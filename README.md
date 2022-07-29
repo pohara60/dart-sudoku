@@ -9,8 +9,8 @@ Dart Sudoku solver package, with Command Line Interface.
 [Strategies](https.//www.sudokuwiki.org/Strategy_Families)
 
 Show Possibles
+Check for Solved Squares
 
-0. Check for Solved Squares
 1. [Hidden Singles](https.//www.sudokuwiki.org/Getting_Started)
 2. [Naked Pairs/Triples](https.//www.sudokuwiki.org/Naked_Candidates#NP)
 3. [Hidden Pairs/Triples](https://www.sudokuwiki.org/Hidden_Candidates#HP)

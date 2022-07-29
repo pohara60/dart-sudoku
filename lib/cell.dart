@@ -40,6 +40,10 @@ class Cell {
     return _possible.isPossible(value);
   }
 
+  bool clearPossible(int value) {
+    return _possible.clear(value);
+  }
+
   void clearUpdate() {
     _error = '';
     _wasUpdated = false;

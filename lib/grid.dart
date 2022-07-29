@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:sudoku/cell.dart';
 import 'package:sudoku/possible.dart';
 
@@ -128,6 +129,7 @@ class Grid {
       if (!updated) updated = nakedGroupStrategy();
       if (!updated) updated = pointingGroupStrategy();
       if (!updated) updated = lineBoxReductionStrategy();
+      if (!updated) updated = xWingStrategy();
       if (explain && updated) {
         printUpdates();
         print(toPossibleString());
@@ -173,6 +175,11 @@ class Grid {
   bool lineBoxReductionStrategy() {
     var explanation = 'Line Box Reduction';
     return allLineBoxReduction(explanation);
+  }
+
+  bool xWingStrategy() {
+    var explanation = 'X-Wing';
+    return xWing(explanation);
   }
 
   void value(int digit, bool updatePossible) {
@@ -558,9 +565,89 @@ class Grid {
                 previousValue && cell.isSet ? true : false));
     return solved;
   }
+
+  List<Cell> getMajorAxis(String axis, int major) {
+    if (axis == 'row') {
+      return getRow(major);
+    } else {
+      return getColumn(major);
+    }
+  }
+
+  List<Cell> getMinorAxis(String axis, int minor) {
+    if (axis == 'row') {
+      return getColumn(minor);
+    } else {
+      return getRow(minor);
+    }
+  }
+
+  Map<int, Map<int, List<int>>> getValuePossibleIndexes(String axis) {
+    var valuePossibleMajors = <int, Map<int, List<int>>>{};
+    // Count number of Rows/Coluns where values may appear exactly twice
+    for (var major = 1; major < 10; major++) {
+      var cells = getMajorAxis(axis, major);
+      var countPossibles = countCellsPossible(cells);
+      for (var i = 0; i < 9; i++) {
+        if (countPossibles[i] == 2) {
+          if (valuePossibleMajors[i] == null) {
+            valuePossibleMajors[i] = <int, List<int>>{};
+          }
+          valuePossibleMajors[i]![major] = cells
+              .expandIndexed<int>(
+                  (index, cell) => cell.possible[i + 1] ? [index + 1] : [])
+              .toList();
+        }
+      }
+    }
+    return valuePossibleMajors;
+  }
+
+  bool xWing(String explanation) {
+    var updated = false;
+    for (var axis in ['row', 'column']) {
+      var valuePossibleMajors = getValuePossibleIndexes(axis);
+      for (var value = 1; value < 10; value++) {
+        var majors = valuePossibleMajors[value - 1];
+        if (majors != null) {
+          majors.forEach((major1, value1) {
+            majors.forEach((major2, value2) {
+              if (major2 > major1 && ListEquality().equals(value1, value2)) {
+                var location =
+                    addExplanation(explanation, '$axis[$major1,$major2}]');
+                // X Wing found
+                // print('XWing value $value in $major1=$value1, $major2=$value2');
+                // Remove the value from the two minor axes
+                for (var minor in value1) {
+                  var cells = getMinorAxis(axis, minor);
+                  cells.forEach((cell) {
+                    var major = axis == 'row' ? cell.row : cell.col;
+                    if (major != major1 && major != major2) {
+                      if (cell.clearPossible(value)) {
+                        updated = true;
+                        _updates.add(cell);
+                        _messages.add(addExplanation(
+                            location, "remove value $value from $cell"));
+                      }
+                    }
+                  });
+                }
+              }
+            });
+          });
+        }
+      }
+    }
+    return updated;
+  }
 }
 
 Possible unionCellsPossible(List<Cell> cells) {
   var possibles = cells.map((cell) => cell.possible).toList();
   return unionPossible(possibles);
+}
+
+List<int> countCellsPossible(List<Cell> cells) {
+  var possibles = cells.map((cell) => cell.possible).toList();
+  return countPossible(possibles);
 }

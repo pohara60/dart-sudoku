@@ -82,3 +82,14 @@ Possible unionPossible(List<Possible> possibles) {
   }
   return result;
 }
+
+List<int> countPossible(List<Possible> possibles) {
+  var result = List<int>.filled(9, 0);
+  for (var value = 1; value < 10; value++) {
+    result[value - 1] = possibles.fold(
+        0,
+        (previousValue, possible) =>
+            possible[value] ? previousValue + 1 : previousValue);
+  }
+  return result;
+}
