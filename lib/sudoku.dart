@@ -58,7 +58,7 @@ class Sudoku {
   }
 
   bool updatePossible() => invokeStrategy(grid!.updatePossible);
-  bool checkUnique() => invokeStrategy(grid!.hiddenSingle);
+  bool checkUnique() => invokeStrategy(grid!.hiddenSingleStrategy);
 
   bool explainStrategy(Strategy strategy) {
     if (grid == null) {

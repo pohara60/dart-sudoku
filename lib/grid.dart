@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:sudoku/cell.dart';
 import 'package:sudoku/possible.dart';
 
@@ -80,14 +79,18 @@ class Grid {
   }
 
   String toPossibleString() {
-    const rowSeparator = '+---+---+---+---+---+---+---+---+---+\n';
-    const colSeparator = '|';
+    const rowBoxTop = '╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗\n';
+    const rowSeparator = '╟───┼───┼───╫───┼───┼───╫───┼───┼───╢\n';
+    const rowBoxSeparator = '╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣\n';
+    const rowBoxBottom = '╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝\n';
+    const colBoxSeparator = '║';
+    const colSeparator = '│';
     var result = StringBuffer();
     for (var r = 0; r < 9; r++) {
-      if (r == 0) result.write(rowSeparator);
+      if (r == 0) result.write(rowBoxTop);
       for (var t = 0; t < 3; t++) {
         for (var c = 0; c < 9; c++) {
-          if (c == 0) result.write(colSeparator);
+          if (c == 0) result.write(colBoxSeparator);
           for (var p = t * 3; p < t * 3 + 3; p++) {
             if (_grid[r][c].isPossible(p + 1)) {
               result.write(((p + 1).toString()));
@@ -95,11 +98,19 @@ class Grid {
               result.write(' ');
             }
           }
-          result.write(colSeparator);
+          if (c % 3 == 2)
+            result.write(colBoxSeparator);
+          else
+            result.write(colSeparator);
         }
         result.write('\n');
       }
-      result.write(rowSeparator);
+      if (r == 8)
+        result.write(rowBoxBottom);
+      else if (r % 3 == 2)
+        result.write(rowBoxSeparator);
+      else
+        result.write(rowSeparator);
     }
     return result.toString();
   }
@@ -113,9 +124,10 @@ class Grid {
         return;
       }
       updated = updatePossible();
-      if (!updated) updated = hiddenSingle();
-      if (!updated) updated = nakedGroup();
-      if (!updated) updated = pointingGroup();
+      if (!updated) updated = hiddenSingleStrategy();
+      if (!updated) updated = nakedGroupStrategy();
+      if (!updated) updated = pointingGroupStrategy();
+      if (!updated) updated = lineBoxReductionStrategy();
       if (explain && updated) {
         printUpdates();
         print(toPossibleString());
@@ -136,10 +148,10 @@ class Grid {
     _grid.forEach((r) => r.forEach((c) {
           if (allNonetsUpdateCell(c, explanation)) updated = true;
         }));
-    return _updates.isNotEmpty;
+    return updated;
   }
 
-  bool hiddenSingle() {
+  bool hiddenSingleStrategy() {
     var explanation = 'Hidden Single';
     var updated = false;
     _grid.forEach((r) => r.forEach((c) {
@@ -148,14 +160,19 @@ class Grid {
     return updated;
   }
 
-  bool nakedGroup() {
+  bool nakedGroupStrategy() {
     var explanation = 'Naked Group';
     return allNonetNakedGroup(explanation);
   }
 
-  bool pointingGroup() {
+  bool pointingGroupStrategy() {
     var explanation = 'Pointing Group';
     return allBoxPointingGroup(explanation);
+  }
+
+  bool lineBoxReductionStrategy() {
+    var explanation = 'Line Box Reduction';
+    return allLineBoxReduction(explanation);
   }
 
   void value(int digit, bool updatePossible) {
@@ -441,63 +458,93 @@ class Grid {
     return updated;
   }
 
-  bool boxPointingGroup(int box, String explanation) {
-    var updated = false;
-    var cells = getBox(box);
-    var location = addExplanation(explanation, cells[0].location("box"));
-    // Check Rows then Columns
-    for (var axis in ['row', 'column']) {
-      var locationAxis = addExplanation(location, axis);
-      for (var boxMajor = 0; boxMajor < 3; boxMajor++) {
-        var cells3 = <Cell>[];
-        for (var boxMinor = 0; boxMinor < 3; boxMinor++) {
-          late Cell cell;
-          if (axis == 'Row') {
-            cell = cells[boxMajor * 3 + boxMinor];
-          } else {
-            cell = cells[boxMinor * 3 + boxMajor];
-          }
-          if (!cell.isSet) cells3.add(cell);
-        }
-        if (cells3.isEmpty) continue;
-
-        var cells6 = cells.where((cell) => !cell.isSet).toList();
-        for (var cell in cells3) {
-          cells6.remove(cell);
-        }
-        var possible3 = unionCellsPossible(cells3);
-        var possible6 = unionCellsPossible(cells6);
-        var unique3 = possible3.subtract(possible6);
-        if (unique3.count > 0) {
-          // The unique3 possible values can be removed from the axis
-          for (var minor = 1; minor < 10; minor++) {
-            late Cell cell;
-            if (axis == 'Row') {
-              var major = cells3[0].row;
-              cell = _grid[major - 1][minor - 1];
-            } else {
-              var major = cells3[0].col;
-              cell = _grid[minor - 1][major - 1];
-            }
-            if (!cell.isSet && !cells3.contains(cell)) {
-              if (cell.removePossible(unique3)) {
-                updated = true;
-                _updates.add(cell);
-                _messages.add(addExplanation(
-                    locationAxis, "remove group $unique3 from $cell"));
-              }
-            }
-          }
-        }
+  List<Cell> getCells3(String axis, int boxMajor, List<Cell> cells) {
+    var cells3 = <Cell>[];
+    for (var boxMinor = 0; boxMinor < 3; boxMinor++) {
+      late Cell cell;
+      if (axis == 'row') {
+        cell = cells[boxMajor * 3 + boxMinor];
+      } else {
+        cell = cells[boxMinor * 3 + boxMajor];
       }
+      if (!cell.isSet) cells3.add(cell);
+    }
+    return cells3;
+  }
+
+  bool allBoxPointingGroup(String explanation) {
+    return allBoxReduction('box', explanation);
+  }
+
+  bool allLineBoxReduction(String explanation) {
+    return allBoxReduction('axis', explanation);
+  }
+
+  bool allBoxReduction(String target, String explanation) {
+    var updated = false;
+    for (var box = 1; box < 10; box++) {
+      if (lineBoxReduction(target, box, explanation)) updated = true;
     }
     return updated;
   }
 
-  bool allBoxPointingGroup(String explanation) {
+  /// *lineBoxReduction* implement Point Group and Line Box Reduction
+  ///
+  /// If target is "box" then find unique value in Rows/Columns of Box
+  /// and remove from rest of Box
+  /// If target is not "box" then find unique value in Rows/Columns in Box
+  /// and remove from rest of Row/Column
+  bool lineBoxReduction(String target, int box, String explanation) {
     var updated = false;
-    for (var box = 1; box < 10; box++) {
-      if (boxPointingGroup(box, explanation)) updated = true;
+    var cells = getBox(box);
+    var location = addExplanation(explanation, cells[0].location("box"));
+    // Check each Row then each Column of Box
+    for (var axis in ['row', 'column']) {
+      for (var boxMajor = 0; boxMajor < 3; boxMajor++) {
+        // Three cells in Row/Column
+        var cells3 = getCells3(axis, boxMajor, cells);
+        if (cells3.isEmpty) continue;
+        // Other six cells in Box
+        var boxCells6 = cells
+            .where((cell) => !cell.isSet && !cells3.contains(cell))
+            .toList();
+        // Other six cells in Row/Column
+        late List<Cell> axisCells6;
+        late String locationAxis;
+        if (axis == 'row') {
+          axisCells6 = getRow(cells3[0].row);
+          locationAxis = addExplanation(location, '$axis[${cells3[0].row}]');
+        } else {
+          axisCells6 = getColumn(cells3[0].col);
+          locationAxis = addExplanation(location, '$axis[${cells3[0].col}]');
+        }
+        axisCells6.removeWhere((cell) => cell.isSet || cells3.contains(cell));
+        // Get cells to check and cells to update according to target
+        late List<Cell> cells6;
+        late List<Cell> updateCells;
+        if (target == 'box') {
+          cells6 = boxCells6;
+          updateCells = axisCells6;
+        } else {
+          cells6 = axisCells6;
+          updateCells = boxCells6;
+        }
+        // Get values in three cells that do not appear in the six cells
+        var possible3 = unionCellsPossible(cells3);
+        var possible6 = unionCellsPossible(cells6);
+        var unique3 = possible3.subtract(possible6);
+        if (unique3.count > 0) {
+          // The unique3 possible values can be removed from the Box/Row/Column
+          for (var cell in updateCells) {
+            if (cell.removePossible(unique3)) {
+              updated = true;
+              _updates.add(cell);
+              _messages.add(addExplanation(
+                  locationAxis, "remove group $unique3 from $cell"));
+            }
+          }
+        }
+      }
     }
     return updated;
   }

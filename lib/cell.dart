@@ -99,7 +99,7 @@ class Cell {
   String location([String type = 'cell']) {
     var location = "";
     if (type == "cell") location = "cell[$_row ,$_col]";
-    if (type == "box") location = "square[${_row + (_col - 1) ~/ 3}]";
+    if (type == "box") location = "box[${_row + (_col - 1) ~/ 3}]";
     if (type == "row") location = "row[$_row]";
     if (type == "column") location = "column[$_col]";
     return location;
