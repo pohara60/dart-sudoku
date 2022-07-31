@@ -10,6 +10,8 @@ class Grid {
   late Set<Cell> _updates;
   late List<String> _messages;
 
+  late bool singleStep;
+
   get grid => _grid;
   Cell? get focus => _focus;
   Set<Cell> get updates => _updates;
@@ -47,13 +49,13 @@ class Grid {
     });
   }
 
-  Grid() {
+  Grid([this.singleStep = false]) {
     _grid = List.generate(
         9, (row) => List.generate(9, (col) => Cell(row + 1, col + 1)));
     _init();
   }
 
-  Grid.sudokuPuzzle(List<String> newSudokuPuzzle) {
+  Grid.sudokuPuzzle(List<String> newSudokuPuzzle, [this.singleStep = false]) {
     _grid = newSudokuPuzzle.asMap().entries.map((entry) {
       int row = entry.key;
       String val = entry.value;
@@ -130,6 +132,7 @@ class Grid {
       if (!updated) updated = pointingGroupStrategy();
       if (!updated) updated = lineBoxReductionStrategy();
       if (!updated) updated = xWingStrategy();
+      if (!updated) updated = yWingStrategy();
       if (explain && updated) {
         printUpdates();
         print(toPossibleString());
@@ -182,6 +185,11 @@ class Grid {
     return xWing(explanation);
   }
 
+  bool yWingStrategy() {
+    var explanation = 'Y-Wing';
+    return yWing(explanation);
+  }
+
   void value(int digit, bool updatePossible) {
     clearUpdates();
     assert(_focus != null);
@@ -189,25 +197,6 @@ class Grid {
     if (updatePossible) {
       cellUpdateAllNonet(_focus, '');
     }
-  }
-
-  /// Return [i] div 3 for 1-based index
-  int floor3(i) {
-    if (i >= 1 && i <= 3) {
-      return 1;
-    }
-    if (i >= 4 && i <= 6) {
-      return 4;
-    }
-    if (i >= 7 && i <= 9) {
-      return 7;
-    }
-    throw Exception;
-  }
-
-  /// Return [i] mod 3 for 1-based index
-  int mod3(i) {
-    return (i - 1) % 3 + 1;
   }
 
   /// Return cells in box [box]
@@ -569,6 +558,8 @@ class Grid {
   List<Cell> getMajorAxis(String axis, int major) {
     if (axis == 'row') {
       return getRow(major);
+    } else if (axis == 'box') {
+      return getBox(major);
     } else {
       return getColumn(major);
     }
@@ -582,33 +573,33 @@ class Grid {
     }
   }
 
-  Map<int, Map<int, List<int>>> getValuePossibleIndexes(String axis) {
-    var valuePossibleMajors = <int, Map<int, List<int>>>{};
-    // Count number of Rows/Coluns where values may appear exactly twice
+  Map<int, Map<int, List<int>>> getValuePossibleTwiceIndexes(String axis) {
+    var valuePossibleTwiceMajors = <int, Map<int, List<int>>>{};
+    // Find Rows/Columns/Boxes where values may appear exactly twice
     for (var major = 1; major < 10; major++) {
       var cells = getMajorAxis(axis, major);
       var countPossibles = countCellsPossible(cells);
-      for (var i = 0; i < 9; i++) {
-        if (countPossibles[i] == 2) {
-          if (valuePossibleMajors[i] == null) {
-            valuePossibleMajors[i] = <int, List<int>>{};
+      for (var value = 1; value < 10; value++) {
+        if (countPossibles[value - 1] == 2) {
+          if (valuePossibleTwiceMajors[value] == null) {
+            valuePossibleTwiceMajors[value] = <int, List<int>>{};
           }
-          valuePossibleMajors[i]![major] = cells
+          valuePossibleTwiceMajors[value]![major] = cells
               .expandIndexed<int>(
-                  (index, cell) => cell.possible[i + 1] ? [index + 1] : [])
+                  (index, cell) => cell.possible[value] ? [index + 1] : [])
               .toList();
         }
       }
     }
-    return valuePossibleMajors;
+    return valuePossibleTwiceMajors;
   }
 
   bool xWing(String explanation) {
     var updated = false;
     for (var axis in ['row', 'column']) {
-      var valuePossibleMajors = getValuePossibleIndexes(axis);
+      var valuePossibleTwiceMajors = getValuePossibleTwiceIndexes(axis);
       for (var value = 1; value < 10; value++) {
-        var majors = valuePossibleMajors[value - 1];
+        var majors = valuePossibleTwiceMajors[value];
         if (majors != null) {
           majors.forEach((major1, value1) {
             majors.forEach((major2, value2) {
@@ -639,6 +630,155 @@ class Grid {
       }
     }
     return updated;
+  }
+
+  Cell getAxisCell(String axis, int major, int minor) {
+    if (axis == 'row') {
+      return _grid[major - 1][minor - 1];
+    } else {
+      return _grid[minor - 1][major - 1];
+    }
+  }
+
+  bool axisEqual(String axis, Cell cell1, Cell cell2) {
+    if (axis == 'row') {
+      return cell1.row == cell2.row;
+    } else {
+      return cell1.col == cell2.col;
+    }
+  }
+
+  bool yWing(String explanation) {
+    var updated = false;
+    var valuePossibleTwiceBoxes = getValuePossibleTwiceIndexes('box');
+    for (var axis in ['row', 'column']) {
+      var valuePossibleTwiceMajors = getValuePossibleTwiceIndexes(axis);
+      for (var value = 1; value < 10; value++) {
+        var majors = valuePossibleTwiceMajors[value];
+        if (majors != null) {
+          for (var major1 in majors.keys) {
+            var minors1 = majors[major1]!;
+            // Proceed if the two cells each have only two values
+            assert(minors1.length == 2);
+            var cell1 = getAxisCell(axis, major1, minors1[0]);
+            var cell2 = getAxisCell(axis, major1, minors1[1]);
+            if (cell1.possibleCount == 2 && cell2.possibleCount == 2) {
+              var value1 = cell1.getOtherPossible(value);
+              var value2 = cell2.getOtherPossible(value);
+              if (value1 != value2) {
+                // Look at boxes containing other value
+                var box1 = cell1.box;
+                var box2 = cell2.box;
+                if (yWingCheckBox(valuePossibleTwiceBoxes, value1, box1, cell1,
+                    value2, box2, axis, explanation)) updated = true;
+                if (updated && singleStep) return true;
+                if (yWingCheckBox(valuePossibleTwiceBoxes, value2, box2, cell2,
+                    value1, box1, axis, explanation)) updated = true;
+                if (updated && singleStep) return true;
+                for (var other in [value1, value2]) {
+                  // Look at rows that have other value twice
+                  var majors2 = valuePossibleTwiceMajors[other];
+                  if (majors2 != null) {
+                    for (var major2 in majors2.keys) {
+                      var minors2 = majors2[major2]!;
+                      if (ListEquality().equals(minors1, minors2)) {
+                        if (other == value2) {
+                          if (yWingCheckSecondMajor(
+                              axis,
+                              major1,
+                              major2,
+                              minors1[0],
+                              minors1[1],
+                              other,
+                              value1,
+                              explanation)) updated = true;
+                          ;
+                        } else {
+                          if (yWingCheckSecondMajor(
+                              axis,
+                              major1,
+                              major2,
+                              minors1[1],
+                              minors1[2],
+                              other,
+                              value2,
+                              explanation)) updated = true;
+                        }
+                        if (updated && singleStep) return true;
+                      }
+                    }
+                  }
+                  ;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return updated;
+  }
+
+  bool yWingCheckBox(
+      Map<int, Map<int, List<int>>> valuePossibleTwiceBoxes,
+      int value,
+      int box,
+      Cell cell,
+      int otherValue,
+      int otherBox,
+      String axis,
+      String explanation) {
+    bool updated = false;
+    var cells = getBox(box);
+    for (var otherCell in cells.where((element) => element != cell)) {
+      if (otherCell.possibleCount == 2 &&
+          otherCell.isPossible(value) &&
+          otherCell.isPossible(otherValue) &&
+          !axisEqual(axis, otherCell, cell)) {
+        // Match
+        // Remove other value from box on cell axis
+        var location = addExplanation(
+            explanation, '$axis[${cell.row},${cell.col}] box[$box]');
+        cells.where((c) => axisEqual(axis, c, cell)).forEach((c) {
+          if (c.clearPossible(otherValue)) {
+            updated = true;
+            cellUpdated(cell, location, "remove value $otherValue from $c");
+          }
+        });
+        location = addExplanation(
+            explanation, '$axis[${cell.row},${cell.col}] box[$otherBox]');
+        // Remove other value from other box on other cell axis
+        cells = getBox(otherBox);
+        cells.where((c) => axisEqual(axis, c, otherCell)).forEach((c) {
+          if (c.clearPossible(otherValue)) {
+            updated = true;
+            cellUpdated(cell, location, "remove value $otherValue from $c");
+          }
+        });
+      }
+    }
+    return updated;
+  }
+
+  bool yWingCheckSecondMajor(String axis, int major1, int major2, int minor1,
+      int minor2, other, value1, String explanation) {
+    var updated = false;
+    var otherCell = getAxisCell(axis, major2, minor1);
+    var location = addExplanation(explanation, '$axis[$major1,$minor1]');
+    if (otherCell.getOtherPossible(other) == value1) {
+      var cell = getAxisCell(axis, major2, minor2);
+
+      if (cell.clearPossible(other)) {
+        updated = true;
+        cellUpdated(cell, location, "remove value $other from $cell");
+      }
+    }
+    return updated;
+  }
+
+  void cellUpdated(Cell cell, String location, String message) {
+    _updates.add(cell);
+    _messages.add(addExplanation(location, message));
   }
 }
 

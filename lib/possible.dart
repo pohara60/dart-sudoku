@@ -72,6 +72,15 @@ class Possible {
     }
     return possible;
   }
+
+  getOther(int value) {
+    for (var other = 1; other < 10; other++) {
+      if (value != other && _possible[other - 1]) {
+        return other;
+      }
+    }
+    return 0;
+  }
 }
 
 Possible unionPossible(List<Possible> possibles) {

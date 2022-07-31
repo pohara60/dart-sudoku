@@ -10,8 +10,9 @@ class Sudoku {
   late final generator;
   String? currentPuzzle;
   Grid? grid;
+  late bool singleStep;
 
-  Sudoku() {
+  Sudoku([this.singleStep = false]) {
     generator = SudokuGenerator();
   }
 
@@ -39,7 +40,7 @@ class Sudoku {
 
   void setSudoku(String puzzle) {
     var puzzleList = puzzle.split('\n');
-    grid = Grid.sudokuPuzzle(puzzleList);
+    grid = Grid.sudokuPuzzle(puzzleList, singleStep);
     currentPuzzle = puzzle;
   }
 

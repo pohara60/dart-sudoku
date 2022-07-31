@@ -22,6 +22,17 @@ class Cell {
     _error = error;
   }
 
+  int get box {
+    var box = floor3(_row) + (_col - 1) ~/ 3;
+    return box;
+  }
+
+  // Zero-based index in 9 cells of box
+  int get boxIndex {
+    var index = (_row - 1) % 3 * 3 + (_col - 1) % 3;
+    return index;
+  }
+
   Possible get possible => _possible;
 
   int get possibleCount => _possible.count;
@@ -65,6 +76,7 @@ class Cell {
 
   int get row => _row;
   int get col => _col;
+  int getAxis(String axis) => axis == 'row' ? _row : _col;
 
   void togglePossible(int value) {
     _possible.toggle(value);
@@ -122,4 +134,22 @@ class Cell {
   bool removePossible(Possible possible) {
     return _possible.remove(possible);
   }
+
+  getOtherPossible(int value) {
+    return _possible.getOther(value);
+  }
+}
+
+/// Return [i] div 3 for 1-based index
+int floor3(i) {
+  if (i >= 1 && i <= 3) {
+    return 1;
+  }
+  if (i >= 4 && i <= 6) {
+    return 4;
+  }
+  if (i >= 7 && i <= 9) {
+    return 7;
+  }
+  throw Exception;
 }
