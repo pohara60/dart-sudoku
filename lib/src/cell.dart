@@ -1,4 +1,4 @@
-import 'package:sudoku/possible.dart';
+import 'package:sudoku/src/possible.dart';
 
 class Cell {
   int _row, _col;

@@ -2,8 +2,10 @@
 ///
 library sudoku;
 
-import 'package:sudoku/generator.dart';
-import 'package:sudoku/grid.dart';
+import 'package:sudoku/src/generator.dart';
+import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/strategy/hiddenSingleStrategy.dart';
+import 'package:sudoku/src/strategy/updatePossibleStrategy.dart';
 
 /// Provide access to the Sudoku API.
 class Sudoku {
@@ -58,14 +60,14 @@ class Sudoku {
     return grid!.invokeStrategy(strategy);
   }
 
-  bool updatePossible() => invokeStrategy(grid!.updatePossible);
-  bool checkUnique() => invokeStrategy(grid!.hiddenSingleStrategy);
+  bool updatePossible() => invokeStrategy(updatePossibleStrategy);
+  bool checkUnique() => invokeStrategy(hiddenSingleStrategy);
 
   bool explainStrategy(Strategy strategy) {
     if (grid == null) {
       throw Exception();
     }
-    var updated = strategy();
+    var updated = strategy(grid!);
     if (updated) {
       print(grid!.messageString);
     }
