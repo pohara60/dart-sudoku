@@ -9,7 +9,7 @@ import 'package:sudoku/src/strategy/updatePossibleStrategy.dart';
 import 'package:sudoku/src/strategy/yWingStrategy.dart';
 import 'package:sudoku/src/strategy/xWingStrategy.dart';
 
-typedef Strategy = bool Function(Grid grid);
+typedef Solve = bool Function(Grid grid);
 
 class Grid {
   late List<List<Cell>> _grid;
@@ -34,10 +34,27 @@ class Grid {
     }
   }
 
+  late UpdatePossibleStrategy updatePossibleStrategy;
+  late HiddenSingleStrategy hiddenSingleStrategy;
+  late NakedGroupStrategy nakedGroupStrategy;
+  late PointingGroupStrategy pointingGroupStrategy;
+  late LineBoxReductionStrategy lineBoxReductionStrategy;
+  late XWingStrategy xWingStrategy;
+  late YWingStrategy yWingStrategy;
+  late SwordfishStrategy swordfishStrategy;
+
   void _init() {
     focus = _grid[0][0];
     _updates = {};
     _messages = [];
+    updatePossibleStrategy = UpdatePossibleStrategy(this);
+    hiddenSingleStrategy = HiddenSingleStrategy(this);
+    nakedGroupStrategy = NakedGroupStrategy(this);
+    pointingGroupStrategy = PointingGroupStrategy(this);
+    lineBoxReductionStrategy = LineBoxReductionStrategy(this);
+    xWingStrategy = XWingStrategy(this);
+    yWingStrategy = YWingStrategy(this);
+    swordfishStrategy = SwordfishStrategy(this);
   }
 
   void clearUpdates() {
@@ -133,14 +150,14 @@ class Grid {
         if (explain) print('Solved!');
         return;
       }
-      updated = updatePossibleStrategy(this);
-      if (!updated) updated = hiddenSingleStrategy(this);
-      if (!updated) updated = nakedGroupStrategy(this);
-      if (!updated) updated = pointingGroupStrategy(this);
-      if (!updated) updated = lineBoxReductionStrategy(this);
-      if (!updated) updated = xWingStrategy(this);
-      if (!updated) updated = yWingStrategy(this);
-      if (!updated) updated = swordfishStrategy(this);
+      updated = updatePossibleStrategy.solve();
+      if (!updated) updated = hiddenSingleStrategy.solve();
+      if (!updated) updated = nakedGroupStrategy.solve();
+      if (!updated) updated = pointingGroupStrategy.solve();
+      if (!updated) updated = lineBoxReductionStrategy.solve();
+      if (!updated) updated = xWingStrategy.solve();
+      if (!updated) updated = yWingStrategy.solve();
+      if (!updated) updated = swordfishStrategy.solve();
       if (explain && updated) {
         printUpdates();
         print(toPossibleString());
@@ -149,7 +166,7 @@ class Grid {
     return;
   }
 
-  bool invokeStrategy(Strategy strategy) {
+  bool invokeStrategy(Solve strategy) {
     clearUpdates();
     var updated = strategy(this);
     return updated;

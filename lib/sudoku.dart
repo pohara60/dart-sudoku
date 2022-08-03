@@ -53,17 +53,7 @@ class Sudoku {
     return grid!.invokeAllStrategies(explain);
   }
 
-  bool invokeStrategy(Strategy strategy) {
-    if (grid == null) {
-      throw Exception();
-    }
-    return grid!.invokeStrategy(strategy);
-  }
-
-  bool updatePossible() => invokeStrategy(updatePossibleStrategy);
-  bool checkUnique() => invokeStrategy(hiddenSingleStrategy);
-
-  bool explainStrategy(Strategy strategy) {
+  bool explainStrategy(Solve strategy) {
     if (grid == null) {
       throw Exception();
     }
