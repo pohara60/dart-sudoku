@@ -133,6 +133,7 @@ class Grid {
       if (!updated) updated = lineBoxReductionStrategy();
       if (!updated) updated = xWingStrategy();
       if (!updated) updated = yWingStrategy();
+      if (!updated) updated = swordfishStrategy();
       if (explain && updated) {
         printUpdates();
         print(toPossibleString());
@@ -188,6 +189,11 @@ class Grid {
   bool yWingStrategy() {
     var explanation = 'Y-Wing';
     return yWing(explanation);
+  }
+
+  bool swordfishStrategy() {
+    var explanation = 'Swordfish';
+    return swordfish(explanation);
   }
 
   void value(int digit, bool updatePossible) {
@@ -320,8 +326,7 @@ class Grid {
       }
     }
     if (updated) {
-      _updates.add(cell);
-      _messages.add(addExplanation(explanation, '$cell'));
+      cellUpdated(cell, explanation, '$cell');
     }
     return updated;
   }
@@ -342,10 +347,7 @@ class Grid {
           }
         } else {
           if (c.remove(cell.value!)) {
-            _updates.add(c);
-            var message = addExplanation(
-                explanation, 'remove value ${cell.value} from $c');
-            _messages.add(message);
+            cellUpdated(c, explanation, 'remove value ${cell.value} from $c');
           }
         }
       }
@@ -425,9 +427,7 @@ class Grid {
               if (c.removePossible(possible)) {
                 updated = true;
                 anyUpdate = true;
-                _updates.add(c);
-                messages.add(addExplanation(
-                    explanation, "remove group $possible from $c"));
+                cellUpdated(c, explanation, "remove group $possible from $c");
               }
             }
           }
@@ -534,9 +534,8 @@ class Grid {
           for (var cell in updateCells) {
             if (cell.removePossible(unique3)) {
               updated = true;
-              _updates.add(cell);
-              _messages.add(addExplanation(
-                  locationAxis, "remove group $unique3 from $cell"));
+              cellUpdated(
+                  cell, locationAxis, "remove group $unique3 from $cell");
             }
           }
         }
@@ -573,52 +572,53 @@ class Grid {
     }
   }
 
-  Map<int, Map<int, List<int>>> getValuePossibleTwiceIndexes(String axis) {
-    var valuePossibleTwiceMajors = <int, Map<int, List<int>>>{};
-    // Find Rows/Columns/Boxes where values may appear exactly twice
+  Map<int, Map<int, List<int>>> getValuePossibleIndexes(
+      String axis, int occurrences) {
+    var valuePossibleMajors = <int, Map<int, List<int>>>{};
+    // Find Rows/Columns/Boxes where values may appear up to occurrences times
     for (var major = 1; major < 10; major++) {
       var cells = getMajorAxis(axis, major);
       var countPossibles = countCellsPossible(cells);
       for (var value = 1; value < 10; value++) {
-        if (countPossibles[value - 1] == 2) {
-          if (valuePossibleTwiceMajors[value] == null) {
-            valuePossibleTwiceMajors[value] = <int, List<int>>{};
+        if (countPossibles[value - 1] > 1 &&
+            countPossibles[value - 1] <= occurrences) {
+          if (valuePossibleMajors[value] == null) {
+            valuePossibleMajors[value] = <int, List<int>>{};
           }
-          valuePossibleTwiceMajors[value]![major] = cells
+          valuePossibleMajors[value]![major] = cells
               .expandIndexed<int>(
                   (index, cell) => cell.possible[value] ? [index + 1] : [])
               .toList();
         }
       }
     }
-    return valuePossibleTwiceMajors;
+    return valuePossibleMajors;
   }
 
   bool xWing(String explanation) {
     var updated = false;
     for (var axis in ['row', 'column']) {
-      var valuePossibleTwiceMajors = getValuePossibleTwiceIndexes(axis);
+      var valuePossibleTwiceMajors = getValuePossibleIndexes(axis, 2);
       for (var value = 1; value < 10; value++) {
         var majors = valuePossibleTwiceMajors[value];
         if (majors != null) {
-          majors.forEach((major1, value1) {
-            majors.forEach((major2, value2) {
-              if (major2 > major1 && ListEquality().equals(value1, value2)) {
+          majors.forEach((major1, minors1) {
+            majors.forEach((major2, minors2) {
+              if (major2 > major1 && ListEquality().equals(minors1, minors2)) {
                 var location =
                     addExplanation(explanation, '$axis[$major1,$major2}]');
                 // X Wing found
                 // print('XWing value $value in $major1=$value1, $major2=$value2');
                 // Remove the value from the two minor axes
-                for (var minor in value1) {
+                for (var minor in minors1) {
                   var cells = getMinorAxis(axis, minor);
                   cells.forEach((cell) {
                     var major = axis == 'row' ? cell.row : cell.col;
                     if (major != major1 && major != major2) {
                       if (cell.clearPossible(value)) {
                         updated = true;
-                        _updates.add(cell);
-                        _messages.add(addExplanation(
-                            location, "remove value $value from $cell"));
+                        cellUpdated(
+                            cell, location, "remove value $value from $cell");
                       }
                     }
                   });
@@ -650,11 +650,11 @@ class Grid {
 
   bool yWing(String explanation) {
     var updated = false;
-    var valuePossibleTwiceBoxes = getValuePossibleTwiceIndexes('box');
+    var valuePossibleBoxes = getValuePossibleIndexes('box', 2);
     for (var axis in ['row', 'column']) {
-      var valuePossibleTwiceMajors = getValuePossibleTwiceIndexes(axis);
+      var valuePossibleMajors = getValuePossibleIndexes(axis, 2);
       for (var value = 1; value < 10; value++) {
-        var majors = valuePossibleTwiceMajors[value];
+        var majors = valuePossibleMajors[value];
         if (majors != null) {
           for (var major1 in majors.keys) {
             var minors1 = majors[major1]!;
@@ -669,15 +669,15 @@ class Grid {
                 // Look at boxes containing other value
                 var box1 = cell1.box;
                 var box2 = cell2.box;
-                if (yWingCheckBox(valuePossibleTwiceBoxes, value1, box1, cell1,
+                if (yWingCheckBox(valuePossibleBoxes, value1, box1, cell1,
                     value2, box2, axis, explanation)) updated = true;
                 if (updated && singleStep) return true;
-                if (yWingCheckBox(valuePossibleTwiceBoxes, value2, box2, cell2,
+                if (yWingCheckBox(valuePossibleBoxes, value2, box2, cell2,
                     value1, box1, axis, explanation)) updated = true;
                 if (updated && singleStep) return true;
                 for (var other in [value1, value2]) {
                   // Look at rows that have other value twice
-                  var majors2 = valuePossibleTwiceMajors[other];
+                  var majors2 = valuePossibleMajors[other];
                   if (majors2 != null) {
                     for (var major2 in majors2.keys) {
                       var minors2 = majors2[major2]!;
@@ -720,7 +720,7 @@ class Grid {
   }
 
   bool yWingCheckBox(
-      Map<int, Map<int, List<int>>> valuePossibleTwiceBoxes,
+      Map<int, Map<int, List<int>>> valuePossibleBoxes,
       int value,
       int box,
       Cell cell,
@@ -771,6 +771,81 @@ class Grid {
       if (cell.clearPossible(other)) {
         updated = true;
         cellUpdated(cell, location, "remove value $other from $cell");
+      }
+    }
+    return updated;
+  }
+
+  List<int> mergeLists(List<int> list1, List<int> list2) {
+    var result = <int>[];
+    var index1 = 0;
+    var index2 = 0;
+    while (index1 < list1.length && index2 < list2.length) {
+      if (list1[index1] == list2[index2]) {
+        result.add(list1[index1]);
+        index1++;
+        index2++;
+      } else if (list1[index1] < list2[index2]) {
+        result.add(list1[index1]);
+        index1++;
+      } else {
+        result.add(list2[index2]);
+        index2++;
+      }
+    }
+    while (index1 < list1.length) {
+      result.add(list1[index1]);
+      index1++;
+    }
+    while (index2 < list2.length) {
+      result.add(list2[index2]);
+      index2++;
+    }
+    return result;
+  }
+
+  bool swordfish(String explanation) {
+    var updated = false;
+    for (var axis in ['row', 'column']) {
+      var valuePossibleMajors = getValuePossibleIndexes(axis, 3);
+      for (var value = 1; value < 10; value++) {
+        var majors = valuePossibleMajors[value];
+        if (majors != null && majors.length >= 3) {
+          majors.forEach((major1, minors1) {
+            majors.forEach((major2, minors2) {
+              if (major1 < major2) {
+                var minors = mergeLists(minors1, minors2);
+                if (minors.length <= 3) {
+                  majors.forEach((major3, minors3) {
+                    if (major2 < major3) {
+                      minors = mergeLists(minors, minors3);
+                      if (minors.length <= 3) {
+                        var location = addExplanation(
+                            explanation, '$axis[$major1,$major2,$major3}]');
+                        // Remove the value from the three minor axes
+                        for (var minor in minors) {
+                          var cells = getMinorAxis(axis, minor);
+                          cells.forEach((cell) {
+                            var major = axis == 'row' ? cell.row : cell.col;
+                            if (major != major1 &&
+                                major != major2 &&
+                                major != major3) {
+                              if (cell.clearPossible(value)) {
+                                updated = true;
+                                cellUpdated(cell, location,
+                                    "remove value $value from $cell");
+                              }
+                            }
+                          });
+                        }
+                      }
+                    }
+                  });
+                }
+              }
+            });
+          });
+        }
       }
     }
     return updated;
