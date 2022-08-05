@@ -28,7 +28,8 @@ class NakedGroupStrategy extends Strategy {
     // Ignore known cells
     // Group maximum is half number of cells (because others must also form a group)
     var possibleCells = cells.where((cell) => !cell.isSet).toList();
-    var groupMax = possibleCells.length ~/ 2;
+    //var groupMax = possibleCells.length ~/ 2;
+    var groupMax = possibleCells.length - 1;
 
     // Check for groups of 2 to groupMax cells
     var updated = true;

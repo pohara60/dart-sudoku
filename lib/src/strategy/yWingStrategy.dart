@@ -97,8 +97,7 @@ class YWingStrategy extends Strategy {
         cells.where((c) => grid.axisEqual(axis, c, cell)).forEach((c) {
           if (c.clearPossible(otherValue)) {
             updated = true;
-            grid.cellUpdated(
-                cell, location, "remove value $otherValue from $c");
+            grid.cellUpdated(c, location, "remove value $otherValue from $c");
           }
         });
         location = addExplanation(
@@ -108,8 +107,7 @@ class YWingStrategy extends Strategy {
         cells.where((c) => grid.axisEqual(axis, c, otherCell)).forEach((c) {
           if (c.clearPossible(otherValue)) {
             updated = true;
-            grid.cellUpdated(
-                cell, location, "remove value $otherValue from $c");
+            grid.cellUpdated(c, location, "remove value $otherValue from $c");
           }
         });
       }

@@ -6,6 +6,7 @@ import 'package:sudoku/src/strategy/lineBoxReductionStrategy.dart';
 import 'package:sudoku/src/strategy/nakedGroupStrategy.dart';
 import 'package:sudoku/src/strategy/swordfishStrategy.dart';
 import 'package:sudoku/src/strategy/updatePossibleStrategy.dart';
+import 'package:sudoku/src/strategy/xyzWingStrategy.dart';
 import 'package:sudoku/src/strategy/yWingStrategy.dart';
 import 'package:sudoku/src/strategy/xWingStrategy.dart';
 
@@ -42,6 +43,7 @@ class Grid {
   late XWingStrategy xWingStrategy;
   late YWingStrategy yWingStrategy;
   late SwordfishStrategy swordfishStrategy;
+  late XYZWingStrategy xyzWingStrategy;
 
   void _init() {
     focus = _grid[0][0];
@@ -55,6 +57,7 @@ class Grid {
     xWingStrategy = XWingStrategy(this);
     yWingStrategy = YWingStrategy(this);
     swordfishStrategy = SwordfishStrategy(this);
+    xyzWingStrategy = XYZWingStrategy(this);
   }
 
   void clearUpdates() {
@@ -158,6 +161,7 @@ class Grid {
       if (!updated) updated = xWingStrategy.solve();
       if (!updated) updated = yWingStrategy.solve();
       if (!updated) updated = swordfishStrategy.solve();
+      if (!updated) updated = xyzWingStrategy.solve();
       if (explain && updated) {
         printUpdates();
         print(toPossibleString());
@@ -306,6 +310,8 @@ class Grid {
   List<Cell> getMinorAxis(String axis, int minor) {
     if (axis == 'row') {
       return getColumn(minor);
+    } else if (axis == 'box') {
+      return getBox(minor);
     } else {
       return getRow(minor);
     }

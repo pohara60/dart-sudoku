@@ -4,8 +4,6 @@ library sudoku;
 
 import 'package:sudoku/src/generator.dart';
 import 'package:sudoku/src/grid.dart';
-import 'package:sudoku/src/strategy/hiddenSingleStrategy.dart';
-import 'package:sudoku/src/strategy/updatePossibleStrategy.dart';
 
 /// Provide access to the Sudoku API.
 class Sudoku {
