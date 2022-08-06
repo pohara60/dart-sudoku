@@ -15,7 +15,7 @@ class SudokuGenerator {
         ".9.....57",
         "..6..7.89",
       ],
-      // XYZ Wing
+      // XYZ Wing, not solved
       [
         "6.......8",
         "5..9.8..7",

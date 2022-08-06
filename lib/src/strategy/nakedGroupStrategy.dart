@@ -35,7 +35,7 @@ class NakedGroupStrategy extends Strategy {
     var updated = true;
     while (updated) {
       updated = false;
-      for (var gl = 1; gl <= groupMax; gl++) {
+      for (var gl = 2; gl <= groupMax; gl++) {
         var groups = findGroups(possibleCells, gl, [], 0);
         for (var group in groups) {
           var possible = unionCellsPossible(group);
