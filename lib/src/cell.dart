@@ -76,7 +76,11 @@ class Cell {
 
   int get row => _row;
   int get col => _col;
-  int getAxis(String axis) => axis == 'row' ? _row : _col;
+  int getAxis(String axis) => axis == 'row'
+      ? _row
+      : axis == 'column'
+          ? _col
+          : box;
 
   void togglePossible(int value) {
     _possible.toggle(value);

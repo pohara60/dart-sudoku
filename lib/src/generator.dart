@@ -15,7 +15,7 @@ class SudokuGenerator {
         ".9.....57",
         "..6..7.89",
       ],
-      // Hidden Groups
+      // Hidden Groups, Y-Wing
       [
         "72.4.8.3.",
         ".8.....47",
