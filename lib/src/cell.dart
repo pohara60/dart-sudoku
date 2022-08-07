@@ -13,6 +13,12 @@ class Cell {
     value = val;
   }
 
+  int get row => _row;
+  int get col => _col;
+  String get name => 'R${_row}C${_col}';
+  String get rowName => 'R${_row}';
+  String get colName => 'C${_col}';
+
   int? get value => _value;
   get isError => _error != '';
   // ignore: unnecessary_getters_setters
@@ -26,6 +32,8 @@ class Cell {
     var box = floor3(_row) + (_col - 1) ~/ 3;
     return box;
   }
+
+  String get boxName => 'B${box}';
 
   // Zero-based index in 9 cells of box
   int get boxIndex {
@@ -73,14 +81,18 @@ class Cell {
 
   // ignore: unnecessary_getters_setters
   bool get isFocus => _isFocus;
-
-  int get row => _row;
-  int get col => _col;
-  int getAxis(String axis) => axis == 'row'
+  int getAxis(String axis) => axis == 'R'
       ? _row
-      : axis == 'column'
+      : axis == 'C'
           ? _col
           : box;
+  String getAxisName(String axis) => axis == 'R'
+      ? 'R$row'
+      : axis == 'C'
+          ? 'C$col'
+          : axis == 'B'
+              ? 'B$box'
+              : name;
 
   void togglePossible(int value) {
     _possible.toggle(value);
@@ -111,18 +123,8 @@ class Cell {
   @override
   // toString() => _value != null ? _value.toString() : '';
   String toString() {
-    var text = '[$_row,$_col] = ${_possible.toString()}';
+    var text = '$name = ${_possible.toString()}';
     return text;
-  }
-
-  /// Return location string of [type] 'cell', 'box', 'row' or 'col'
-  String location([String type = 'cell']) {
-    var location = "";
-    if (type == "cell") location = "cell[$_row ,$_col]";
-    if (type == "box") location = "box[${_row + (_col - 1) ~/ 3}]";
-    if (type == "row") location = "row[$_row]";
-    if (type == "column") location = "column[$_col]";
-    return location;
   }
 
   bool checkUnique() {

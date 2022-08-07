@@ -54,8 +54,8 @@ class XYZWingStrategy extends Strategy {
 
   bool solve() {
     var updated = false;
-    var valuePossibleBoxes = getValueXYZPossibleIndexes('box');
-    for (var axis in ['row', 'column']) {
+    var valuePossibleBoxes = getValueXYZPossibleIndexes('B');
+    for (var axis in ['R', 'C']) {
       var valuePossibleMajors = getValueXYZPossibleIndexes(axis);
       for (var value = 1; value < 10; value++) {
         var majors = valuePossibleMajors[value];
@@ -72,7 +72,7 @@ class XYZWingStrategy extends Strategy {
               if (valuePossibleBoxes[value] != null &&
                   valuePossibleBoxes[value]![hingeCell.box] != null) {
                 var boxIndexes = valuePossibleBoxes[value]![hingeCell.box]!;
-                var boxCells = grid.getMinorAxis('box', hingeCell.box);
+                var boxCells = grid.getMinorAxis('B', hingeCell.box);
                 for (var pair2
                     in getTripleAndDoubleIndexes(boxCells, boxIndexes, value)) {
                   var boxIndex1 = pair2[0]; // Three possible values
@@ -84,7 +84,7 @@ class XYZWingStrategy extends Strategy {
                             1) {
                       // Remove value from other cells in axis of box
                       var location = addExplanation(explanation,
-                          '$axis[${hingeCell.row},${hingeCell.col}] box[${hingeCell.box}]');
+                          '$axis hinge ${hingeCell.name} ${hingeCell.boxName}]');
                       boxCells
                           .where((c) => grid.axisEqual(axis, c, hingeCell))
                           .forEach((c) {

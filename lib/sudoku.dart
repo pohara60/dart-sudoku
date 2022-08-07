@@ -16,6 +16,12 @@ class Sudoku {
     generator = SudokuGenerator();
   }
 
+  factory Sudoku.sudoku(String puzzle, [singleStep = false]) {
+    var sudoku = Sudoku(singleStep);
+    sudoku.setSudoku(puzzle);
+    return sudoku;
+  }
+
   /// **getSolutions** for specified puzzle.
   ///
   Set<String> getSolutions(String? puzzle) {
@@ -44,11 +50,11 @@ class Sudoku {
     currentPuzzle = puzzle;
   }
 
-  void invokeAllStrategies(bool explain) {
+  void invokeAllStrategies([bool explain = false, bool showPossible = false]) {
     if (grid == null) {
       throw Exception();
     }
-    return grid!.invokeAllStrategies(explain);
+    return grid!.invokeAllStrategies(explain, showPossible);
   }
 
   bool explainStrategy(Solve strategy) {

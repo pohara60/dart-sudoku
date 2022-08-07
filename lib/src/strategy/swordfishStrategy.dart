@@ -6,7 +6,7 @@ class SwordfishStrategy extends Strategy {
 
   bool solve() {
     var updated = false;
-    for (var axis in ['row', 'column']) {
+    for (var axis in ['R', 'C']) {
       var valuePossibleMajors = grid.getValuePossibleIndexes(axis, 3);
       for (var value = 1; value < 10; value++) {
         var majors = valuePossibleMajors[value];
@@ -20,13 +20,13 @@ class SwordfishStrategy extends Strategy {
                     if (major2 < major3) {
                       minors = mergeLists(minors, minors3);
                       if (minors.length <= 3) {
-                        var location = addExplanation(
-                            explanation, '$axis[$major1,$major2,$major3}]');
+                        var location = addExplanation(explanation,
+                            '$axis$major1,$axis$major2,$axis$major3}]');
                         // Remove the value from the three minor axes
                         for (var minor in minors) {
                           var cells = grid.getMinorAxis(axis, minor);
                           cells.forEach((cell) {
-                            var major = axis == 'row' ? cell.row : cell.col;
+                            var major = cell.getAxis(axis);
                             if (major != major1 &&
                                 major != major2 &&
                                 major != major3) {

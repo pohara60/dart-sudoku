@@ -53,8 +53,7 @@ class HiddenGroupStrategy extends Strategy {
             if (c.removeOtherPossible(possible)) {
               updated = true;
               anyUpdate = true;
-              grid.cellUpdated(
-                  c, explanation, "remove other than $group from $c");
+              grid.cellUpdated(c, explanation, "set $c");
             }
           }
         }

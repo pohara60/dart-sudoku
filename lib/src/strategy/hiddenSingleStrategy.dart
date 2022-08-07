@@ -22,7 +22,7 @@ class HiddenSingleStrategy extends Strategy {
       updated = true;
     } else {
       // Check for a possible value not in box, row or column
-      for (var axis in ['row', 'column', 'box']) {
+      for (var axis in ['R', 'C', 'B']) {
         var cells = grid.getMajorAxis(axis, cell.getAxis(axis));
         cells.remove(cell);
         var otherPossible = unionCellsPossible(cells);

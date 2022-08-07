@@ -6,7 +6,7 @@ class PointingGroupStrategy extends LineBoxReductionStrategy {
   PointingGroupStrategy(grid) : super(grid, 'Pointing Group');
 
   bool solve() {
-    return allBoxReduction('box');
+    return allBoxReduction('B');
   }
 }
 
@@ -28,16 +28,16 @@ class LineBoxReductionStrategy extends Strategy {
 
   /// *lineBoxReduction* implement Point Group and Line Box Reduction
   ///
-  /// If target is "box" then find unique value in Rows/Columns of Box
+  /// If target is "B" then find unique value in Rows/Columns of Box
   /// and remove from rest of Box
-  /// If target is not "box" then find unique value in Rows/Columns in Box
+  /// If target is not "B" then find unique value in Rows/Columns in Box
   /// and remove from rest of Row/Column
   bool lineBoxReduction(String target, int box) {
     var updated = false;
     var cells = grid.getBox(box);
-    var location = addExplanation(explanation, cells[0].location("box"));
+    var location = addExplanation(explanation, cells[0].getAxisName('B'));
     // Check each Row then each Column of Box
-    for (var axis in ['row', 'column']) {
+    for (var axis in ['R', 'C']) {
       for (var boxMajor = 0; boxMajor < 3; boxMajor++) {
         // Three cells in Row/Column
         var cells3 = grid.getCells3(axis, boxMajor, cells);
@@ -49,18 +49,14 @@ class LineBoxReductionStrategy extends Strategy {
         // Other six cells in Row/Column
         late List<Cell> axisCells6;
         late String locationAxis;
-        if (axis == 'row') {
-          axisCells6 = grid.getRow(cells3[0].row);
-          locationAxis = addExplanation(location, '$axis[${cells3[0].row}]');
-        } else {
-          axisCells6 = grid.getColumn(cells3[0].col);
-          locationAxis = addExplanation(location, '$axis[${cells3[0].col}]');
-        }
+        axisCells6 = grid.getCellAxis(axis, cells3[0]);
+        locationAxis =
+            addExplanation(location, '${cells3[0].getAxisName(axis)}');
         axisCells6.removeWhere((cell) => cell.isSet || cells3.contains(cell));
         // Get cells to check and cells to update according to target
         late List<Cell> cells6;
         late List<Cell> updateCells;
-        if (target == 'box') {
+        if (target == 'B') {
           cells6 = boxCells6;
           updateCells = axisCells6;
         } else {

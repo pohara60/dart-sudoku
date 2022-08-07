@@ -43,11 +43,13 @@ For example:
     if (puzzles.length > 0) {
       // Get and print solutions
       final puzzle = puzzles[0];
-      final sudoku = Sudoku();
-      final solutions = sudoku.getSolutions(puzzle);
-      for (var solution in solutions) {
-        print('Solution for $puzzle is $solution');
-      }
+      print('$puzzle');
+      var sudoku = Sudoku.sudoku(puzzle);
+      sudoku.invokeAllStrategies(true, false);
+      // final solutions = sudoku.getSolutions(puzzle);
+      // for (var solution in solutions) {
+      //   print('Solution for $puzzle is $solution');
+      // }
     }
   }
 }

@@ -20,17 +20,11 @@ class UpdatePossibleStrategy extends Strategy {
     if (cell.value != null) return false;
 
     // Remove known values from box, row, col
-    var cells = grid.getBox(cell.box);
-    var location = addExplanation(explanation, cells[0].location("box"));
-    if (nonetUpdateCell(cell, cells, location)) updated = true;
-
-    cells = grid.getRow(cell.row);
-    location = addExplanation(explanation, cells[0].location("row"));
-    if (nonetUpdateCell(cell, cells, location)) updated = true;
-
-    cells = grid.getColumn(cell.col);
-    location = addExplanation(explanation, cells[0].location("column"));
-    if (nonetUpdateCell(cell, cells, location)) updated = true;
+    for (var axis in ['B', 'R', 'C']) {
+      var cells = grid.getCellAxis(axis, cell);
+      var location = addExplanation(explanation, cells[0].getAxisName(axis));
+      if (nonetUpdateCell(cell, cells, location)) updated = true;
+    }
 
     return updated;
   }

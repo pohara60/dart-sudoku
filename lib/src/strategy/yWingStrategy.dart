@@ -55,8 +55,8 @@ class YWingStrategy extends Strategy {
 
   bool solve() {
     var updated = false;
-    var valuePossibleBoxes = getValueYPossibleIndexes('box');
-    for (var axis in ['row', 'column']) {
+    var valuePossibleBoxes = getValueYPossibleIndexes('B');
+    for (var axis in ['R', 'C']) {
       var valuePossibleMajors = getValueYPossibleIndexes(axis);
       for (var value = 1; value < 10; value++) {
         var majors1 = valuePossibleMajors[value];
@@ -85,7 +85,7 @@ class YWingStrategy extends Strategy {
                     if (otherCell.isPossible(thirdValue)) {
                       // Remove other value from major2, minor2
                       var location = addExplanation(explanation,
-                          '$axis[${hingeCell.row},${hingeCell.col}] $axis[$major2]');
+                          '$axis hinge ${hingeCell.name} $axis$major2');
                       var c = grid.getAxisCell(axis, major2, minor2);
                       if (c.clearPossible(otherValue)) {
                         updated = true;
@@ -100,7 +100,7 @@ class YWingStrategy extends Strategy {
               if (valuePossibleBoxes[value] != null &&
                   valuePossibleBoxes[value]![hingeCell.box] != null) {
                 var boxIndexes = valuePossibleBoxes[value]![hingeCell.box]!;
-                var boxCells = grid.getMinorAxis('box', hingeCell.box);
+                var boxCells = grid.getMinorAxis('B', hingeCell.box);
                 for (var pair2
                     in getDoubleIndexes(boxCells, boxIndexes, thirdValue)) {
                   var boxIndex1 = pair2[0]; // Two possible values
@@ -111,7 +111,7 @@ class YWingStrategy extends Strategy {
                         otherCell.isPossible(otherValue)) {
                       // Remove value from other cells in axis of box
                       var location = addExplanation(explanation,
-                          '$axis[${hingeCell.row},${hingeCell.col}] box[${hingeCell.box}]');
+                          '$axis hinge ${hingeCell.name} ${hingeCell.boxName}');
                       boxCells
                           .where((c) => grid.axisEqual(axis, c, hingeCell))
                           .forEach((c) {
@@ -122,7 +122,7 @@ class YWingStrategy extends Strategy {
                         }
                       });
                       location = addExplanation(explanation,
-                          '$axis[${hingeCell.row},${hingeCell.col}] box[${axisCell.box}]');
+                          '$axis hinge ${hingeCell.name} ${axisCell.boxName}');
                       // Remove other value from other box on other cell axis
                       var otherBoxCells = grid.getBox(axisCell.box);
                       otherBoxCells

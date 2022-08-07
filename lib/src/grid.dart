@@ -115,7 +115,7 @@ class Grid {
     const rowBoxTop = '╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗\n';
     const rowSeparator = '╟───┼───┼───╫───┼───┼───╫───┼───┼───╢\n';
     const rowBoxSeparator = '╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣\n';
-    const rowBoxBottom = '╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝\n';
+    const rowBoxBottom = '╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝';
     const colBoxSeparator = '║';
     const colSeparator = '│';
     var result = StringBuffer();
@@ -148,7 +148,7 @@ class Grid {
     return result.toString();
   }
 
-  void invokeAllStrategies(bool explain) {
+  void invokeAllStrategies([bool explain = false, bool showPossible = false]) {
     var updated = true;
     while (updated) {
       clearUpdates();
@@ -166,9 +166,9 @@ class Grid {
       if (!updated) updated = yWingStrategy.solve();
       if (!updated) updated = swordfishStrategy.solve();
       if (!updated) updated = xyzWingStrategy.solve();
-      if (explain && updated) {
-        printUpdates();
-        print(toPossibleString());
+      if (updated) {
+        if (explain) printUpdates();
+        if (showPossible) print(toPossibleString());
       }
     }
     return;
@@ -251,24 +251,18 @@ class Grid {
     if (cell.value == null) return;
 
     // Remove known value from box, row, col
-    var cells = getBox(cell.box);
-    var location = addExplanation(explanation, cells[0].location("box"));
-    cellUpdateNonet(cell, cells, location);
-
-    cells = getRow(cell.row);
-    location = addExplanation(explanation, cells[0].location("row"));
-    cellUpdateNonet(cell, cells, location);
-
-    cells = getColumn(cell.col);
-    location = addExplanation(explanation, cells[0].location("column"));
-    cellUpdateNonet(cell, cells, location);
+    for (var axis in ['B', 'R', 'C']) {
+      var cells = getCellAxis(axis, cell);
+      var location = addExplanation(explanation, cells[0].getAxisName(axis));
+      cellUpdateNonet(cell, cells, location);
+    }
   }
 
   List<Cell> getCells3(String axis, int boxMajor, List<Cell> cells) {
     var cells3 = <Cell>[];
     for (var boxMinor = 0; boxMinor < 3; boxMinor++) {
       late Cell cell;
-      if (axis == 'row') {
+      if (axis == 'R') {
         cell = cells[boxMajor * 3 + boxMinor];
       } else {
         cell = cells[boxMinor * 3 + boxMajor];
@@ -288,10 +282,20 @@ class Grid {
     return solved;
   }
 
+  List<Cell> getCellAxis(String axis, Cell cell) {
+    if (axis == 'R') {
+      return getRow(cell.row);
+    } else if (axis == 'B') {
+      return getBox(cell.box);
+    } else {
+      return getColumn(cell.col);
+    }
+  }
+
   List<Cell> getMajorAxis(String axis, int major) {
-    if (axis == 'row') {
+    if (axis == 'R') {
       return getRow(major);
-    } else if (axis == 'box') {
+    } else if (axis == 'B') {
       return getBox(major);
     } else {
       return getColumn(major);
@@ -299,9 +303,9 @@ class Grid {
   }
 
   List<Cell> getMinorAxis(String axis, int minor) {
-    if (axis == 'row') {
+    if (axis == 'R') {
       return getColumn(minor);
-    } else if (axis == 'box') {
+    } else if (axis == 'B') {
       return getBox(minor);
     } else {
       return getRow(minor);
@@ -332,7 +336,7 @@ class Grid {
   }
 
   Cell getAxisCell(String axis, int major, int minor) {
-    if (axis == 'row') {
+    if (axis == 'R') {
       return _grid[major - 1][minor - 1];
     } else {
       return _grid[minor - 1][major - 1];
@@ -340,7 +344,7 @@ class Grid {
   }
 
   bool axisEqual(String axis, Cell cell1, Cell cell2) {
-    if (axis == 'row') {
+    if (axis == 'R') {
       return cell1.row == cell2.row;
     } else {
       return cell1.col == cell2.col;
