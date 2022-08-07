@@ -135,6 +135,10 @@ class Cell {
     return _possible.remove(possible);
   }
 
+  bool removeOtherPossible(Possible possible) {
+    return _possible.removeOther(possible);
+  }
+
   getOtherPossible(int value) {
     return _possible.getOther(value);
   }

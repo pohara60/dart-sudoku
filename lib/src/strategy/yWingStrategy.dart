@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/grid.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
@@ -6,133 +5,142 @@ import 'package:sudoku/src/strategy/strategy.dart';
 class YWingStrategy extends Strategy {
   YWingStrategy(grid) : super(grid, 'Y-Wing');
 
-  bool solve() {
-    var updated = false;
-    var valuePossibleBoxes = grid.getValuePossibleIndexes('box', 2);
-    for (var axis in ['row', 'column']) {
-      var valuePossibleMajors = grid.getValuePossibleIndexes(axis, 2);
+  Map<int, Map<int, List<int>>> getValueYPossibleIndexes(String axis) {
+    var valuePossibleMajors = <int, Map<int, List<int>>>{};
+    // Find Rows/Columns/Boxes where values may appear in doubles
+    for (var major = 1; major < 10; major++) {
+      var cells = grid.getMajorAxis(axis, major);
+      var countPossibles = countCellsPossible(cells);
       for (var value = 1; value < 10; value++) {
-        var majors = valuePossibleMajors[value];
-        if (majors != null) {
-          for (var major1 in majors.keys) {
-            var minors1 = majors[major1]!;
-            // Proceed if the two cells each have only two values
-            assert(minors1.length == 2);
-            var cell1 = grid.getAxisCell(axis, major1, minors1[0]);
-            var cell2 = grid.getAxisCell(axis, major1, minors1[1]);
-            if (cell1.possibleCount == 2 && cell2.possibleCount == 2) {
-              var value1 = cell1.getOtherPossible(value);
-              var value2 = cell2.getOtherPossible(value);
-              if (value1 != value2) {
-                // Look at boxes containing other value
-                var box1 = cell1.box;
-                var box2 = cell2.box;
-                if (yWingCheckBox(valuePossibleBoxes, value1, box1, cell1,
-                    value2, box2, axis)) updated = true;
-                if (updated && grid.singleStep) return true;
-                if (yWingCheckBox(valuePossibleBoxes, value2, box2, cell2,
-                    value1, box1, axis)) updated = true;
-                if (updated && grid.singleStep) return true;
-                for (var other in [value1, value2]) {
-                  // Look at rows that have other value twice
-                  var majors2 = valuePossibleMajors[other];
-                  if (majors2 != null) {
-                    for (var major2 in majors2.keys) {
-                      var minors2 = majors2[major2]!;
-                      if (ListEquality().equals(minors1, minors2)) {
-                        if (other == value2) {
-                          if (yWingCheckSecondMajor(
-                              axis,
-                              major1,
-                              major2,
-                              minors1[0],
-                              minors1[1],
-                              other,
-                              value1)) updated = true;
-                          ;
-                        } else {
-                          if (yWingCheckSecondMajor(
-                              axis,
-                              major1,
-                              major2,
-                              minors1[1],
-                              minors1[2],
-                              other,
-                              value2)) updated = true;
-                        }
-                        if (updated && grid.singleStep) return true;
-                      }
-                    }
-                  }
-                  ;
+        if (countPossibles[value - 1] >= 2) {
+          if (valuePossibleMajors[value] == null) {
+            valuePossibleMajors[value] = <int, List<int>>{};
+          }
+          for (var index = 0; index < cells.length; index++) {
+            var cell = cells[index];
+            if (cell.isPossible(value)) {
+              if (cell.possibleCount == 2) {
+                if (valuePossibleMajors[value]![major] == null) {
+                  valuePossibleMajors[value]![major] = <int>[];
                 }
+                valuePossibleMajors[value]![major]!.add(index + 1);
               }
             }
           }
         }
       }
     }
-    return updated;
+    return valuePossibleMajors;
   }
 
-  bool yWingCheckBox(
-      Map<int, Map<int, List<int>>> valuePossibleBoxes,
-      int value,
-      int box,
-      Cell cell,
-      int otherValue,
-      int otherBox,
-      String axis) {
-    bool updated = false;
-    var cells = grid.getBox(box);
-    for (var otherCell in cells.where((element) => element != cell)) {
-      if (otherCell.possibleCount == 2 &&
-          otherCell.isPossible(value) &&
-          otherCell.isPossible(otherValue) &&
-          !grid.axisEqual(axis, otherCell, cell)) {
-        // Match
-        // Remove other value from box on cell axis
-        var location = addExplanation(
-            explanation, '$axis[${cell.row},${cell.col}] box[$box]');
-        cells.where((c) => grid.axisEqual(axis, c, cell)).forEach((c) {
-          if (c.clearPossible(otherValue)) {
-            updated = true;
-            grid.cellUpdated(c, location, "remove value $otherValue from $c");
+  Iterable<List<int>> getDoubleIndexes(
+      List<Cell> cells, List<int> indexes, int value) sync* {
+    for (var index1 = 0; index1 < cells.length; index1++) {
+      var cell1 = cells[index1];
+      // Get cells with two possible values including requested value
+      if (cell1.possibleCount == 2 && cell1.isPossible(value)) {
+        for (var index2 = 0; index2 < cells.length; index2++) {
+          var cell2 = cells[index2];
+          // Get other cells with two overlapping possible values not including requested value
+          if (cell2 != cell1 &&
+              cell2.possibleCount == 2 &&
+              cell2.isPossible(value) &&
+              cell2.possible.subtract(cell1.possible).count == 1) {
+            yield [index1, index2];
           }
-        });
-        location = addExplanation(
-            explanation, '$axis[${cell.row},${cell.col}] box[$otherBox]');
-        // Remove other value from other box on other cell axis
-        cells = grid.getBox(otherBox);
-        cells.where((c) => grid.axisEqual(axis, c, otherCell)).forEach((c) {
-          if (c.clearPossible(otherValue)) {
-            updated = true;
-            grid.cellUpdated(c, location, "remove value $otherValue from $c");
-          }
-        });
+        }
       }
     }
-    return updated;
   }
 
-  bool yWingCheckSecondMajor(
-    String axis,
-    int major1,
-    int major2,
-    int minor1,
-    int minor2,
-    int other,
-    int value1,
-  ) {
+  bool solve() {
     var updated = false;
-    var otherCell = grid.getAxisCell(axis, major2, minor1);
-    var location = addExplanation(explanation, '$axis[$major1,$minor1]');
-    if (otherCell.getOtherPossible(other) == value1) {
-      var cell = grid.getAxisCell(axis, major2, minor2);
+    var valuePossibleBoxes = getValueYPossibleIndexes('box');
+    for (var axis in ['row', 'column']) {
+      var valuePossibleMajors = getValueYPossibleIndexes(axis);
+      for (var value = 1; value < 10; value++) {
+        var majors1 = valuePossibleMajors[value];
+        if (majors1 != null) {
+          for (var major1 in majors1.keys) {
+            var minors1 = majors1[major1]!;
 
-      if (cell.clearPossible(other)) {
-        updated = true;
-        grid.cellUpdated(cell, location, "remove value $other from $cell");
+            var cells = grid.getMajorAxis(axis, major1);
+            for (var pair1 in getDoubleIndexes(cells, minors1, value)) {
+              var minor1 = pair1[0] + 1; // Two possible values
+              var minor2 = pair1[1] + 1; // Two possible values
+              var hingeCell = cells[minor1 - 1];
+              var axisCell = cells[minor2 - 1];
+              var otherValue =
+                  axisCell.possible.subtract(hingeCell.possible).unique();
+              var thirdValue =
+                  hingeCell.possible.subtract(axisCell.possible).unique();
+              // Check other majors for other value in double in minor1
+              var majors2 = valuePossibleMajors[otherValue];
+              if (majors2 != null) {
+                for (var major2
+                    in majors2.keys.where((major) => major != major1)) {
+                  var minors2 = majors2[major2]!;
+                  if (minors2.contains(minor1)) {
+                    var otherCell = grid.getAxisCell(axis, major2, minor2);
+                    if (otherCell.isPossible(thirdValue)) {
+                      // Remove other value from major2, minor2
+                      var location = addExplanation(explanation,
+                          '$axis[${hingeCell.row},${hingeCell.col}] $axis[$major2]');
+                      var c = grid.getAxisCell(axis, major2, minor2);
+                      if (c.clearPossible(otherValue)) {
+                        updated = true;
+                        grid.cellUpdated(
+                            c, location, "remove value $otherValue from $c");
+                      }
+                    }
+                  }
+                }
+              }
+              // Check Box for hinge cell
+              if (valuePossibleBoxes[value] != null &&
+                  valuePossibleBoxes[value]![hingeCell.box] != null) {
+                var boxIndexes = valuePossibleBoxes[value]![hingeCell.box]!;
+                var boxCells = grid.getMinorAxis('box', hingeCell.box);
+                for (var pair2
+                    in getDoubleIndexes(boxCells, boxIndexes, thirdValue)) {
+                  var boxIndex1 = pair2[0]; // Two possible values
+                  var boxIndex2 = pair2[1]; // Two possible values
+                  if (boxCells[boxIndex1] == hingeCell) {
+                    var otherCell = boxCells[boxIndex2];
+                    if (otherCell.getAxis(axis) != hingeCell.getAxis(axis) &&
+                        otherCell.isPossible(otherValue)) {
+                      // Remove value from other cells in axis of box
+                      var location = addExplanation(explanation,
+                          '$axis[${hingeCell.row},${hingeCell.col}] box[${hingeCell.box}]');
+                      boxCells
+                          .where((c) => grid.axisEqual(axis, c, hingeCell))
+                          .forEach((c) {
+                        if (c != hingeCell && c.clearPossible(otherValue)) {
+                          updated = true;
+                          grid.cellUpdated(
+                              c, location, "remove value $otherValue from $c");
+                        }
+                      });
+                      location = addExplanation(explanation,
+                          '$axis[${hingeCell.row},${hingeCell.col}] box[${axisCell.box}]');
+                      // Remove other value from other box on other cell axis
+                      var otherBoxCells = grid.getBox(axisCell.box);
+                      otherBoxCells
+                          .where((c) => grid.axisEqual(axis, c, otherCell))
+                          .forEach((c) {
+                        if (c.clearPossible(otherValue)) {
+                          updated = true;
+                          grid.cellUpdated(
+                              c, location, "remove value $otherValue from $c");
+                        }
+                      });
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
     return updated;

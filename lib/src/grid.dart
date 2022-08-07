@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/possible.dart';
+import 'package:sudoku/src/strategy/hiddenGroupStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenSingleStrategy.dart';
 import 'package:sudoku/src/strategy/lineBoxReductionStrategy.dart';
 import 'package:sudoku/src/strategy/nakedGroupStrategy.dart';
@@ -38,6 +39,7 @@ class Grid {
   late UpdatePossibleStrategy updatePossibleStrategy;
   late HiddenSingleStrategy hiddenSingleStrategy;
   late NakedGroupStrategy nakedGroupStrategy;
+  late HiddenGroupStrategy hiddenGroupStrategy;
   late PointingGroupStrategy pointingGroupStrategy;
   late LineBoxReductionStrategy lineBoxReductionStrategy;
   late XWingStrategy xWingStrategy;
@@ -52,6 +54,7 @@ class Grid {
     updatePossibleStrategy = UpdatePossibleStrategy(this);
     hiddenSingleStrategy = HiddenSingleStrategy(this);
     nakedGroupStrategy = NakedGroupStrategy(this);
+    hiddenGroupStrategy = HiddenGroupStrategy(this);
     pointingGroupStrategy = PointingGroupStrategy(this);
     lineBoxReductionStrategy = LineBoxReductionStrategy(this);
     xWingStrategy = XWingStrategy(this);
@@ -156,6 +159,7 @@ class Grid {
       updated = updatePossibleStrategy.solve();
       if (!updated) updated = hiddenSingleStrategy.solve();
       if (!updated) updated = nakedGroupStrategy.solve();
+      if (!updated) updated = hiddenGroupStrategy.solve();
       if (!updated) updated = pointingGroupStrategy.solve();
       if (!updated) updated = lineBoxReductionStrategy.solve();
       if (!updated) updated = xWingStrategy.solve();
@@ -190,19 +194,6 @@ class Grid {
     var cells = <Cell>[];
     var row = floor3(box);
     var col = ((box - 1) % 3) * 3 + 1;
-    for (var r = row; r < row + 3; r++) {
-      for (var c = col; c < col + 3; c++) {
-        cells.add(_grid[r - 1][c - 1]);
-      }
-    }
-    return cells;
-  }
-
-  /// Return cells in box that includes co-ordinates [irow] and [icol]
-  List<Cell> getBoxForCell(int irow, int icol) {
-    var cells = <Cell>[];
-    var row = floor3(irow);
-    var col = floor3(icol);
     for (var r = row; r < row + 3; r++) {
       for (var c = col; c < col + 3; c++) {
         cells.add(_grid[r - 1][c - 1]);
@@ -260,7 +251,7 @@ class Grid {
     if (cell.value == null) return;
 
     // Remove known value from box, row, col
-    var cells = getBoxForCell(cell.row, cell.col);
+    var cells = getBox(cell.box);
     var location = addExplanation(explanation, cells[0].location("box"));
     cellUpdateNonet(cell, cells, location);
 

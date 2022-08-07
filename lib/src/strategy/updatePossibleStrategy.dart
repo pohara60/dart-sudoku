@@ -20,7 +20,7 @@ class UpdatePossibleStrategy extends Strategy {
     if (cell.value != null) return false;
 
     // Remove known values from box, row, col
-    var cells = grid.getBoxForCell(cell.row, cell.col);
+    var cells = grid.getBox(cell.box);
     var location = addExplanation(explanation, cells[0].location("box"));
     if (nonetUpdateCell(cell, cells, location)) updated = true;
 

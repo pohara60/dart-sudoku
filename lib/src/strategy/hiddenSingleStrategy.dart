@@ -15,21 +15,23 @@ class HiddenSingleStrategy extends Strategy {
 
   /// Check [cell] for unique possible value
   bool cellHiddenSingle(Cell cell) {
-    if (cell.value != null) return false;
+    if (cell.isSet) return false;
 
     var updated = false;
     if (cell.checkUnique()) {
       updated = true;
     } else {
       // Check for a possible value not in box, row or column
-      var cells = grid.getBoxForCell(cell.row, cell.col);
-      cells.remove(cell);
-      var otherPossible = unionCellsPossible(cells);
-      var difference = cell.possible.subtract(otherPossible);
-      var value = difference.unique();
-      if (value > 0) {
-        cell.value = value;
-        updated = true;
+      for (var axis in ['row', 'column', 'box']) {
+        var cells = grid.getMajorAxis(axis, cell.getAxis(axis));
+        cells.remove(cell);
+        var otherPossible = unionCellsPossible(cells);
+        var difference = cell.possible.subtract(otherPossible);
+        var value = difference.unique();
+        if (value > 0) {
+          cell.value = value;
+          updated = true;
+        }
       }
     }
     if (updated) {
