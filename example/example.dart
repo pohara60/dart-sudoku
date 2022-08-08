@@ -15,7 +15,6 @@ void main() {
     "34......8",
     "168943275"
   ].join('\n');
-  print('getSudoku\n$puzzle');
   var sudoku = Sudoku.sudoku(puzzle);
-  sudoku.invokeAllStrategies(true, false);
+  print(sudoku.invokeAllStrategies(true, false));
 }

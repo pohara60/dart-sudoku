@@ -50,7 +50,8 @@ class Sudoku {
     currentPuzzle = puzzle;
   }
 
-  void invokeAllStrategies([bool explain = false, bool showPossible = false]) {
+  String invokeAllStrategies(
+      [bool explain = false, bool showPossible = false]) {
     if (grid == null) {
       throw Exception();
     }

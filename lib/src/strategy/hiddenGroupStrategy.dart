@@ -5,21 +5,23 @@ import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class HiddenGroupStrategy extends Strategy {
+  int min = 2;
+  int max = 4;
   HiddenGroupStrategy(grid) : super(grid, 'Hidden Group');
+  factory HiddenGroupStrategy.minMax(grid, min, max) {
+    var strategy = HiddenGroupStrategy(grid);
+    strategy.min = min;
+    strategy.max = max;
+    return strategy;
+  }
 
   bool solve() {
     var updated = false;
-    for (var row = 1; row < 10; row++) {
-      var cells = grid.getRow(row);
-      if (nonetHiddenGroup(cells)) updated = true;
-    }
-    for (var col = 1; col < 10; col++) {
-      var cells = grid.getColumn(col);
-      if (nonetHiddenGroup(cells)) updated = true;
-    }
-    for (var box = 1; box < 10; box++) {
-      var cells = grid.getBox(box);
-      if (nonetHiddenGroup(cells)) updated = true;
+    for (var axis in ['R', 'C', 'B']) {
+      for (var major = 1; major < 10; major++) {
+        var cells = grid.getMajorAxis(axis, major);
+        if (nonetHiddenGroup(cells)) updated = true;
+      }
     }
     return updated;
   }
@@ -34,29 +36,46 @@ class HiddenGroupStrategy extends Strategy {
         .toList();
     var groupMax = possibleValues.length ~/ 2;
     //var groupMax = possibleValues.length - 1;
+    if (groupMax > this.max) groupMax = this.max;
+    var groupMin = this.min;
+    if (groupMax < groupMin) return false;
 
     // Check for groups of 2 to groupMax values
     var anyUpdate = false;
     var updated = true;
     while (updated) {
       updated = false;
+      var smallerGroups = [];
       for (var gl = 2; gl <= groupMax; gl++) {
         var groups = findGroups(possibleValues, gl, [], 0, valuesPossible);
-        for (var group in groups) {
-          var possible = unionValuesPossible(group);
-          var groupCells =
-              unionValuesCells(valuesPossible, group, possibleCells);
-          // Remove other values from group cells
-          for (var i = 0; i < groupCells.length; i++) {
-            var c = groupCells[i];
+        if (gl >= groupMin) {
+          for (var group in groups) {
+            var possible = unionValuesPossible(group);
+            // Check if group is a superset of a smaller group
+            var superset = false;
+            for (var smallerGroup in smallerGroups) {
+              var smallerPossible = unionValuesPossible(smallerGroup);
+              if (smallerPossible.subtract(possible).count == 0) {
+                superset = true;
+              }
+            }
+            if (!superset) {
+              var groupCells =
+                  unionValuesCells(valuesPossible, group, possibleCells);
+              // Remove other values from group cells
+              for (var i = 0; i < groupCells.length; i++) {
+                var c = groupCells[i];
 
-            if (c.removeOtherPossible(possible)) {
-              updated = true;
-              anyUpdate = true;
-              grid.cellUpdated(c, explanation, "set $c");
+                if (c.removeOtherPossible(possible)) {
+                  updated = true;
+                  anyUpdate = true;
+                  grid.cellUpdated(c, explanation, "set $c");
+                }
+              }
             }
           }
         }
+        smallerGroups.addAll(groups);
       }
     }
     return anyUpdate;

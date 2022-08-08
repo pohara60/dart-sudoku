@@ -3,21 +3,23 @@ import 'package:sudoku/src/grid.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class NakedGroupStrategy extends Strategy {
+  int min = 2;
+  int max = 4;
   NakedGroupStrategy(grid) : super(grid, 'Naked Group');
+  factory NakedGroupStrategy.minMax(grid, min, max) {
+    var strategy = NakedGroupStrategy(grid);
+    strategy.min = min;
+    strategy.max = max;
+    return strategy;
+  }
 
   bool solve() {
     var updated = false;
-    for (var row = 1; row < 10; row++) {
-      var cells = grid.getRow(row);
-      if (nonetNakedGroup(cells)) updated = true;
-    }
-    for (var col = 1; col < 10; col++) {
-      var cells = grid.getColumn(col);
-      if (nonetNakedGroup(cells)) updated = true;
-    }
-    for (var box = 1; box < 10; box++) {
-      var cells = grid.getBox(box);
-      if (nonetNakedGroup(cells)) updated = true;
+    for (var axis in ['B', 'R', 'C']) {
+      for (var major = 1; major < 10; major++) {
+        var cells = grid.getMajorAxis(axis, major);
+        if (nonetNakedGroup(cells)) updated = true;
+      }
     }
     return updated;
   }
@@ -27,14 +29,17 @@ class NakedGroupStrategy extends Strategy {
     // Check cells for groups
     // Ignore known cells
     var possibleCells = cells.where((cell) => !cell.isSet).toList();
-    var groupMax = possibleCells.length ~/ 2;
+    var groupMax = (possibleCells.length + 1) ~/ 2;
     //var groupMax = possibleCells.length - 1;
+    if (groupMax > this.max) groupMax = this.max;
+    var groupMin = this.min;
+    if (groupMax < groupMin) return false;
 
     // Check for groups of 2 to groupMax cells
     var updated = true;
     while (updated) {
       updated = false;
-      for (var gl = 2; gl <= groupMax; gl++) {
+      for (var gl = groupMin; gl <= groupMax; gl++) {
         var groups = findGroups(possibleCells, gl, [], 0);
         for (var group in groups) {
           var possible = unionCellsPossible(group);

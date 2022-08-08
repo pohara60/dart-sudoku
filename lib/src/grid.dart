@@ -20,6 +20,7 @@ class Grid {
   late List<String> _messages;
 
   late bool singleStep;
+  bool debug = false;
 
   get grid => _grid;
   Cell? get focus => _focus;
@@ -38,8 +39,10 @@ class Grid {
 
   late UpdatePossibleStrategy updatePossibleStrategy;
   late HiddenSingleStrategy hiddenSingleStrategy;
-  late NakedGroupStrategy nakedGroupStrategy;
-  late HiddenGroupStrategy hiddenGroupStrategy;
+  late NakedGroupStrategy nakedGroupStrategy3;
+  late NakedGroupStrategy nakedGroupStrategy4;
+  late HiddenGroupStrategy hiddenGroupStrategy3;
+  late HiddenGroupStrategy hiddenGroupStrategy4;
   late PointingGroupStrategy pointingGroupStrategy;
   late LineBoxReductionStrategy lineBoxReductionStrategy;
   late XWingStrategy xWingStrategy;
@@ -53,8 +56,10 @@ class Grid {
     _messages = [];
     updatePossibleStrategy = UpdatePossibleStrategy(this);
     hiddenSingleStrategy = HiddenSingleStrategy(this);
-    nakedGroupStrategy = NakedGroupStrategy(this);
-    hiddenGroupStrategy = HiddenGroupStrategy(this);
+    nakedGroupStrategy3 = NakedGroupStrategy.minMax(this, 2, 3);
+    nakedGroupStrategy4 = NakedGroupStrategy.minMax(this, 4, 4);
+    hiddenGroupStrategy3 = HiddenGroupStrategy.minMax(this, 2, 3);
+    hiddenGroupStrategy4 = HiddenGroupStrategy.minMax(this, 4, 4);
     pointingGroupStrategy = PointingGroupStrategy(this);
     lineBoxReductionStrategy = LineBoxReductionStrategy(this);
     xWingStrategy = XWingStrategy(this);
@@ -73,9 +78,9 @@ class Grid {
     }
   }
 
-  void printUpdates() {
+  void getUpdates(StringBuffer result) {
     _messages.forEach((m) {
-      print(m);
+      result.writeln(debugPrint(m));
     });
   }
 
@@ -148,18 +153,28 @@ class Grid {
     return result.toString();
   }
 
-  void invokeAllStrategies([bool explain = false, bool showPossible = false]) {
+  String debugPrint(String str) {
+    if (debug) print(str);
+    return str;
+  }
+
+  String invokeAllStrategies(
+      [bool explain = false, bool showPossible = false]) {
+    var result = StringBuffer();
+    result.writeln(toString());
     var updated = true;
     while (updated) {
       clearUpdates();
       if (isSolved()) {
-        if (explain) print('Solved!');
-        return;
+        if (explain) result.writeln('Solved!');
+        break;
       }
       updated = updatePossibleStrategy.solve();
       if (!updated) updated = hiddenSingleStrategy.solve();
-      if (!updated) updated = nakedGroupStrategy.solve();
-      if (!updated) updated = hiddenGroupStrategy.solve();
+      if (!updated) updated = nakedGroupStrategy3.solve();
+      if (!updated) updated = hiddenGroupStrategy3.solve();
+      if (!updated) updated = nakedGroupStrategy4.solve();
+      if (!updated) updated = hiddenGroupStrategy4.solve();
       if (!updated) updated = pointingGroupStrategy.solve();
       if (!updated) updated = lineBoxReductionStrategy.solve();
       if (!updated) updated = xWingStrategy.solve();
@@ -167,11 +182,12 @@ class Grid {
       if (!updated) updated = swordfishStrategy.solve();
       if (!updated) updated = xyzWingStrategy.solve();
       if (updated) {
-        if (explain) printUpdates();
-        if (showPossible) print(toPossibleString());
+        if (explain) getUpdates(result);
+        if (showPossible) result.writeln(debugPrint(toPossibleString()));
       }
     }
-    return;
+    result.write(toString());
+    return result.toString();
   }
 
   bool invokeStrategy(Solve strategy) {
