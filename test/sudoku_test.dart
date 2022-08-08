@@ -82,12 +82,62 @@ void main() {
     '168943275',
   ];
 
+  var puzzle2 =
+      // XYZ Wing, not solved - needs Simple Colouring
+      [
+    "6.......8",
+    "5..9.8..7",
+    "82...1.3.",
+    "34.2.9.8.",
+    "2...8.3..",
+    "18.3.7.25",
+    "75.4...92",
+    "9....5..4",
+    "4...9...3"
+  ].join('\n');
+  var solution2 = [
+    '6.......8',
+    '5..9.8..7',
+    '82...1.3.',
+    '34.2.9.8.',
+    '2...8.3..',
+    '18.3.7.25',
+    '75.4...92',
+    '9....5..4',
+    '4...9...3',
+    'Naked Group, remove group 46 from R4C5 = 15',
+    'Naked Group, remove group 46 from R5C4 = 15',
+    'Naked Group, remove group 136 from R1C2 = 79',
+    'Naked Group, remove group 136 from R5C2 = 79',
+    'Pointing Group, B4, C3, remove group 56 from R7C3 = 138',
+    'Pointing Group, B4, C3, remove group 56 from R8C3 = 1238',
+    'Pointing Group, B4, C3, remove group 56 from R9C3 = 128',
+    'Line Box Reduction, B6, C9, remove group 1 from R4C7 = 67',
+    'Line Box Reduction, B6, C9, remove group 1 from R5C8 = 467',
+    'XYZ-Wing, R hinge R5C8 B6], remove value 6 from R5C9 = 19',
+    '6.......8',
+    '5..9.8..7',
+    '82...1.3.',
+    '34.2.9.8.',
+    '2...8.3..',
+    '18.3.7.25',
+    '75.4...92',
+    '9....5..4',
+    '4...9...3',
+  ];
   group('API', () {
     test('sudoku1', () {
       var sudoku1 = Sudoku.sudoku(puzzle1);
       expect(
         sudoku1.invokeAllStrategies(true, false),
         solution1.join('\n'),
+      );
+    });
+    test('sudoku2', () {
+      var sudoku2 = Sudoku.sudoku(puzzle2);
+      expect(
+        sudoku2.invokeAllStrategies(true, false),
+        solution2.join('\n'),
       );
     });
   });
