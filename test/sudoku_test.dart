@@ -114,7 +114,10 @@ void main() {
     'Pointing Group, B4, C3, remove group 56 from R9C3 = 128',
     'Line Box Reduction, B6, C9, remove group 1 from R4C7 = 67',
     'Line Box Reduction, B6, C9, remove group 1 from R5C8 = 467',
-    'XYZ-Wing, R hinge R5C8 B6], remove value 6 from R5C9 = 19',
+    'Simple Colouring, Rule 4 R1C7,R1C6, remove value 4 from R1C7 = 1259', //New
+    'Simple Colouring, Rule 4 R3C3,R3C9, remove value 9 from R3C3 = 47', //New
+    'Pointing Group, B1, R1, remove group 9 from R1C7 = 125', //New
+    'XYZ-Wing, R hinge R5C8 B6, remove value 6 from R5C9 = 19',
     '6.......8',
     '5..9.8..7',
     '82...1.3.',
@@ -125,6 +128,86 @@ void main() {
     '9....5..4',
     '4...9...3',
   ];
+
+  var puzzle3 =
+      // Simple Colouring
+      [
+    "..7.836..",
+    ".397.68..",
+    "826419753",
+    "64.19.387",
+    ".8.367...",
+    ".73.48.6.",
+    "39.87..26",
+    "7649..138",
+    "2.863.97."
+  ].join('\n');
+  var solution3 = [
+    "..7.836..",
+    ".397.68..",
+    "826419753",
+    "64.19.387",
+    ".8.367...",
+    ".73.48.6.",
+    "39.87..26",
+    "7649..138",
+    "2.863.97.",
+    'Naked Group, remove group 25 from R7C6 = 14',
+    'Naked Group, remove group 25 from R9C6 = 14',
+    'Naked Group, remove group 25 from R6C1 = 19',
+    'Naked Group, remove group 25 from R6C9 = 19',
+    'Pointing Group, B3, C9, remove group 2 from R5C9 = 1459',
+    'Simple Colouring, Rule 4 R5C3,R5C9, remove value 5 from R5C3 = 12',
+    'Simple Colouring, Rule 2 R1, remove value 5 from R2C1 = 14',
+    'Simple Colouring, Rule 2 R1, set value R2C5 = 5',
+    'Simple Colouring, Rule 2 R1, remove value 5 from R8C5 = 2',
+    'Simple Colouring, Rule 2 R1, set value R8C6 = 5',
+    'Simple Colouring, Rule 2 R1, remove value 5 from R4C6 = 2',
+    'Simple Colouring, Rule 2 R1, set value R4C3 = 5',
+    'Simple Colouring, Rule 2 R1, remove value 5 from R7C3 = 1',
+    'Simple Colouring, Rule 2 R1, set value R7C7 = 5',
+    'Simple Colouring, Rule 2 R1, remove value 5 from R9C9 = 4',
+    'Simple Colouring, Rule 2 R1, set value R9C2 = 5',
+    'Simple Colouring, Rule 2 R1, remove value 5 from R1C2 = 1',
+    'Simple Colouring, Rule 2 R1, set value R5C9 = 5',
+    'Simple Colouring, Rule 2 R1, remove value 5 from R5C1 = 19',
+    'Simple Colouring, Rule 2 R1, set value R6C4 = 5',
+    'Simple Colouring, Rule 2 R1, remove value 5 from R6C7 = 2',
+    'Simple Colouring, Rule 2 R1, remove value 5 from R1C4 = 2',
+    'Simple Colouring, Rule 4 R5C7,R5C1, remove value 5 from R5C7 = 24',
+    'Hidden Single, R1C1 = 5',
+    'Hidden Single, R1C2 = 1',
+    'Hidden Single, R1C4 = 2',
+    'Hidden Single, R2C1 = 4',
+    'Hidden Single, R2C9 = 2',
+    'Hidden Single, R4C6 = 2',
+    'Hidden Single, R5C3 = 2',
+    'Hidden Single, R5C7 = 4',
+    'Hidden Single, R6C7 = 2',
+    'Hidden Single, R7C3 = 1',
+    'Hidden Single, R7C6 = 4',
+    'Hidden Single, R8C5 = 2',
+    'Hidden Single, R9C6 = 1',
+    'Hidden Single, R9C9 = 4',
+    'Hidden Single, R1C8 = 4',
+    'Hidden Single, R1C9 = 9',
+    'Hidden Single, R2C8 = 1',
+    'Hidden Single, R5C8 = 9',
+    'Hidden Single, R6C9 = 1',
+    'Hidden Single, R5C1 = 1',
+    'Hidden Single, R6C1 = 9',
+    'Solved!',
+    '517283649',
+    '439756812',
+    '826419753',
+    '645192387',
+    '182367495',
+    '973548261',
+    '391874526',
+    '764925138',
+    '258631974',
+  ];
+
   group('API', () {
     test('sudoku1', () {
       var sudoku1 = Sudoku.sudoku(puzzle1);
@@ -138,6 +221,13 @@ void main() {
       expect(
         sudoku2.invokeAllStrategies(true, false),
         solution2.join('\n'),
+      );
+    });
+    test('sudoku3', () {
+      var sudoku3 = Sudoku.sudoku(puzzle3);
+      expect(
+        sudoku3.invokeAllStrategies(true, false),
+        solution3.join('\n'),
       );
     });
   });

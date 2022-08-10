@@ -84,7 +84,7 @@ class XYZWingStrategy extends Strategy {
                             1) {
                       // Remove value from other cells in axis of box
                       var location = addExplanation(explanation,
-                          '$axis hinge ${hingeCell.name} ${hingeCell.boxName}]');
+                          '$axis hinge ${hingeCell.name} ${hingeCell.boxName}');
                       boxCells
                           .where((c) => grid.axisEqual(axis, c, hingeCell))
                           .forEach((c) {

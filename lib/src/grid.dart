@@ -5,6 +5,7 @@ import 'package:sudoku/src/strategy/hiddenGroupStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenSingleStrategy.dart';
 import 'package:sudoku/src/strategy/lineBoxReductionStrategy.dart';
 import 'package:sudoku/src/strategy/nakedGroupStrategy.dart';
+import 'package:sudoku/src/strategy/simpleColouringStrategy.dart';
 import 'package:sudoku/src/strategy/swordfishStrategy.dart';
 import 'package:sudoku/src/strategy/updatePossibleStrategy.dart';
 import 'package:sudoku/src/strategy/xyzWingStrategy.dart';
@@ -46,6 +47,7 @@ class Grid {
   late PointingGroupStrategy pointingGroupStrategy;
   late LineBoxReductionStrategy lineBoxReductionStrategy;
   late XWingStrategy xWingStrategy;
+  late SimpleColouringStrategy simpleColouringStrategy;
   late YWingStrategy yWingStrategy;
   late SwordfishStrategy swordfishStrategy;
   late XYZWingStrategy xyzWingStrategy;
@@ -63,6 +65,7 @@ class Grid {
     pointingGroupStrategy = PointingGroupStrategy(this);
     lineBoxReductionStrategy = LineBoxReductionStrategy(this);
     xWingStrategy = XWingStrategy(this);
+    simpleColouringStrategy = SimpleColouringStrategy(this);
     yWingStrategy = YWingStrategy(this);
     swordfishStrategy = SwordfishStrategy(this);
     xyzWingStrategy = XYZWingStrategy(this);
@@ -178,6 +181,7 @@ class Grid {
       if (!updated) updated = pointingGroupStrategy.solve();
       if (!updated) updated = lineBoxReductionStrategy.solve();
       if (!updated) updated = xWingStrategy.solve();
+      if (!updated) updated = simpleColouringStrategy.solve();
       if (!updated) updated = yWingStrategy.solve();
       if (!updated) updated = swordfishStrategy.solve();
       if (!updated) updated = xyzWingStrategy.solve();
@@ -354,8 +358,12 @@ class Grid {
   Cell getAxisCell(String axis, int major, int minor) {
     if (axis == 'R') {
       return _grid[major - 1][minor - 1];
-    } else {
+    } else if (axis == 'C') {
       return _grid[minor - 1][major - 1];
+    } else {
+      var row = floor3(major) + (minor - 1) ~/ 3;
+      var col = ((major - 1) % 3) * 3 + 1 + (minor - 1) % 3;
+      return _grid[row - 1][col - 1];
     }
   }
 
