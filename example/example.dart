@@ -31,8 +31,8 @@ void main() {
     "9....5..4",
     "4...9...3"
   ].join('\n');
-  var sudoku2 = Sudoku.sudoku(puzzle2);
-  print(sudoku2.invokeAllStrategies(true, false));
+  // var sudoku2 = Sudoku.sudoku(puzzle2);
+  // print(sudoku2.invokeAllStrategies(true, false));
 
   var puzzle3 =
       // Singles Chains
@@ -49,4 +49,20 @@ void main() {
   ].join('\n');
   // var sudoku3 = Sudoku.sudoku(puzzle3);
   // print(sudoku3.invokeAllStrategies(true, false));
+
+  var puzzle4 =
+      // BUG
+      [
+    "174832596",
+    "593461278",
+    "682957..1",
+    ".675..9..",
+    ".197.36.5",
+    "435.968.7",
+    "3.16..759",
+    "9.8.75.6.",
+    "7563.9.82"
+  ].join('\n');
+  var sudoku4 = Sudoku.sudoku(puzzle4);
+  print(sudoku4.invokeAllStrategies(true, false));
 }

@@ -97,7 +97,8 @@ class YWingStrategy extends Strategy {
                 }
               }
               // Check Box for hinge cell
-              if (valuePossibleBoxes[value] != null &&
+              if (hingeCell.box != axisCell.box &&
+                  valuePossibleBoxes[value] != null &&
                   valuePossibleBoxes[value]![hingeCell.box] != null) {
                 var boxIndexes = valuePossibleBoxes[value]![hingeCell.box]!;
                 var boxCells = grid.getMinorAxis('B', hingeCell.box);

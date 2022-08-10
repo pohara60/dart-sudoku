@@ -14,16 +14,16 @@ class SwordfishStrategy extends Strategy {
           majors.forEach((major1, minors1) {
             majors.forEach((major2, minors2) {
               if (major1 < major2) {
-                var minors = mergeLists(minors1, minors2);
-                if (minors.length <= 3) {
+                var minors12 = mergeLists(minors1, minors2);
+                if (minors12.length <= 3) {
                   majors.forEach((major3, minors3) {
                     if (major2 < major3) {
-                      minors = mergeLists(minors, minors3);
-                      if (minors.length <= 3) {
+                      var minors123 = mergeLists(minors12, minors3);
+                      if (minors123.length <= 3) {
                         var location = addExplanation(explanation,
-                            '$axis$major1,$axis$major2,$axis$major3}]');
+                            '$axis$major1,$axis$major2,$axis$major3');
                         // Remove the value from the three minor axes
-                        for (var minor in minors) {
+                        for (var minor in minors123) {
                           var cells = grid.getMinorAxis(axis, minor);
                           cells.forEach((cell) {
                             var major = cell.getAxis(axis);

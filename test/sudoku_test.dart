@@ -208,6 +208,68 @@ void main() {
     '258631974',
   ];
 
+  var puzzle4 =
+      // BUG
+      [
+    "174832596",
+    "593461278",
+    "682957..1",
+    ".675..9..",
+    ".197.36.5",
+    "435.968.7",
+    "3.16..759",
+    "9.8.75.6.",
+    "7563.9.82"
+  ].join('\n');
+  var solution4 = [
+    '174832596',
+    '593461278',
+    '682957..1',
+    '.675..9..',
+    '.197.36.5',
+    '435.968.7',
+    '3.16..759',
+    '9.8.75.6.',
+    '7563.9.82',
+    'Swordfish, R3,R5,R9, remove value 4 from R4C5 = 128',
+    'Swordfish, R3,R5,R9, remove value 4 from R7C5 = 28',
+    'Swordfish, R3,R5,R9, remove value 4 from R8C7 = 13',
+    'Swordfish, R3,R5,R9, remove value 4 from R4C8 = 123',
+    'XYZ-Wing, C hinge R4C5 B5, remove value 2 from R5C5 = 48',
+    'Naked Group, remove group 48 from R4C5 = 12',
+    'BUG, R4C8 = 2',
+    'Hidden Single, R3C8 = 3',
+    'Hidden Single, R4C1 = 8',
+    'Hidden Single, R4C5 = 1',
+    'Hidden Single, R4C9 = 3',
+    'Hidden Single, R5C1 = 2',
+    'Hidden Single, R5C5 = 8',
+    'Hidden Single, R5C8 = 4',
+    'Hidden Single, R6C4 = 2',
+    'Hidden Single, R6C8 = 1',
+    'Hidden Single, R7C5 = 2',
+    'Hidden Single, R7C6 = 8',
+    'Hidden Single, R8C4 = 1',
+    'Hidden Single, R8C9 = 4',
+    'Hidden Single, R9C5 = 4',
+    'Hidden Single, R9C7 = 1',
+    'Hidden Single, R3C7 = 4',
+    'Hidden Single, R4C6 = 4',
+    'Hidden Single, R7C2 = 4',
+    'Hidden Single, R8C2 = 2',
+    'Hidden Single, R8C7 = 3',
+    'Solved!',
+    '174832596',
+    '593461278',
+    '682957431',
+    '867514923',
+    '219783645',
+    '435296817',
+    '341628759',
+    '928175364',
+    '756349182',
+  ];
+
   group('API', () {
     test('sudoku1', () {
       var sudoku1 = Sudoku.sudoku(puzzle1);
@@ -228,6 +290,13 @@ void main() {
       expect(
         sudoku3.invokeAllStrategies(true, false),
         solution3.join('\n'),
+      );
+    });
+    test('sudoku4', () {
+      var sudoku4 = Sudoku.sudoku(puzzle4);
+      expect(
+        sudoku4.invokeAllStrategies(true, false),
+        solution4.join('\n'),
       );
     });
   });

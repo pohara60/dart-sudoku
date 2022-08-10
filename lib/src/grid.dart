@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/possible.dart';
+import 'package:sudoku/src/strategy/bugStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenGroupStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenSingleStrategy.dart';
 import 'package:sudoku/src/strategy/lineBoxReductionStrategy.dart';
@@ -51,6 +52,7 @@ class Grid {
   late YWingStrategy yWingStrategy;
   late SwordfishStrategy swordfishStrategy;
   late XYZWingStrategy xyzWingStrategy;
+  late BUGStrategy bugStrategy;
 
   void _init() {
     focus = _grid[0][0];
@@ -69,6 +71,7 @@ class Grid {
     yWingStrategy = YWingStrategy(this);
     swordfishStrategy = SwordfishStrategy(this);
     xyzWingStrategy = XYZWingStrategy(this);
+    bugStrategy = BUGStrategy(this);
   }
 
   void clearUpdates() {
@@ -185,9 +188,11 @@ class Grid {
       if (!updated) updated = yWingStrategy.solve();
       if (!updated) updated = swordfishStrategy.solve();
       if (!updated) updated = xyzWingStrategy.solve();
+      if (!updated) updated = bugStrategy.solve();
       if (updated) {
         if (explain) getUpdates(result);
-        if (showPossible) result.writeln(debugPrint(toPossibleString()));
+        var possibleString = debugPrint(toPossibleString());
+        if (showPossible) result.writeln(possibleString);
       }
     }
     result.write(toString());
