@@ -4,36 +4,47 @@ library sudoku;
 
 import 'package:sudoku/src/generator.dart';
 import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/killer.dart';
+import 'package:sudoku/src/puzzle.dart';
 
 /// Provide access to the Sudoku API.
 class Sudoku {
   late final generator;
   String? currentPuzzle;
-  Grid? grid;
+  Puzzle? puzzle;
   late bool singleStep;
 
   Sudoku([this.singleStep = false]) {
     generator = SudokuGenerator();
   }
 
-  factory Sudoku.sudoku(String puzzle, [singleStep = false]) {
+  factory Sudoku.sudoku(String puzzleString, [singleStep = false]) {
     var sudoku = Sudoku(singleStep);
-    sudoku.setSudoku(puzzle);
+    sudoku.setSudoku(puzzleString);
+    return sudoku;
+  }
+
+  factory Sudoku.killer(String sudokuString, List<List<dynamic>> killerGrid,
+      [singleStep = false]) {
+    var sudoku = Sudoku(singleStep);
+    sudoku.setSudoku(sudokuString);
+    sudoku.addKiller(killerGrid);
+
     return sudoku;
   }
 
   /// **getSolutions** for specified puzzle.
   ///
-  Set<String> getSolutions(String? puzzle) {
-    if (puzzle != null) {
-      setSudoku(puzzle);
+  Set<String> getSolutions(String? puzzleString) {
+    if (puzzleString != null) {
+      setSudoku(puzzleString);
     }
     if (currentPuzzle == null) {
       throw Exception();
     }
 
     // Solve
-    return {grid.toString()};
+    return {puzzle.toString()};
   }
 
   /// **getSudoku** gets a puzzle, and makes it current.
@@ -44,35 +55,43 @@ class Sudoku {
     return puzzle;
   }
 
-  void setSudoku(String puzzle) {
-    var puzzleList = puzzle.split('\n');
-    grid = Grid.sudokuPuzzle(puzzleList, singleStep);
-    currentPuzzle = puzzle;
+  void setSudoku(String puzzleString) {
+    var puzzleList = puzzleString.split('\n');
+    puzzle = Grid.puzzle(puzzleList, singleStep);
+    currentPuzzle = puzzleString;
+  }
+
+  void addKiller(List<List<dynamic>> killerGrid) {
+    if (puzzle == null) {
+      throw Exception();
+    }
+    puzzle = Killer.puzzle(puzzle!, killerGrid);
+    currentPuzzle = currentPuzzle! + killerGrid.join('\n');
   }
 
   String invokeAllStrategies(
       [bool explain = false, bool showPossible = false]) {
-    if (grid == null) {
+    if (puzzle == null) {
       throw Exception();
     }
-    return grid!.invokeAllStrategies(explain, showPossible);
+    return puzzle!.invokeAllStrategies(explain, showPossible);
   }
 
   bool explainStrategy(Solve strategy) {
-    if (grid == null) {
+    if (puzzle == null) {
       throw Exception();
     }
-    var updated = strategy(grid!);
+    var updated = strategy(puzzle!);
     if (updated) {
-      print(grid!.messageString);
+      print(puzzle!.messageString);
     }
     return updated;
   }
 
   String getExplanation() {
-    if (grid == null) {
+    if (puzzle == null) {
       throw Exception();
     }
-    return grid!.messageString;
+    return puzzle!.messageString;
   }
 }

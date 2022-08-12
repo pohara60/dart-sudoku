@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/possible.dart';
+import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/strategy/bugStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenGroupStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenSingleStrategy.dart';
@@ -13,18 +14,21 @@ import 'package:sudoku/src/strategy/xyzWingStrategy.dart';
 import 'package:sudoku/src/strategy/yWingStrategy.dart';
 import 'package:sudoku/src/strategy/xWingStrategy.dart';
 
-typedef Solve = bool Function(Grid grid);
+typedef Solve = bool Function(Puzzle grid);
 
-class Grid {
+class Grid implements Puzzle {
   late List<List<Cell>> _grid;
   Cell? _focus;
   late Set<Cell> _updates;
   late List<String> _messages;
+  bool _error = false;
 
   late bool singleStep;
   bool debug = false;
 
-  get grid => _grid;
+  Grid get grid => this;
+  List<List<Cell>> get cellGrid => _grid;
+  Cell getCell(int row, int col) => _grid[row - 1][col - 1];
   Cell? get focus => _focus;
   Set<Cell> get updates => _updates;
   List<String> get messages => _messages;
@@ -96,7 +100,7 @@ class Grid {
     _init();
   }
 
-  Grid.sudokuPuzzle(List<String> newSudokuPuzzle, [this.singleStep = false]) {
+  Grid.puzzle(List<String> newSudokuPuzzle, [this.singleStep = false]) {
     _grid = newSudokuPuzzle.asMap().entries.map((entry) {
       int row = entry.key;
       String val = entry.value;
@@ -380,16 +384,40 @@ class Grid {
     }
   }
 
+  void addMessage(String message, [bool error = false]) {
+    _messages.add(message);
+    _error |= error;
+  }
+
   void cellUpdated(Cell cell, String explanation, String? message) {
     _updates.add(cell);
     if (message != null) {
-      _messages.add(addExplanation(explanation, message));
+      addMessage(addExplanation(explanation, message));
     }
   }
 
   void cellError(Cell cell, String explanation, String error) {
     cell.error = error;
-    _messages.add(addExplanation(explanation, error));
+    addMessage(addExplanation(explanation, error), true);
+  }
+
+  List<Cell> adjacentCells(Cell cell) {
+    var row = cell.row;
+    var col = cell.col;
+    var cells = <Cell>[];
+    if (row > 1) {
+      cells.add(_grid[row - 2][col - 1]);
+    }
+    if (row < 9) {
+      cells.add(_grid[row][col - 1]);
+    }
+    if (col > 1) {
+      cells.add(_grid[row - 1][col - 2]);
+    }
+    if (col < 9) {
+      cells.add(_grid[row - 1][col]);
+    }
+    return cells;
   }
 }
 

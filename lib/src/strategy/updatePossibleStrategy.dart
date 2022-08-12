@@ -7,7 +7,7 @@ class UpdatePossibleStrategy extends Strategy {
 
   bool solve() {
     var updated = false;
-    grid.grid.forEach((r) => r.forEach((c) {
+    grid.cellGrid.forEach((r) => r.forEach((c) {
           if (allNonetsUpdateCell(c)) updated = true;
         }));
     return updated;

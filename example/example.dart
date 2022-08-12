@@ -1,8 +1,35 @@
 import 'package:sudoku/sudoku.dart';
 
 void main() {
-  // final sudoku = Sudoku();
-  // var str = sudoku.getSudoku();
+  var emptySudoku = [
+    ".........",
+    ".........",
+    ".........",
+    ".........",
+    ".........",
+    ".........",
+    ".........",
+    ".........",
+    ".........",
+  ].join('\n');
+
+  const L = "L";
+  const R = "R";
+  const U = "U";
+  const D = "D";
+  var killerPuzzle1 = [
+    [8, L, 13, L, 18, L, L, 20, L],
+    [21, L, 14, L, L, 17, U, U, U],
+    [U, U, 23, L, R, U, 25, 18, 12],
+    [20, L, U, 15, U, R, U, U, U],
+    [U, U, 19, U, 10, 19, U, U, L],
+    [R, R, U, U, U, U, 15, L, L],
+    [13, 21, L, U, 20, U, 14, L, U],
+    [U, U, 10, L, U, L, L, U, L],
+    [U, U, 18, L, L, 6, L, 16, L],
+  ];
+  var killer1 = Sudoku.killer(emptySudoku, killerPuzzle1);
+  print(killer1.invokeAllStrategies(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",
@@ -64,5 +91,6 @@ void main() {
     "7563.9.82"
   ].join('\n');
   var sudoku4 = Sudoku.sudoku(puzzle4);
-  print(sudoku4.invokeAllStrategies(true, false));
+  // sudoku4.addKiller('KillerString');
+  // print(sudoku4.invokeAllStrategies(true, false));
 }

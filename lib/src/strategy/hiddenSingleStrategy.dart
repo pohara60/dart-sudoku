@@ -7,7 +7,7 @@ class HiddenSingleStrategy extends Strategy {
 
   bool solve() {
     var updated = false;
-    grid.grid.forEach((row) => row.forEach((cell) {
+    grid.cellGrid.forEach((row) => row.forEach((cell) {
           if (cellHiddenSingle(cell)) updated = true;
         }));
     return updated;

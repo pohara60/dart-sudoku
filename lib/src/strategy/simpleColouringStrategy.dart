@@ -149,8 +149,8 @@ class SimpleColouringStrategy extends Strategy {
                 cell1.col != cell2.col) {
               // check intersection cells to remove value
               for (var cell in [
-                grid.grid[cell1.row - 1][cell2.col - 1],
-                grid.grid[cell2.row - 1][cell1.col - 1]
+                grid.getCell(cell1.row, cell2.col),
+                grid.getCell(cell2.row, cell2.col)
               ]) {
                 var location = addExplanation(
                     explanation, 'Rule 4 ${cell.name},${cell2.name}');

@@ -148,6 +148,12 @@ class Cell {
   getOtherPossible(int value) {
     return _possible.getOther(value);
   }
+
+  int compareTo(Cell other) {
+    if (row == other.row && col == other.col) return 0;
+    if (row < other.row || row == other.row && col < other.col) return -1;
+    return 1;
+  }
 }
 
 /// Return [i] div 3 for 1-based index
@@ -162,4 +168,11 @@ int floor3(i) {
     return 7;
   }
   throw Exception;
+}
+
+bool cellsInNonet(List<Cell> cells) {
+  if (Set.from(cells.map((x) => x.row)).length == 1) return true;
+  if (Set.from(cells.map((x) => x.col)).length == 1) return true;
+  if (Set.from(cells.map((x) => x.box)).length == 1) return true;
+  return false;
 }
