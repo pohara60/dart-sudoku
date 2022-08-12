@@ -74,7 +74,8 @@ class Sudoku {
     if (puzzle == null) {
       throw Exception();
     }
-    return puzzle!.invokeAllStrategies(explain, showPossible);
+    return puzzle!
+        .invokeAllStrategies(explain: explain, showPossible: showPossible);
   }
 
   bool explainStrategy(Solve strategy) {

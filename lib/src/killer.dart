@@ -3,9 +3,13 @@ import 'package:sudoku/src/cage.dart';
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/grid.dart';
 import 'package:sudoku/src/puzzle.dart';
+import 'package:sudoku/src/strategy/killerCombinations.dart';
+import 'package:sudoku/src/strategy/strategy.dart';
 
 class Killer extends PuzzleDecorator {
   late List<Cage> cages;
+
+  late KillerCombinationsStrategy killerCombinationsStrategy;
 
   Killer.puzzle(Puzzle puzzle, List<List<dynamic>> killerGrid) {
     this.puzzle = puzzle;
@@ -16,9 +20,17 @@ class Killer extends PuzzleDecorator {
   Grid get grid => puzzle.grid;
 
   @override
-  String invokeAllStrategies(
-      [bool explain = false, bool showPossible = false]) {
-    return puzzle.invokeAllStrategies(explain, showPossible);
+  String invokeAllStrategies({
+    bool explain = false,
+    bool showPossible = false,
+    List<Strategy>? easyStrategies,
+    List<Strategy>? toughStrategies,
+  }) {
+    var easyStrategies = <Strategy>[killerCombinationsStrategy];
+    return puzzle.invokeAllStrategies(
+        explain: explain,
+        showPossible: showPossible,
+        easyStrategies: easyStrategies);
   }
 
   @override
@@ -203,7 +215,7 @@ class Killer extends PuzzleDecorator {
           newLocations,
           true,
           nodups,
-          source,
+          'i' + source, // Innie cage
         );
         if (this.cages.firstWhereOrNull((cage) => cage.equals(newCage)) ==
             null) {
@@ -213,8 +225,14 @@ class Killer extends PuzzleDecorator {
       if (otherLocations.length <= maxCageLength) {
         var nodups = cellsInNonet(otherCells);
         var otherTotal = otherCagesTotal - newTotal;
-        var otherCage =
-            Cage(this, otherTotal, otherLocations, true, nodups, source + ' x');
+        var otherCage = Cage(
+          this,
+          otherTotal,
+          otherLocations,
+          true,
+          nodups,
+          'o' + source, // Outie cage
+        );
         if (this.cages.firstWhereOrNull((cage) => cage.equals(otherCage)) ==
             null) {
           this.cages.add(otherCage);
@@ -226,9 +244,11 @@ class Killer extends PuzzleDecorator {
   void initKiller(List<List<dynamic>> killerGrid) {
     setKiller(killerGrid);
     if (validateCages()) return;
-
     colourCages();
     addVirtualCages();
+
+    // Strategies
+    killerCombinationsStrategy = KillerCombinationsStrategy(this);
   }
 
   void setKiller(List<List<dynamic>> killerGrid) {

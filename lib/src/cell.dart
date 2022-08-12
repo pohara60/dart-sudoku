@@ -141,6 +141,10 @@ class Cell {
     return _possible.remove(possible);
   }
 
+  bool reducePossible(Possible possible) {
+    return _possible.reduce(possible);
+  }
+
   bool removeOtherPossible(Possible possible) {
     return _possible.removeOther(possible);
   }

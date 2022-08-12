@@ -106,6 +106,16 @@ class Possible {
     }
     return true;
   }
+
+  bool reduce(Possible possible) {
+    var updated = false;
+    for (var value = _base; value < _base + 9; value++) {
+      if (!possible[value]) {
+        if (clear(value)) updated = true;
+      }
+    }
+    return updated;
+  }
 }
 
 Possible unionPossible(List<Possible> possibles, [base = 1]) {

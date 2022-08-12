@@ -8,6 +8,7 @@ import 'package:sudoku/src/strategy/hiddenSingleStrategy.dart';
 import 'package:sudoku/src/strategy/lineBoxReductionStrategy.dart';
 import 'package:sudoku/src/strategy/nakedGroupStrategy.dart';
 import 'package:sudoku/src/strategy/simpleColouringStrategy.dart';
+import 'package:sudoku/src/strategy/strategy.dart';
 import 'package:sudoku/src/strategy/swordfishStrategy.dart';
 import 'package:sudoku/src/strategy/updatePossibleStrategy.dart';
 import 'package:sudoku/src/strategy/xyzWingStrategy.dart';
@@ -24,7 +25,7 @@ class Grid implements Puzzle {
   bool _error = false;
 
   late bool singleStep;
-  bool debug = false;
+  bool debug = true;
 
   Grid get grid => this;
   List<List<Cell>> get cellGrid => _grid;
@@ -168,8 +169,12 @@ class Grid implements Puzzle {
     return str;
   }
 
-  String invokeAllStrategies(
-      [bool explain = false, bool showPossible = false]) {
+  String invokeAllStrategies({
+    bool explain = false,
+    bool showPossible = false,
+    List<Strategy>? easyStrategies,
+    List<Strategy>? toughStrategies,
+  }) {
     var result = StringBuffer();
     result.writeln(toString());
     var updated = true;
@@ -179,6 +184,7 @@ class Grid implements Puzzle {
         if (explain) result.writeln('Solved!');
         break;
       }
+      // Easy
       updated = updatePossibleStrategy.solve();
       if (!updated) updated = hiddenSingleStrategy.solve();
       if (!updated) updated = nakedGroupStrategy3.solve();
@@ -187,12 +193,29 @@ class Grid implements Puzzle {
       if (!updated) updated = hiddenGroupStrategy4.solve();
       if (!updated) updated = pointingGroupStrategy.solve();
       if (!updated) updated = lineBoxReductionStrategy.solve();
+
+      // Decorator strategies
+      if (easyStrategies != null) {
+        for (var strategy in easyStrategies) {
+          if (!updated) updated = strategy.solve();
+        }
+      }
+
+      // Tough
       if (!updated) updated = xWingStrategy.solve();
       if (!updated) updated = simpleColouringStrategy.solve();
       if (!updated) updated = yWingStrategy.solve();
       if (!updated) updated = swordfishStrategy.solve();
       if (!updated) updated = xyzWingStrategy.solve();
       if (!updated) updated = bugStrategy.solve();
+
+      // Decorator strategies
+      if (toughStrategies != null) {
+        for (var strategy in toughStrategies) {
+          if (!updated) updated = strategy.solve();
+        }
+      }
+
       if (updated) {
         if (explain) getUpdates(result);
         var possibleString = debugPrint(toPossibleString());

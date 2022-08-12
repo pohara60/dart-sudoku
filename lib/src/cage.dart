@@ -75,9 +75,8 @@ class Cage {
 
   toString() {
     var sortedCells = cells;
-    var text =
-        '$total [${this.cells.length}] ${virtual ? 'v' : 'r'} ${nodups ? 'u' : 'd'}:';
-    var cellText = sortedCells.map((cageCell) => cageCell.name).join(',');
+    var text = '$total$source${nodups ? '' : 'd'}:';
+    // var cellText = sortedCells.map((cageCell) => cageCell.name).join(',');
     var cellText2 = '';
     var currentRow = -1, currentCol = -1;
     var lastRow = -1, lastCol = -1;
@@ -86,10 +85,10 @@ class Cage {
       var text = '';
       if (currentRow != -1) {
         text +=
-            '[$currentRow,${firstCol == lastCol ? firstCol : firstCol.toString() + '-' + lastCol.toString()}]';
+            'R${currentRow}C${firstCol == lastCol ? firstCol : firstCol.toString() + '-' + lastCol.toString()}';
       } else if (currentCol != -1) {
         text +=
-            '[${firstRow == lastRow ? firstRow : firstRow.toString() + '-' + lastRow.toString()},$currentCol]';
+            'R${firstRow == lastRow ? firstRow : firstRow.toString() + '-' + lastRow.toString()}C$currentCol';
       }
       return text;
     }
@@ -100,7 +99,7 @@ class Cage {
           lastCol = cell.col;
           currentCol = -1;
         } else {
-          cellText2 += currentText();
+          cellText2 = (cellText2 != '' ? ',' : '') + currentText();
           currentCol = cell.col;
           firstRow = lastRow = cell.row;
           firstCol = lastCol = cell.col;
@@ -110,25 +109,22 @@ class Cage {
           lastRow = cell.row;
           currentRow = -1;
         } else {
-          cellText2 += currentText();
+          cellText2 += (cellText2 != '' ? ',' : '') + currentText();
           currentRow = cell.row;
           firstRow = lastRow = cell.row;
           firstCol = lastCol = cell.col;
         }
       } else {
-        cellText2 += currentText();
+        cellText2 += (cellText2 != '' ? ',' : '') + currentText();
         currentRow = cell.row;
         currentCol = cell.col;
         firstCol = lastCol = cell.col;
         firstRow = lastRow = cell.row;
       }
     }
-    cellText2 += currentText();
+    cellText2 += (cellText2 != '' ? ',' : '') + currentText();
 
     text += cellText2;
-    if (this.source != '') {
-      text += ' ($source)';
-    }
     return text;
   }
 
