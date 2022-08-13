@@ -28,7 +28,8 @@ class Sudoku {
       [singleStep = false]) {
     var sudoku = Sudoku(singleStep);
     sudoku.setSudoku(sudokuString);
-    sudoku.addKiller(killerGrid);
+    var message = sudoku.addKiller(killerGrid);
+    if (message != '') print(message);
 
     return sudoku;
   }
@@ -55,18 +56,20 @@ class Sudoku {
     return puzzle;
   }
 
-  void setSudoku(String puzzleString) {
+  String setSudoku(String puzzleString) {
     var puzzleList = puzzleString.split('\n');
     puzzle = Grid.puzzle(puzzleList, singleStep);
     currentPuzzle = puzzleString;
+    return '';
   }
 
-  void addKiller(List<List<dynamic>> killerGrid) {
+  String addKiller(List<List<dynamic>> killerGrid) {
     if (puzzle == null) {
-      throw Exception();
+      return 'No puzzle!';
     }
-    puzzle = Killer.puzzle(puzzle!, killerGrid);
     currentPuzzle = currentPuzzle! + killerGrid.join('\n');
+    puzzle = Killer.puzzle(puzzle!, killerGrid);
+    return puzzle?.messageString ?? '';
   }
 
   String invokeAllStrategies(

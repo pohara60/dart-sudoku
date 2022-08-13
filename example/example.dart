@@ -17,6 +17,23 @@ void main() {
   const R = "R";
   const U = "U";
   const D = "D";
+  const LL = "L";
+  const RR = "R";
+  const UU = "U";
+  const DD = "D";
+  const XX = '.';
+
+  var emptyKiller = [
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+  ];
   var killerPuzzle1 = [
     [8, L, 13, L, 18, L, L, 20, L],
     [21, L, 14, L, L, 17, U, U, U],
@@ -28,8 +45,30 @@ void main() {
     [U, U, 10, L, U, L, L, U, L],
     [U, U, 18, L, L, 6, L, 16, L],
   ];
-  var killer1 = Sudoku.killer(emptySudoku, killerPuzzle1);
-  print(killer1.invokeAllStrategies(true, false));
+  var killerPuzzle2 = [
+    [13, 09, LL, 15, LL, LL, 13, 25, LL],
+    [UU, 13, LL, 08, LL, RR, UU, UU, UU],
+    [UU, 01, 17, 02, 11, LL, 09, LL, 10],
+    [17, LL, UU, 28, LL, 16, LL, 10, UU],
+    [UU, 13, UU, UU, UU, UU, UU, UU, LL],
+    [24, UU, LL, 10, LL, LL, 23, LL, 17],
+    [UU, LL, 05, LL, 06, LL, UU, RR, UU],
+    [13, LL, 23, LL, 10, 18, 10, LL, 09],
+    [UU, 07, LL, UU, UU, UU, LL, UU, UU],
+  ];
+  var killerPuzzle = [
+    [11, LL, 08, 14, LL, 06, LL, 23, LL],
+    [11, LL, UU, UU, 14, LL, 06, LL, UU],
+    [18, 15, 11, LL, 08, 22, LL, UU, 12],
+    [UU, UU, 42, UU, UU, UU, UU, 17, UU],
+    [UU, UU, UU, 18, LL, 13, LL, UU, 07],
+    [UU, 19, UU, UU, UU, 12, LL, RR, UU],
+    [RR, UU, UU, LL, LL, LL, UU, 08, LL],
+    [16, LL, 16, LL, 17, LL, LL, 09, 09],
+    [UU, UU, UU, 23, LL, LL, LL, UU, UU],
+  ];
+  var killer = Sudoku.killer(emptySudoku, killerPuzzle);
+  print(killer.invokeAllStrategies(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",

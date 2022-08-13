@@ -175,6 +175,9 @@ class Grid implements Puzzle {
     List<Strategy>? easyStrategies,
     List<Strategy>? toughStrategies,
   }) {
+    // Previous error?
+    if (_error) return "Error";
+
     var result = StringBuffer();
     result.writeln(toString());
     var updated = true;

@@ -110,57 +110,96 @@ class Killer extends PuzzleDecorator {
   }
 
   void addVirtualCages() {
-    for (var size = 1; size <= 5; size++) {
-      for (var r = 1; r <= 10 - size; r++) {
-        var cells = <Cell>[];
-        for (var r2 = r; r2 < r + size; r2++) {
-          cells.addAll(grid.getRow(r2));
+    // Examine 1, 2, 3, 4 consecutive rows/columns
+    // Do not need to examine 5 because outies of 4 are innies of 5
+    for (var axis in ['R', 'C']) {
+      for (var size = 1; size <= 4; size++) {
+        for (var major1 = 1; major1 <= 10 - size; major1++) {
+          var cells = <Cell>[];
+          for (var major2 = major1; major2 < major1 + size; major2++) {
+            cells.addAll(grid.getMajorAxis(axis, major2));
+          }
+          var source =
+              size == 1 ? '$axis$major1' : '$axis$major1-${major1 + size - 1}';
+          this.addVirtualCage(cells, source);
         }
-        var source = size == 1 ? 'R$r' : 'R$r-${r + size - 1}';
-        this.addVirtualCage(cells, source);
       }
     }
-    for (var size = 1; size <= 5; size++) {
-      for (var c = 1; c <= 10 - size; c++) {
-        var cells = <Cell>[];
-        for (var c2 = c; c2 < c + size; c2++) {
-          cells.addAll(grid.getColumn(c2));
-        }
-        var source = size == 1 ? 'C$c' : 'C$c-${c + size - 1}';
-        this.addVirtualCage(cells, source);
+    // Adjacent box combinations
+    var boxes = [
+      [1, 2],
+      [1, 4],
+      [2, 3],
+      [2, 5],
+      [3, 6],
+      [4, 5],
+      [4, 7],
+      [5, 6],
+      [5, 8],
+      [6, 9],
+      [7, 8],
+      [8, 9],
+      [1, 2, 4],
+      [1, 2, 5],
+      [2, 3, 5],
+      [2, 3, 6],
+      [1, 4, 5],
+      [2, 4, 5],
+      [2, 5, 6],
+      [3, 5, 6],
+      [4, 5, 7],
+      [4, 5, 8],
+      [5, 6, 8],
+      [5, 6, 9],
+      [4, 7, 8],
+      [5, 7, 8],
+      [5, 8, 9],
+      [6, 8, 9],
+      [1, 2, 3, 4],
+      [1, 2, 3, 5],
+      [1, 2, 3, 6],
+      [1, 2, 4, 5],
+      [1, 2, 4, 7],
+      [1, 2, 5, 6],
+      [1, 2, 5, 8],
+      [1, 4, 5, 6],
+      [1, 4, 5, 7],
+      [1, 4, 7, 8],
+      [2, 3, 4, 5],
+      [2, 3, 5, 6],
+      [2, 3, 5, 8],
+      [2, 3, 6, 9],
+      [2, 4, 5, 6],
+      [2, 4, 5, 8],
+      [2, 5, 6, 8],
+      [2, 5, 6, 9],
+      [2, 5, 7, 8],
+      [2, 5, 8, 9],
+      [3, 4, 5, 6],
+      [3, 5, 6, 8],
+      [3, 5, 6, 9],
+      [3, 6, 8, 9],
+      [4, 5, 6, 7],
+      [4, 5, 6, 8],
+      [4, 5, 6, 9],
+      [4, 5, 7, 8],
+      [4, 5, 8, 9],
+      [4, 7, 8, 9],
+      [5, 6, 7, 8],
+      [5, 6, 8, 9],
+      [5, 7, 8, 9],
+    ];
+    for (var bs in boxes) {
+      var cells = <Cell>[];
+      var source = 'B';
+      for (var b in bs) {
+        cells.addAll(grid.getBox(b));
+        if (source != 'B')
+          source += ',$b';
+        else
+          source += '$b';
       }
-    }
-    for (var size = 1; size <= 2; size++) {
-      for (var r = 1; r <= 9; r += 3) {
-        for (var c = 1; c <= 9; c += 3) {
-          if (size == 1) {
-            var b = grid.getCell(r, c).box;
-            var cells = grid.getBox(b);
-            var source = 'B$b';
-            this.addVirtualCage(cells, source);
-          }
-          if (size == 2) {
-            if (r < 6) {
-              var cells = <Cell>[];
-              var b1 = grid.getCell(r, c).box;
-              cells.addAll(grid.getBox(b1));
-              var b2 = grid.getCell(r + 3, c).box;
-              cells.addAll(grid.getBox(b2));
-              var source = 'B$b1,$b2';
-              this.addVirtualCage(cells, source);
-            }
-            if (c < 6) {
-              var cells = <Cell>[];
-              var b1 = grid.getCell(r, c).box;
-              cells.addAll(grid.getBox(b1));
-              var b2 = grid.getCell(r, c + 3).box;
-              cells.addAll(grid.getBox(b2));
-              var source = 'B$b1,$b2';
-              this.addVirtualCage(cells, source);
-            }
-          }
-        }
-      }
+      this.addVirtualCage(cells, source);
     }
   }
 
@@ -206,7 +245,7 @@ class Killer extends PuzzleDecorator {
     }
     if (newTotal != 0 && newTotal != cellsTotal) {
       // If the cage is in a nonet, then it does not allow duplicates
-      const maxCageLength = 5;
+      const maxCageLength = 7;
       if (newLocations.length <= maxCageLength) {
         var nodups = cellsInNonet(newCells);
         var newCage = Cage(
@@ -242,13 +281,13 @@ class Killer extends PuzzleDecorator {
   }
 
   void initKiller(List<List<dynamic>> killerGrid) {
+    // Strategies
+    killerCombinationsStrategy = KillerCombinationsStrategy(this);
+
     setKiller(killerGrid);
     if (validateCages()) return;
     colourCages();
     addVirtualCages();
-
-    // Strategies
-    killerCombinationsStrategy = KillerCombinationsStrategy(this);
   }
 
   void setKiller(List<List<dynamic>> killerGrid) {
@@ -276,14 +315,14 @@ class Killer extends PuzzleDecorator {
 
   setCage(int row, int col, dynamic entry) {
     var cage = null;
-    if (["D", "L", "R", "U"].contains(entry)) {
+    if (["D", "L", "R", "U", "DD", "LL", "RR", "UU"].contains(entry)) {
       // Get cage from referenced cell
       var r = row;
       var c = col;
-      if (entry == "D") r++;
-      if (entry == "L") c--;
-      if (entry == "R") c++;
-      if (entry == "U") r--;
+      if (entry == "D" || entry == "DD") r++;
+      if (entry == "L" || entry == "LL") c--;
+      if (entry == "R" || entry == "RR") c++;
+      if (entry == "U" || entry == "UU") r--;
       if (r >= 1 && r <= 9 && c >= 1 && c <= 9) {
         var cell = grid.getCell(r, c);
         cage = getCage(cell);

@@ -99,7 +99,7 @@ class Cage {
           lastCol = cell.col;
           currentCol = -1;
         } else {
-          cellText2 = (cellText2 != '' ? ',' : '') + currentText();
+          cellText2 += (cellText2 != '' ? ',' : '') + currentText();
           currentCol = cell.col;
           firstRow = lastRow = cell.row;
           firstCol = lastCol = cell.col;
