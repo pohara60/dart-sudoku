@@ -7,13 +7,15 @@ import 'package:sudoku/src/strategy/killerCombinations.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class Killer extends PuzzleDecorator {
-  late List<Cage> cages;
+  late final List<Cage> cages;
+  late final Map<Cell, Cage> cellCage;
 
   late KillerCombinationsStrategy killerCombinationsStrategy;
 
   Killer.puzzle(Puzzle puzzle, List<List<dynamic>> killerGrid) {
     this.puzzle = puzzle;
     this.cages = <Cage>[];
+    this.cellCage = <Cell, Cage>{};
     initKiller(killerGrid);
   }
 
@@ -36,8 +38,7 @@ class Killer extends PuzzleDecorator {
   @override
   String get messageString => puzzle.messageString;
 
-  Cage? getCage(cell) => this.cages.firstWhereOrNull(
-      (cage) => cage.cells.map((cageCell) => cageCell.cell).contains(cell));
+  Cage? getCage(cell) => cellCage[cell];
 
   void colourCages() {
     for (var cage in this.cages) {
@@ -85,7 +86,7 @@ class Killer extends PuzzleDecorator {
       // Sum totals and number of cells
       grandTotal += cages[i].total;
       numCells += cages[i].cells.length;
-      allCells += cages[i].cells;
+      allCells += cages[i].cells.map((cageCell) => cageCell.cell).toList();
     }
     if (grandTotal != 45 * 9) {
       // @ts-ignore
@@ -243,7 +244,7 @@ class Killer extends PuzzleDecorator {
         }
       }
     }
-    if (newTotal != 0 && newTotal != cellsTotal) {
+    if (newTotal > 0 && newTotal != cellsTotal) {
       // If the cage is in a nonet, then it does not allow duplicates
       const maxCageLength = 7;
       if (newLocations.length <= maxCageLength) {
@@ -328,10 +329,7 @@ class Killer extends PuzzleDecorator {
         cage = getCage(cell);
         if (cage != null) {
           var cell = grid.getCell(row, col);
-          var cageCell = CageCell(cell);
-          cage.cells.add(cageCell);
-          cageCell.cage = cage;
-          cageCell.cages = [cage];
+          CageCell(cell, cage, this);
         }
       }
     } else {

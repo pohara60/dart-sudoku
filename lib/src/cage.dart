@@ -6,8 +6,10 @@ class CageCell {
   final Cell cell; // The cell
   late Cage cage; // Primary cage
   late List<Cage> cages; // All cages including virtual
-  CageCell(this.cell) {
-    cages = <Cage>[];
+  CageCell(this.cell, this.cage, Killer killer) {
+    this.cages = [cage];
+    cage.cells.add(this);
+    if (killer.cellCage[cell] == null) killer.cellCage[cell] = cage;
   }
   int get row => cell.row;
   int get col => cell.col;
@@ -35,7 +37,7 @@ class Cage {
     // Get cage cells
     locations.forEach((element) {
       var cell = killer.grid.getCell(element[0], element[1]);
-      this.cells.add(CageCell(cell));
+      CageCell(cell, this, killer);
     });
     this.cells.sort((cageCell1, cellCage2) => cageCell1.compareTo(cellCage2));
 
@@ -55,12 +57,12 @@ class Cage {
 
     // Set cage for cells
     this.zombie = false;
-    this.cells.forEach((cell) {
-      if (!virtual) {
-        cell.cage = this;
-      }
-      cell.cages.add(this);
-    });
+    // this.cells.forEach((cell) {
+    //   if (!virtual) {
+    //     cell.cage = this;
+    //   }
+    //   cell.cages.add(this);
+    // });
     // Add non-virtual cage to the grid display
     // if (!virtual) {
     //     if (grid.grid.cages == null) {
