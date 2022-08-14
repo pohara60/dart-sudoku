@@ -9,13 +9,14 @@ import 'package:sudoku/src/strategy/strategy.dart';
 class Killer extends PuzzleDecorator {
   late final List<Cage> cages;
   late final Map<Cell, Cage> cellCage;
-
+  late final Map<Cell, CageCell> cellCageCell;
   late KillerCombinationsStrategy killerCombinationsStrategy;
 
   Killer.puzzle(Puzzle puzzle, List<List<dynamic>> killerGrid) {
     this.puzzle = puzzle;
     this.cages = <Cage>[];
     this.cellCage = <Cell, Cage>{};
+    this.cellCageCell = <Cell, CageCell>{};
     initKiller(killerGrid);
   }
 
@@ -329,7 +330,7 @@ class Killer extends PuzzleDecorator {
         cage = getCage(cell);
         if (cage != null) {
           var cell = grid.getCell(row, col);
-          CageCell(cell, cage, this);
+          CageCell.forCell(cell, cage, this);
         }
       }
     } else {

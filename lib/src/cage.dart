@@ -3,13 +3,25 @@ import 'package:sudoku/src/killer.dart';
 import 'package:sudoku/src/possible.dart';
 
 class CageCell {
-  final Cell cell; // The cell
-  late Cage cage; // Primary cage
-  late List<Cage> cages; // All cages including virtual
-  CageCell(this.cell, this.cage, Killer killer) {
-    this.cages = [cage];
-    cage.cells.add(this);
-    if (killer.cellCage[cell] == null) killer.cellCage[cell] = cage;
+  late final Cell cell; // The cell
+  late final Cage cage; // Primary cage
+  late final List<Cage> cages; // All cages including virtual
+  CageCell();
+  factory CageCell.forCell(cell, cage, Killer killer) {
+    late CageCell cageCell;
+    if (killer.cellCageCell[cell] == null) {
+      cageCell = CageCell();
+      cageCell.cell = cell;
+      cageCell.cage = cage;
+      cageCell.cages = <Cage>[];
+      killer.cellCage[cell] = cage;
+      killer.cellCageCell[cell] = cageCell;
+    } else {
+      cageCell = killer.cellCageCell[cell]!;
+    }
+    cageCell.cages.add(cage);
+    cage.cells.add(cageCell);
+    return cageCell;
   }
   int get row => cell.row;
   int get col => cell.col;
@@ -37,7 +49,7 @@ class Cage {
     // Get cage cells
     locations.forEach((element) {
       var cell = killer.grid.getCell(element[0], element[1]);
-      CageCell(cell, this, killer);
+      CageCell.forCell(cell, this, killer);
     });
     this.cells.sort((cageCell1, cellCage2) => cageCell1.compareTo(cellCage2));
 
