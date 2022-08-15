@@ -15,18 +15,20 @@ class KillerCombinationsStrategy extends Strategy {
     for (var cage in killer.cages) {
       var total = cage.total;
       var setValues = <int>[];
-      var combinations = cage.findCageCombinations(0, total, setValues);
+      var axisValues = <String, List<int>>{};
+      var combinations =
+          cage.findCageCombinations(0, total, setValues, axisValues);
       // Update possible values to union of combinations
       var unionCombinations =
-          List.generate(cage.cells.length, (index) => Possible(false));
+          List.generate(cage.cageCells.length, (index) => Possible(false));
       for (var combination in combinations) {
         for (var index = 0; index < combination.length; index++) {
           var value = combination[index];
           unionCombinations[index][value] = true;
         }
       }
-      for (var index = 0; index < cage.cells.length; index++) {
-        var cell = cage.cells[index].cell;
+      for (var index = 0; index < cage.cageCells.length; index++) {
+        var cell = cage.cageCells[index].cell;
         if (cell.reducePossible(unionCombinations[index])) {
           updated = true;
           grid.cellUpdated(cell, explanation, 'cage $cage $cell');

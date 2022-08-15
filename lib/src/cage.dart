@@ -1,4 +1,5 @@
 import 'package:sudoku/src/cell.dart';
+import 'package:sudoku/src/grid.dart';
 import 'package:sudoku/src/killer.dart';
 import 'package:sudoku/src/possible.dart';
 
@@ -20,7 +21,7 @@ class CageCell {
       cageCell = killer.cellCageCell[cell]!;
     }
     cageCell.cages.add(cage);
-    cage.cells.add(cageCell);
+    cage.cageCells.add(cageCell);
     return cageCell;
   }
   int get row => cell.row;
@@ -30,36 +31,36 @@ class CageCell {
   int compareTo(CageCell other) {
     return this.cell.compareTo(other.cell);
   }
+
+  String toString() {
+    var text = cell.toString();
+    return text;
+  }
 }
 
 class Cage {
   late Killer killer;
   int total;
-  late List<CageCell> cells;
+  late List<CageCell> cageCells;
   bool virtual;
   bool nodups;
   String source;
   late bool zombie;
   int? colour;
 
-  Cage(this.killer, this.total, List<List<int>> locations,
-      [this.virtual = false, this.nodups = true, this.source = '']) {
-    this.cells = [];
-
-    // Get cage cells
-    locations.forEach((element) {
-      var cell = killer.grid.getCell(element[0], element[1]);
-      CageCell.forCell(cell, this, killer);
-    });
-    this.cells.sort((cageCell1, cellCage2) => cageCell1.compareTo(cellCage2));
+  void _validate() {
+    this
+        .cageCells
+        .sort((cageCell1, cellCage2) => cageCell1.compareTo(cellCage2));
 
     // Check for duplicate virtual cage - look at cages for first cell
     if (virtual) {
-      var cages = this.cells[0].cages;
+      var cages = this.cageCells[0].cages;
       for (final cage in cages) {
         if (cage.total != this.total) continue;
-        if (cage.cells.length != this.cells.length) continue;
-        var difference = cage.cells.where((x) => !this.cells.contains(x));
+        if (cage.cageCells.length != this.cageCells.length) continue;
+        var difference =
+            cage.cageCells.where((x) => !this.cageCells.contains(x));
         if (difference.length > 0) continue;
         // Duplicate cage will be a zombie
         this.zombie = true;
@@ -87,8 +88,30 @@ class Cage {
     // }
   }
 
+  Cage(this.killer, this.total, List<List<int>> locations,
+      [this.virtual = false, this.nodups = true, this.source = '']) {
+    this.cageCells = [];
+
+    // Get cage cells
+    locations.forEach((element) {
+      var cell = killer.grid.getCell(element[0], element[1]);
+      CageCell.forCell(cell, this, killer);
+    });
+
+    this._validate();
+  }
+
+  Cage.fromCageCells(this.killer, this.total, List<CageCell> cageCells,
+      [this.virtual = true, this.nodups = true, this.source = '']) {
+    this.cageCells = List<CageCell>.from(cageCells);
+    cageCells.forEach((cageCell) {
+      cageCell.cages.add(this);
+    });
+    this._validate();
+  }
+
   toString() {
-    var sortedCells = cells;
+    var sortedCells = cageCells;
     var text = '$total$source${nodups ? '' : 'd'}:';
     // var cellText = sortedCells.map((cageCell) => cageCell.name).join(',');
     var cellText2 = '';
@@ -144,8 +167,8 @@ class Cage {
 
   bool equals(Cage other) {
     // Equal if cells are same
-    if (this.cells.length == other.cells.length &&
-        this.cells.every((cageCell) => other.cells
+    if (this.cageCells.length == other.cageCells.length &&
+        this.cageCells.every((cageCell) => other.cageCells
             .any((otherCageCell) => otherCageCell.cell == cageCell.cell))) {
       return true;
     }
@@ -159,27 +182,89 @@ class Cage {
      * @param {Array} setValues - the set of values in the combinations so far
      * @returns {Array} the set of values in the combinations
      */
-  List<List<int>> findCageCombinations(
-      int index, int total, List<int> setValues) {
-    var cells = this.cells;
+  List<List<int>> findCageCombinations(int index, int total,
+      List<int> setValues, Map<String, List<int>> axisValues) {
+    var cageCells = this.cageCells;
     var newCombinations = <List<int>>[];
-    final cell = cells[index];
+    final cageCell = cageCells[index];
+    valueLoop:
     for (var value = 1; value < 10; value++) {
-      if (cell.possible[value] && !(this.nodups && setValues.contains(value))) {
-        if (index + 1 == cells.length) {
+      if (cageCell.possible[value]) {
+        // Check if no duplicates allowed
+        if (this.nodups) {
+          if (setValues.contains(value)) continue valueLoop;
+        } else {
+          // Check if Row, Column or Box have duplicate for this cage
+          for (var axis in ['R', 'C', 'B']) {
+            var label = cageCell.cell.getAxisName(axis);
+            if (axisValues.containsKey(label) &&
+                axisValues[label]!.contains(value)) continue valueLoop;
+          }
+        }
+
+        if (index + 1 == cageCells.length) {
           if (total == value) {
             setValues.add(value);
             newCombinations.add(setValues);
             break;
           }
         } else if (total > value) {
+          // Record values for Row, Column or Box for this cage
+          var newAxisValues = axisValues;
+          if (!this.nodups) {
+            newAxisValues = Map<String, List<int>>.from(axisValues);
+            for (var label in newAxisValues.keys) {
+              newAxisValues[label] = List.from(newAxisValues[label]!);
+            }
+            for (var axis in ['R', 'C', 'B']) {
+              var label = cageCell.cell.getAxisName(axis);
+              if (!newAxisValues.containsKey(label))
+                newAxisValues[label] = <int>[];
+              newAxisValues[label]!.add(value);
+            }
+          }
           // find combinations for reduced total in remaining cells
           var combinations = findCageCombinations(
-              index + 1, total - value, [...setValues, value]);
+              index + 1, total - value, [...setValues, value], newAxisValues);
           newCombinations.addAll(combinations);
         }
       }
     }
     return newCombinations;
   }
+}
+
+List<CageCell> intersectionCageCells(List<CageCell> l1, List<CageCell> l2) {
+  var result = l1.where((cageCell) => l2.contains(cageCell)).toList();
+  return result;
+}
+
+List<CageCell> remainderCageCells(List<CageCell> l1, List<CageCell> l2) {
+  var result = l1.where((cageCell) => !l2.contains(cageCell)).toList();
+  return result;
+}
+
+int fixedTotalCageCells(List<CageCell> cageCells) {
+  if (cageCells.length == 0) return 0;
+  if (cageCells.length == 1) {
+    var cell = cageCells[0].cell;
+    if (cell.isSet) return cell.value!;
+    return 0;
+  }
+  int total = 0;
+  var cells = cageCells.map((cageCell) => cageCell.cell).toList();
+  var nodups = cellsInNonet(cells);
+  if (nodups) {
+    // Total is fixed if number of possible values is same as number of cells
+    var unionPossible = unionCellsPossible(cells);
+    if (unionPossible.count != cells.length) return 0;
+    for (var value = 1; value < 10; value++) {
+      if (unionPossible[value]) total += value;
+    }
+  } else {
+    // Total is fixed if all cells are set
+    if (cells.any((element) => !element.isSet)) return 0;
+    total = cells.fold<int>(0, (total, cell) => total + cell.value!);
+  }
+  return total;
 }

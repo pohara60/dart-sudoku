@@ -4,6 +4,7 @@ import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/grid.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/strategy/killerCombinations.dart';
+import 'package:sudoku/src/strategy/shrinkCagesStrategy.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class Killer extends PuzzleDecorator {
@@ -11,6 +12,7 @@ class Killer extends PuzzleDecorator {
   late final Map<Cell, Cage> cellCage;
   late final Map<Cell, CageCell> cellCageCell;
   late KillerCombinationsStrategy killerCombinationsStrategy;
+  late ShrinkCagesStrategy shrinkCagesStrategy;
 
   Killer.puzzle(Puzzle puzzle, List<List<dynamic>> killerGrid) {
     this.puzzle = puzzle;
@@ -30,10 +32,13 @@ class Killer extends PuzzleDecorator {
     List<Strategy>? toughStrategies,
   }) {
     var easyStrategies = <Strategy>[killerCombinationsStrategy];
+    var toughStrategies = <Strategy>[shrinkCagesStrategy];
     return puzzle.invokeAllStrategies(
-        explain: explain,
-        showPossible: showPossible,
-        easyStrategies: easyStrategies);
+      explain: explain,
+      showPossible: showPossible,
+      easyStrategies: easyStrategies,
+      toughStrategies: toughStrategies,
+    );
   }
 
   @override
@@ -44,7 +49,7 @@ class Killer extends PuzzleDecorator {
   void colourCages() {
     for (var cage in this.cages) {
       var adjacentCells = <Cell>[];
-      for (var cageCell in cage.cells) {
+      for (var cageCell in cage.cageCells) {
         adjacentCells.addAll(grid.adjacentCells(cageCell.cell));
       }
       var adjacentCages = adjacentCells
@@ -67,7 +72,7 @@ class Killer extends PuzzleDecorator {
     for (var i = 0; i < cages.length; i++) {
       // Does the cage have duplicate cells
       var cage = cages[i];
-      var cells = cage.cells;
+      var cells = cage.cageCells;
       for (var i = 0; i < cells.length; i++) {
         for (var j = i + 1; j < cells.length; j++) {
           if (cells[i] == cells[j]) {
@@ -77,8 +82,8 @@ class Killer extends PuzzleDecorator {
       }
       // Do the cell cages overlap?
       for (var j = i + 1; j < cages.length; j++) {
-        for (var c1 in cages[i].cells) {
-          if (cages[j].cells.contains(c1)) {
+        for (var c1 in cages[i].cageCells) {
+          if (cages[j].cageCells.contains(c1)) {
             grid.addMessage('Cell $c1 appears in more than one cage!', true);
             error = true;
           }
@@ -86,8 +91,8 @@ class Killer extends PuzzleDecorator {
       }
       // Sum totals and number of cells
       grandTotal += cages[i].total;
-      numCells += cages[i].cells.length;
-      allCells += cages[i].cells.map((cageCell) => cageCell.cell).toList();
+      numCells += cages[i].cageCells.length;
+      allCells += cages[i].cageCells.map((cageCell) => cageCell.cell).toList();
     }
     if (grandTotal != 45 * 9) {
       // @ts-ignore
@@ -219,8 +224,8 @@ class Killer extends PuzzleDecorator {
       if (!unionCells.contains(cell)) {
         var cage = getCage(cell);
         if (cage != null) {
-          var difference =
-              cage.cells.where((cageCell) => !cells.contains(cageCell.cell));
+          var difference = cage.cageCells
+              .where((cageCell) => !cells.contains(cageCell.cell));
           if (difference.length > 0) {
             // Add the cell to the new cage
             newCells.add(cell);
@@ -240,7 +245,7 @@ class Killer extends PuzzleDecorator {
             }
           } else {
             newTotal -= cage.total;
-            unionCells.addAll(cage.cells.map((cageCell) => cageCell.cell));
+            unionCells.addAll(cage.cageCells.map((cageCell) => cageCell.cell));
           }
         }
       }
@@ -285,6 +290,7 @@ class Killer extends PuzzleDecorator {
   void initKiller(List<List<dynamic>> killerGrid) {
     // Strategies
     killerCombinationsStrategy = KillerCombinationsStrategy(this);
+    shrinkCagesStrategy = ShrinkCagesStrategy(this);
 
     setKiller(killerGrid);
     if (validateCages()) return;
