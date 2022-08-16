@@ -4,6 +4,17 @@ Dart Sudoku solver package, with Command Line Interface.
 
 ## To Do
 
+1. Add Brute force solvers
+2. Allow partial Killer (in combination with other constraints)
+3. Support Arrow constraints
+4. Support Renban constraints
+5. Support Whisper constraints
+6. Support 159 constraints
+7. Support Little Killer constraints
+8. Support XV constraints
+9. Support Circle constraints
+10. Support Consecutive/Multiple constraints
+
 ## Strategies
 
 [Strategies](https.//www.sudokuwiki.org/Strategy_Families)
@@ -26,14 +37,15 @@ Check for Solved Squares
 
 ### Tough Strategies
 
-9. [Killer Cage Splitting](https://www.sudokuwiki.org/Cage_Splitting)
+9. Done [Killer Cage Splitting](https://www.sudokuwiki.org/Cage_Splitting)
+   Handled by virtual cages
 10. Done [X-Wing](https://www.sudokuwiki.org/X_Wing_Strategy)
 11. Done [Simple Colouring](https://www.sudokuwiki.org/Singles_Chains)
 12. Done [Y-Wing](https://www.sudokuwiki.org/Y_Wing_Strategy)
 13. Done [Killer Innies/Outies (2+ cells)](https://www.sudokuwiki.org/Innies_And_Outies)
 14. Done [Killer Combo's (hard)](https://www.sudokuwiki.org/Killer_Combinations)
-15. [Killer Cage/Unit Overlap](https://www.sudokuwiki.org/Cage_Unit_Overlap)
-16. [Killer Cage Compare](https://www.sudokuwiki.org/Cage_Comparison)
+15. Done [Killer Cage/Unit Overlap](https://www.sudokuwiki.org/Cage_Unit_Overlap)
+16. ???? [Killer Cage Compare](https://www.sudokuwiki.org/Cage_Comparison)
 17. Done [Swordfish](https://www.sudokuwiki.org/Sword_Fish_Strategy)
 18. Done [XYZ Wing](https://www.sudokuwiki.org/XYZ_Wing)
 
