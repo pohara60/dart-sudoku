@@ -1,4 +1,4 @@
-import 'package:sudoku/sudoku.dart';
+import 'package:sudoku/sudokuAPI.dart';
 
 void main() {
   var emptySudoku = [
@@ -90,8 +90,8 @@ void main() {
     [XX, XX, RR, UU, UU, UU, LL, XX, XX],
     [XX, XX, 08, LL, XX, 08, LL, XX, XX],
   ];
-  var killer = Sudoku.killer(emptySudoku, killerPuzzle, true);
-  print(killer.invokeAllStrategies(true, false));
+  // var killer = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
+  // print(killer.solve(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",
@@ -104,8 +104,8 @@ void main() {
     "34......8",
     "168943275"
   ].join('\n');
-  // var sudoku1 = Sudoku.sudoku(puzzle1);
-  // print(sudoku1.invokeAllStrategies(true, false));
+  // var sudoku1 = SudokuAPI.sudoku(puzzle1);
+  // print(sudoku1.solve(true, false));
 
   var puzzle2 =
       // XYZ Wing, not solved until XY-Chain
@@ -120,8 +120,8 @@ void main() {
     "9....5..4",
     "4...9...3"
   ].join('\n');
-  // var sudoku2 = Sudoku.sudoku(puzzle2);
-  // print(sudoku2.invokeAllStrategies(true, false));
+  // var sudoku2 = SudokuAPI.sudoku(puzzle2);
+  // print(sudoku2.solve(true, false));
 
   var puzzle3 =
       // Singles Chains
@@ -136,8 +136,8 @@ void main() {
     "7649..138",
     "2.863.97."
   ].join('\n');
-  // var sudoku3 = Sudoku.sudoku(puzzle3);
-  // print(sudoku3.invokeAllStrategies(true, false));
+  var sudoku3 = SudokuAPI.sudoku(puzzle3);
+  print(sudoku3.solve(true, false));
 
   var puzzle4 =
       // BUG
@@ -152,7 +152,7 @@ void main() {
     "9.8.75.6.",
     "7563.9.82"
   ].join('\n');
-  var sudoku4 = Sudoku.sudoku(puzzle4);
+  var sudoku4 = SudokuAPI.sudoku(puzzle4);
   // sudoku4.addKiller('KillerString');
-  // print(sudoku4.invokeAllStrategies(true, false));
+  // print(sudoku4.solve(true, false));
 }

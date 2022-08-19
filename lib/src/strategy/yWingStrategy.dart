@@ -1,15 +1,15 @@
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class YWingStrategy extends Strategy {
-  YWingStrategy(grid) : super(grid, 'Y-Wing');
+  YWingStrategy(sudoku) : super(sudoku, 'Y-Wing');
 
   Map<int, Map<int, List<int>>> getValueYPossibleIndexes(String axis) {
     var valuePossibleMajors = <int, Map<int, List<int>>>{};
     // Find Rows/Columns/Boxes where values may appear in doubles
     for (var major = 1; major < 10; major++) {
-      var cells = grid.getMajorAxis(axis, major);
+      var cells = sudoku.getMajorAxis(axis, major);
       var countPossibles = countCellsPossible(cells);
       for (var value = 1; value < 10; value++) {
         if (countPossibles[value - 1] >= 2) {
@@ -64,7 +64,7 @@ class YWingStrategy extends Strategy {
           for (var major1 in majors1.keys) {
             var minors1 = majors1[major1]!;
 
-            var cells = grid.getMajorAxis(axis, major1);
+            var cells = sudoku.getMajorAxis(axis, major1);
             for (var pair1 in getDoubleIndexes(cells, minors1, value)) {
               var minor1 = pair1[0] + 1; // Two possible values
               var minor2 = pair1[1] + 1; // Two possible values
@@ -81,15 +81,15 @@ class YWingStrategy extends Strategy {
                     in majors2.keys.where((major) => major != major1)) {
                   var minors2 = majors2[major2]!;
                   if (minors2.contains(minor1)) {
-                    var otherCell = grid.getAxisCell(axis, major2, minor2);
+                    var otherCell = sudoku.getAxisCell(axis, major2, minor2);
                     if (otherCell.isPossible(thirdValue)) {
                       // Remove other value from major2, minor2
                       var location = addExplanation(explanation,
                           '$axis hinge ${hingeCell.name} $axis$major2');
-                      var c = grid.getAxisCell(axis, major2, minor2);
+                      var c = sudoku.getAxisCell(axis, major2, minor2);
                       if (c.clearPossible(otherValue)) {
                         updated = true;
-                        grid.cellUpdated(
+                        sudoku.cellUpdated(
                             c, location, "remove value $otherValue from $c");
                       }
                     }
@@ -101,7 +101,7 @@ class YWingStrategy extends Strategy {
                   valuePossibleBoxes[value] != null &&
                   valuePossibleBoxes[value]![hingeCell.box] != null) {
                 var boxIndexes = valuePossibleBoxes[value]![hingeCell.box]!;
-                var boxCells = grid.getMinorAxis('B', hingeCell.box);
+                var boxCells = sudoku.getMinorAxis('B', hingeCell.box);
                 for (var pair2
                     in getDoubleIndexes(boxCells, boxIndexes, thirdValue)) {
                   var boxIndex1 = pair2[0]; // Two possible values
@@ -114,24 +114,24 @@ class YWingStrategy extends Strategy {
                       var location = addExplanation(explanation,
                           '$axis hinge ${hingeCell.name} ${hingeCell.boxName}');
                       boxCells
-                          .where((c) => grid.axisEqual(axis, c, hingeCell))
+                          .where((c) => sudoku.axisEqual(axis, c, hingeCell))
                           .forEach((c) {
                         if (c != hingeCell && c.clearPossible(otherValue)) {
                           updated = true;
-                          grid.cellUpdated(
+                          sudoku.cellUpdated(
                               c, location, "remove value $otherValue from $c");
                         }
                       });
                       location = addExplanation(explanation,
                           '$axis hinge ${hingeCell.name} ${axisCell.boxName}');
                       // Remove other value from other box on other cell axis
-                      var otherBoxCells = grid.getBox(axisCell.box);
+                      var otherBoxCells = sudoku.getBox(axisCell.box);
                       otherBoxCells
-                          .where((c) => grid.axisEqual(axis, c, otherCell))
+                          .where((c) => sudoku.axisEqual(axis, c, otherCell))
                           .forEach((c) {
                         if (c.clearPossible(otherValue)) {
                           updated = true;
-                          grid.cellUpdated(
+                          sudoku.cellUpdated(
                               c, location, "remove value $otherValue from $c");
                         }
                       });

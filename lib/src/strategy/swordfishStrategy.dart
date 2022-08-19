@@ -1,13 +1,13 @@
-import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class SwordfishStrategy extends Strategy {
-  SwordfishStrategy(grid) : super(grid, 'Swordfish');
+  SwordfishStrategy(sudoku) : super(sudoku, 'Swordfish');
 
   bool solve() {
     var updated = false;
     for (var axis in ['R', 'C']) {
-      var valuePossibleMajors = grid.getValuePossibleIndexes(axis, 3);
+      var valuePossibleMajors = sudoku.getValuePossibleIndexes(axis, 3);
       for (var value = 1; value < 10; value++) {
         var majors = valuePossibleMajors[value];
         if (majors != null && majors.length >= 3) {
@@ -24,7 +24,7 @@ class SwordfishStrategy extends Strategy {
                             '$axis$major1,$axis$major2,$axis$major3');
                         // Remove the value from the three minor axes
                         for (var minor in minors123) {
-                          var cells = grid.getMinorAxis(axis, minor);
+                          var cells = sudoku.getMinorAxis(axis, minor);
                           cells.forEach((cell) {
                             var major = cell.getAxis(axis);
                             if (major != major1 &&
@@ -32,7 +32,7 @@ class SwordfishStrategy extends Strategy {
                                 major != major3) {
                               if (cell.clearPossible(value)) {
                                 updated = true;
-                                grid.cellUpdated(cell, location,
+                                sudoku.cellUpdated(cell, location,
                                     "remove value $value from $cell");
                               }
                             }

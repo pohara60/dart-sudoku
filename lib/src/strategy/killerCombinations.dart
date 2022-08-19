@@ -21,18 +21,18 @@ class KillerCombinationsStrategy extends Strategy {
       // Update possible values to union of combinations
       assert(combinations.length > 0);
       var unionCombinations =
-          List.generate(cage.cageCells.length, (index) => Possible(false));
+          List.generate(cage.cells.length, (index) => Possible(false));
       for (var combination in combinations) {
         for (var index = 0; index < combination.length; index++) {
           var value = combination[index];
           unionCombinations[index][value] = true;
         }
       }
-      for (var index = 0; index < cage.cageCells.length; index++) {
-        var cell = cage.cageCells[index].cell;
+      for (var index = 0; index < cage.cells.length; index++) {
+        var cell = cage.cells[index];
         if (cell.reducePossible(unionCombinations[index])) {
           updated = true;
-          grid.cellUpdated(cell, explanation, 'cage $cage $cell');
+          sudoku.cellUpdated(cell, explanation, 'cage $cage $cell');
         }
       }
     }

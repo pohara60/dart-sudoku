@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class BUGStrategy extends Strategy {
@@ -14,7 +14,7 @@ class BUGStrategy extends Strategy {
     var bugValue = 0;
     for (var axis in ['R', 'C', 'B']) {
       for (var major = 1; major < 10; major++) {
-        var cells = grid
+        var cells = sudoku
             .getMajorAxis(axis, major)
             .where((cell) => !cell.isSet)
             .toList();
@@ -54,7 +54,7 @@ class BUGStrategy extends Strategy {
     if (bugOK && bugCell != null) {
       bugCell.value = bugValue;
       updated = true;
-      grid.cellUpdated(bugCell, explanation, "$bugCell");
+      sudoku.cellUpdated(bugCell, explanation, "$bugCell");
     }
     return updated;
   }

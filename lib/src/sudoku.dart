@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/puzzle.dart';
+import 'package:sudoku/src/region.dart';
 import 'package:sudoku/src/strategy/bugStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenGroupStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenSingleStrategy.dart';
@@ -17,33 +18,36 @@ import 'package:sudoku/src/strategy/xWingStrategy.dart';
 
 typedef Solve = bool Function(Puzzle grid);
 
-class Grid implements Puzzle {
+class SudokuRegion extends Region<Sudoku> {
+  // late Killer killer;
+  int total;
+  SudokuRegion(Sudoku puzzle, String name, List<Cell> cells)
+      : this.total = 45,
+        super(puzzle, name, true, cells);
+  String toString() => 'Sudoku $name';
+}
+
+class Sudoku implements Puzzle {
+  Sudoku get sudoku => this;
+
+  late bool singleStep;
+  bool debug = false;
+
   late List<List<Cell>> _grid;
-  Cell? _focus;
+  List<List<Cell>> get grid => _grid;
+  Cell getCell(int row, int col) => _grid[row - 1][col - 1];
+
+  late Map<String, Region> _regions;
+  Map<String, Region> get regions => _regions;
+
   late Set<Cell> _updates;
   late List<String> _messages;
   bool _error = false;
 
-  late bool singleStep;
-  bool debug = true;
-
-  Grid get grid => this;
-  List<List<Cell>> get cellGrid => _grid;
-  Cell getCell(int row, int col) => _grid[row - 1][col - 1];
-  Cell? get focus => _focus;
   Set<Cell> get updates => _updates;
   List<String> get messages => _messages;
   String get messageString => _messages.join('\n');
   bool get error => _error;
-
-  set focus(Cell? focus) {
-    if (focus != _focus) {
-      clearUpdates();
-      if (_focus != null) _focus!.isFocus = false;
-      _focus = focus;
-      if (focus != null) _focus!.isFocus = true;
-    }
-  }
 
   late UpdatePossibleStrategy updatePossibleStrategy;
   late HiddenSingleStrategy hiddenSingleStrategy;
@@ -60,8 +64,16 @@ class Grid implements Puzzle {
   late XYZWingStrategy xyzWingStrategy;
   late BUGStrategy bugStrategy;
 
-  void _init() {
-    focus = _grid[0][0];
+  void _initRegions() {
+    this._regions = <String, Region>{};
+    for (var r = 1; r < 10; r++) {
+      _regions['R$r'] = SudokuRegion(this, 'R$r', <Cell>[]);
+      _regions['C$r'] = SudokuRegion(this, 'C$r', <Cell>[]);
+      _regions['B$r'] = SudokuRegion(this, 'B$r', <Cell>[]);
+    }
+  }
+
+  void _initProcessing() {
     _updates = {};
     _messages = [];
     updatePossibleStrategy = UpdatePossibleStrategy(this);
@@ -80,6 +92,28 @@ class Grid implements Puzzle {
     bugStrategy = BUGStrategy(this);
   }
 
+  Sudoku([this.singleStep = false]) {
+    _initRegions();
+    _grid = List.generate(9,
+        (row) => List.generate(9, (col) => Cell(row + 1, col + 1, _regions)));
+    _initProcessing();
+  }
+
+  Sudoku.puzzle(List<String> newSudokuPuzzle, [this.singleStep = false]) {
+    _initRegions();
+    _grid = newSudokuPuzzle.asMap().entries.map((entry) {
+      int row = entry.key;
+      String val = entry.value;
+      return List.generate(
+        9,
+        (col) => val[col] == '.'
+            ? Cell(row + 1, col + 1, _regions)
+            : Cell.value(row + 1, col + 1, int.parse(val[col]), _regions),
+      );
+    }).toList();
+    _initProcessing();
+  }
+
   void clearUpdates() {
     _messages = [];
     _updates = {};
@@ -94,26 +128,6 @@ class Grid implements Puzzle {
     _messages.forEach((m) {
       result.writeln(debugPrint(m));
     });
-  }
-
-  Grid([this.singleStep = false]) {
-    _grid = List.generate(
-        9, (row) => List.generate(9, (col) => Cell(row + 1, col + 1)));
-    _init();
-  }
-
-  Grid.puzzle(List<String> newSudokuPuzzle, [this.singleStep = false]) {
-    _grid = newSudokuPuzzle.asMap().entries.map((entry) {
-      int row = entry.key;
-      String val = entry.value;
-      return List.generate(
-        9,
-        (col) => val[col] == '.'
-            ? Cell(row + 1, col + 1)
-            : Cell.value(row + 1, col + 1, int.parse(val[col])),
-      );
-    }).toList();
-    _init();
   }
 
   String toString() {
@@ -170,7 +184,7 @@ class Grid implements Puzzle {
     return str;
   }
 
-  String invokeAllStrategies({
+  String solve({
     bool explain = false,
     bool showPossible = false,
     List<Strategy>? easyStrategies,
@@ -236,47 +250,9 @@ class Grid implements Puzzle {
     return updated;
   }
 
-  void value(int digit, bool updatePossible) {
-    clearUpdates();
-    assert(_focus != null);
-    _focus!.value = digit;
-    if (updatePossible) {
-      cellUpdateAllNonet(_focus, '');
-    }
-  }
-
-  /// Return cells in box [box]
-  List<Cell> getBox(int box) {
-    var cells = <Cell>[];
-    var row = floor3(box);
-    var col = ((box - 1) % 3) * 3 + 1;
-    for (var r = row; r < row + 3; r++) {
-      for (var c = col; c < col + 3; c++) {
-        cells.add(_grid[r - 1][c - 1]);
-      }
-    }
-    return cells;
-  }
-
-  /// Return cells in row [row]
-  List<Cell> getRow(int row) {
-    var r = row;
-    var cells = <Cell>[];
-    for (var c = 1; c < 10; c++) {
-      cells.add(_grid[r - 1][c - 1]);
-    }
-    return cells;
-  }
-
-  /// Return cells in column [col]
-  List<Cell> getColumn(int col) {
-    var c = col;
-    var cells = <Cell>[];
-    for (var r = 1; r < 10; r++) {
-      cells.add(_grid[r - 1][c - 1]);
-    }
-    return cells;
-  }
+  List<Cell> getBox(int box) => List.from(regions['B$box']!.cells);
+  List<Cell> getRow(int row) => List.from(regions['R$row']!.cells);
+  List<Cell> getColumn(int col) => List.from(regions['C$col']!.cells);
 
   /// Update possible values in nonet [cells] for [cell] value, with label [explanation]
   void cellUpdateNonet(Cell cell, List<Cell> cells, String explanation) {
@@ -288,7 +264,8 @@ class Grid implements Puzzle {
         var value = c.value;
         if (value != null) {
           if (values[value - 1]) {
-            c.error = addExplanation(explanation, 'duplicate value $value');
+            this.addMessage(
+                addExplanation(explanation, 'duplicate value $value'), true);
           } else {
             values[value - 1] = true;
           }
@@ -424,7 +401,6 @@ class Grid implements Puzzle {
   }
 
   void cellError(Cell cell, String explanation, String error) {
-    cell.error = error;
     addMessage(addExplanation(explanation, error), true);
   }
 

@@ -1,15 +1,15 @@
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class XYZWingStrategy extends Strategy {
-  XYZWingStrategy(grid) : super(grid, 'XYZ-Wing');
+  XYZWingStrategy(sudoku) : super(sudoku, 'XYZ-Wing');
 
   Map<int, Map<int, List<int>>> getValueXYZPossibleIndexes(String axis) {
     var valuePossibleMajors = <int, Map<int, List<int>>>{};
     // Find Rows/Columns/Boxes where values may appear in a triple and a double
     for (var major = 1; major < 10; major++) {
-      var cells = grid.getMajorAxis(axis, major);
+      var cells = sudoku.getMajorAxis(axis, major);
       var countPossibles = countCellsPossible(cells);
       for (var value = 1; value < 10; value++) {
         if (countPossibles[value - 1] >= 2) {
@@ -62,7 +62,7 @@ class XYZWingStrategy extends Strategy {
         if (majors != null) {
           for (var major1 in majors.keys) {
             var minors1 = majors[major1]!;
-            var cells = grid.getMajorAxis(axis, major1);
+            var cells = sudoku.getMajorAxis(axis, major1);
             for (var pair1
                 in getTripleAndDoubleIndexes(cells, minors1, value)) {
               var minor1 = pair1[0] + 1; // Three possible values
@@ -72,7 +72,7 @@ class XYZWingStrategy extends Strategy {
               if (valuePossibleBoxes[value] != null &&
                   valuePossibleBoxes[value]![hingeCell.box] != null) {
                 var boxIndexes = valuePossibleBoxes[value]![hingeCell.box]!;
-                var boxCells = grid.getMinorAxis('B', hingeCell.box);
+                var boxCells = sudoku.getMinorAxis('B', hingeCell.box);
                 for (var pair2
                     in getTripleAndDoubleIndexes(boxCells, boxIndexes, value)) {
                   var boxIndex1 = pair2[0]; // Three possible values
@@ -86,11 +86,11 @@ class XYZWingStrategy extends Strategy {
                       var location = addExplanation(explanation,
                           '$axis hinge ${hingeCell.name} ${hingeCell.boxName}');
                       boxCells
-                          .where((c) => grid.axisEqual(axis, c, hingeCell))
+                          .where((c) => sudoku.axisEqual(axis, c, hingeCell))
                           .forEach((c) {
                         if (c != hingeCell && c.clearPossible(value)) {
                           updated = true;
-                          grid.cellUpdated(
+                          sudoku.cellUpdated(
                               c, location, "remove value $value from $c");
                         }
                       });

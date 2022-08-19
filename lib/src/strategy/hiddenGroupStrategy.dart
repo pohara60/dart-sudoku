@@ -7,9 +7,9 @@ import 'package:sudoku/src/strategy/strategy.dart';
 class HiddenGroupStrategy extends Strategy {
   int min = 2;
   int max = 4;
-  HiddenGroupStrategy(grid) : super(grid, 'Hidden Group');
-  factory HiddenGroupStrategy.minMax(grid, min, max) {
-    var strategy = HiddenGroupStrategy(grid);
+  HiddenGroupStrategy(sudoku) : super(sudoku, 'Hidden Group');
+  factory HiddenGroupStrategy.minMax(sudoku, min, max) {
+    var strategy = HiddenGroupStrategy(sudoku);
     strategy.min = min;
     strategy.max = max;
     return strategy;
@@ -19,7 +19,7 @@ class HiddenGroupStrategy extends Strategy {
     var updated = false;
     for (var axis in ['R', 'C', 'B']) {
       for (var major = 1; major < 10; major++) {
-        var cells = grid.getMajorAxis(axis, major);
+        var cells = sudoku.getMajorAxis(axis, major);
         if (nonetHiddenGroup(cells)) updated = true;
       }
     }
@@ -69,7 +69,7 @@ class HiddenGroupStrategy extends Strategy {
                 if (c.removeOtherPossible(possible)) {
                   updated = true;
                   anyUpdate = true;
-                  grid.cellUpdated(c, explanation, "set $c");
+                  sudoku.cellUpdated(c, explanation, "set $c");
                 }
               }
             }

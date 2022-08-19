@@ -1,12 +1,6 @@
 {
     "configurations": [
         {
-            "name": "Dart (region)",
-            "type": "dart",
-            "request": "launch",
-            "program": "lib\\src\\region.dart"
-        },
-        {
             "name": "Dart (test\\sudoku_test.dart)",
             "type": "dart",
             "request": "launch",

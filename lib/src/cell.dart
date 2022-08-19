@@ -1,50 +1,9 @@
 import 'package:sudoku/src/possible.dart';
+import 'package:sudoku/src/region.dart';
 
 class Cell {
-  int _row, _col;
   int? _value;
-  var _possible = Possible();
-  bool _isFocus = false;
-  String _error = '';
-  bool _wasUpdated = false;
-
-  Cell(this._row, this._col);
-  Cell.value(this._row, this._col, int val) {
-    value = val;
-  }
-
-  int get row => _row;
-  int get col => _col;
-  String get name => 'R${_row}C${_col}';
-  String get rowName => 'R${_row}';
-  String get colName => 'C${_col}';
-
   int? get value => _value;
-  get isError => _error != '';
-  // ignore: unnecessary_getters_setters
-  String get error => _error;
-  // ignore: unnecessary_getters_setters
-  set error(String error) {
-    _error = error;
-  }
-
-  int get box {
-    var box = floor3(_row) + (_col - 1) ~/ 3;
-    return box;
-  }
-
-  String get boxName => 'B${box}';
-
-  // Zero-based index in 9 cells of box
-  int get boxIndex {
-    var index = (_row - 1) % 3 * 3 + (_col - 1) % 3;
-    return index;
-  }
-
-  Possible get possible => _possible;
-
-  int get possibleCount => _possible.count;
-
   set value(int? value) {
     if (value != null) {
       _value = value;
@@ -53,7 +12,54 @@ class Cell {
   }
 
   bool get isSet => _value != null;
-  bool get wasUpdated => _wasUpdated;
+
+  int _row, _col;
+  int get row => _row;
+  int get col => _col;
+  String get name => 'R${_row}C${_col}';
+  String get rowName => 'R${_row}';
+  String get colName => 'C${_col}';
+  int get box {
+    var box = floor3(_row) + (_col - 1) ~/ 3;
+    return box;
+  }
+
+  String get boxName => 'B${box}';
+  // Zero-based index in 9 cells of box
+  int get boxIndex {
+    var index = (_row - 1) % 3 * 3 + (_col - 1) % 3;
+    return index;
+  }
+
+  late Possible _possible;
+  Possible get possible => _possible;
+  int get possibleCount => _possible.count;
+
+  late Region rowRegion;
+  late Region colRegion;
+  late Region boxRegion;
+  late List<Region> regions;
+  List<Region> get allRegions => [rowRegion, colRegion, boxRegion, ...regions];
+  // TODO Killer primary cage
+
+  _initRegions(regions) {
+    rowRegion = regions['R$row']!;
+    rowRegion.cells.add(this);
+    colRegion = regions['C$col']!;
+    colRegion.cells.add(this);
+    boxRegion = regions['B$box']!;
+    boxRegion.cells.add(this);
+    this.regions = <Region>[];
+  }
+
+  Cell(this._row, this._col, Map<String, Region> regions) {
+    _possible = Possible();
+    _initRegions(regions);
+  }
+  Cell.value(this._row, this._col, int val, Map<String, Region> regions) {
+    value = val;
+    _initRegions(regions);
+  }
 
   bool isPossible(int value) {
     return _possible.isPossible(value);
@@ -63,10 +69,7 @@ class Cell {
     return _possible.clear(value);
   }
 
-  void clearUpdate() {
-    _error = '';
-    _wasUpdated = false;
-  }
+  void clearUpdate() {}
 
   String format(bool showPossible) => _value != null
       ? _value.toString()
@@ -74,13 +77,6 @@ class Cell {
           ? _possible.toString()
           : '';
 
-  // ignore: unnecessary_getters_setters
-  set isFocus(bool isFocus) {
-    _isFocus = isFocus;
-  }
-
-  // ignore: unnecessary_getters_setters
-  bool get isFocus => _isFocus;
   int getAxis(String axis) => axis == 'R'
       ? _row
       : axis == 'C'
@@ -113,7 +109,6 @@ class Cell {
       // if (countTrue == 1) {
       //   this.value = valueTrue;
       // }
-      this._wasUpdated = true;
       return true;
     } else {
       return false;

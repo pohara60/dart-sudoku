@@ -1,9 +1,9 @@
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class PointingGroupStrategy extends LineBoxReductionStrategy {
-  PointingGroupStrategy(grid) : super(grid, 'Pointing Group');
+  PointingGroupStrategy(sudoku) : super(sudoku, 'Pointing Group');
 
   bool solve() {
     return allBoxReduction('B');
@@ -11,8 +11,8 @@ class PointingGroupStrategy extends LineBoxReductionStrategy {
 }
 
 class LineBoxReductionStrategy extends Strategy {
-  LineBoxReductionStrategy(grid, [explanation = 'Line Box Reduction'])
-      : super(grid, explanation);
+  LineBoxReductionStrategy(sudoku, [explanation = 'Line Box Reduction'])
+      : super(sudoku, explanation);
 
   bool solve() {
     return allBoxReduction('axis');
@@ -34,13 +34,13 @@ class LineBoxReductionStrategy extends Strategy {
   /// and remove from rest of Row/Column
   bool lineBoxReduction(String target, int box) {
     var updated = false;
-    var cells = grid.getBox(box);
+    var cells = sudoku.getBox(box);
     var location = addExplanation(explanation, cells[0].getAxisName('B'));
     // Check each Row then each Column of Box
     for (var axis in ['R', 'C']) {
       for (var boxMajor = 0; boxMajor < 3; boxMajor++) {
         // Three cells in Row/Column
-        var cells3 = grid.getCells3(axis, boxMajor, cells);
+        var cells3 = sudoku.getCells3(axis, boxMajor, cells);
         if (cells3.isEmpty) continue;
         // Other six cells in Box
         var boxCells6 = cells
@@ -49,7 +49,7 @@ class LineBoxReductionStrategy extends Strategy {
         // Other six cells in Row/Column
         late List<Cell> axisCells6;
         late String locationAxis;
-        axisCells6 = grid.getCellAxis(axis, cells3[0]);
+        axisCells6 = sudoku.getCellAxis(axis, cells3[0]);
         locationAxis =
             addExplanation(location, '${cells3[0].getAxisName(axis)}');
         axisCells6.removeWhere((cell) => cell.isSet || cells3.contains(cell));
@@ -72,8 +72,32 @@ class LineBoxReductionStrategy extends Strategy {
           for (var cell in updateCells) {
             if (cell.removePossible(unique3)) {
               updated = true;
-              grid.cellUpdated(
+              sudoku.cellUpdated(
                   cell, locationAxis, "remove group $unique3 from $cell");
+            }
+          }
+          // They can be removed from any overlapping unique killer regions
+          for (var value = 1; value < 10; value++) {
+            if (unique3[value]) {
+              var uniqueCells = cells3.where((cell) => cell.possible[value]);
+              var overlapRegions = uniqueCells
+                  .expand((cell) => cell.regions)
+                  .toSet()
+                  .where((region) =>
+                      region.nodups &&
+                      region.cells.toSet().containsAll(uniqueCells))
+                  .toSet();
+              overlapRegions.forEach((region) {
+                region.cells
+                    .where((cell) => !uniqueCells.contains(cell))
+                    .forEach((cell) {
+                  if (cell.clearPossible(value)) {
+                    updated = true;
+                    sudoku.cellUpdated(
+                        cell, locationAxis, "remove value $value from $cell");
+                  }
+                });
+              });
             }
           }
         }

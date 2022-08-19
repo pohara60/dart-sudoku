@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
 
-import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 enum Colour {
@@ -13,14 +13,14 @@ Colour toggleColour(Colour colour) =>
     colour == Colour.ODD ? Colour.EVEN : Colour.ODD;
 
 class SimpleColouringStrategy extends Strategy {
-  SimpleColouringStrategy(grid) : super(grid, 'Simple Colouring');
+  SimpleColouringStrategy(sudoku) : super(sudoku, 'Simple Colouring');
 
   bool solve() {
     var updated = false;
 
     var valuePossibleTwice = <String, Map<int, Map<int, List<int>>>>{};
     for (var axis in ['R', 'C', 'B']) {
-      valuePossibleTwice[axis] = grid.getValuePossibleIndexes(axis, 2);
+      valuePossibleTwice[axis] = sudoku.getValuePossibleIndexes(axis, 2);
     }
 
     for (var value = 1; value < 10; value++) {
@@ -39,7 +39,7 @@ class SimpleColouringStrategy extends Strategy {
             var minors = valuePossibleTwiceValue[major];
             if (minors != null) {
               for (var minor in minors) {
-                var other = grid.getAxisCell(axis, major, minor);
+                var other = sudoku.getAxisCell(axis, major, minor);
                 if (other != cell) {
                   // if cell not on a chain
                   // then recursively add to chain with alternate colour
@@ -72,7 +72,7 @@ class SimpleColouringStrategy extends Strategy {
         if (valuePossibleTwiceValue != null) {
           for (var major in valuePossibleTwiceValue.keys) {
             for (var minor in valuePossibleTwiceValue[major]!) {
-              var cell = grid.getAxisCell(axis, major, minor);
+              var cell = sudoku.getAxisCell(axis, major, minor);
               var colour = Colour.ODD;
               if (!chains.any((chain) => chain.contains(cell))) {
                 // Create chain
@@ -88,7 +88,7 @@ class SimpleColouringStrategy extends Strategy {
 
       // Debug
       // print('Singles Chains $value');
-      // print(grid.toPossibleString());
+      // print(sudoku.toPossibleString());
       // for (var chain in chains) {
       //   print('Chain $chain');
       //   print('Colors ${chain.map((cell) => cellColour[cell].toString())}');
@@ -101,7 +101,7 @@ class SimpleColouringStrategy extends Strategy {
         for (var major = 1; major < 10; major++) {
           // if two cells in axis on a chain have same colour
           // then fix chain to other colour
-          var cells = grid.getMajorAxis(axis, major);
+          var cells = sudoku.getMajorAxis(axis, major);
           var colours = <Colour?>[];
           var location = addExplanation(explanation, 'Rule 2 $axis$major');
           void fixChain(List<Cell> chain, Colour colour) {
@@ -109,14 +109,14 @@ class SimpleColouringStrategy extends Strategy {
               if (cellColour[cell] == colour) {
                 if (cell.clearPossible(value)) {
                   updated = true;
-                  grid.cellUpdated(
+                  sudoku.cellUpdated(
                       cell, location, "remove value $value from $cell");
                 }
               } else {
                 if (cell.value != value) {
                   cell.value = value;
                   updated = true;
-                  grid.cellUpdated(cell, location, "set value $cell");
+                  sudoku.cellUpdated(cell, location, "set value $cell");
                 }
               }
             }
@@ -149,15 +149,15 @@ class SimpleColouringStrategy extends Strategy {
                 cell1.col != cell2.col) {
               // check intersection cells to remove value
               for (var cell in [
-                grid.getCell(cell1.row, cell2.col),
-                grid.getCell(cell2.row, cell2.col)
+                sudoku.getCell(cell1.row, cell2.col),
+                sudoku.getCell(cell2.row, cell1.col)
               ]) {
                 if (!chain.contains(cell)) {
                   var location = addExplanation(
                       explanation, 'Rule 4 ${cell1.name},${cell2.name}');
                   if (cell.clearPossible(value)) {
                     updated = true;
-                    grid.cellUpdated(
+                    sudoku.cellUpdated(
                         cell, location, "remove value $value from $cell");
                   }
                 }
@@ -169,7 +169,7 @@ class SimpleColouringStrategy extends Strategy {
     }
     // if (cell.clearPossible(value)) {
     //   updated = true;
-    //   grid.cellUpdated(cell, location, "remove value $value from $cell");
+    //   sudoku.cellUpdated(cell, location, "remove value $value from $cell");
     // }
     return updated;
   }

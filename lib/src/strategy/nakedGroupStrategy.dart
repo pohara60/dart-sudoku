@@ -1,13 +1,13 @@
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class NakedGroupStrategy extends Strategy {
   int min = 2;
   int max = 4;
-  NakedGroupStrategy(grid) : super(grid, 'Naked Group');
-  factory NakedGroupStrategy.minMax(grid, min, max) {
-    var strategy = NakedGroupStrategy(grid);
+  NakedGroupStrategy(sudoku) : super(sudoku, 'Naked Group');
+  factory NakedGroupStrategy.minMax(sudoku, min, max) {
+    var strategy = NakedGroupStrategy(sudoku);
     strategy.min = min;
     strategy.max = max;
     return strategy;
@@ -17,7 +17,7 @@ class NakedGroupStrategy extends Strategy {
     var updated = false;
     for (var axis in ['B', 'R', 'C']) {
       for (var major = 1; major < 10; major++) {
-        var cells = grid.getMajorAxis(axis, major);
+        var cells = sudoku.getMajorAxis(axis, major);
         if (nonetNakedGroup(cells)) updated = true;
       }
     }
@@ -50,7 +50,7 @@ class NakedGroupStrategy extends Strategy {
               if (c.removePossible(possible)) {
                 updated = true;
                 anyUpdate = true;
-                grid.cellUpdated(
+                sudoku.cellUpdated(
                     c, explanation, "remove group $possible from $c");
               }
             }

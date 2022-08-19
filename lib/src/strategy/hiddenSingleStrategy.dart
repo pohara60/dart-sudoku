@@ -1,13 +1,13 @@
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/grid.dart';
+import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class HiddenSingleStrategy extends Strategy {
-  HiddenSingleStrategy(grid) : super(grid, 'Hidden Single');
+  HiddenSingleStrategy(sudoku) : super(sudoku, 'Hidden Single');
 
   bool solve() {
     var updated = false;
-    grid.cellGrid.forEach((row) => row.forEach((cell) {
+    sudoku.grid.forEach((row) => row.forEach((cell) {
           if (cellHiddenSingle(cell)) updated = true;
         }));
     return updated;
@@ -23,7 +23,7 @@ class HiddenSingleStrategy extends Strategy {
     } else {
       // Check for a possible value not in box, row or column
       for (var axis in ['R', 'C', 'B']) {
-        var cells = grid.getMajorAxis(axis, cell.getAxis(axis));
+        var cells = sudoku.getMajorAxis(axis, cell.getAxis(axis));
         cells.remove(cell);
         var otherPossible = unionCellsPossible(cells);
         var difference = cell.possible.subtract(otherPossible);
@@ -35,7 +35,7 @@ class HiddenSingleStrategy extends Strategy {
       }
     }
     if (updated) {
-      grid.cellUpdated(cell, explanation, '$cell');
+      sudoku.cellUpdated(cell, explanation, '$cell');
     }
     return updated;
   }

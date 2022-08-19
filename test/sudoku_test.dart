@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:sudoku/sudoku.dart';
+import 'package:sudoku/sudokuAPI.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -114,9 +114,9 @@ void main() {
     'Pointing Group, B4, C3, remove group 56 from R9C3 = 128',
     'Line Box Reduction, B6, C9, remove group 1 from R4C7 = 67',
     'Line Box Reduction, B6, C9, remove group 1 from R5C8 = 467',
-    'Simple Colouring, Rule 4 R1C7,R1C6, remove value 4 from R1C7 = 1259', //New
-    'Simple Colouring, Rule 4 R3C3,R3C9, remove value 9 from R3C3 = 47', //New
-    'Pointing Group, B1, R1, remove group 9 from R1C7 = 125', //New
+    'Simple Colouring, Rule 4 R6C7,R1C6, remove value 4 from R1C7 = 1259',
+    'Simple Colouring, Rule 4 R6C3,R3C9, remove value 9 from R3C3 = 47',
+    'Pointing Group, B1, R1, remove group 9 from R1C7 = 125',
     'XYZ-Wing, R hinge R5C8 B6, remove value 6 from R5C9 = 19',
     '6.......8',
     '5..9.8..7',
@@ -157,7 +157,7 @@ void main() {
     'Naked Group, remove group 25 from R6C1 = 19',
     'Naked Group, remove group 25 from R6C9 = 19',
     'Pointing Group, B3, C9, remove group 2 from R5C9 = 1459',
-    'Simple Colouring, Rule 4 R5C3,R5C9, remove value 5 from R5C3 = 12',
+    'Simple Colouring, Rule 4 R7C3,R5C9, remove value 5 from R5C3 = 12',
     'Simple Colouring, Rule 2 R1, remove value 5 from R2C1 = 14',
     'Simple Colouring, Rule 2 R1, set value R2C5 = 5',
     'Simple Colouring, Rule 2 R1, remove value 5 from R8C5 = 2',
@@ -174,7 +174,7 @@ void main() {
     'Simple Colouring, Rule 2 R1, set value R6C4 = 5',
     'Simple Colouring, Rule 2 R1, remove value 5 from R6C7 = 2',
     'Simple Colouring, Rule 2 R1, remove value 5 from R1C4 = 2',
-    'Simple Colouring, Rule 4 R5C7,R5C1, remove value 5 from R5C7 = 24',
+    'Simple Colouring, Rule 4 R7C7,R5C1, remove value 5 from R5C7 = 24',
     'Hidden Single, R1C1 = 5',
     'Hidden Single, R1C2 = 1',
     'Hidden Single, R1C4 = 2',
@@ -272,30 +272,30 @@ void main() {
 
   group('API', () {
     test('sudoku1', () {
-      var sudoku1 = Sudoku.sudoku(puzzle1);
+      var sudoku1 = SudokuAPI.sudoku(puzzle1);
       expect(
-        sudoku1.invokeAllStrategies(true, false),
+        sudoku1.solve(true, false),
         solution1.join('\n'),
       );
     });
     test('sudoku2', () {
-      var sudoku2 = Sudoku.sudoku(puzzle2);
+      var sudoku2 = SudokuAPI.sudoku(puzzle2);
       expect(
-        sudoku2.invokeAllStrategies(true, false),
+        sudoku2.solve(true, false),
         solution2.join('\n'),
       );
     });
     test('sudoku3', () {
-      var sudoku3 = Sudoku.sudoku(puzzle3);
+      var sudoku3 = SudokuAPI.sudoku(puzzle3);
       expect(
-        sudoku3.invokeAllStrategies(true, false),
+        sudoku3.solve(true, false),
         solution3.join('\n'),
       );
     });
     test('sudoku4', () {
-      var sudoku4 = Sudoku.sudoku(puzzle4);
+      var sudoku4 = SudokuAPI.sudoku(puzzle4);
       expect(
-        sudoku4.invokeAllStrategies(true, false),
+        sudoku4.solve(true, false),
         solution4.join('\n'),
       );
     });

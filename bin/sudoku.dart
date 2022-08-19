@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:sudoku/sudoku.dart';
+import 'package:sudoku/sudokuAPI.dart';
 
 const PROGRAM = 'sudoku';
 
@@ -43,8 +43,8 @@ For example:
     if (puzzles.length > 0) {
       // Get and print solutions
       final puzzle = puzzles[0];
-      var sudoku = Sudoku.sudoku(puzzle);
-      var result = sudoku.invokeAllStrategies(true, false);
+      var sudoku = SudokuAPI.sudoku(puzzle);
+      var result = sudoku.solve(true, false);
       print(result);
       // final solutions = sudoku.getSolutions(puzzle);
       // for (var solution in solutions) {
@@ -66,7 +66,7 @@ class GetSudokuCommand extends Command {
   @override
   void run() {
     // Get and print puzzle
-    final sudoku = Sudoku();
+    final sudoku = SudokuAPI();
     var puzzle = sudoku.getSudoku();
     print('getSudoku = $puzzle');
   }
