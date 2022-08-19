@@ -1,7 +1,11 @@
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+/// Find groups of values that appear in a subset of a Row/Column/Box
+/// Naked because no other values are possible in the cells
+///
+/// Can be created with minimum/maximum grop size in order to split
+/// strategy into multiple phases
 class NakedGroupStrategy extends Strategy {
   int min = 2;
   int max = 4;
@@ -35,7 +39,7 @@ class NakedGroupStrategy extends Strategy {
     var groupMin = this.min;
     if (groupMax < groupMin) return false;
 
-    // Check for groups of 2 to groupMax cells
+    // Check for groups of groupMin to groupMax cells
     var updated = true;
     while (updated) {
       updated = false;
@@ -61,7 +65,6 @@ class NakedGroupStrategy extends Strategy {
     return anyUpdate;
   }
 
-  ///
   /// Recursive function to compute Groups (Pairs, Triples, etc) of possible values
   /// pC - list of cells to check
   /// g - required group size

@@ -1,5 +1,4 @@
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class HiddenSingleStrategy extends Strategy {

@@ -14,6 +14,21 @@ class Killer extends PuzzleDecorator {
   Sudoku get sudoku => puzzle.sudoku;
   String get messageString => sudoku.messageString;
 
+  /// Cages are Regions of type KillerRegion
+  List<KillerRegion> get cages => List<KillerRegion>.from(this
+      .regions
+      .values
+      .where((region) => region.runtimeType == KillerRegion));
+
+  /// Get the puzzle Cage for a Cell
+  KillerRegion? getCage(Cell cell) => cell.regions.firstWhereOrNull((region) =>
+      region.runtimeType == KillerRegion &&
+      !(region as KillerRegion).virtual) as KillerRegion?;
+
+  /// Get all Cages for a Cell, including virtual cages
+  List<KillerRegion> getAllCages(Cell cell) => List<KillerRegion>.from(
+      cell.regions.where((region) => region.runtimeType == KillerRegion));
+
   Killer.puzzle(Puzzle puzzle, List<List<dynamic>> killerGrid,
       [partial = false]) {
     this.puzzle = puzzle;
@@ -46,18 +61,6 @@ class Killer extends PuzzleDecorator {
       easyStrategies: easyStrategies,
     );
   }
-
-  List<KillerRegion> get cages => List<KillerRegion>.from(this
-      .regions
-      .values
-      .where((region) => region.runtimeType == KillerRegion));
-
-  KillerRegion? getCage(Cell cell) => cell.regions.firstWhereOrNull((region) =>
-      region.runtimeType == KillerRegion &&
-      !(region as KillerRegion).virtual) as KillerRegion?;
-
-  List<KillerRegion> getAllCages(Cell cell) => List<KillerRegion>.from(
-      cell.regions.where((region) => region.runtimeType == KillerRegion));
 
   void colourCages() {
     for (var cage in this.cages) {

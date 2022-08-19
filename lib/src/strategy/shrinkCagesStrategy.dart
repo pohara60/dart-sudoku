@@ -5,6 +5,8 @@ import 'package:sudoku/src/killer.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+/// Find cages where the overlap with other cages has a known total,
+/// and remove all the overlaps from the cage to make a new cage
 class ShrinkCagesStrategy extends Strategy {
   ShrinkCagesStrategy(Puzzle puzzle) : super(puzzle, 'Shrink Cages') {
     assert(puzzle.runtimeType == Killer);

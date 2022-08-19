@@ -1,10 +1,12 @@
-import 'dart:collection';
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
-class BUGStrategy extends Strategy {
-  BUGStrategy(grid) : super(grid, 'BUG');
+/// B.U.G. = Bi-value Universal Graveyard
+/// Any Sudoku where all remaining cells contain just two candidates is fatally flawed.
+/// There must be a last remaining cell with three candidates. The odd number that can't
+/// be paired with another cell has to be the solution for that cell to prevent BUG.
+class BugStrategy extends Strategy {
+  BugStrategy(grid) : super(grid, 'BUG');
 
   bool solve() {
     var updated = false;

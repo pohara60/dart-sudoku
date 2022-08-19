@@ -2,6 +2,16 @@ import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+/// This is an extension of Y-Wing or (XY-Wing).
+///
+/// Three cells that contain only 3 different numbers between them, but which
+/// fall outside the confines of one Row/Column/Box, with one of the cells (the
+/// 'apex' or 'hinge') being able to see the other two; those other two having
+/// only one number in common; and the apex having all three numbers as candidates.
+///
+/// It follows that one or other of the three cells must contain the common number;
+/// and hence any extraneous cell (there can only be two) that "sees" all three
+/// cells Trio cannot have that number as its true value.
 class XYZWingStrategy extends Strategy {
   XYZWingStrategy(sudoku) : super(sudoku, 'XYZ-Wing');
 

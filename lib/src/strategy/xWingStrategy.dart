@@ -3,6 +3,10 @@ import 'package:collection/collection.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+/// When there are only two possible cells for a value in each of two different
+/// Rows (or Columns), and these candidates lie in the same Columns (or Rows),
+// then all other candidates for this value in the Columns (or Rows) can be
+// eliminated.
 class XWingStrategy extends Strategy {
   XWingStrategy(sudoku) : super(sudoku, 'X-Wing');
 
@@ -18,8 +22,6 @@ class XWingStrategy extends Strategy {
               if (major2 > major1 && ListEquality().equals(minors1, minors2)) {
                 var location =
                     addExplanation(explanation, '$axis$major1,$axis$major2}]');
-                // X Wing found
-                // print('XWing value $value in $major1=$value1, $major2=$value2');
                 // Remove the value from the two minor axes
                 for (var minor in minors1) {
                   var cells = sudoku.getMinorAxis(axis, minor);

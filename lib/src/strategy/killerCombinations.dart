@@ -1,8 +1,11 @@
+import 'package:collection/collection.dart';
+
 import 'package:sudoku/src/killer.dart';
 import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+/// Find combinations of values for each Killer Cage (Region)
 class KillerCombinationsStrategy extends Strategy {
   KillerCombinationsStrategy(Puzzle puzzle)
       : super(puzzle, 'Killer Combinations') {
@@ -10,14 +13,11 @@ class KillerCombinationsStrategy extends Strategy {
   }
 
   bool solve() {
+    assert(puzzle is Killer);
     var killer = puzzle as Killer;
     var updated = false;
     for (var cage in killer.cages) {
-      var total = cage.total;
-      var setValues = <int>[];
-      var axisValues = <String, List<int>>{};
-      var combinations =
-          cage.findCageCombinations(0, total, setValues, axisValues);
+      var combinations = cage.cageCombinations();
       // Update possible values to union of combinations
       assert(combinations.length > 0);
       var unionCombinations =
@@ -28,13 +28,12 @@ class KillerCombinationsStrategy extends Strategy {
           unionCombinations[index][value] = true;
         }
       }
-      for (var index = 0; index < cage.cells.length; index++) {
-        var cell = cage.cells[index];
+      cage.cells.forEachIndexed((index, cell) {
         if (cell.reducePossible(unionCombinations[index])) {
           updated = true;
           sudoku.cellUpdated(cell, explanation, 'cage $cage $cell');
         }
-      }
+      });
     }
     return updated;
   }

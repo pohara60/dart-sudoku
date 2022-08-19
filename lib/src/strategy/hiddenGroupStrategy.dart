@@ -4,6 +4,11 @@ import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+/// Find groups of values that appear in a subset of a Row/Column/Box
+/// Hidden because other values are possible in the cells
+///
+/// Can be created with minimum/maximum grop size in order to split
+/// strategy into multiple phases
 class HiddenGroupStrategy extends Strategy {
   int min = 2;
   int max = 4;
@@ -26,6 +31,7 @@ class HiddenGroupStrategy extends Strategy {
     return updated;
   }
 
+  /// Find groups of values that appear in a subset of the cells
   bool nonetHiddenGroup(List<Cell> cells) {
     var possibleCells = cells.where((cell) => !cell.isSet).toList();
     var valuesPossible = getValuesPossible(possibleCells);
@@ -41,6 +47,7 @@ class HiddenGroupStrategy extends Strategy {
     if (groupMax < groupMin) return false;
 
     // Check for groups of 2 to groupMax values
+    // Ignores minimum size here to avoid including small groups in large groups
     var anyUpdate = false;
     var updated = true;
     while (updated) {
@@ -81,21 +88,20 @@ class HiddenGroupStrategy extends Strategy {
     return anyUpdate;
   }
 
-  ///
   /// Recursive function to compute Groups (Pairs, Triples, etc) of possible values
   /// pV - list of values to check
   /// g - required group size
   /// sV - current values in group
   /// f - next index in check values to try
+  /// valuesPossible - pre-computed possible cells for values
   /// Returns list of groups, each of which is a list of values
-////
   List<List<int>> findGroups(
       List<int> pV, int g, List<int> sV, int f, List<Possible> valuesPossible) {
     var groups = <List<int>>[];
     for (var index = f; index < pV.length; index++) {
       var value = pV[index];
       if (!sV.contains(value) &&
-          // Don't include naked/hidden singles
+          // Don't include naked/hidden singles (which are not included in smaller groups)
           valuesPossible[value - 1].count > 1 &&
           valuesPossible[value - 1].count <= g) {
         var newSV = [...sV, value];
@@ -138,7 +144,7 @@ Possible unionValuesPossible(List<int> group) {
 }
 
 /// Compute possible cells for values
-/// Inverts normal meaning of Possible
+/// (Inverts normal meaning of Possible)
 List<Possible> getValuesPossible(List<Cell> cells) {
   var result = List<Possible>.generate(9, (index) => Possible(false, 0));
   cells.where((cell) => !cell.isSet).forEachIndexed((index, cell) {

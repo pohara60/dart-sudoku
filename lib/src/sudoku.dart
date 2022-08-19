@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/region.dart';
 import 'package:sudoku/src/strategy/bugStrategy.dart';
@@ -62,7 +61,7 @@ class Sudoku implements Puzzle {
   late YWingStrategy yWingStrategy;
   late SwordfishStrategy swordfishStrategy;
   late XYZWingStrategy xyzWingStrategy;
-  late BUGStrategy bugStrategy;
+  late BugStrategy bugStrategy;
 
   void _initRegions() {
     this._regions = <String, Region>{};
@@ -89,7 +88,7 @@ class Sudoku implements Puzzle {
     yWingStrategy = YWingStrategy(this);
     swordfishStrategy = SwordfishStrategy(this);
     xyzWingStrategy = XYZWingStrategy(this);
-    bugStrategy = BUGStrategy(this);
+    bugStrategy = BugStrategy(this);
   }
 
   Sudoku([this.singleStep = false]) {
@@ -255,6 +254,8 @@ class Sudoku implements Puzzle {
   List<Cell> getColumn(int col) => List.from(regions['C$col']!.cells);
 
   /// Update possible values in nonet [cells] for [cell] value, with label [explanation]
+  ///
+  /// For use by UI
   void cellUpdateNonet(Cell cell, List<Cell> cells, String explanation) {
     var values = List.filled(9, false);
     assert(cell.value != null);
@@ -328,44 +329,21 @@ class Sudoku implements Puzzle {
   List<Cell> getMajorAxis(String axis, int major) {
     if (axis == 'R') {
       return getRow(major);
-    } else if (axis == 'B') {
-      return getBox(major);
-    } else {
+    } else if (axis == 'C') {
       return getColumn(major);
+    } else {
+      return getBox(major);
     }
   }
 
   List<Cell> getMinorAxis(String axis, int minor) {
     if (axis == 'R') {
       return getColumn(minor);
-    } else if (axis == 'B') {
-      return getBox(minor);
-    } else {
+    } else if (axis == 'C') {
       return getRow(minor);
+    } else {
+      return getBox(minor);
     }
-  }
-
-  Map<int, Map<int, List<int>>> getValuePossibleIndexes(
-      String axis, int occurrences) {
-    var valuePossibleMajors = <int, Map<int, List<int>>>{};
-    // Find Rows/Columns/Boxes where values may appear up to occurrences times
-    for (var major = 1; major < 10; major++) {
-      var cells = getMajorAxis(axis, major);
-      var countPossibles = countCellsPossible(cells);
-      for (var value = 1; value < 10; value++) {
-        if (countPossibles[value - 1] > 1 &&
-            countPossibles[value - 1] <= occurrences) {
-          if (valuePossibleMajors[value] == null) {
-            valuePossibleMajors[value] = <int, List<int>>{};
-          }
-          valuePossibleMajors[value]![major] = cells
-              .expandIndexed<int>(
-                  (index, cell) => cell.possible[value] ? [index + 1] : [])
-              .toList();
-        }
-      }
-    }
-    return valuePossibleMajors;
   }
 
   Cell getAxisCell(String axis, int major, int minor) {
@@ -422,16 +400,29 @@ class Sudoku implements Puzzle {
     }
     return cells;
   }
-}
 
-Possible unionCellsPossible(List<Cell> cells) {
-  var possibles = cells.map((cell) => cell.possible).toList();
-  return unionPossible(possibles);
-}
-
-List<int> countCellsPossible(List<Cell> cells) {
-  var possibles = cells.map((cell) => cell.possible).toList();
-  return countPossible(possibles);
+  /// Find Rows/Columns/Boxes where values may appear up to occurrences times
+  Map<int, Map<int, List<int>>> getValuePossibleIndexes(
+      String axis, int occurrences) {
+    var valuePossibleMajors = <int, Map<int, List<int>>>{};
+    for (var major = 1; major < 10; major++) {
+      var cells = getMajorAxis(axis, major);
+      var countPossibles = countCellsPossible(cells);
+      for (var value = 1; value < 10; value++) {
+        if (countPossibles[value - 1] > 1 &&
+            countPossibles[value - 1] <= occurrences) {
+          if (valuePossibleMajors[value] == null) {
+            valuePossibleMajors[value] = <int, List<int>>{};
+          }
+          valuePossibleMajors[value]![major] = cells
+              .expandIndexed<int>(
+                  (index, cell) => cell.possible[value] ? [index + 1] : [])
+              .toList();
+        }
+      }
+    }
+    return valuePossibleMajors;
+  }
 }
 
 String addExplanation(String explanation, String detail) =>

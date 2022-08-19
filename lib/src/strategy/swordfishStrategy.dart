@@ -1,6 +1,10 @@
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+/// A Swordfish is a 3 by 3 nine-cell pattern where a candidate is found on three
+/// different rows (or columns) and they line up in the opposite direction.
+/// Eventually we will fix three candidates somewhere in those cells which excludes
+/// all other candidates in those units.
 class SwordfishStrategy extends Strategy {
   SwordfishStrategy(sudoku) : super(sudoku, 'Swordfish');
 

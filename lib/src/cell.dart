@@ -175,3 +175,47 @@ bool cellsInNonet(List<Cell> cells) {
   if (Set.from(cells.map((x) => x.box)).length == 1) return true;
   return false;
 }
+
+Possible unionCellsPossible(List<Cell> cells) {
+  var possibles = cells.map((cell) => cell.possible).toList();
+  return unionPossible(possibles);
+}
+
+List<int> countCellsPossible(List<Cell> cells) {
+  var possibles = cells.map((cell) => cell.possible).toList();
+  return countPossible(possibles);
+}
+
+List<Cell> intersectionCells(List<Cell> l1, List<Cell> l2) {
+  var result = l1.where((cell) => l2.contains(cell)).toList();
+  return result;
+}
+
+List<Cell> remainderCells(List<Cell> l1, List<Cell> l2) {
+  var result = l1.where((cell) => !l2.contains(cell)).toList();
+  return result;
+}
+
+int fixedTotalCells(List<Cell> cells) {
+  if (cells.length == 0) return 0;
+  if (cells.length == 1) {
+    var cell = cells[0];
+    if (cell.isSet) return cell.value!;
+    return 0;
+  }
+  int total = 0;
+  var nodups = cellsInNonet(cells);
+  if (nodups) {
+    // Total is fixed if number of possible values is same as number of cells
+    var unionPossible = unionCellsPossible(cells);
+    if (unionPossible.count != cells.length) return 0;
+    for (var value = 1; value < 10; value++) {
+      if (unionPossible[value]) total += value;
+    }
+  } else {
+    // Total is fixed if all cells are set
+    if (cells.any((element) => !element.isSet)) return 0;
+    total = cells.fold<int>(0, (total, cell) => total + cell.value!);
+  }
+  return total;
+}

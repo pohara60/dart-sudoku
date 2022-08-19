@@ -2,6 +2,19 @@ import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+/// If a number occurs twice or three times in just one unit (Row, Column or Box)
+/// then we can remove that number from the intersection of another unit.
+/// There are four types of intersection:
+/// 1. In a box - if aligned on a row, n can be removed from the rest of the row.
+/// 2. In a box - if aligned on a column, n can be removed from the rest of the column.
+/// 3. On a row - if all in the same box, n can be removed from the rest of the box.
+/// 4. On a column - if all in the same box, n can be removed from the rest of the box.
+///
+/// The first two types are called Pointing Pairs/Triples, the second two types are
+/// called Line Box Reduction
+///
+/// In addition, if the group is contained in any other Region with unique values, then
+/// n can be removed from the region.
 class PointingGroupStrategy extends LineBoxReductionStrategy {
   PointingGroupStrategy(sudoku) : super(sudoku, 'Pointing Group');
 
@@ -18,45 +31,42 @@ class LineBoxReductionStrategy extends Strategy {
     return allBoxReduction('axis');
   }
 
-  bool allBoxReduction(String target) {
+  bool allBoxReduction(String scope) {
     var updated = false;
     for (var box = 1; box < 10; box++) {
-      if (lineBoxReduction(target, box)) updated = true;
+      if (lineBoxReduction(scope, box)) updated = true;
     }
     return updated;
   }
 
-  /// *lineBoxReduction* implement Point Group and Line Box Reduction
+  /// *lineBoxReduction* implement Pointing Group and Line Box Reduction
   ///
-  /// If target is "B" then find unique value in Rows/Columns of Box
-  /// and remove from rest of Box
-  /// If target is not "B" then find unique value in Rows/Columns in Box
-  /// and remove from rest of Row/Column
-  bool lineBoxReduction(String target, int box) {
+  /// Pointing Group - if scope is "B" then find unique value in Rows/Columns of
+  /// Box and remove from rest of Row/Column
+  /// Line Box Reduction - If scope is not "B" then find unique value in Rows/Columns
+  /// contained in Box and remove from rest of Box
+  bool lineBoxReduction(String scope, int box) {
     var updated = false;
     var cells = sudoku.getBox(box);
-    var location = addExplanation(explanation, cells[0].getAxisName('B'));
     // Check each Row then each Column of Box
     for (var axis in ['R', 'C']) {
       for (var boxMajor = 0; boxMajor < 3; boxMajor++) {
         // Three cells in Row/Column
         var cells3 = sudoku.getCells3(axis, boxMajor, cells);
-        if (cells3.isEmpty) continue;
+        if (cells3.isEmpty) continue; // All set
         // Other six cells in Box
         var boxCells6 = cells
             .where((cell) => !cell.isSet && !cells3.contains(cell))
             .toList();
         // Other six cells in Row/Column
-        late List<Cell> axisCells6;
-        late String locationAxis;
-        axisCells6 = sudoku.getCellAxis(axis, cells3[0]);
-        locationAxis =
-            addExplanation(location, '${cells3[0].getAxisName(axis)}');
+        var axisCells6 = sudoku.getCellAxis(axis, cells3[0]);
         axisCells6.removeWhere((cell) => cell.isSet || cells3.contains(cell));
-        // Get cells to check and cells to update according to target
+        var locationAxis = addExplanation(
+            explanation, '${cells3[0].boxName},${cells3[0].getAxisName(axis)}');
+        // Get cells to check and cells to update according to scope
         late List<Cell> cells6;
         late List<Cell> updateCells;
-        if (target == 'B') {
+        if (scope == 'B') {
           cells6 = boxCells6;
           updateCells = axisCells6;
         } else {
@@ -68,7 +78,7 @@ class LineBoxReductionStrategy extends Strategy {
         var possible6 = unionCellsPossible(cells6);
         var unique3 = possible3.subtract(possible6);
         if (unique3.count > 0) {
-          // The unique3 possible values can be removed from the Box/Row/Column
+          // The unique3 possible values can be removed from the Box or Row/Column
           for (var cell in updateCells) {
             if (cell.removePossible(unique3)) {
               updated = true;
@@ -76,7 +86,7 @@ class LineBoxReductionStrategy extends Strategy {
                   cell, locationAxis, "remove group $unique3 from $cell");
             }
           }
-          // They can be removed from any overlapping unique killer regions
+          // They can be removed from any overlapping unique regions
           for (var value = 1; value < 10; value++) {
             if (unique3[value]) {
               var uniqueCells = cells3.where((cell) => cell.possible[value]);
@@ -93,8 +103,8 @@ class LineBoxReductionStrategy extends Strategy {
                     .forEach((cell) {
                   if (cell.clearPossible(value)) {
                     updated = true;
-                    sudoku.cellUpdated(
-                        cell, locationAxis, "remove value $value from $cell");
+                    sudoku.cellUpdated(cell, locationAxis,
+                        "remove value $value from ${region.name} $cell");
                   }
                 });
               });

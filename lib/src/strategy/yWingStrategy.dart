@@ -2,6 +2,16 @@ import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+/// A Y-Wing looks like an X-Wing - but with three corners, not four. The fourth
+/// corner is where the candidate can be removed.
+///
+/// If two cells in a Row have candidates AB and BC, and another Row has candidates
+/// AC in the same Column as AB, then C can be removed from the fourth corner. And
+/// the same for Columns/Rows.
+///
+/// If two cells in a Box have candidates AB and BC, and another Column in a different
+/// Box has candidates AC in the same Row as AB, then C can be removed from the
+/// the AB Row of the AB box, and the BC Row of the AC box.
 class YWingStrategy extends Strategy {
   YWingStrategy(sudoku) : super(sudoku, 'Y-Wing');
 
