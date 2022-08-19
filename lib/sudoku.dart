@@ -25,10 +25,10 @@ class Sudoku {
   }
 
   factory Sudoku.killer(String sudokuString, List<List<dynamic>> killerGrid,
-      [singleStep = false]) {
+      [bool partial = false, bool singleStep = false]) {
     var sudoku = Sudoku(singleStep);
     sudoku.setSudoku(sudokuString);
-    var message = sudoku.addKiller(killerGrid);
+    var message = sudoku.addKiller(killerGrid, partial);
     if (message != '') print(message);
 
     return sudoku;
@@ -63,12 +63,12 @@ class Sudoku {
     return '';
   }
 
-  String addKiller(List<List<dynamic>> killerGrid) {
+  String addKiller(List<List<dynamic>> killerGrid, [bool partial = false]) {
     if (puzzle == null) {
       return 'No puzzle!';
     }
     currentPuzzle = currentPuzzle! + killerGrid.join('\n');
-    puzzle = Killer.puzzle(puzzle!, killerGrid);
+    puzzle = Killer.puzzle(puzzle!, killerGrid, partial);
     return puzzle?.messageString ?? '';
   }
 

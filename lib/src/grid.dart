@@ -34,6 +34,7 @@ class Grid implements Puzzle {
   Set<Cell> get updates => _updates;
   List<String> get messages => _messages;
   String get messageString => _messages.join('\n');
+  bool get error => _error;
 
   set focus(Cell? focus) {
     if (focus != _focus) {

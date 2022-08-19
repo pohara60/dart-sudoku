@@ -68,7 +68,7 @@ void main() {
     [UU, UU, UU, 23, LL, LL, LL, UU, UU],
   ];
   // Extremely Tough
-  var killerPuzzle = [
+  var killerPuzzle4 = [
     [24, LL, 08, 18, 14, LL, LL, LL, 21],
     [UU, UU, UU, UU, 13, LL, LL, RR, UU],
     [10, 15, UU, UU, 12, LL, 12, LL, LL],
@@ -79,7 +79,18 @@ void main() {
     [13, LL, 07, LL, LL, UU, UU, 18, LL],
     [UU, 30, LL, LL, LL, UU, UU, UU, UU],
   ];
-  var killer = Sudoku.killer(emptySudoku, killerPuzzle);
+  var killerPuzzle = [
+    [XX, XX, 13, LL, XX, 14, LL, XX, XX],
+    [XX, XX, 18, LL, 07, LL, LL, XX, XX],
+    [08, 17, XX, UU, 09, LL, XX, 07, 10],
+    [UU, UU, 11, XX, UU, XX, RR, UU, UU],
+    [XX, RR, UU, LL, XX, 24, LL, LL, XX],
+    [15, 20, LL, XX, 18, XX, 06, LL, 12],
+    [UU, UU, XX, 08, UU, 15, XX, UU, UU],
+    [XX, XX, RR, UU, UU, UU, LL, XX, XX],
+    [XX, XX, 08, LL, XX, 08, LL, XX, XX],
+  ];
+  var killer = Sudoku.killer(emptySudoku, killerPuzzle, true);
   print(killer.invokeAllStrategies(true, false));
 
   var puzzle1 = [

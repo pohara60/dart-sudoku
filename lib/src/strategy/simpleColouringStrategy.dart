@@ -152,12 +152,14 @@ class SimpleColouringStrategy extends Strategy {
                 grid.getCell(cell1.row, cell2.col),
                 grid.getCell(cell2.row, cell2.col)
               ]) {
-                var location = addExplanation(
-                    explanation, 'Rule 4 ${cell.name},${cell2.name}');
-                if (cell.clearPossible(value)) {
-                  updated = true;
-                  grid.cellUpdated(
-                      cell, location, "remove value $value from $cell");
+                if (!chain.contains(cell)) {
+                  var location = addExplanation(
+                      explanation, 'Rule 4 ${cell1.name},${cell2.name}');
+                  if (cell.clearPossible(value)) {
+                    updated = true;
+                    grid.cellUpdated(
+                        cell, location, "remove value $value from $cell");
+                  }
                 }
               }
             }

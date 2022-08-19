@@ -11,14 +11,17 @@ class Killer extends PuzzleDecorator {
   late final List<Cage> cages;
   late final Map<Cell, Cage> cellCage;
   late final Map<Cell, CageCell> cellCageCell;
+  late final bool partial;
   late KillerCombinationsStrategy killerCombinationsStrategy;
   late ShrinkCagesStrategy shrinkCagesStrategy;
 
-  Killer.puzzle(Puzzle puzzle, List<List<dynamic>> killerGrid) {
+  Killer.puzzle(Puzzle puzzle, List<List<dynamic>> killerGrid,
+      [partial = false]) {
     this.puzzle = puzzle;
     this.cages = <Cage>[];
     this.cellCage = <Cell, Cage>{};
     this.cellCageCell = <Cell, CageCell>{};
+    this.partial = partial;
     initKiller(killerGrid);
   }
 
@@ -72,19 +75,21 @@ class Killer extends PuzzleDecorator {
     for (var i = 0; i < cages.length; i++) {
       // Does the cage have duplicate cells
       var cage = cages[i];
-      var cells = cage.cageCells;
-      for (var i = 0; i < cells.length; i++) {
-        for (var j = i + 1; j < cells.length; j++) {
-          if (cells[i] == cells[j]) {
-            grid.addMessage('Cell ${cells[i]} is duplicated in cage!', true);
+      var cageCells = cage.cageCells;
+      for (var i = 0; i < cageCells.length; i++) {
+        for (var j = i + 1; j < cageCells.length; j++) {
+          if (cageCells[i].cell == cageCells[j].cell) {
+            grid.addMessage(
+                'Cell ${cageCells[i].cell} is duplicated in cage!', true);
           }
         }
       }
       // Do the cell cages overlap?
       for (var j = i + 1; j < cages.length; j++) {
         for (var c1 in cages[i].cageCells) {
-          if (cages[j].cageCells.contains(c1)) {
-            grid.addMessage('Cell $c1 appears in more than one cage!', true);
+          if (cages[j].cageCells.any((cageCell) => cageCell.cell == c1.cell)) {
+            grid.addMessage(
+                'Cell ${c1.cell} appears in more than one cage!', true);
             error = true;
           }
         }
@@ -94,12 +99,11 @@ class Killer extends PuzzleDecorator {
       numCells += cages[i].cageCells.length;
       allCells += cages[i].cageCells.map((cageCell) => cageCell.cell).toList();
     }
-    if (grandTotal != 45 * 9) {
-      // @ts-ignore
+    if (!partial && grandTotal != 45 * 9) {
       grid.addMessage('Cages total is $grandTotal, should be ${45 * 9}', true);
       error = true;
     }
-    if (numCells != 81) {
+    if (!partial && numCells != 81) {
       var missingCells = '';
       for (var r = 1; r < 10; r++) {
         for (var c = 1; c < 10; c++) {
@@ -220,10 +224,15 @@ class Killer extends PuzzleDecorator {
     var otherLocations = <List<int>>[];
     var newCells = <Cell>[];
     var otherCells = <Cell>[];
+    var otherOK = true;
     for (var cell in cells) {
       if (!unionCells.contains(cell)) {
         var cage = getCage(cell);
-        if (cage != null) {
+        if (cage == null || cage.virtual) {
+          newCells.add(cell);
+          newLocations.add([cell.row, cell.col]);
+          otherOK = false;
+        } else {
           var difference = cage.cageCells
               .where((cageCell) => !cells.contains(cageCell.cell));
           if (difference.length > 0) {
@@ -253,6 +262,7 @@ class Killer extends PuzzleDecorator {
     if (newTotal > 0 && newTotal != cellsTotal) {
       // If the cage is in a nonet, then it does not allow duplicates
       const maxCageLength = 7;
+      assert(newLocations.length > 0);
       if (newLocations.length <= maxCageLength) {
         var nodups = cellsInNonet(newCells);
         var newCage = Cage(
@@ -268,7 +278,9 @@ class Killer extends PuzzleDecorator {
           this.cages.add(newCage);
         }
       }
-      if (otherLocations.length <= maxCageLength) {
+      if (otherOK &&
+          otherLocations.length > 0 &&
+          otherLocations.length <= maxCageLength) {
         var nodups = cellsInNonet(otherCells);
         var otherTotal = otherCagesTotal - newTotal;
         var otherCage = Cage(
@@ -293,6 +305,7 @@ class Killer extends PuzzleDecorator {
     shrinkCagesStrategy = ShrinkCagesStrategy(this);
 
     setKiller(killerGrid);
+    if (grid.error) return;
     if (validateCages()) return;
     colourCages();
     addVirtualCages();
@@ -309,49 +322,62 @@ class Killer extends PuzzleDecorator {
       for (final location in locations) {
         var row = location[0];
         var col = location[1];
-        var cage = setCage(row + 1, col + 1, killerGrid[row][col]);
-        if (cage == null) {
+        var processed = setCage(row + 1, col + 1, killerGrid[row][col]);
+        if (!processed) {
           tryLocations.add([row, col]);
         }
       }
       if (tryLocations.length == locations.length) {
         // Failed to retry any location, so give up
+        var cellStr = tryLocations.fold<String>(
+            '',
+            (str, loc) => str == ''
+                ? 'R${loc[0] + 1}C${loc[1] + 1}'
+                : str + ',R${loc[0] + 1}C${loc[1] + 1}');
+        grid.addMessage('Could not process Killer cells $cellStr', true);
         return;
       }
     }
   }
 
-  setCage(int row, int col, dynamic entry) {
+  bool setCage(int row, int col, dynamic entry) {
+    var processed = true;
     var cage = null;
-    if (["D", "L", "R", "U", "DD", "LL", "RR", "UU"].contains(entry)) {
+    if (["D", "L", "R", "U"].contains(entry)) {
       // Get cage from referenced cell
       var r = row;
       var c = col;
-      if (entry == "D" || entry == "DD") r++;
-      if (entry == "L" || entry == "LL") c--;
-      if (entry == "R" || entry == "RR") c++;
-      if (entry == "U" || entry == "UU") r--;
+      if (entry == "D") r++;
+      if (entry == "L") c--;
+      if (entry == "R") c++;
+      if (entry == "U") r--;
       if (r >= 1 && r <= 9 && c >= 1 && c <= 9) {
         var cell = grid.getCell(r, c);
         cage = getCage(cell);
         if (cage != null) {
           var cell = grid.getCell(row, col);
           CageCell.forCell(cell, cage, this);
+        } else {
+          processed = false;
         }
       }
+    } else if (entry is int) {
+      var value = entry;
+      var cell = grid.getCell(row, col);
+      cage = getCage(cell);
+      if (cage == null) {
+        cage = Cage(this, value, [
+          [row, col]
+        ]);
+        this.cages.add(cage);
+      }
+    } else if (entry == '.') {
+      // Ignore cell
     } else {
-      if (entry is int) {
-        var value = entry;
-        var cell = grid.getCell(row, col);
-        cage = getCage(cell);
-        if (cage == null) {
-          cage = Cage(this, value, [
-            [row, col]
-          ]);
-          this.cages.add(cage);
-        }
-      }
+      grid.addMessage(
+          'Unrecognised character $entry in Killer cell R${row}C$col', true);
     }
-    return cage;
+
+    return processed;
   }
 }

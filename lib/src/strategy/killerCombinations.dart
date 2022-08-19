@@ -19,6 +19,7 @@ class KillerCombinationsStrategy extends Strategy {
       var combinations =
           cage.findCageCombinations(0, total, setValues, axisValues);
       // Update possible values to union of combinations
+      assert(combinations.length > 0);
       var unionCombinations =
           List.generate(cage.cageCells.length, (index) => Possible(false));
       for (var combination in combinations) {

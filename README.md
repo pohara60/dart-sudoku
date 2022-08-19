@@ -4,16 +4,22 @@ Dart Sudoku solver package, with Command Line Interface.
 
 ## To Do
 
-1. Add Brute force solvers
-2. Allow partial Killer (in combination with other constraints)
-3. Support Arrow constraints
-4. Support Renban constraints
-5. Support Whisper constraints
-6. Support 159 constraints
-7. Support Little Killer constraints
-8. Support XV constraints
-9. Support Circle constraints
-10. Support Consecutive/Multiple constraints
+1. Refactor Cages into Regions, Cells in Regions, no CageCell
+2. Better display for Killer
+3. Add Brute force solvers
+4. Support Arrow constraints
+5. Support Renban constraints
+6. Support Whisper constraints
+7. Support 159 constraints
+8. Support Little Killer constraints
+9. Support XV constraints
+10. Support Circle constraints
+11. Support Consecutive/Multiple constraints
+12. Support SudokuX constraint
+
+## Redesign
+
+Treat Rows, Columns, Boxes and Cages as Regions:
 
 ## Strategies
 
