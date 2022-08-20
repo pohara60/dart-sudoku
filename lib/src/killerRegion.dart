@@ -1,18 +1,16 @@
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/killer.dart';
 import 'package:sudoku/src/region.dart';
-import 'package:sudoku/src/sudoku.dart';
 
 class KillerRegion extends Region<Killer> {
   late Killer killer;
-  late int total;
   late bool virtual;
   late String source;
   int? colour;
 
-  KillerRegion(Killer killer, String name, int this.total, List<Cell> cells,
+  KillerRegion(Killer killer, String name, int total, List<Cell> cells,
       [bool this.virtual = false, bool nodups = true, String this.source = ''])
-      : super(killer, name, nodups, cells) {
+      : super(killer, name, total, nodups, cells) {
     for (var cell in cells) {
       cell.regions.add(this);
     }
@@ -35,7 +33,7 @@ class KillerRegion extends Region<Killer> {
 
   toString() {
     var sortedCells = cells;
-    var text = '$total$source${nodups ? '' : 'd'}:';
+    var text = '$name $total$source${nodups ? '' : 'd'}:';
     // var cellText = sortedCells.map((cageCell) => cageCell.name).join(',');
     var cellText2 = '';
     var currentRow = -1, currentCol = -1;
@@ -100,7 +98,7 @@ class KillerRegion extends Region<Killer> {
 
   /// Compute the set of values in the possible combinations for a cage
   List<List<int>> cageCombinations() {
-    var combinations = this.regionCombinations(this.total);
+    var combinations = this.regionCombinations();
     return combinations;
   }
 }

@@ -15,7 +15,7 @@ abstract class Puzzle {
   String get messageString;
   String toString();
   Sudoku get sudoku;
-  Map<String, Region> get regions;
+  Map<String, Region> get allRegions;
 }
 
 /// Puzzle Decorator for additional puzzle types

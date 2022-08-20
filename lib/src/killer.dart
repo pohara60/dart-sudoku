@@ -5,21 +5,20 @@ import 'package:sudoku/src/killerRegion.dart';
 import 'package:sudoku/src/region.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/puzzle.dart';
-import 'package:sudoku/src/strategy/killerCombinations.dart';
+import 'package:sudoku/src/strategy/regionCombinations.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class Killer extends PuzzleDecorator {
   late final bool partial;
-  Map<String, Region> get regions => sudoku.regions;
+  Map<String, Region> get allRegions => sudoku.allRegions;
+  List<Region> get regions => sudoku.regions;
 
   Sudoku get sudoku => puzzle.sudoku;
   String get messageString => sudoku.messageString;
 
   /// Cages are Regions of type KillerRegion
-  List<KillerRegion> get cages => List<KillerRegion>.from(this
-      .regions
-      .values
-      .where((region) => region.runtimeType == KillerRegion));
+  List<KillerRegion> get cages => List<KillerRegion>.from(
+      this.regions.where((region) => region.runtimeType == KillerRegion));
 
   /// Get the puzzle Cage for a Cell
   KillerRegion? getCage(Cell cell) => cell.regions.firstWhereOrNull((region) =>
@@ -30,11 +29,15 @@ class Killer extends PuzzleDecorator {
   List<KillerRegion> getAllCages(Cell cell) => List<KillerRegion>.from(
       cell.regions.where((region) => region.runtimeType == KillerRegion));
 
+  late RegionCombinationsStrategy regionCombinationsStrategy;
+
   Killer.puzzle(Puzzle puzzle, List<List<dynamic>> killerGrid,
       [partial = false]) {
     this.puzzle = puzzle;
     this.partial = partial;
     initKiller(killerGrid);
+    // Strategies
+    regionCombinationsStrategy = RegionCombinationsStrategy(this);
   }
 
   static final colours = {
@@ -48,15 +51,15 @@ class Killer extends PuzzleDecorator {
   };
 
   String toString() {
-    var text = sudoku.toString();
     // text = regions.entries
     //     .where((region) => region.value.runtimeType == KillerRegion)
     //     .fold<String>(
     //         text, (text, region) => '$text\n${region.value.toString()}');
-    text = sudoku.grid.fold<String>(
-        text,
+    var text = sudoku.grid.fold<String>(
+        '',
         (text, row) =>
-            '$text\n' +
+            '$text' +
+            (text != '' ? '\n' : '') +
             row.fold<String>(
                 '',
                 (text, cell) =>
@@ -68,10 +71,9 @@ class Killer extends PuzzleDecorator {
                                 cell
                             ? '${getCage(cell)!.total.toString().padLeft(2)}'
                             : '  '))));
+    text = '$text\n' + puzzle.toString();
     return text;
   }
-
-  late KillerCombinationsStrategy killerCombinationsStrategy;
 
   @override
   String solve(
@@ -80,12 +82,19 @@ class Killer extends PuzzleDecorator {
       List<Strategy>? easyStrategies,
       List<Strategy>? toughStrategies,
       Function? toStr}) {
-    var easyStrategies = <Strategy>[killerCombinationsStrategy];
+    var strategies = List<Strategy>.from(easyStrategies ?? []);
+    if (!strategies.any(
+        (strategy) => strategy.runtimeType == RegionCombinationsStrategy)) {
+      strategies.add(regionCombinationsStrategy);
+    }
+
+    String stringFunc() => toStr == null ? toString() : toStr();
+
     return puzzle.solve(
         explain: explain,
         showPossible: showPossible,
-        easyStrategies: easyStrategies,
-        toStr: toString);
+        easyStrategies: strategies,
+        toStr: stringFunc);
   }
 
   void colourCages() {
@@ -321,7 +330,7 @@ class Killer extends PuzzleDecorator {
         );
         if (this.cages.firstWhereOrNull((cage) => cage.equals(newCage)) ==
             null) {
-          this.regions[name] = newCage;
+          this.allRegions[name] = newCage;
         }
       }
       if (otherOK &&
@@ -341,16 +350,13 @@ class Killer extends PuzzleDecorator {
         );
         if (this.cages.firstWhereOrNull((cage) => cage.equals(otherCage)) ==
             null) {
-          this.regions[name] = otherCage;
+          this.allRegions[name] = otherCage;
         }
       }
     }
   }
 
   void initKiller(List<List<dynamic>> killerGrid) {
-    // Strategies
-    killerCombinationsStrategy = KillerCombinationsStrategy(this);
-
     setKiller(killerGrid);
     if (sudoku.error) return;
     if (validateCages()) return;
@@ -426,7 +432,7 @@ class Killer extends PuzzleDecorator {
             [row, col]
           ],
         );
-        this.regions[name] = cage;
+        this.allRegions[name] = cage;
       }
     } else if (entry == '.') {
       // Ignore cell

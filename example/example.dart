@@ -1,5 +1,6 @@
 import 'package:sudoku/sudokuAPI.dart';
 
+// ignore_for_file: unused_local_variable
 void main() {
   var emptySudoku = [
     ".........",
@@ -90,8 +91,9 @@ void main() {
     [XX, XX, RR, UU, UU, UU, LL, XX, XX],
     [XX, XX, 08, LL, XX, 08, LL, XX, XX],
   ];
-  var killer = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
-  print(killer.solve(true, false));
+  var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
+  print(puzzle.addSudokuX());
+  print(puzzle.solve(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",

@@ -40,7 +40,6 @@ class Cell {
   late Region boxRegion;
   late List<Region> regions;
   List<Region> get allRegions => [rowRegion, colRegion, boxRegion, ...regions];
-  // TODO Killer primary cage
 
   _initRegions(regions) {
     rowRegion = regions['R$row']!;

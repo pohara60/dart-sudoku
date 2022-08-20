@@ -4,8 +4,9 @@ abstract class Region<Puzzle> {
   Puzzle puzzle;
   List<Cell> cells;
   String name;
+  int total;
   bool nodups;
-  Region(Puzzle this.puzzle, String this.name, bool this.nodups,
+  Region(Puzzle this.puzzle, String this.name, int this.total, bool this.nodups,
       List<Cell> this.cells);
   String toString();
 
@@ -14,7 +15,7 @@ abstract class Region<Puzzle> {
   /// total - total value for remaining cells in cage
   /// setValues - the set of values in the combinations so far
   /// returns the set of values in the combinations
-  List<List<int>> regionCombinations(int total) {
+  List<List<int>> regionCombinations() {
     var setValues = <int>[];
     var axisValues = <String, List<int>>{};
     var combinations = _regionCombinations(0, total, setValues, axisValues);

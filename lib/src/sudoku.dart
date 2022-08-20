@@ -19,10 +19,8 @@ typedef Solve = bool Function(Puzzle grid);
 
 class SudokuRegion extends Region<Sudoku> {
   // late Killer killer;
-  int total;
   SudokuRegion(Sudoku puzzle, String name, List<Cell> cells)
-      : this.total = 45,
-        super(puzzle, name, true, cells);
+      : super(puzzle, name, 45, true, cells);
   String toString() => 'Sudoku $name';
 }
 
@@ -37,7 +35,13 @@ class Sudoku implements Puzzle {
   Cell getCell(int row, int col) => _grid[row - 1][col - 1];
 
   late Map<String, Region> _regions;
-  Map<String, Region> get regions => _regions;
+  Map<String, Region> get allRegions => _regions;
+
+  /// Regions that are not simple SudokuRegion
+  List<Region> get regions => List<Region>.from(this
+      .allRegions
+      .values
+      .where((region) => region.runtimeType != SudokuRegion));
 
   late Set<Cell> _updates;
   late List<String> _messages;
@@ -251,9 +255,9 @@ class Sudoku implements Puzzle {
     return updated;
   }
 
-  List<Cell> getBox(int box) => List.from(regions['B$box']!.cells);
-  List<Cell> getRow(int row) => List.from(regions['R$row']!.cells);
-  List<Cell> getColumn(int col) => List.from(regions['C$col']!.cells);
+  List<Cell> getBox(int box) => List.from(allRegions['B$box']!.cells);
+  List<Cell> getRow(int row) => List.from(allRegions['R$row']!.cells);
+  List<Cell> getColumn(int col) => List.from(allRegions['C$col']!.cells);
 
   /// Update possible values in nonet [cells] for [cell] value, with label [explanation]
   ///

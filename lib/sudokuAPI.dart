@@ -6,6 +6,7 @@ import 'package:sudoku/src/generator.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/killer.dart';
 import 'package:sudoku/src/puzzle.dart';
+import 'package:sudoku/src/sudokuX.dart';
 
 /// Provide access to the Sudoku API.
 class SudokuAPI {
@@ -69,6 +70,15 @@ class SudokuAPI {
     }
     currentPuzzle = currentPuzzle! + killerGrid.join('\n');
     puzzle = Killer.puzzle(puzzle!, killerGrid, partial);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addSudokuX() {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + 'SudokuX\n';
+    puzzle = SudokuX.puzzle(puzzle!);
     return puzzle?.messageString ?? '';
   }
 
