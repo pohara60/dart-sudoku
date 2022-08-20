@@ -10,6 +10,7 @@ abstract class Puzzle {
     bool showPossible = false,
     List<Strategy>? easyStrategies,
     List<Strategy>? toughStrategies,
+    Function? toStr,
   });
   String get messageString;
   String toString();

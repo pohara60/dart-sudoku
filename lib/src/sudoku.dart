@@ -183,17 +183,19 @@ class Sudoku implements Puzzle {
     return str;
   }
 
-  String solve({
-    bool explain = false,
-    bool showPossible = false,
-    List<Strategy>? easyStrategies,
-    List<Strategy>? toughStrategies,
-  }) {
+  String solve(
+      {bool explain = false,
+      bool showPossible = false,
+      List<Strategy>? easyStrategies,
+      List<Strategy>? toughStrategies,
+      Function? toStr}) {
     // Previous error?
     if (_error) return "Error";
 
+    String stringFunc() => toStr == null ? toString() : toStr();
+
     var result = StringBuffer();
-    result.writeln(toString());
+    result.writeln(stringFunc());
     var updated = true;
     while (updated) {
       clearUpdates();
@@ -239,7 +241,7 @@ class Sudoku implements Puzzle {
         if (showPossible) result.writeln(possibleString);
       }
     }
-    result.write(toString());
+    result.write(stringFunc());
     return result.toString();
   }
 

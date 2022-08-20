@@ -90,8 +90,8 @@ void main() {
     [XX, XX, RR, UU, UU, UU, LL, XX, XX],
     [XX, XX, 08, LL, XX, 08, LL, XX, XX],
   ];
-  // var killer = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
-  // print(killer.solve(true, false));
+  var killer = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
+  print(killer.solve(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",
@@ -136,8 +136,8 @@ void main() {
     "7649..138",
     "2.863.97."
   ].join('\n');
-  var sudoku3 = SudokuAPI.sudoku(puzzle3);
-  print(sudoku3.solve(true, false));
+  // var sudoku3 = SudokuAPI.sudoku(puzzle3);
+  // print(sudoku3.solve(true, false));
 
   var puzzle4 =
       // BUG

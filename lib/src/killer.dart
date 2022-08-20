@@ -1,3 +1,4 @@
+import 'package:chalkdart/chalk.dart';
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/killerRegion.dart';
@@ -36,30 +37,55 @@ class Killer extends PuzzleDecorator {
     initKiller(killerGrid);
   }
 
+  static final colours = {
+    0: chalk.black.onGrey,
+    1: chalk.black.onGreen,
+    2: chalk.black.onYellow,
+    3: chalk.black.onMagenta,
+    4: chalk.black.onCyan,
+    5: chalk.black.onRed,
+    6: chalk.black.onBlue,
+  };
+
   String toString() {
     var text = sudoku.toString();
-    var regionText = regions.entries
-        .where((entry) => entry.value.runtimeType == KillerRegion)
-        .fold<String>(
-            text, (text, entry) => '$text\n${entry.value.toString()}');
-    return regionText;
+    // text = regions.entries
+    //     .where((region) => region.value.runtimeType == KillerRegion)
+    //     .fold<String>(
+    //         text, (text, region) => '$text\n${region.value.toString()}');
+    text = sudoku.grid.fold<String>(
+        text,
+        (text, row) =>
+            '$text\n' +
+            row.fold<String>(
+                '',
+                (text, cell) =>
+                    text +
+                    (getCage(cell) == null
+                        ? colours[0]!('  ')
+                        : colours[getCage(cell)!.colour]!(getCage(cell)!
+                                    .cells[0] ==
+                                cell
+                            ? '${getCage(cell)!.total.toString().padLeft(2)}'
+                            : '  '))));
+    return text;
   }
 
   late KillerCombinationsStrategy killerCombinationsStrategy;
 
   @override
-  String solve({
-    bool explain = false,
-    bool showPossible = false,
-    List<Strategy>? easyStrategies,
-    List<Strategy>? toughStrategies,
-  }) {
+  String solve(
+      {bool explain = false,
+      bool showPossible = false,
+      List<Strategy>? easyStrategies,
+      List<Strategy>? toughStrategies,
+      Function? toStr}) {
     var easyStrategies = <Strategy>[killerCombinationsStrategy];
     return puzzle.solve(
-      explain: explain,
-      showPossible: showPossible,
-      easyStrategies: easyStrategies,
-    );
+        explain: explain,
+        showPossible: showPossible,
+        easyStrategies: easyStrategies,
+        toStr: toString);
   }
 
   void colourCages() {

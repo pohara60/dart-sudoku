@@ -4,18 +4,18 @@ Dart Sudoku solver package, with Command Line Interface.
 
 ## To Do
 
-1. Refactor Cages into Regions, Cells in Regions, no CageCell
-2. Better display for Killer
-3. Add Brute force solvers
-4. Support Arrow constraints
-5. Support Renban constraints
-6. Support Whisper constraints
-7. Support 159 constraints
-8. Support Little Killer constraints
-9. Support XV constraints
-10. Support Circle constraints
-11. Support Consecutive/Multiple constraints
-12. Support SudokuX constraint
+1. Support SudokuX constraint
+2. Add Brute force solvers
+3. Support Arrow constraints
+4. Support Renban constraints
+5. Support Whisper constraints
+6. Support 159 constraints
+7. Support Little Killer constraints
+8. Support XV constraints
+9. Support Circle constraints
+10. Support Consecutive/Multiple constraints
+11. Add Diabolical Strategies
+12. Add Extreme Strategies
 
 ## Redesign
 
@@ -30,7 +30,7 @@ Check for Solved Squares
 
 ### Easy Strategies
 
-1. Done [Hidden Singles](https.//www.sudokuwiki.org/Getting_Started)
+1. [x] [Hidden Singles](https.//www.sudokuwiki.org/Getting_Started)
 2. Done [Naked Pairs/Triples](https.//www.sudokuwiki.org/Naked_Candidates#NP)
 3. Done [Hidden Pairs/Triples](https://www.sudokuwiki.org/Hidden_Candidates#HP)
 4. Done [Quads](https://www.sudokuwiki.org/Naked_Candidates#NQ)
@@ -50,7 +50,8 @@ Check for Solved Squares
 12. Done [Y-Wing](https://www.sudokuwiki.org/Y_Wing_Strategy)
 13. Done [Killer Innies/Outies (2+ cells)](https://www.sudokuwiki.org/Innies_And_Outies)
 14. Done [Killer Combo's (hard)](https://www.sudokuwiki.org/Killer_Combinations)
-15. Done [Killer Cage/Unit Overlap](https://www.sudokuwiki.org/Cage_Unit_Overlap)
+15. Partial [Killer Cage/Unit Overlap](https://www.sudokuwiki.org/Cage_Unit_Overlap)
+    Line Box Reduction updates overlapping Cages
 16. ???? [Killer Cage Compare](https://www.sudokuwiki.org/Cage_Comparison)
 17. Done [Swordfish](https://www.sudokuwiki.org/Sword_Fish_Strategy)
 18. Done [XYZ Wing](https://www.sudokuwiki.org/XYZ_Wing)
