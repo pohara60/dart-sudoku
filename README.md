@@ -51,7 +51,7 @@ Check for Solved Squares
 14. [x] [Killer Combo's (hard)](https://www.sudokuwiki.org/Killer_Combinations)
 15. [x] [Killer Cage/Unit Overlap](https://www.sudokuwiki.org/Cage_Unit_Overlap)
         Line Box Reduction updates overlapping Cages
-16. [ ] [killer cage compare](https://www.sudokuwiki.org/Cage_Comparison)
+16. [ ] [Killer Cage Compare](https://www.sudokuwiki.org/Cage_Comparison)
 17. [x] [Swordfish](https://www.sudokuwiki.org/Sword_Fish_Strategy)
 18. [x] [XYZ Wing](https://www.sudokuwiki.org/XYZ_Wing)
 
