@@ -7,6 +7,7 @@ import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/killer.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/sudokuX.dart';
+import 'package:sudoku/src/whisper.dart';
 
 /// Provide access to the Sudoku API.
 class SudokuAPI {
@@ -70,6 +71,15 @@ class SudokuAPI {
     }
     currentPuzzle = currentPuzzle! + killerGrid.join('\n');
     puzzle = Killer.puzzle(puzzle!, killerGrid, partial);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addWhisper(List<List<String>> whisperLines) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + whisperLines.join('\n');
+    puzzle = Whisper.puzzle(puzzle!, whisperLines);
     return puzzle?.messageString ?? '';
   }
 

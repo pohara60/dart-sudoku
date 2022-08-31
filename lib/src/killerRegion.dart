@@ -95,10 +95,4 @@ class KillerRegion extends Region<Killer> {
     }
     return false;
   }
-
-  /// Compute the set of values in the possible combinations for a cage
-  List<List<int>> cageCombinations() {
-    var combinations = this.regionCombinations();
-    return combinations;
-  }
 }

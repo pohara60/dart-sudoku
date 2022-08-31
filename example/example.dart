@@ -80,7 +80,7 @@ void main() {
     [13, LL, 07, LL, LL, UU, UU, 18, LL],
     [UU, 30, LL, LL, LL, UU, UU, UU, UU],
   ];
-  var killerPuzzle = [
+  var killerPuzzle5 = [
     [XX, XX, 13, LL, XX, 14, LL, XX, XX],
     [XX, XX, 18, LL, 07, LL, LL, XX, XX],
     [08, 17, XX, UU, 09, LL, XX, 07, 10],
@@ -91,8 +91,24 @@ void main() {
     [XX, XX, RR, UU, UU, UU, LL, XX, XX],
     [XX, XX, 08, LL, XX, 08, LL, XX, XX],
   ];
+  var killerPuzzle = [
+    [11, LL, XX, 11, 11, 11, XX, XX, XX],
+    [XX, XX, 45, UU, UU, UU, 45, XX, XX],
+    [XX, RR, UU, 11, LL, RR, UU, 11, LL],
+    [11, LL, UU, XX, XX, XX, UU, XX, XX],
+    [XX, UU, UU, XX, XX, 11, UU, XX, XX],
+    [XX, XX, UU, RR, RR, UU, UU, XX, XX],
+    [11, RR, UU, LL, XX, RR, UU, LL, XX],
+    [UU, XX, XX, 11, XX, 11, 11, LL, XX],
+    [XX, 11, LL, UU, XX, UU, UU, XX, XX],
+  ];
+  var whisperPuzzle = [
+    ['R2C3', 'R3C3', 'R4C3', 'R5C3', 'R6C3'],
+    ['R2C7', 'R3C7', 'R4C7', 'R5C7', 'R6C7', 'R7C7'],
+    ['R6C9', 'R7C9'],
+  ];
   var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
-  print(puzzle.addSudokuX());
+  print(puzzle.addWhisper(whisperPuzzle));
   print(puzzle.solve(true, false));
 
   var puzzle1 = [

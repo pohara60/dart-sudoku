@@ -152,6 +152,14 @@ class Cell {
     if (row < other.row || row == other.row && col < other.col) return -1;
     return 1;
   }
+
+  bool adjacent(Cell cell) {
+    var rowDiff = this.row - cell.row;
+    if (rowDiff < -1 || rowDiff > 1) return false;
+    var colDiff = this.col - cell.col;
+    if (colDiff < -1 || colDiff > 1) return false;
+    return true;
+  }
 }
 
 /// Return [i] div 3 for 1-based index

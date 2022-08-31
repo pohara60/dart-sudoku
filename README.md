@@ -4,17 +4,16 @@ Dart Sudoku solver package, with Command Line Interface.
 
 ## To Do
 
-1. Add Brute force solvers
-2. Support Arrow constraints
-3. Support Renban constraints
-4. Support Whisper constraints
-5. Support 159 constraints
-6. Support Little Killer constraints
-7. Support XV constraints
-8. Support Circle constraints
-9. Support Consecutive/Multiple constraints
-10. Add Diabolical Strategies
-11. Add Extreme Strategies
+1. Support Arrow constraints
+2. Support Renban constraints
+3. Support 159 constraints
+4. Support Little Killer constraints
+5. Support XV constraints
+6. Support Circle constraints
+7. Support Consecutive/Multiple constraints
+8. Add Brute force solvers
+9. Add Diabolical Strategies
+10. Add Extreme Strategies
 
 ## Redesign
 
