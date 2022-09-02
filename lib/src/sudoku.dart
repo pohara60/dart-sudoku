@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
+import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/region.dart';
 import 'package:sudoku/src/strategy/bugStrategy.dart';
@@ -187,6 +188,9 @@ class Sudoku implements Puzzle {
     return str;
   }
 
+  // ignore: unused_field
+  var _iterations = 0;
+
   String solve(
       {bool explain = false,
       bool showPossible = false,
@@ -239,6 +243,7 @@ class Sudoku implements Puzzle {
         }
       }
 
+      _iterations++;
       if (updated) {
         if (explain) getUpdates(result);
         var possibleString = debugPrint(toPossibleString());
@@ -428,6 +433,54 @@ class Sudoku implements Puzzle {
       }
     }
     return valuePossibleMajors;
+  }
+
+  List<Cell>? getLineCells(List<String> line) {
+    var cells = <Cell>[];
+    Cell? priorCell;
+    String badCells = '';
+    for (var location in line) {
+      assert(location.length == 4);
+      var row = int.tryParse(location[1]);
+      var col = int.tryParse(location[3]);
+      if (row == null ||
+          col == null ||
+          row < 1 ||
+          row > 9 ||
+          col < 1 ||
+          col > 9) {
+        badCells = badCells == '' ? location : '$badCells,$location';
+        priorCell = null;
+      } else {
+        var cell = this.getCell(row, col);
+        if (priorCell != null && !priorCell.adjacent(cell)) {
+          this.addMessage('Non-adjacent Line cells $line', true);
+          return null;
+        }
+        cells.add(cell);
+        priorCell = cell;
+      }
+    }
+    if (badCells != '') {
+      sudoku.addMessage('Could not process Line $line cells $badCells', true);
+      return null;
+    }
+    return cells;
+  }
+
+  bool updateCellCombinations(
+      List<Cell> cells, List<List<int>> combinations, String explanation) {
+    var updated = false;
+    assert(combinations.length > 0);
+    List<Possible> unionCombinations =
+        unionCellCombinations(cells, combinations);
+    cells.forEachIndexed((index, cell) {
+      if (cell.reducePossible(unionCombinations[index])) {
+        updated = true;
+        cellUpdated(cell, explanation, '$cell');
+      }
+    });
+    return updated;
   }
 }
 

@@ -107,8 +107,37 @@ void main() {
     ['R2C7', 'R3C7', 'R4C7', 'R5C7', 'R6C7', 'R7C7'],
     ['R6C9', 'R7C9'],
   ];
-  var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
-  print(puzzle.addWhisper(whisperPuzzle));
+  // var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
+  // print(puzzle.addWhisper(whisperPuzzle));
+  // print(puzzle.solve(true, false));
+
+  var sudokuPuzzle = [
+    "8..3.....",
+    ".........",
+    ".........",
+    "........6",
+    ".........",
+    "5........",
+    ".........",
+    ".........",
+    ".....7..1",
+  ].join('\n');
+  var arrowPuzzle = [
+    ['R3C2', 'R3C3', 'R3C4', 'R3C5'],
+    ['R3C7', 'R2C7', 'R1C7'],
+    ['R4C3', 'R4C4', 'R4C5', 'R4C6'],
+    ['R5C4', 'R5C5', 'R5C6', 'R5C7'],
+    ['R6C2', 'R7C2', 'R8C2', 'R9C2'],
+    ['R6C9', 'R6C8', 'R6C7', 'R6C6'],
+    ['R7C8', 'R7C7', 'R7C6', 'R7C5'],
+    ['R8C7', 'R8C6', 'R8C5', 'R8C4'],
+  ];
+  // 6 not in arrows in B9 because 123 in B7: region combination is same as another cell in unit
+  // 6 must go in R5 in B5, so arrow must have 6 - need mandatory values in region
+  // Arrows in B9 cannot both have 1, so one of them is 234=9, and other is 7/8
+  // Many arrows in a unit means minimum sum affects totals
+  var puzzle = SudokuAPI.sudoku(sudokuPuzzle);
+  print(puzzle.addArrow(arrowPuzzle));
   print(puzzle.solve(true, false));
 
   var puzzle1 = [

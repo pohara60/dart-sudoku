@@ -11,9 +11,12 @@ Dart Sudoku solver package, with Command Line Interface.
 5. Support XV constraints
 6. Support Circle constraints
 7. Support Consecutive/Multiple constraints
-8. Add Brute force solvers
-9. Add Diabolical Strategies
-10. Add Extreme Strategies
+8. Support Circle (even) and Square (Odd) constraints
+9. Support Knight-move and King-move constraints
+10. Support Palindrome constraints
+11. Add Brute force solvers
+12. Add Diabolical Strategies
+13. Add Extreme Strategies
 
 ## Redesign
 

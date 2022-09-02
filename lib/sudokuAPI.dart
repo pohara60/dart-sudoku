@@ -2,6 +2,7 @@
 ///
 library sudoku;
 
+import 'package:sudoku/src/arrow.dart';
 import 'package:sudoku/src/generator.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/killer.dart';
@@ -80,6 +81,15 @@ class SudokuAPI {
     }
     currentPuzzle = currentPuzzle! + whisperLines.join('\n');
     puzzle = Whisper.puzzle(puzzle!, whisperLines);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addArrow(List<List<String>> arrowLines) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + arrowLines.join('\n');
+    puzzle = Arrow.puzzle(puzzle!, arrowLines);
     return puzzle?.messageString ?? '';
   }
 

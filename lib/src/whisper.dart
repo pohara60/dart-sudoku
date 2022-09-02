@@ -96,40 +96,14 @@ class Whisper extends PuzzleDecorator {
   static var _lineSeq = 1;
 
   void setWhisper(List<List<String>> whisperLines) {
-    var badCells = '';
     for (var line in whisperLines) {
-      var cells = <Cell>[];
-      Cell? priorCell;
-      for (var location in line) {
-        assert(location.length == 4);
-        var row = int.tryParse(location[1]);
-        var col = int.tryParse(location[3]);
-        if (row == null ||
-            col == null ||
-            row < 1 ||
-            row > 9 ||
-            col < 1 ||
-            col > 9) {
-          badCells = badCells == '' ? location : '$badCells,$location';
-          priorCell = null;
-        } else {
-          var cell = sudoku.getCell(row, col);
-          if (priorCell != null && !priorCell.adjacent(cell)) {
-            sudoku.addMessage('Non-adjacent Whisper cells $line', true);
-          }
-          cells.add(cell);
-          priorCell = cell;
-        }
-      }
+      var cells = sudoku.getLineCells(line);
+      if (cells == null) return;
+
       var name = 'W${_lineSeq++}';
       var nodups = cellsInNonet(cells);
       var region = WhisperRegion(this, name, cells, nodups: nodups);
       this.allRegions[name] = region;
-    }
-
-    if (badCells != '') {
-      sudoku.addMessage('Could not process Whisper cells $badCells', true);
-      return;
     }
   }
 }

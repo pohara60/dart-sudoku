@@ -40,19 +40,14 @@ class UpdatePossibleStrategy extends Strategy {
   bool nonetUpdateCell(Cell cell, List<Cell> cells, String explanation) {
     var updated = false;
     var set = unionCellsPossible(cells);
-    if (cell.removePossible(set))
-      for (final c in cells) {
-        var value = c.value!;
-        if (cell.remove(value)) {
-          updated = true;
-        }
-      }
-    if (updated) {
+    if (cell.removePossible(set)) {
+      updated = true;
       sudoku.cellUpdated(cell, explanation, null);
       // Don't give messages about possible value updates
       // _messages.add(addExplanation(
       //     explanation, 'update possible cell ${cell.toString()}'));
     }
+
     return updated;
   }
 }

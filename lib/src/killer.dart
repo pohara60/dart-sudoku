@@ -348,10 +348,12 @@ class Killer extends PuzzleDecorator {
           nodups,
           'o' + source, // Outie cage
         );
+        // Discard duplicates
         if (this.cages.firstWhereOrNull((cage) => cage.equals(otherCage)) ==
             null) {
           this.allRegions[name] = otherCage;
-        }
+        } else
+          _virtualSeq--;
       }
     }
   }

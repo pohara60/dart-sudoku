@@ -98,13 +98,19 @@ class LineBoxReductionStrategy extends Strategy {
                       region.cells.toSet().containsAll(uniqueCells))
                   .toSet();
               overlapRegions.forEach((region) {
-                region.cells
-                    .where((cell) => !uniqueCells.contains(cell))
-                    .forEach((cell) {
-                  if (cell.clearPossible(value)) {
-                    updated = true;
-                    sudoku.cellUpdated(cell, locationAxis,
-                        "remove value $value from ${region.name} $cell");
+                region.cells.forEach((cell) {
+                  if (!uniqueCells.contains(cell)) {
+                    // Remove value from other cells
+                    if (cell.clearPossible(value)) {
+                      updated = true;
+                      sudoku.cellUpdated(cell, locationAxis,
+                          "remove value $value from ${region.name} $cell");
+                    }
+                  } else {
+                    // Value is mandatory in region for unique cells
+                    if (!region.mandatory.containsKey(value))
+                      region.mandatory[value] = {};
+                    region.mandatory[value]!.addAll(uniqueCells);
                   }
                 });
               });

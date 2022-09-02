@@ -226,3 +226,16 @@ int fixedTotalCells(List<Cell> cells) {
   }
   return total;
 }
+
+List<Possible> unionCellCombinations(
+    List<Cell> cells, List<List<int>> combinations) {
+  var unionCombinations =
+      List.generate(cells.length, (index) => Possible(false));
+  for (var combination in combinations) {
+    for (var index = 0; index < combination.length; index++) {
+      var value = combination[index];
+      unionCombinations[index][value] = true;
+    }
+  }
+  return unionCombinations;
+}
