@@ -4,7 +4,7 @@ Dart Sudoku solver package, with Command Line Interface.
 
 ## To Do
 
-1. Support Arrow constraints
+1. Verify Arrow example and add to tests
 2. Support Renban constraints
 3. Support 159 constraints
 4. Support Little Killer constraints
