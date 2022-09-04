@@ -685,7 +685,7 @@ Region Combinations, AG3 B5,(A3, A4, A6):R4C4-6,R5C5-6,R6C6:R5C7,R6C8,R6C7, R6C6
 ║   │   │12 ║  3│12 │12 ║12 │12 │ 2 ║
 ║   │45 │4 6║   │456│456║456│456│45 ║
 ║ 8 │7 9│7 9║   │7  │  9║7  │7 9│7  ║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢.
 ║123│   │123║12 │12 │12 ║123│123│ 23║
 ║4 6│45 │4 6║456│456│456║456│456│45 ║
 ║7 9│7 9│7 9║   │7  │ 89║78 │789│78 ║
@@ -721,7 +721,7 @@ Region Combinations, AG3 B5,(A3, A4, A6):R4C4-6,R5C5-6,R6C6:R5C7,R6C8,R6C7, R6C6
 Hidden Single, R4C3 = 9
 Hidden Single, R5C7 = 1
 Hidden Single, R6C3 = 1
-Hidden Single, R6C6 = 4
+Hidden Single, R6C6 = 4 why not R4C1 = 2
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║   │   │12 ║  3│12 │12 ║12 │12 │ 2 ║
 ║   │45 │4 6║   │456│456║456│456│45 ║
@@ -1186,7 +1186,7 @@ Hidden Single, R6C8 = 2
 ║4 6│   │456║456│   │   ║456│456│   ║
 ║   │   │ 8 ║ 8 │  9│7  ║ 8 │ 8 │   ║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-Naked Group, remove group 89 from R7C9 = 3457
+Naked Group, remove group 89 from R7C9 = 3457 end
 Naked Group, remove group 89 from R8C8 = 34567
 Naked Group, remove group 89 from R8C9 = 3457
 Naked Group, remove group 89 from R9C7 = 456
