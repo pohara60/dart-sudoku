@@ -4,7 +4,7 @@ Dart Sudoku solver package, with Command Line Interface.
 
 ## To Do
 
-1. Verify Arrow example and add to tests
+1. Limit combinations using Exceptions
 2. Support Renban constraints
 3. Support 159 constraints
 4. Support Little Killer constraints
@@ -17,10 +17,6 @@ Dart Sudoku solver package, with Command Line Interface.
 11. Add Brute force solvers
 12. Add Diabolical Strategies
 13. Add Extreme Strategies
-
-## Redesign
-
-Treat Rows, Columns, Boxes and Cages as Regions:
 
 ## Strategies
 
