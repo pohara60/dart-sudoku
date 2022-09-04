@@ -132,10 +132,6 @@ void main() {
     ['R7C8', 'R7C7', 'R7C6', 'R7C5'],
     ['R8C7', 'R8C6', 'R8C5', 'R8C4'],
   ];
-  // 6 not in arrows in B9 because 123 in B7: region combination is same as another cell in unit
-  // 6 must go in R5 in B5, so arrow must have 6 - need mandatory values in region
-  // Arrows in B9 cannot both have 1, so one of them is 234=9, and other is 7/8
-  // Many arrows in a unit means minimum sum affects totals
   var puzzle = SudokuAPI.sudoku(sudokuPuzzle);
   print(puzzle.addArrow(arrowPuzzle));
   print(puzzle.solve(true, false));

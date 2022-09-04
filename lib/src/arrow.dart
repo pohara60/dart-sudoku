@@ -55,6 +55,39 @@ class Arrow extends PuzzleDecorator {
     //     .where((region) => region.value.runtimeType == ArrowRegion)
     //     .fold<String>(
     //         text, (text, region) => '$text\n${region.value.toString()}');
+    String arrowChars(List<Cell> cells, Cell cell) {
+      var index = cells.indexOf(cell);
+      if (index == 0) return '()';
+      var prior = cells[index - 1];
+      if (cell.row == prior.row) {
+        if (index != cells.length - 1) return '--';
+        if (cell.col > prior.col) return '->';
+        return '<-';
+      }
+      if (cell.col == prior.col) {
+        if (index != cells.length - 1) return '||';
+        if (cell.row > prior.row) return r'\/';
+        return r'/\';
+      }
+      if (cell.row > prior.row) {
+        if (cell.col > prior.col) {
+          if (index != cells.length - 1) return '_|';
+          return r'\';
+        } else {
+          if (index != cells.length - 1) return '|_';
+          return r'/';
+        }
+      } else {
+        if (cell.col > prior.col) {
+          if (index != cells.length - 1) return '-|';
+          return r'/';
+        } else {
+          if (index != cells.length - 1) return '|-';
+          return r'\';
+        }
+      }
+    }
+
     var text = sudoku.grid.fold<String>(
         '',
         (text, row) =>
@@ -66,9 +99,8 @@ class Arrow extends PuzzleDecorator {
                     text +
                     (getArrow(cell) == null
                         ? colours[0]!('  ')
-                        : getArrow(cell)!.cells[0] == cell
-                            ? colours[1]!('()')
-                            : colours[1]!('  '))));
+                        : colours[1]!(
+                            arrowChars(getArrow(cell)!.cells, cell)))));
     text = '$text\n' + puzzle.toString();
     return text;
   }
@@ -160,7 +192,8 @@ class Arrow extends PuzzleDecorator {
       if (outieCells.length < cells.length &&
           outieCells.length + cells.length - arrows.length <= 10) {
         var name = 'AG${_arrowGroupSeq++}';
-        var cells = List<Cell>.from(groupCells);
+        var cells = [...groupCells, ...outieCells];
+        cells.sort((c1, c2) => c1.compareTo(c2));
         var nodups = cellsInNonet(cells);
         var group = ArrowRegionGroup(
           this,
@@ -169,7 +202,6 @@ class Arrow extends PuzzleDecorator {
           nodups,
           arrows,
           cells,
-          List.from(outieCells),
         );
         // Discard duplicates
         if (this

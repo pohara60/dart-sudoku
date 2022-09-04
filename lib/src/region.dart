@@ -12,7 +12,7 @@ abstract class Region<Puzzle> {
       : mandatory = Map<int, Set<Cell>>();
   String toString();
 
-  String cellsString(List<Cell> sortedCells) {
+  String cellsString(List<Cell> cells) {
     var cellText2 = '';
     var currentRow = -1, currentCol = -1;
     var lastRow = -1, lastCol = -1;
@@ -29,9 +29,9 @@ abstract class Region<Puzzle> {
       return text;
     }
 
-    for (final cell in sortedCells) {
+    for (final cell in cells) {
       if (cell.row == currentRow) {
-        if (cell.col == lastCol + 1) {
+        if (cell.col == lastCol + 1 || cell.col == lastCol - 1) {
           lastCol = cell.col;
           currentCol = -1;
         } else {
@@ -42,6 +42,9 @@ abstract class Region<Puzzle> {
         }
       } else if (cell.col == currentCol) {
         if (cell.row == lastRow + 1) {
+          lastRow = cell.row;
+          currentRow = -1;
+        } else if (cell.row == lastRow - 1) {
           lastRow = cell.row;
           currentRow = -1;
         } else {
@@ -108,17 +111,15 @@ abstract class Region<Puzzle> {
 }
 
 abstract class RegionGroup<Puzzle> extends Region<Puzzle> {
-  List<Cell> outies;
   String nonet;
   List<Region> regions;
   RegionGroup(Puzzle puzzle, String name, String this.nonet, nodups,
-      List<Region> this.regions, List<Cell> cells, List<Cell> this.outies)
+      List<Region> this.regions, List<Cell> cells)
       : super(puzzle, name, 0, nodups, cells);
 
   String toString() {
     var regions = this.regions.map<String>((r) => r.name);
-    var text =
-        '$name $nonet,$regions:${cellsString(cells)}:${cellsString(outies)}';
+    var text = '$name $nonet,$regions:${cellsString(cells)}';
     return text;
   }
 

@@ -13,7 +13,6 @@ class RegionCombinationsStrategy extends Strategy {
       var location = addExplanation(explanation, '$region');
       var combinations = region.regionCombinations();
       // Update possible values to union of combinations
-      // Update possible values to union of combinations
       if (sudoku.updateCellCombinations(region.cells, combinations, location))
         updated = true;
     }

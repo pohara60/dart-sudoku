@@ -36,8 +36,8 @@ class ArrowRegion extends Region<Arrow> {
 
 class ArrowRegionGroup extends RegionGroup {
   ArrowRegionGroup(Arrow puzzle, String name, String nonet, bool nodups,
-      List<Region> regions, List<Cell> cells, List<Cell> outies)
-      : super(puzzle, name, nonet, nodups, regions, cells, outies);
+      List<Region> regions, List<Cell> cells)
+      : super(puzzle, name, nonet, nodups, regions, cells);
 
   int get minimum {
     return 0;
@@ -68,9 +68,9 @@ class ArrowRegionGroup extends RegionGroup {
       var maximum = combination.fold<int>(0, (total, value) => total + value);
       return maximum > max ? maximum : max;
     });
-    // Get combinations for arrow lines, i.e. region cells and outies
+    // Get combinations for arrow lines
     // Limited to maximum
-    var arrowCells = [...this.cells, ...this.outies];
+    var arrowCells = this.cells;
     var arrowCombinations = cellCombinations(
       arrowCells,
       false,

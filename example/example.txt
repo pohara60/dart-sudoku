@@ -37,7 +37,7 @@
 ║  9│ 89│ 89║ 89│ 89│7  ║ 89│ 89│   ║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 Region Combinations, A1:R3C2-5, R3C2 = 679
-Region Combinations, A1:R3C2-5, R3C3 = 12346 // why no 5?
+Region Combinations, A1:R3C2-5, R3C3 = 12346
 Region Combinations, A1:R3C2-5, R3C4 = 12456
 Region Combinations, A1:R3C2-5, R3C5 = 12456
 Region Combinations, A2:R3C7,R2C7,R1C7, R3C7 = 3456789
@@ -414,7 +414,7 @@ Pointing Group, B5,C4, remove group 7 from R2C4 = 12456
 ║4 6│45 │456║456│   │   ║456│456│   ║
 ║  9│   │ 89║ 89│ 89│7  ║ 89│ 89│   ║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-Region Combinations, A4:R5C4-7, R5C4 = 9    // why Region and not Region Group with R4C3 and R6C9 = 9 also?
+Region Combinations, A4:R5C4-7, R5C4 = 9
 Region Combinations, A4:R5C4-7, R5C5 = 126
 Region Combinations, A4:R5C4-7, R5C6 = 126
 Region Combinations, A4:R5C4-7, R5C7 = 12
@@ -671,8 +671,8 @@ Pointing Group, B7,C3, remove group 58 from R2C3 = 1234679
 ║4 6│   │456║456│   │   ║456│456│   ║
 ║   │   │ 8 ║ 8 │  9│7  ║ 8 │ 8 │   ║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-Region Combinations, A3:R4C3-6, R4C3 = 9 // why not Region Group?
-Region Combinations, A3:R4C3-6, R4C4 = 15 // why not 234 allowed?
+Region Combinations, A3:R4C3-6, R4C3 = 9
+Region Combinations, A3:R4C3-6, R4C4 = 15
 Region Combinations, A3:R4C3-6, R4C5 = 135
 Region Combinations, A3:R4C3-6, R4C6 = 135
 Region Combinations, A6:R6C9,R6C8,R6C7,R6C6, R6C8 = 234
@@ -721,7 +721,7 @@ Region Combinations, AG3 B5,(A3, A4, A6):R4C4-6,R5C5-6,R6C6:R5C7,R6C8,R6C7, R6C6
 Hidden Single, R4C3 = 9
 Hidden Single, R5C7 = 1
 Hidden Single, R6C3 = 1
-Hidden Single, R6C6 = 4 why not R4C1 = 2
+Hidden Single, R6C6 = 4
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║   │   │12 ║  3│12 │12 ║12 │12 │ 2 ║
 ║   │45 │4 6║   │456│456║456│456│45 ║
@@ -1186,7 +1186,7 @@ Hidden Single, R6C8 = 2
 ║4 6│   │456║456│   │   ║456│456│   ║
 ║   │   │ 8 ║ 8 │  9│7  ║ 8 │ 8 │   ║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-Naked Group, remove group 89 from R7C9 = 3457 end
+Naked Group, remove group 89 from R7C9 = 3457 
 Naked Group, remove group 89 from R8C8 = 34567
 Naked Group, remove group 89 from R8C9 = 3457
 Naked Group, remove group 89 from R9C7 = 456
