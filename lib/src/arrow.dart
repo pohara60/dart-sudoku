@@ -187,10 +187,10 @@ class Arrow extends PuzzleDecorator {
     }
     // Do not add group for single arrow contained in cells
     if (arrows.isNotEmpty && arrows.length > 1) {
-//        (arrows.length > 1 || outieCells.length > 1 && groupCells.length > 1)) {
+      // Now create all region groups, combination processing limits inefficiency
       // Do not bother when outies dominate
-      if (outieCells.length < cells.length &&
-          outieCells.length + cells.length - arrows.length <= 10) {
+      // ignore: dead_code
+      if (true || outieCells.length < groupCells.length) {
         var name = 'AG${_arrowGroupSeq++}';
         var cells = [...groupCells, ...outieCells];
         cells.sort((c1, c2) => c1.compareTo(c2));

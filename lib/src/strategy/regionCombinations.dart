@@ -12,6 +12,8 @@ class RegionCombinationsStrategy extends Strategy {
     for (var region in sudoku.regions) {
       var location = addExplanation(explanation, '$region');
       var combinations = region.regionCombinations();
+      // Null means could not compute combinations for region
+      if (combinations == null) continue;
       // Update possible values to union of combinations
       if (sudoku.updateCellCombinations(region.cells, combinations, location))
         updated = true;

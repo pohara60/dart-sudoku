@@ -19,7 +19,7 @@ class ArrowRegion extends Region<Arrow> {
   }
 
   @override
-  List<List<int>> regionCombinations() {
+  List<List<int>>? regionCombinations() {
     var setValues = <int>[];
     var axisValues = <String, List<int>>{};
     var combinations = nextRegionCombinations(
@@ -44,10 +44,12 @@ class ArrowRegionGroup extends RegionGroup {
   }
 
   @override
-  List<List<int>> regionGroupCombinations(String explanation) {
+  List<List<int>>? regionGroupCombinations(String explanation) {
     // Get maximum value of arrow totals
     var totalCells =
         this.regions.expand((region) => [region.cells[0]]).toList();
+    var combinationCount = Limiter();
+    var iterationCount = Limiter();
     var totalCombinations = cellCombinations(
       totalCells,
       false,
@@ -58,7 +60,10 @@ class ArrowRegionGroup extends RegionGroup {
       <String, List<int>>{},
       remainingNoTotal,
       validNoTotal,
+      combinationCount,
+      iterationCount,
     );
+    print('combinations=$combinationCount, iterations=$iterationCount');
     var totalMin =
         totalCombinations.fold<int>(totalCells.length * 9, (min, combination) {
       var minimum = combination.fold<int>(0, (total, value) => total + value);
@@ -71,34 +76,50 @@ class ArrowRegionGroup extends RegionGroup {
     // Get combinations for arrow lines
     // Limited to maximum
     var arrowCells = this.cells;
-    var arrowCombinations = cellCombinations(
-      arrowCells,
-      false,
-      null,
-      0,
-      totalMax,
-      <int>[],
-      <String, List<int>>{},
-      remainingMaxTotal,
-      validMaxTotal,
-    );
-    // Get minimum total of arrowCombinations
-    var arrowMin =
-        arrowCombinations.fold<int>(arrowCells.length * 9, (min, combination) {
-      var minimum = combination.fold<int>(0, (total, value) => total + value);
-      return minimum < min ? minimum : min;
-    });
-    // If arrow minimum is greater than total minimum, then update arrow totals
-    if (arrowMin > totalMin) {
-      var newTotalCombinations = totalCombinations.where((combination) =>
-          combination.fold<int>(0, (total, value) => total + value) >=
-          arrowMin);
-      if (newTotalCombinations.length < totalCombinations.length) {
-        // Update possible - cannot handle result
-        puzzle.sudoku.updateCellCombinations(
-            totalCells, newTotalCombinations.toList(), explanation);
+    combinationCount = Limiter(COMBINATION_LIMIT);
+    iterationCount = Limiter(ITERATION_LIMIT);
+    // var stopwatch = Stopwatch();
+    // stopwatch.start();
+    try {
+      var arrowCombinations = cellCombinations(
+        arrowCells,
+        false,
+        null,
+        0,
+        totalMax,
+        <int>[],
+        <String, List<int>>{},
+        remainingMaxTotal,
+        validMaxTotal,
+        combinationCount,
+        iterationCount,
+      );
+      // stopwatch.stop();
+      // print(
+      //     'combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
+      // Get minimum total of arrowCombinations
+      var arrowMin = arrowCombinations.fold<int>(arrowCells.length * 9,
+          (min, combination) {
+        var minimum = combination.fold<int>(0, (total, value) => total + value);
+        return minimum < min ? minimum : min;
+      });
+      // If arrow minimum is greater than total minimum, then update arrow totals
+      if (arrowMin > totalMin) {
+        var newTotalCombinations = totalCombinations.where((combination) =>
+            combination.fold<int>(0, (total, value) => total + value) >=
+            arrowMin);
+        if (newTotalCombinations.length < totalCombinations.length) {
+          // Update possible - cannot handle result
+          puzzle.sudoku.updateCellCombinations(
+              totalCells, newTotalCombinations.toList(), explanation);
+        }
       }
+      return arrowCombinations;
+    } on LimitException {
+      // stopwatch.stop();
+      // print(
+      //     'exception combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
+      return null;
     }
-    return arrowCombinations;
   }
 }

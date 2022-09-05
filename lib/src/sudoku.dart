@@ -250,6 +250,7 @@ class Sudoku implements Puzzle {
         if (showPossible) result.writeln(possibleString);
       }
     }
+    result.writeln('solution iterations=$_iterations');
     result.write(stringFunc());
     return result.toString();
   }

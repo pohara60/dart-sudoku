@@ -4,7 +4,7 @@ Dart Sudoku solver package, with Command Line Interface.
 
 ## To Do
 
-1. Limit combinations using Exceptions
+1. Cache region combinations to limit next computation?
 2. Support Renban constraints
 3. Support 159 constraints
 4. Support Little Killer constraints

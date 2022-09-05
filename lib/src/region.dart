@@ -76,7 +76,7 @@ abstract class Region<Puzzle> {
   }
 
   /// Compute the set of values in the possible combinations for a region
-  List<List<int>> regionCombinations() {
+  List<List<int>>? regionCombinations() {
     var setValues = <int>[];
     var axisValues = <String, List<int>>{};
     var combinations = nextRegionCombinations(
@@ -97,7 +97,7 @@ abstract class Region<Puzzle> {
   /// setValues - the set of values in the combinations so far
   /// remainingTotal - function to update total for each value
   /// returns the set of values in the combinations
-  List<List<int>> nextRegionCombinations(
+  List<List<int>>? nextRegionCombinations(
     int index,
     int total,
     List<int> setValues,
@@ -105,8 +105,34 @@ abstract class Region<Puzzle> {
     int remainingTotal(int total, int value, int index),
     bool validTotal(int total, int value),
   ) {
-    return cellCombinations(this.cells, this.nodups, this.mandatory, index,
-        total, setValues, axisValues, remainingTotal, validTotal);
+    var combinationCount = Limiter(COMBINATION_LIMIT);
+    var iterationCount = Limiter(ITERATION_LIMIT);
+    // var stopwatch = Stopwatch();
+    // stopwatch.start();
+    try {
+      var combinations = cellCombinations(
+        this.cells,
+        this.nodups,
+        this.mandatory,
+        index,
+        total,
+        setValues,
+        axisValues,
+        remainingTotal,
+        validTotal,
+        combinationCount,
+        iterationCount,
+      );
+      // stopwatch.stop();
+      // print(
+      //     'combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
+      return combinations;
+    } catch (e) {
+      // stopwatch.stop();
+      // print(
+      //     'exception combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
+      return null;
+    }
   }
 }
 
@@ -127,7 +153,7 @@ abstract class RegionGroup<Puzzle> extends Region<Puzzle> {
     return 0;
   }
 
-  List<List<int>> regionGroupCombinations(String explanation) {
+  List<List<int>>? regionGroupCombinations(String explanation) {
     var setValues = <int>[];
     var axisValues = <String, List<int>>{};
     var combinations = nextRegionCombinations(
@@ -156,6 +182,10 @@ int remainingMaxTotal(maximum, value, index) => maximum - value;
 int remainingArrowTotal(total, value, index) =>
     index == 0 ? value : total - value;
 
+// Limit on number of combinations to return
+var COMBINATION_LIMIT = 10000;
+var ITERATION_LIMIT = 100000;
+
 /// Compute the set of values in the possible combinations for cells
 /// cells - the cells
 /// nodups - no duplicates
@@ -166,16 +196,17 @@ int remainingArrowTotal(total, value, index) =>
 /// remainingTotal - function to update total for each value
 /// returns the set of values in the combinations
 List<List<int>> cellCombinations(
-  List<Cell> cells,
-  bool nodups,
-  Map<int, Set<Cell>>? mandatory,
-  int index,
-  int total,
-  List<int> setValues,
-  Map<String, List<int>>? axisValues,
-  int remainingTotal(int total, int value, int index),
-  bool validTotal(int total, int value),
-) {
+    List<Cell> cells,
+    bool nodups,
+    Map<int, Set<Cell>>? mandatory,
+    int index,
+    int total,
+    List<int> setValues,
+    Map<String, List<int>>? axisValues,
+    int remainingTotal(int total, int value, int index),
+    bool validTotal(int total, int value),
+    [Limiter? combinationLimiter,
+    Limiter? iterationLimiter]) {
   var regionCells = cells;
   assert(nodups || axisValues != null);
   var newCombinations = <List<int>>[];
@@ -194,6 +225,8 @@ List<List<int>> cellCombinations(
               axisValues[label]!.contains(value)) continue valueLoop;
         }
       }
+      // Exceeds iteration limit?
+      if (iterationLimiter != null) iterationLimiter.increment();
 
       if (index + 1 == regionCells.length) {
         // Check region total, if any
@@ -206,6 +239,10 @@ List<List<int>> cellCombinations(
                 var index = combination.indexOf(entry.key);
                 return (index != -1 && entry.value.contains(cells[index]));
               })) {
+            // New combination OK
+            // Exceeds limit?
+            if (combinationLimiter != null) combinationLimiter.increment();
+
             newCombinations.add(combination);
             if (total > 0 && validTotal != validMaxTotal) {
               // Exact value required, so can break
@@ -234,18 +271,41 @@ List<List<int>> cellCombinations(
         // find combinations for reduced total in remaining cells
         var remaining = remainingTotal(total, value, index);
         var combinations = cellCombinations(
-            cells,
-            nodups,
-            mandatory,
-            index + 1,
-            remaining,
-            [...setValues, value],
-            newAxisValues,
-            remainingTotal,
-            validTotal);
+          cells,
+          nodups,
+          mandatory,
+          index + 1,
+          remaining,
+          [...setValues, value],
+          newAxisValues,
+          remainingTotal,
+          validTotal,
+          combinationLimiter,
+          iterationLimiter,
+        );
         newCombinations.addAll(combinations);
       }
     }
   }
   return newCombinations;
+}
+
+class Limiter {
+  int count = 0;
+  int? limit;
+  Limiter([this.limit]);
+  void increment() {
+    count++;
+    if (limit != null && count > limit!) {
+      throw LimitException;
+    }
+  }
+
+  String toString() {
+    return '$count' + (limit == null ? '' : '/$limit!');
+  }
+}
+
+class LimitException implements Exception {
+  LimitException();
 }
