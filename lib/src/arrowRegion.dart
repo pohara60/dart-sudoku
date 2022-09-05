@@ -115,7 +115,7 @@ class ArrowRegionGroup extends RegionGroup {
         }
       }
       return arrowCombinations;
-    } on LimitException {
+    } catch (e) {
       // stopwatch.stop();
       // print(
       //     'exception combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');

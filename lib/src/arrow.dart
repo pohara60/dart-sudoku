@@ -57,33 +57,33 @@ class Arrow extends PuzzleDecorator {
     //         text, (text, region) => '$text\n${region.value.toString()}');
     String arrowChars(List<Cell> cells, Cell cell) {
       var index = cells.indexOf(cell);
-      if (index == 0) return '()';
+      if (index == 0) return '○';
       var prior = cells[index - 1];
       if (cell.row == prior.row) {
-        if (index != cells.length - 1) return '--';
-        if (cell.col > prior.col) return '->';
-        return '<-';
+        if (index != cells.length - 1) return '-';
+        if (cell.col > prior.col) return '→';
+        return '←';
       }
       if (cell.col == prior.col) {
-        if (index != cells.length - 1) return '||';
-        if (cell.row > prior.row) return r'\/';
-        return r'/\';
+        if (index != cells.length - 1) return '|';
+        if (cell.row > prior.row) return r'↓';
+        return r'↑';
       }
       if (cell.row > prior.row) {
         if (cell.col > prior.col) {
-          if (index != cells.length - 1) return '_|';
-          return r'\';
+          if (index != cells.length - 1) return r'⟍';
+          return '↘';
         } else {
-          if (index != cells.length - 1) return '|_';
-          return r'/';
+          if (index != cells.length - 1) return r'⟋';
+          return '↙';
         }
       } else {
         if (cell.col > prior.col) {
-          if (index != cells.length - 1) return '-|';
-          return r'/';
+          if (index != cells.length - 1) return r'⟍';
+          return '↗';
         } else {
-          if (index != cells.length - 1) return '|-';
-          return r'\';
+          if (index != cells.length - 1) return r'⟋';
+          return '↖';
         }
       }
     }
@@ -98,7 +98,7 @@ class Arrow extends PuzzleDecorator {
                 (text, cell) =>
                     text +
                     (getArrow(cell) == null
-                        ? colours[0]!('  ')
+                        ? colours[0]!(' ')
                         : colours[1]!(
                             arrowChars(getArrow(cell)!.cells, cell)))));
     text = '$text\n' + puzzle.toString();
