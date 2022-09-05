@@ -12,7 +12,7 @@ class ShrinkCagesStrategy extends Strategy {
     assert(puzzle.runtimeType == Killer);
   }
 
-  static int _shrinkSeq = 1; // Numbering for new cages
+  int _shrinkSeq = 1; // Numbering for new cages
 
   bool solve() {
     var killer = puzzle as Killer;

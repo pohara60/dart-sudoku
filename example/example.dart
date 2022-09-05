@@ -132,9 +132,9 @@ void main() {
     ['R7C8', 'R7C7', 'R7C6', 'R7C5'],
     ['R8C7', 'R8C6', 'R8C5', 'R8C4'],
   ];
-  // var puzzle = SudokuAPI.sudoku(sudokuPuzzle);
-  // print(puzzle.addArrow(arrowPuzzle1));
-  // print(puzzle.solve(true, false));
+  var puzzle = SudokuAPI.sudoku(sudokuPuzzle);
+  print(puzzle.addArrow(arrowPuzzle1));
+  print(puzzle.solve(true, false));
 
   // Difficult "Handshake" puzzle
   // Needs deduction about matching cells
@@ -158,9 +158,9 @@ void main() {
     ['R9C4', 'R9C5', 'R8C5'],
     ['R9C9', 'R9C8', 'R9C7'],
   ];
-  var puzzle = SudokuAPI.sudoku(emptySudoku);
-  print(puzzle.addArrow(arrowPuzzle2));
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addArrow(arrowPuzzle2));
+  // print(puzzle.solve(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",

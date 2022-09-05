@@ -63,7 +63,7 @@ class ArrowRegionGroup extends RegionGroup {
       combinationCount,
       iterationCount,
     );
-    print('combinations=$combinationCount, iterations=$iterationCount');
+    // print('combinations=$combinationCount, iterations=$iterationCount');
     var totalMin =
         totalCombinations.fold<int>(totalCells.length * 9, (min, combination) {
       var minimum = combination.fold<int>(0, (total, value) => total + value);

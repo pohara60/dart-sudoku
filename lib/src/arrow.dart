@@ -12,6 +12,7 @@ import 'package:sudoku/src/strategy/strategy.dart';
 class Arrow extends PuzzleDecorator {
   Map<String, Region> get allRegions => sudoku.allRegions;
   List<Region> get regions => sudoku.regions;
+  List<RegionGroup> get regionGroups => sudoku.regionGroups;
 
   Sudoku get sudoku => puzzle.sudoku;
   String get messageString => sudoku.messageString;
@@ -30,8 +31,9 @@ class Arrow extends PuzzleDecorator {
       cell.regions.where((region) => region.runtimeType == ArrowRegion));
 
   /// ArrowGroups are RegionGroups of type ArrowRegionGroup
-  List<ArrowRegionGroup> get arrowGroups => List<ArrowRegionGroup>.from(
-      this.regions.where((region) => region.runtimeType == ArrowRegionGroup));
+  List<ArrowRegionGroup> get arrowGroups => List<ArrowRegionGroup>.from(this
+      .regionGroups
+      .where((region) => region.runtimeType == ArrowRegionGroup));
 
   late RegionCombinationsStrategy regionCombinationsStrategy;
   late RegionGroupCombinationsStrategy regionGroupCombinationsStrategy;
@@ -137,7 +139,7 @@ class Arrow extends PuzzleDecorator {
     addRegionGroups();
   }
 
-  static var _arrowSeq = 1;
+  var _arrowSeq = 1;
 
   void setArrow(List<List<String>> arrowLines) {
     for (var line in arrowLines) {
@@ -161,7 +163,7 @@ class Arrow extends PuzzleDecorator {
     }
   }
 
-  static var _arrowGroupSeq = 1;
+  var _arrowGroupSeq = 1;
 
   void addRegionGroup(List<Cell> cells, source) {
     var arrows = <ArrowRegion>[];

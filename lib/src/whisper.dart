@@ -93,7 +93,7 @@ class Whisper extends PuzzleDecorator {
     if (sudoku.error) return;
   }
 
-  static var _lineSeq = 1;
+  var _lineSeq = 1;
 
   void setWhisper(List<List<String>> whisperLines) {
     for (var line in whisperLines) {

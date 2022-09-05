@@ -658,15 +658,6 @@ void main() {
         solution4.join('\n'),
       );
     });
-    test('killer1', () {
-      var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle1, true);
-      puzzle.addSudokuX();
-      var sudoku4 = SudokuAPI.sudoku(puzzle4);
-      expect(
-        puzzle.solve(true, false),
-        killerSolution1.join('\n'),
-      );
-    });
   });
 
   group('Command line', () {

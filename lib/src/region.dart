@@ -77,15 +77,14 @@ abstract class Region<Puzzle> {
 
   /// Compute the set of values in the possible combinations for a region
   List<List<int>>? regionCombinations() {
-    var setValues = <int>[];
-    var axisValues = <String, List<int>>{};
     var combinations = nextRegionCombinations(
       0,
       total,
-      setValues,
-      axisValues,
+      <int>[],
+      <String, List<int>>{},
       remainingOptionalTotal,
       validOptionalTotal,
+      false, // unlimited
     );
     return combinations;
   }
@@ -98,15 +97,16 @@ abstract class Region<Puzzle> {
   /// remainingTotal - function to update total for each value
   /// returns the set of values in the combinations
   List<List<int>>? nextRegionCombinations(
-    int index,
-    int total,
-    List<int> setValues,
-    Map<String, List<int>>? axisValues,
-    int remainingTotal(int total, int value, int index),
-    bool validTotal(int total, int value),
-  ) {
-    var combinationCount = Limiter(COMBINATION_LIMIT);
-    var iterationCount = Limiter(ITERATION_LIMIT);
+      int index,
+      int total,
+      List<int> setValues,
+      Map<String, List<int>>? axisValues,
+      int remainingTotal(int total, int value, int index),
+      bool validTotal(int total, int value),
+      [bool limited = true,
+      int validValues(List<int> values)?]) {
+    var combinationCount = Limiter(limited ? COMBINATION_LIMIT : null);
+    var iterationCount = Limiter(limited ? ITERATION_LIMIT : null);
     // var stopwatch = Stopwatch();
     // stopwatch.start();
     try {
@@ -122,6 +122,7 @@ abstract class Region<Puzzle> {
         validTotal,
         combinationCount,
         iterationCount,
+        validValues,
       );
       // stopwatch.stop();
       // print(
@@ -154,13 +155,11 @@ abstract class RegionGroup<Puzzle> extends Region<Puzzle> {
   }
 
   List<List<int>>? regionGroupCombinations(String explanation) {
-    var setValues = <int>[];
-    var axisValues = <String, List<int>>{};
     var combinations = nextRegionCombinations(
       0,
       this.total,
-      setValues,
-      axisValues,
+      <int>[],
+      <String, List<int>>{},
       remainingOptionalTotal,
       validOptionalTotal,
     );
@@ -196,17 +195,19 @@ var ITERATION_LIMIT = 100000;
 /// remainingTotal - function to update total for each value
 /// returns the set of values in the combinations
 List<List<int>> cellCombinations(
-    List<Cell> cells,
-    bool nodups,
-    Map<int, Set<Cell>>? mandatory,
-    int index,
-    int total,
-    List<int> setValues,
-    Map<String, List<int>>? axisValues,
-    int remainingTotal(int total, int value, int index),
-    bool validTotal(int total, int value),
-    [Limiter? combinationLimiter,
-    Limiter? iterationLimiter]) {
+  List<Cell> cells,
+  bool nodups,
+  Map<int, Set<Cell>>? mandatory,
+  int index,
+  int total,
+  List<int> setValues,
+  Map<String, List<int>>? axisValues,
+  int remainingTotal(int total, int value, int index),
+  bool validTotal(int total, int value), [
+  Limiter? combinationLimiter,
+  Limiter? iterationLimiter,
+  int validValues(List<int> values)?,
+]) {
   var regionCells = cells;
   assert(nodups || axisValues != null);
   var newCombinations = <List<int>>[];
@@ -225,15 +226,23 @@ List<List<int>> cellCombinations(
               axisValues[label]!.contains(value)) continue valueLoop;
         }
       }
+
+      // Value validation
+      var combination = [...setValues, value];
+      if (validValues != null) {
+        var valid = validValues(combination);
+        if (valid > 0) continue valueLoop;
+        if (valid < 0) break;
+      }
       // Exceeds iteration limit?
       if (iterationLimiter != null) iterationLimiter.increment();
 
+      // Finished combination?
       if (index + 1 == regionCells.length) {
         // Check region total, if any
         var valid = validTotal(total, value);
         if (valid) {
           // Check region mandatory, if any
-          var combination = [...setValues, value];
           if (mandatory == null ||
               mandatory.entries.every((entry) {
                 var index = combination.indexOf(entry.key);
@@ -282,6 +291,7 @@ List<List<int>> cellCombinations(
           validTotal,
           combinationLimiter,
           iterationLimiter,
+          validValues,
         );
         newCombinations.addAll(combinations);
       }

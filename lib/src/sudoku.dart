@@ -39,10 +39,13 @@ class Sudoku implements Puzzle {
   Map<String, Region> get allRegions => _regions;
 
   /// Regions that are not simple SudokuRegion
-  List<Region> get regions => List<Region>.from(this
-      .allRegions
-      .values
-      .where((region) => region.runtimeType != SudokuRegion));
+  List<Region> get regions =>
+      List<Region>.from(this.allRegions.values.where((region) =>
+          region.runtimeType != SudokuRegion && !(region is RegionGroup)));
+
+  /// Regions that are not simple SudokuRegion
+  List<RegionGroup> get regionGroups => List<RegionGroup>.from(
+      this.allRegions.values.where((region) => region is RegionGroup));
 
   late Set<Cell> _updates;
   late List<String> _messages;
