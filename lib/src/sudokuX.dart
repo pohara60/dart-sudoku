@@ -28,7 +28,7 @@ class SudokuX extends PuzzleDecorator {
 
   late RegionCombinationsStrategy regionCombinationsStrategy;
 
-  SudokuX.puzzle(Puzzle puzzle, [partial = false]) {
+  SudokuX.puzzle(Puzzle puzzle, {rising = true, falling = true}) {
     this.puzzle = puzzle;
     var cells1 = <Cell>[];
     var cells2 = <Cell>[];
@@ -36,8 +36,8 @@ class SudokuX extends PuzzleDecorator {
       cells1.add(sudoku.grid[i][i]);
       cells2.add(sudoku.grid[i][8 - i]);
     }
-    allRegions['X1'] = SudokuXRegion(sudoku, 'X1', cells1);
-    allRegions['X2'] = SudokuXRegion(sudoku, 'X2', cells2);
+    if (falling) allRegions['X1'] = SudokuXRegion(sudoku, 'X1', cells1);
+    if (rising) allRegions['X2'] = SudokuXRegion(sudoku, 'X2', cells2);
     // Strategies
     regionCombinationsStrategy = RegionCombinationsStrategy(this);
   }

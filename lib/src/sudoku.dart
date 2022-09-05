@@ -29,7 +29,7 @@ class Sudoku implements Puzzle {
   Sudoku get sudoku => this;
 
   late bool singleStep;
-  bool debug = true;
+  bool debug = false;
 
   late List<List<Cell>> _grid;
   List<List<Cell>> get grid => _grid;
@@ -250,7 +250,7 @@ class Sudoku implements Puzzle {
         if (showPossible) result.writeln(possibleString);
       }
     }
-    result.writeln('solution iterations=$_iterations');
+    //result.writeln('solution iterations=$_iterations');
     result.write(stringFunc());
     return result.toString();
   }
