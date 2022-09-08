@@ -3,14 +3,14 @@ import 'package:sudoku/src/arrow.dart';
 import 'package:sudoku/src/region.dart';
 
 class ArrowRegion extends Region<Arrow> {
-  late Arrow arrow;
-
   ArrowRegion(Arrow arrow, String name, List<Cell> cells, {nodups = true})
       : super(arrow, name, 0, nodups, cells) {
     for (var cell in cells) {
       cell.regions.add(this);
     }
   }
+
+  Arrow get arrow => puzzle;
 
   toString() {
     var sortedCells = cells;
@@ -20,13 +20,11 @@ class ArrowRegion extends Region<Arrow> {
 
   @override
   List<List<int>>? regionCombinations() {
-    var setValues = <int>[];
-    var axisValues = <String, List<int>>{};
     var combinations = nextRegionCombinations(
       0,
       0,
-      setValues,
-      axisValues,
+      <int>[],
+      <String, List<int>>{},
       remainingArrowTotal,
       validArrowTotal,
     );
@@ -39,9 +37,7 @@ class ArrowRegionGroup extends RegionGroup {
       List<Region> regions, List<Cell> cells)
       : super(puzzle, name, nonet, nodups, regions, cells);
 
-  int get minimum {
-    return 0;
-  }
+  Arrow get arrow => puzzle;
 
   @override
   List<List<int>>? regionGroupCombinations(String explanation) {

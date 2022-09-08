@@ -8,6 +8,7 @@ import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/killer.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/sudokuX.dart';
+import 'package:sudoku/src/thermo.dart';
 import 'package:sudoku/src/whisper.dart';
 
 /// Provide access to the Sudoku API.
@@ -90,6 +91,15 @@ class SudokuAPI {
     }
     currentPuzzle = currentPuzzle! + arrowLines.join('\n');
     puzzle = Arrow.puzzle(puzzle!, arrowLines);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addThermo(List<List<String>> thermoLines) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + thermoLines.join('\n');
+    puzzle = Thermo.puzzle(puzzle!, thermoLines);
     return puzzle?.messageString ?? '';
   }
 
