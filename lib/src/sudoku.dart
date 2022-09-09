@@ -48,6 +48,9 @@ class Sudoku implements Puzzle {
   List<RegionGroup> get regionGroups => List<RegionGroup>.from(
       this.allRegions.values.where((region) => region is RegionGroup));
 
+  List<Region> getRegions(Cell cell) => List<Region>.from(
+      cell.regions.where((region) => region.runtimeType != SudokuRegion));
+
   late Set<Cell> _updates;
   late List<String> _messages;
   bool _error = false;
@@ -216,7 +219,7 @@ class Sudoku implements Puzzle {
         explain, result, easyStrategies, toughStrategies, showPossible);
     if (!isSolved() && !_error) {
       // Find cell to try
-      Cell tryCell = findCellToIterate();
+      Cell tryCell = findCellToIterate().first;
       var tryValues = List.from(tryCell.possible.values);
       var state = saveState();
       // Iterate over values while fails until succeeds
@@ -544,8 +547,38 @@ class Sudoku implements Puzzle {
     return updated;
   }
 
-  Cell findCellToIterate() {
-    return _grid[0][2];
+  int cellIterateCompare(Cell a, Cell b) {
+    var aRegions = getRegions(a).length;
+    var bRegions = getRegions(b).length;
+    var diff = aRegions - bRegions;
+    if (diff != 0) return diff;
+    return a.compareTo(b);
+  }
+
+  Iterable<Cell> findCellToIterate() sync* {
+    // Find cells for values that appear twice in a Row/Column/Box
+    var cells = <Cell>{};
+    for (var axis in ['R', 'C', 'B']) {
+      var valuePossibleTwice = sudoku.getValuePossibleIndexes(axis, 2);
+      for (var majorEntry in valuePossibleTwice.values) {
+        for (var entry in majorEntry.entries) {
+          var major = entry.key;
+          var minors = entry.value;
+          for (var minor in minors) {
+            cells.add(getAxisCell(axis, major, minor));
+          }
+        }
+      }
+    }
+    // Order cells by number of regions (i.e. constraints)
+    // that they appear in
+    var sortedCells = List<Cell>.from(cells);
+    sortedCells.sort((a, b) => cellIterateCompare(a, b));
+    for (var cell in sortedCells) {
+      // Check cell has not been set since cells were computed
+      if (!cell.isSet) yield cell;
+    }
+    // yield _grid[0][2];
     // return _grid[2][0];
   }
 
