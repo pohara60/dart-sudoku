@@ -1,5 +1,6 @@
 import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/region.dart';
+import 'package:sudoku/src/solveException.dart';
 
 class Cell {
   int? _value;
@@ -34,6 +35,14 @@ class Cell {
   late Possible _possible;
   Possible get possible => _possible;
   int get possibleCount => _possible.count;
+  void set possible(Possible possible) {
+    var uniqueValue = possible.unique();
+    if (uniqueValue > 0)
+      this._value = uniqueValue;
+    else
+      this._value = null;
+    this._possible = possible;
+  }
 
   late Region rowRegion;
   late Region colRegion;
@@ -65,10 +74,12 @@ class Cell {
   }
 
   bool clearPossible(int value) {
-    return _possible.clear(value);
+    var updated = _possible.clear(value);
+    if (updated) checkPossible();
+    return updated;
   }
 
-  void clearUpdate() {}
+  // void clearUpdate() {}
 
   String format(bool showPossible) => _value != null
       ? _value.toString()
@@ -91,12 +102,14 @@ class Cell {
 
   void togglePossible(int value) {
     _possible.toggle(value);
+    checkPossible();
   }
 
   bool remove(int value) {
     //this.initPossible();
     if (_possible.isPossible(value)) {
       _possible.toggle(value);
+      checkPossible();
       // var countTrue = 0;
       // var valueTrue;
       // for (var e = 1; e < 10; e++) {
@@ -132,15 +145,21 @@ class Cell {
   }
 
   bool removePossible(Possible possible) {
-    return _possible.remove(possible);
+    var updated = _possible.remove(possible);
+    if (updated) checkPossible();
+    return updated;
   }
 
   bool reducePossible(Possible possible) {
-    return _possible.reduce(possible);
+    var updated = _possible.reduce(possible);
+    if (updated) checkPossible();
+    return updated;
   }
 
   bool removeOtherPossible(Possible possible) {
-    return _possible.removeOther(possible);
+    var updated = _possible.removeOther(possible);
+    if (updated) checkPossible();
+    return updated;
   }
 
   getOtherPossible(int value) {
@@ -159,6 +178,12 @@ class Cell {
     var colDiff = this.col - cell.col;
     if (colDiff < -1 || colDiff > 1) return false;
     return true;
+  }
+
+  void checkPossible() {
+    if (possibleCount == 0) {
+      throw SolveException('No values for $this');
+    }
   }
 }
 

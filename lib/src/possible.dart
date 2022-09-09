@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 /// Possible values for a Sudoku cell
 class Possible {
   late final List<bool> _possible;
@@ -23,6 +25,9 @@ class Possible {
   bool isPossible(int value) {
     return _possible[value - _base];
   }
+
+  Iterable<int> get values => _possible
+      .expandIndexed((index, element) => element ? [index + _base] : []);
 
   bool operator [](int value) => _possible[value - _base];
   void operator []=(int value, bool possible) =>

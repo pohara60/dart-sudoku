@@ -3,6 +3,7 @@ import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/region.dart';
+import 'package:sudoku/src/solveException.dart';
 import 'package:sudoku/src/strategy/bugStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenGroupStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenSingleStrategy.dart';
@@ -29,7 +30,7 @@ class Sudoku implements Puzzle {
   Sudoku get sudoku => this;
 
   late bool singleStep;
-  bool debug = false;
+  bool debug = true;
 
   late List<List<Cell>> _grid;
   List<List<Cell>> get grid => _grid;
@@ -124,11 +125,11 @@ class Sudoku implements Puzzle {
   void clearUpdates() {
     _messages = [];
     _updates = {};
-    for (var row in _grid) {
-      for (var cell in row) {
-        cell.clearUpdate();
-      }
-    }
+    // for (var row in _grid) {
+    //   for (var cell in row) {
+    //     cell.clearUpdate();
+    //   }
+    // }
   }
 
   void getUpdates(StringBuffer result) {
@@ -194,19 +195,76 @@ class Sudoku implements Puzzle {
   // ignore: unused_field
   var _iterations = 0;
 
-  String solve(
-      {bool explain = false,
-      bool showPossible = false,
-      List<Strategy>? easyStrategies,
-      List<Strategy>? toughStrategies,
-      Function? toStr}) {
+  String solve({
+    bool explain = false,
+    bool showPossible = false,
+    List<Strategy>? easyStrategies,
+    List<Strategy>? toughStrategies,
+    Function? toStr,
+    bool first = true,
+  }) {
     // Previous error?
     if (_error) return "Error";
 
     String stringFunc() => toStr == null ? toString() : toStr();
 
     var result = StringBuffer();
-    result.writeln(stringFunc());
+    if (first) {
+      result.writeln(stringFunc());
+    }
+    attemptSolve(
+        explain, result, easyStrategies, toughStrategies, showPossible);
+    if (!isSolved() && !_error) {
+      // Find cell to try
+      Cell tryCell = findCellToIterate();
+      var tryValues = List.from(tryCell.possible.values);
+      var state = saveState();
+      // Iterate over values while fails until succeeds
+      for (var value in tryValues) {
+        if (explain) {
+          var msg = debugPrint('Iterate $tryCell value $value');
+          result.writeln(msg);
+        }
+        tryCell.value = value;
+        try {
+          // Solve with new value
+          var nextResult = solve(
+            explain: explain,
+            showPossible: showPossible,
+            easyStrategies: easyStrategies,
+            toughStrategies: toughStrategies,
+            toStr: toStr,
+            first: false,
+          );
+          if (isSolved()) {
+            result.write(nextResult.toString());
+            break;
+          }
+          // Failed to find solution
+          var msg = debugPrint('Iterate failed to find solution!');
+          result.writeln(msg);
+        } on SolveException catch (e) {
+          // Invalid state
+          var msg = debugPrint('Iterate exception ${e.message}!');
+          result.writeln(msg);
+        }
+        restoreState(state);
+      }
+    }
+
+    if (first) {
+      //result.writeln('solution iterations=$_iterations');
+      result.write(stringFunc());
+    }
+    return result.toString();
+  }
+
+  void attemptSolve(
+      bool explain,
+      StringBuffer result,
+      List<Strategy>? easyStrategies,
+      List<Strategy>? toughStrategies,
+      bool showPossible) {
     var updated = true;
     while (updated) {
       clearUpdates();
@@ -253,9 +311,6 @@ class Sudoku implements Puzzle {
         if (showPossible) result.writeln(possibleString);
       }
     }
-    //result.writeln('solution iterations=$_iterations');
-    result.write(stringFunc());
-    return result.toString();
   }
 
   bool invokeStrategy(Solve strategy) {
@@ -384,6 +439,7 @@ class Sudoku implements Puzzle {
   void addMessage(String message, [bool error = false]) {
     _messages.add(message);
     _error |= error;
+    if (_error) throw SolveException(message);
   }
 
   void cellUpdated(Cell cell, String explanation, String? message) {
@@ -475,7 +531,8 @@ class Sudoku implements Puzzle {
   bool updateCellCombinations(
       List<Cell> cells, List<List<int>> combinations, String explanation) {
     var updated = false;
-    assert(combinations.length > 0);
+    if (combinations.length == 0)
+      throw SolveException('No combinations for $explanation');
     List<Possible> unionCombinations =
         unionCellCombinations(cells, combinations);
     cells.forEachIndexed((index, cell) {
@@ -485,6 +542,30 @@ class Sudoku implements Puzzle {
       }
     });
     return updated;
+  }
+
+  Cell findCellToIterate() {
+    return _grid[0][2];
+    // return _grid[2][0];
+  }
+
+  List<List<Possible>> saveState() {
+    // State is just cell possible
+    var state = List.generate(
+        9,
+        (row) =>
+            _grid[row].map((cell) => Possible.from(cell.possible)).toList());
+    return state;
+  }
+
+  void restoreState(List<List<Possible>> state) {
+    state.forEachIndexed((rowIndex, row) {
+      row.forEachIndexed((colIndex, possible) {
+        _grid[rowIndex][colIndex].possible = Possible.from(possible);
+      });
+    });
+    // Clear previous error
+    _error = false;
   }
 }
 
