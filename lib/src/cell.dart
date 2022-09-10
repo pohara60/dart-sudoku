@@ -182,7 +182,7 @@ class Cell {
 
   void checkPossible() {
     if (possibleCount == 0) {
-      throw SolveException('No values for $this');
+      throw SolveException('No values for ${this.name}');
     }
   }
 }

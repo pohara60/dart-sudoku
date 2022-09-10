@@ -224,8 +224,8 @@ class Sudoku implements Puzzle {
       var state = saveState();
       // Iterate over values while fails until succeeds
       for (var value in tryValues) {
+        var msg = debugPrint('Iterate $tryCell, value $value');
         if (explain) {
-          var msg = debugPrint('Iterate $tryCell value $value');
           result.writeln(msg);
         }
         tryCell.value = value;
@@ -245,18 +245,24 @@ class Sudoku implements Puzzle {
           }
           // Failed to find solution
           var msg = debugPrint('Iterate failed to find solution!');
-          result.writeln(msg);
+          if (explain) {
+            result.writeln(msg);
+          }
         } on SolveException catch (e) {
           // Invalid state
           var msg = debugPrint('Iterate exception ${e.message}!');
-          result.writeln(msg);
+          if (explain) {
+            result.writeln(msg);
+          }
         }
         restoreState(state);
       }
     }
 
     if (first) {
-      //result.writeln('solution iterations=$_iterations');
+      if (explain) {
+        result.writeln('Solution iterations=$_iterations');
+      }
       result.write(stringFunc());
     }
     return result.toString();
@@ -547,10 +553,14 @@ class Sudoku implements Puzzle {
     return updated;
   }
 
+  // Order cells by number of regions (i.e. constraints)
+  // that they appear in, then number of values
   int cellIterateCompare(Cell a, Cell b) {
     var aRegions = getRegions(a).length;
     var bRegions = getRegions(b).length;
-    var diff = aRegions - bRegions;
+    var diff = bRegions - aRegions; // more regions first
+    if (diff != 0) return diff;
+    diff = a.possibleCount - b.possibleCount;
     if (diff != 0) return diff;
     return a.compareTo(b);
   }
@@ -570,16 +580,13 @@ class Sudoku implements Puzzle {
         }
       }
     }
-    // Order cells by number of regions (i.e. constraints)
-    // that they appear in
+    // Order cells
     var sortedCells = List<Cell>.from(cells);
     sortedCells.sort((a, b) => cellIterateCompare(a, b));
     for (var cell in sortedCells) {
       // Check cell has not been set since cells were computed
       if (!cell.isSet) yield cell;
     }
-    // yield _grid[0][2];
-    // return _grid[2][0];
   }
 
   List<List<Possible>> saveState() {

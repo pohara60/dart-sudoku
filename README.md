@@ -4,7 +4,7 @@ Dart Sudoku solver package, with Command Line Interface.
 
 ## To Do
 
-1. Support Thermo constraints
+1. Change Region Group creation to focus on intersections?
 2. Cache region combinations to limit next computation?
 3. Support Renban constraints
 4. Support 159 constraints
@@ -15,7 +15,7 @@ Dart Sudoku solver package, with Command Line Interface.
 9. Support Circle (even) and Square (Odd) constraints
 10. Support Knight-move and King-move constraints
 11. Support Palindrome constraints
-12. Add Brute force solvers
+12. Add efficient Brute force solvers
 13. Add Diabolical Strategies
 14. Add Extreme Strategies
 
