@@ -15,7 +15,9 @@ void main() {
     "2.968.413",
     "34......8",
     "168943275"
-  ].join('\n');
+  ].join(
+    '\n',
+  );
   var solution1 = [
     '72.4.8.3.',
     '.8.....47',
@@ -71,6 +73,7 @@ void main() {
     'Hidden Single, R8C5 = 2',
     'Hidden Single, R8C7 = 9',
     'Solved!',
+    'Solution iterations=9',
     '725498136',
     '986312547',
     '431576892',
@@ -94,7 +97,9 @@ void main() {
     "75.4...92",
     "9....5..4",
     "4...9...3"
-  ].join('\n');
+  ].join(
+    '\n',
+  );
   var solution2 = [
     '6.......8',
     '5..9.8..7',
@@ -118,15 +123,63 @@ void main() {
     'Simple Colouring, Rule 4 R6C3,R3C9, remove value 9 from R3C3 = 47',
     'Pointing Group, B1,R1, remove group 9 from R1C7 = 125',
     'XYZ-Wing, R hinge R5C8 B6, remove value 6 from R5C9 = 19',
-    '6.......8',
-    '5..9.8..7',
-    '82...1.3.',
-    '34.2.9.8.',
-    '2...8.3..',
-    '18.3.7.25',
-    '75.4...92',
-    '9....5..4',
-    '4...9...3',
+    'Iterate R1C2 = 79, value 7',
+    'Hidden Single, R1C3 = 9',
+    'Hidden Single, R1C4 = 5',
+    'Hidden Single, R3C3 = 4',
+    'Hidden Single, R5C2 = 9',
+    'Hidden Single, R3C7 = 5',
+    'Hidden Single, R3C9 = 9',
+    'Hidden Single, R4C5 = 5',
+    'Hidden Single, R4C9 = 1',
+    'Hidden Single, R5C3 = 5',
+    'Hidden Single, R5C4 = 1',
+    'Hidden Single, R5C8 = 7',
+    'Hidden Single, R5C9 = 1',
+    'Hidden Single, R6C3 = 6',
+    'Hidden Single, R6C7 = 9',
+    'Hidden Single, R9C8 = 5',
+    'Hidden Single, R2C7 = 4',
+    'Hidden Single, R2C8 = 6',
+    'Hidden Single, R4C3 = 7',
+    'Hidden Single, R4C7 = 6',
+    'Hidden Single, R5C6 = 6',
+    'Hidden Single, R6C5 = 4',
+    'Hidden Single, R1C6 = 4',
+    'Hidden Single, R1C7 = 2',
+    'Hidden Single, R1C8 = 1',
+    'Hidden Single, R2C5 = 2',
+    'Hidden Single, R7C5 = 6',
+    'Hidden Single, R7C6 = 3',
+    'Hidden Single, R8C5 = 1',
+    'Hidden Single, R8C8 = 1',
+    'Hidden Single, R9C6 = 2',
+    'Hidden Single, R1C5 = 3',
+    'Hidden Single, R3C4 = 6',
+    'Hidden Single, R3C5 = 7',
+    'Hidden Single, R7C3 = 1',
+    'Hidden Single, R7C7 = 8',
+    'Hidden Single, R8C2 = 6',
+    'Hidden Single, R8C3 = 2',
+    'Hidden Single, R9C2 = 6',
+    'Hidden Single, R9C3 = 1',
+    'Hidden Single, R2C2 = 1',
+    'Hidden Single, R2C3 = 3',
+    'Hidden Single, R8C4 = 8',
+    'Hidden Single, R8C7 = 7',
+    'Hidden Single, R9C4 = 8',
+    'Hidden Single, R9C7 = 7',
+    'Solved!',
+    'Solution iterations=20',
+    '679534218',
+    '513928467',
+    '824671539',
+    '347259681',
+    '295186371',
+    '186347925',
+    '751463892',
+    '962815714',
+    '461892753'
   ];
 
   var puzzle3 =
@@ -141,7 +194,9 @@ void main() {
     "39.87..26",
     "7649..138",
     "2.863.97."
-  ].join('\n');
+  ].join(
+    '\n',
+  );
   var solution3 = [
     "..7.836..",
     ".397.68..",
@@ -197,6 +252,7 @@ void main() {
     'Hidden Single, R5C1 = 1',
     'Hidden Single, R6C1 = 9',
     'Solved!',
+    'Solution iterations=10',
     '517283649',
     '439756812',
     '826419753',
@@ -220,7 +276,9 @@ void main() {
     "3.16..759",
     "9.8.75.6.",
     "7563.9.82"
-  ].join('\n');
+  ].join(
+    '\n',
+  );
   var solution4 = [
     '174832596',
     '593461278',
@@ -259,6 +317,7 @@ void main() {
     'Hidden Single, R8C2 = 2',
     'Hidden Single, R8C7 = 3',
     'Solved!',
+    'Solution iterations=9',
     '174832596',
     '593461278',
     '682957431',
@@ -280,7 +339,9 @@ void main() {
     ".........",
     ".........",
     ".........",
-  ].join('\n');
+  ].join(
+    '\n',
+  );
 
 // ignore_for_file: unused_local_variable
   const L = "L";
@@ -634,28 +695,36 @@ void main() {
       var sudoku1 = SudokuAPI.sudoku(puzzle1);
       expect(
         sudoku1.solve(true, false),
-        solution1.join('\n'),
+        solution1.join(
+          '\n',
+        ),
       );
     });
     test('sudoku2', () {
       var sudoku2 = SudokuAPI.sudoku(puzzle2);
       expect(
         sudoku2.solve(true, false),
-        solution2.join('\n'),
+        solution2.join(
+          '\n',
+        ),
       );
     });
     test('sudoku3', () {
       var sudoku3 = SudokuAPI.sudoku(puzzle3);
       expect(
         sudoku3.solve(true, false),
-        solution3.join('\n'),
+        solution3.join(
+          '\n',
+        ),
       );
     });
     test('sudoku4', () {
       var sudoku4 = SudokuAPI.sudoku(puzzle4);
       expect(
         sudoku4.solve(true, false),
-        solution4.join('\n'),
+        solution4.join(
+          '\n',
+        ),
       );
     });
   });

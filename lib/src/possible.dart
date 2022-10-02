@@ -5,7 +5,7 @@ class Possible {
   late final List<bool> _possible;
   late final int _base;
 
-  Possible([initial = true, this._base = 1]) {
+  Possible([bool initial = true, int this._base = 1]) {
     _possible = List<bool>.filled(9, initial);
   }
 
@@ -90,6 +90,17 @@ class Possible {
     var result = Possible.from(this);
     for (var value = 0; value < 9; value++) {
       if (other._possible[value]) {
+        result._possible[value] = false;
+      }
+    }
+    return result;
+  }
+
+  Possible intersect(Possible other) {
+    assert(_base == other._base);
+    var result = Possible.from(this);
+    for (var value = 0; value < 9; value++) {
+      if (!other._possible[value]) {
         result._possible[value] = false;
       }
     }

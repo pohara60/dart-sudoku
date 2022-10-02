@@ -96,9 +96,6 @@ class ThermoRegionGroup extends RegionGroup {
 
   int validThermoGroupValues(List<int> values) {
     var cells = this.cells;
-    if (values.length == 4 && values.last == 7) {
-      var debug = true;
-    }
     // Check thermo maximums first as they shortcut processing
     var cell = cells[values.length - 1];
     var value = values[values.length - 1];

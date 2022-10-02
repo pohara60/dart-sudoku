@@ -4,20 +4,21 @@ Dart Sudoku solver package, with Command Line Interface.
 
 ## To Do
 
-1. Change Region Group creation to focus on intersections?
-2. Cache region combinations to limit next computation?
-3. Support Renban constraints
-4. Support 159 constraints
-5. Support Little Killer constraints
-6. Support XV constraints
-7. Support Circle constraints
-8. Support Consecutive/Multiple constraints
-9. Support Circle (even) and Square (Odd) constraints
-10. Support Knight-move and King-move constraints
-11. Support Palindrome constraints
-12. Add efficient Brute force solvers
-13. Add Diabolical Strategies
-14. Add Extreme Strategies
+1. Support Domino (XV, Consecutive/Multiple) constraints
+2. Support Circle constraints
+3. Change iteration strategy to try common value
+4. Change Region Group creation to focus on intersections?
+5. Cache region combinations to limit next computation?
+6. Support Renban constraints
+7. Support Sandwich constraints
+8. Support 159 constraints
+9. Support Little Killer constraints
+10. Support Circle (even) and Square (Odd) constraints
+11. Support Knight-move and King-move constraints
+12. Support Palindrome constraints
+13. Add efficient Brute force solvers
+14. Add Diabolical Strategies
+15. Add Extreme Strategies
 
 ## Strategies
 

@@ -3,6 +3,7 @@
 library sudoku;
 
 import 'package:sudoku/src/arrow.dart';
+import 'package:sudoku/src/domino.dart';
 import 'package:sudoku/src/generator.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/killer.dart';
@@ -100,6 +101,15 @@ class SudokuAPI {
     }
     currentPuzzle = currentPuzzle! + thermoLines.join('\n');
     puzzle = Thermo.puzzle(puzzle!, thermoLines);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addDomino(List<List<String>> dominoLines, [bool full = false]) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + dominoLines.join('\n');
+    puzzle = Domino.puzzle(puzzle!, dominoLines, full);
     return puzzle?.messageString ?? '';
   }
 

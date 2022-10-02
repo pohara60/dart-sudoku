@@ -157,8 +157,57 @@ void main() {
     ['R8C9', 'R7C9', 'R6C9'],
     ['R8C9', 'R9C9', 'R9C8', 'R9C7', 'R9C6', 'R9C5'],
   ];
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addThermo(thermoPuzzle2));
+  // print(puzzle.solve(true, false));
+
+  const dd = ' ';
+  const DX = 'X';
+  const DV = 'V';
+  const DO = 'O';
+  const DE = 'E';
+  const DC = 'C';
+  const DM = 'M';
+  var emptyDomino = [
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+  ];
+  var dominoPuzzle1 = [
+    [XX, DC, XX, dd, XX, dd, XX, dd, XX, dd, XX, DM, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, DC, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [DC, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [DM, dd, DM, dd, dd, dd, DC, dd, dd, dd, DM, dd, dd, dd, dd, dd, dd],
+    [XX, DM, XX, DC, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DC, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DM, XX, DC, XX],
+    [dd, dd, DC, dd, DM, dd, dd, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, DC, XX, DM, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DC, XX, dd, XX, dd, XX],
+    [DC, dd, DC, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DC, XX, dd, XX, DM, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DC, XX],
+  ];
   var puzzle = SudokuAPI.sudoku(emptySudoku);
-  print(puzzle.addThermo(thermoPuzzle2));
+  print(puzzle.addDomino(dominoPuzzle1, true));
   print(puzzle.solve(true, false));
 
   // Difficult "Handshake" puzzle

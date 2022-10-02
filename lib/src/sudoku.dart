@@ -30,7 +30,7 @@ class Sudoku implements Puzzle {
   Sudoku get sudoku => this;
 
   late bool singleStep;
-  bool debug = true;
+  bool debug = false;
 
   late List<List<Cell>> _grid;
   List<List<Cell>> get grid => _grid;
@@ -219,43 +219,47 @@ class Sudoku implements Puzzle {
         explain, result, easyStrategies, toughStrategies, showPossible);
     if (!isSolved() && !_error) {
       // Find cell to try
-      Cell tryCell = findCellToIterate().first;
-      var tryValues = List.from(tryCell.possible.values);
-      var state = saveState();
-      // Iterate over values while fails until succeeds
-      for (var value in tryValues) {
-        var msg = debugPrint('Iterate $tryCell, value $value');
-        if (explain) {
-          result.writeln(msg);
-        }
-        tryCell.value = value;
-        try {
-          // Solve with new value
-          var nextResult = solve(
-            explain: explain,
-            showPossible: showPossible,
-            easyStrategies: easyStrategies,
-            toughStrategies: toughStrategies,
-            toStr: toStr,
-            first: false,
-          );
-          if (isSolved()) {
-            result.write(nextResult.toString());
-            break;
-          }
-          // Failed to find solution
-          var msg = debugPrint('Iterate failed to find solution!');
+      try {
+        Cell tryCell = findCellToIterate().first;
+        var tryValues = List.from(tryCell.possible.values);
+        var state = saveState();
+        // Iterate over values while fails until succeeds
+        for (var value in tryValues) {
+          var msg = debugPrint('Iterate $tryCell, value $value');
           if (explain) {
             result.writeln(msg);
           }
-        } on SolveException catch (e) {
-          // Invalid state
-          var msg = debugPrint('Iterate exception ${e.message}!');
-          if (explain) {
-            result.writeln(msg);
+          tryCell.value = value;
+          try {
+            // Solve with new value
+            var nextResult = solve(
+              explain: explain,
+              showPossible: showPossible,
+              easyStrategies: easyStrategies,
+              toughStrategies: toughStrategies,
+              toStr: toStr,
+              first: false,
+            );
+            if (isSolved()) {
+              result.write(nextResult.toString());
+              break;
+            }
+            // Failed to find solution
+            var msg = debugPrint('Iterate failed to find solution!');
+            if (explain) {
+              result.writeln(msg);
+            }
+          } on SolveException catch (e) {
+            // Invalid state
+            var msg = debugPrint('Iterate exception ${e.message}!');
+            if (explain) {
+              result.writeln(msg);
+            }
           }
+          restoreState(state);
         }
-        restoreState(state);
+      } on StateError catch (e) {
+        // No iteration posible
       }
     }
 
