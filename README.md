@@ -19,6 +19,19 @@ Dart Sudoku solver package, with Command Line Interface.
 13. Add Diabolical Strategies
 14. Add Extreme Strategies
 
+## Parity
+
+Killer region overlaps Parity region(s) may give parity of cell
+  r8c2/8, r5c1/9, r8c2/3/7/8
+Parity domino
+Unit has 4E and 5O
+  rest of r8
+  r7c3/7
+Number E/O known in Killer region, run of Odd parity dominos, in row
+  r3c2/8 E
+Killer region with known parity for all but one cell
+c6r1/2 O because of E count in column
+
 ## Strategies
 
 [Strategies](https.//www.sudokuwiki.org/Strategy_Families)
