@@ -12,7 +12,9 @@ import 'package:sudoku/src/strategy/regionCombinations.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class Domino extends PuzzleDecorator {
-  late final bool full;
+  late final bool negative; // Apply negative constraints
+  final dominoTypes = <DominoType>{}; // Domino types for negative constraints
+
   Map<String, Region> get allRegions => sudoku.allRegions;
   List<Region> get regions => sudoku.regions;
   List<RegionGroup> get regionGroups => sudoku.regionGroups;
@@ -43,7 +45,7 @@ class Domino extends PuzzleDecorator {
   late RegionGroupCombinationsStrategy regionGroupCombinationsStrategy;
 
   Domino.puzzle(Puzzle puzzle, List<List<String>> dominoLines,
-      [this.full = false]) {
+      [this.negative = false]) {
     this.puzzle = puzzle;
     initDomino(dominoLines);
     // Strategies
@@ -225,6 +227,7 @@ class Domino extends PuzzleDecorator {
       var name = 'D${_dominoSeq++}';
       var region = DominoRegion(this, name, type, cells);
       this.allRegions[name] = region;
+      this.dominoTypes.add(type);
     }
   }
 
@@ -282,73 +285,70 @@ class Domino extends PuzzleDecorator {
     }
     return null;
   }
-}
 
-Possible cellNeighbourImpossible(Cell cell) {
-  var neighbour = Possible(true);
-  for (var value = 1; value < 10; value++) {
-    if (cell.isPossible(value)) {
-      var impossible = valueNeighbourImpossible(value);
-      neighbour = neighbour.intersect(impossible);
+  Possible cellNeighbourImpossible(Cell cell) {
+    var neighbour = Possible(true);
+    for (var value = 1; value < 10; value++) {
+      if (cell.isPossible(value)) {
+        var impossible = valueNeighbourImpossible(value);
+        neighbour = neighbour.intersect(impossible);
+      }
     }
+    return neighbour;
   }
-  return neighbour;
-}
 
-Possible valueNeighbourImpossible(int value) {
-  var neighbour = Possible(false);
-  // Include the value itself, as it is not possible for neighbour
-  neighbour[value] = true;
-  for (var otherValue = 1; otherValue < 10; otherValue++) {
-    // TODO Domino Types depend on what appears in puzzle
-    // Returning impossible values, i.e. not negative
-    if (negativeNeighbours(value, otherValue)) neighbour[otherValue] = true;
+  Possible valueNeighbourImpossible(int value) {
+    var neighbour = Possible(false);
+    // Include the value itself, as it is not possible for neighbour
+    neighbour[value] = true;
+    for (var otherValue = 1; otherValue < 10; otherValue++) {
+      // Returning impossible values, i.e. not negative
+      if (negativeNeighbours(value, otherValue)) neighbour[otherValue] = true;
+    }
+    return neighbour;
   }
-  return neighbour;
-}
 
-bool negativeNeighbours(int value, int otherValue) {
-  var result = false;
-  if (validNeighbours(DominoType.DOMINO_C, value, otherValue) == 0)
-    result = true;
-  if (validNeighbours(DominoType.DOMINO_M, value, otherValue) == 0)
-    result = true;
-  return result;
-}
-
-int validNeighbours(DominoType type, int value, int otherValue) {
-  if (type == DominoType.DOMINO_C) {
-    var diff = value - otherValue;
-    if (diff < -1) return 1; // continue processing higher values
-    if (diff > 1) return -1; // break processing higher values
-    return 0;
+  bool negativeNeighbours(int value, int otherValue) {
+    for (var type in this.dominoTypes) {
+      if (validNeighbours(type, value, otherValue) == 0) return true;
+    }
+    return false;
   }
-  if (type == DominoType.DOMINO_M) {
-    if (value > otherValue) {
-      var multiple = value ~/ otherValue;
-      var remainder = value % otherValue;
-      if (multiple < 2) return 1; // continue processing higher values
-      if (multiple > 2 || remainder > 0)
-        return -1; // break processing higher values
-      return 0;
-    } else {
-      var multiple = otherValue ~/ value;
-      var remainder = otherValue % value;
-      if (multiple < 2) return 1; // continue processing higher values
-      if (multiple > 2 || remainder > 0)
-        return 1; // continue processing higher values
+
+  int validNeighbours(DominoType type, int value, int otherValue) {
+    if (type == DominoType.DOMINO_C) {
+      var diff = value - otherValue;
+      if (diff < -1) return 1; // continue processing higher values
+      if (diff > 1) return -1; // break processing higher values
       return 0;
     }
-  }
-  if (type == DominoType.DOMINO_O) {
-    var sum = value + otherValue;
-    if (sum % 2 != 1) return 1; // continue processing higher values
+    if (type == DominoType.DOMINO_M) {
+      if (value > otherValue) {
+        var multiple = value ~/ otherValue;
+        var remainder = value % otherValue;
+        if (multiple < 2) return 1; // continue processing higher values
+        if (multiple > 2 || remainder > 0)
+          return -1; // break processing higher values
+        return 0;
+      } else {
+        var multiple = otherValue ~/ value;
+        var remainder = otherValue % value;
+        if (multiple < 2) return 1; // continue processing higher values
+        if (multiple > 2 || remainder > 0)
+          return 1; // continue processing higher values
+        return 0;
+      }
+    }
+    if (type == DominoType.DOMINO_O) {
+      var sum = value + otherValue;
+      if (sum % 2 != 1) return 1; // continue processing higher values
+      return 0;
+    }
+    if (type == DominoType.DOMINO_E) {
+      var sum = value + otherValue;
+      if (sum % 2 != 0) return 1; // continue processing higher values
+      return 0;
+    }
     return 0;
   }
-  if (type == DominoType.DOMINO_E) {
-    var sum = value + otherValue;
-    if (sum % 2 != 0) return 1; // continue processing higher values
-    return 0;
-  }
-  return 0;
 }

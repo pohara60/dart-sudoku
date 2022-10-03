@@ -15,7 +15,7 @@ class UpdateDominoPossibleStrategy extends Strategy {
     if (!(puzzle is Domino)) return false;
 
     var domino = puzzle as Domino;
-    if (!domino.full) return false;
+    if (!domino.negative) return false;
 
     var updated = false;
     sudoku.grid.forEach((r) => r.forEach((c) {
@@ -35,7 +35,7 @@ class UpdateDominoPossibleStrategy extends Strategy {
     var otherCells = sudoku.adjacentCells(cell);
     for (var otherCell in otherCells) {
       if (domino.sharedDomino(cell, otherCell) == null) {
-        if (cell.removePossible(cellNeighbourImpossible(otherCell)))
+        if (cell.removePossible(domino.cellNeighbourImpossible(otherCell)))
           updated = true;
       }
     }

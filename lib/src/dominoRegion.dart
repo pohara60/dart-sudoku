@@ -166,12 +166,12 @@ class DominoRegionGroup extends RegionGroup {
           var dom = domino.sharedDomino(cell, otherCell);
           if (dom != null) {
             // Adjacent cell in domino, check valid
-            var result = validNeighbours(dom.type, value, otherValue);
+            var result = domino.validNeighbours(dom.type, value, otherValue);
             if (result != 0) return result;
           } else {
             // Adjacent cell not in domino, check negative constraint
-            if (domino.full) {
-              if (negativeNeighbours(value, otherValue)) {
+            if (domino.negative) {
+              if (domino.negativeNeighbours(value, otherValue)) {
                 return 1; // continue processing higher values
               }
             }
