@@ -146,7 +146,8 @@ abstract class RegionGroup<Puzzle> extends Region<Puzzle> {
 
   String toString() {
     var regions = this.regions.map<String>((r) => r.name);
-    var text = '$name $nonet,$regions:${cellsString(cells)}';
+    var text =
+        '$name ${nonet != '' ? '$nonet,' : ''}$regions:${cellsString(cells)}';
     return text;
   }
 

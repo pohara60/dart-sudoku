@@ -30,7 +30,7 @@ class Sudoku implements Puzzle {
   Sudoku get sudoku => this;
 
   late bool singleStep;
-  bool debug = true;
+  bool debug = false;
 
   late List<List<Cell>> _grid;
   List<List<Cell>> get grid => _grid;
@@ -258,6 +258,7 @@ class Sudoku implements Puzzle {
           }
           restoreState(state);
         }
+        // ignore: unused_catch_clause
       } on StateError catch (e) {
         // No iteration posible
       }

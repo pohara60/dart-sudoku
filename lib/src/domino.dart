@@ -254,11 +254,7 @@ class Domino extends PuzzleDecorator {
       if (groupDominos.length > 1) {
         var name = 'DG${_dominoGroupSeq++}';
         groupCells.sort((c1, c2) => c1.compareTo(c2));
-        var source = groupDominos.fold<String>(
-            '',
-            (previousValue, domino) => previousValue != ''
-                ? '$previousValue,${domino.name}'
-                : domino.name);
+        var source = '';
         var nodups = cellsInNonet(groupCells);
         var group = DominoRegionGroup(
           this,
@@ -305,11 +301,19 @@ Possible valueNeighbourImpossible(int value) {
   neighbour[value] = true;
   for (var otherValue = 1; otherValue < 10; otherValue++) {
     // TODO Domino Types depend on what appears in puzzle
-    if (validNeighbours(DominoType.DOMINO_C, value, otherValue) == 0 ||
-        validNeighbours(DominoType.DOMINO_M, value, otherValue) == 0)
-      neighbour[otherValue] = true;
+    // Returning impossible values, i.e. not negative
+    if (negativeNeighbours(value, otherValue)) neighbour[otherValue] = true;
   }
   return neighbour;
+}
+
+bool negativeNeighbours(int value, int otherValue) {
+  var result = false;
+  if (validNeighbours(DominoType.DOMINO_C, value, otherValue) == 0)
+    result = true;
+  if (validNeighbours(DominoType.DOMINO_M, value, otherValue) == 0)
+    result = true;
+  return result;
 }
 
 int validNeighbours(DominoType type, int value, int otherValue) {
@@ -330,7 +334,7 @@ int validNeighbours(DominoType type, int value, int otherValue) {
     } else {
       var multiple = otherValue ~/ value;
       var remainder = otherValue % value;
-      if (multiple < 2) return -1; // break processing higher values
+      if (multiple < 2) return 1; // continue processing higher values
       if (multiple > 2 || remainder > 0)
         return 1; // continue processing higher values
       return 0;

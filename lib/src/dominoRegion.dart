@@ -20,7 +20,7 @@ class DominoRegion extends Region<Domino> {
       {nodups = true})
       : super(
           domino,
-          name,
+          name + type.toString(),
           type == DominoType.DOMINO_X
               ? 10
               : type == DominoType.DOMINO_V
@@ -83,7 +83,7 @@ class DominoRegion extends Region<Domino> {
       } else {
         var multiple = otherValue ~/ value;
         var remainder = otherValue % value;
-        if (multiple < 2) return -1; // break processing higher values
+        if (multiple < 2) return 1; // continue processing higher values
         if (multiple > 2 || remainder > 0)
           return 1; // continue processing higher values
         return 0;
@@ -157,17 +157,25 @@ class DominoRegionGroup extends RegionGroup {
     for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
       var cell = cells[valueIndex];
       var value = values[valueIndex];
-      // Check domino sequence
-      for (var domino in domino.getDominos(cell)) {
-        var index = domino.cells.indexOf(cell);
-        assert(index != -1);
-        var otherCell = domino.cells[(index + 1) % 2];
+      // Check adjacent cells in the group that have a value
+      var otherCells = domino.sudoku.adjacentCells(cell);
+      for (var otherCell in otherCells) {
         var otherValueIndex = this.cells.indexOf(otherCell);
-        if (otherValueIndex < values.length) {
-          // Check for domino other cell
+        if (otherValueIndex != -1 && otherValueIndex < values.length) {
           var otherValue = values[otherValueIndex];
-          var result = validNeighbours(domino.type, value, otherValue);
-          if (result != 0) return result;
+          var dom = domino.sharedDomino(cell, otherCell);
+          if (dom != null) {
+            // Adjacent cell in domino, check valid
+            var result = validNeighbours(dom.type, value, otherValue);
+            if (result != 0) return result;
+          } else {
+            // Adjacent cell not in domino, check negative constraint
+            if (domino.full) {
+              if (negativeNeighbours(value, otherValue)) {
+                return 1; // continue processing higher values
+              }
+            }
+          }
         }
       }
     }
