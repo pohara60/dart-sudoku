@@ -72,7 +72,7 @@ class Domino extends PuzzleDecorator {
           var next = ' ';
           var d =
               sharedDomino(cell, sudoku.getCell(rowIndex + 1, colIndex + 2));
-          if (d != null) d.type.toString();
+          if (d != null) next = d.type.toString();
           rowStr += colours[0]!(next);
         }
         if (rowIndex < 8) {
@@ -135,7 +135,7 @@ class Domino extends PuzzleDecorator {
   void initDomino(List<List<String>> dominoLines) {
     setDomino(dominoLines);
     if (sudoku.error) return;
-    //addRegionGroups();
+    addRegionGroups();
   }
 
   var _dominoSeq = 1;
@@ -228,59 +228,47 @@ class Domino extends PuzzleDecorator {
     }
   }
 
-  void addRegionGroups() {
-    for (var axis in ['R', 'C', 'B']) {
-      for (var major1 = 1; major1 < 10; major1++) {
-        var cells = sudoku.getMajorAxis(axis, major1);
-        var source = '$axis$major1';
-        this.addRegionGroup(cells, source);
-      }
-    }
-  }
-
   var _dominoGroupSeq = 1;
 
-  void addRegionGroup(List<Cell> cells, source) {
-    var dominos = <DominoRegion>[];
-    var outieCells = <Cell>{};
-    var groupCells = <Cell>{};
-    for (var cell in cells) {
-      for (var domino in getDominos(cell)) {
-        if (!dominos.contains(domino)) {
-          // Do not include domino total in group
-          var dominoCells = domino.cells.sublist(1);
-          var union =
-              dominoCells.where((dominoCell) => cells.contains(dominoCell));
-          // Union is empty if just domino total
-          if (union.isNotEmpty) {
-            groupCells.addAll(union);
-            var difference =
-                dominoCells.where((dominoCell) => !cells.contains(dominoCell));
-            outieCells.addAll(difference);
-            dominos.add(domino);
-          }
+  void addRegionGroups() {
+    void closure(DominoRegion domino, List<DominoRegion> groupDominos) {
+      groupDominos.add(domino);
+      for (var cell in domino.cells) {
+        for (var otherDomino
+            in getDominos(cell).where((element) => element != domino)) {
+          if (!groupDominos.contains(otherDomino))
+            closure(otherDomino, groupDominos);
         }
       }
     }
-    // Do not add group for single domino contained in cells
-    if (dominos.isNotEmpty && dominos.length > 1) {
-      // Now create all region groups, combination processing limits inefficiency
-      // Do not bother when outies dominate
-      // ignore: dead_code
-      if (true || outieCells.length < groupCells.length) {
-        var name = 'AG${_dominoGroupSeq++}';
-        var cells = [...groupCells, ...outieCells];
-        cells.sort((c1, c2) => c1.compareTo(c2));
-        var nodups = cellsInNonet(cells);
+
+    var allGroupDominos = <DominoRegion>[];
+    for (var domino in dominos) {
+      if (allGroupDominos.contains(domino)) continue;
+
+      var groupDominos = <DominoRegion>[];
+      closure(domino, groupDominos);
+      var groupCells = groupDominos.expand((e) => e.cells).toSet().toList();
+
+      // Do not add group for single domino
+      if (groupDominos.length > 1) {
+        var name = 'DG${_dominoGroupSeq++}';
+        groupCells.sort((c1, c2) => c1.compareTo(c2));
+        var source = groupDominos.fold<String>(
+            '',
+            (previousValue, domino) => previousValue != ''
+                ? '$previousValue,${domino.name}'
+                : domino.name);
+        var nodups = cellsInNonet(groupCells);
         var group = DominoRegionGroup(
           this,
           name,
           source,
           nodups,
-          dominos,
-          cells,
+          groupDominos,
+          groupCells,
         );
-        // Discard duplicates
+        // Discard duplicates (should not happen)
         if (this
                 .dominoGroups
                 .firstWhereOrNull((dominoGroup) => dominoGroup.equals(group)) ==

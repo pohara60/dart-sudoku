@@ -112,39 +112,13 @@ class DominoRegionGroup extends RegionGroup {
 
   @override
   List<List<int>>? regionGroupCombinations(String explanation) {
-    // Get maximum value of domino totals
-    var totalCells =
-        this.regions.expand((region) => [region.cells[0]]).toList();
-    var combinationCount = Limiter();
-    var iterationCount = Limiter();
-    var totalCombinations = cellCombinations(
-      totalCells,
-      false,
-      null,
-      0,
-      0,
-      <int>[],
-      <String, List<int>>{},
-      remainingNoTotal,
-      validNoTotal,
-      combinationCount,
-      iterationCount,
-    );
-    // print('combinations=$combinationCount, iterations=$iterationCount');
-    var totalMin =
-        totalCombinations.fold<int>(totalCells.length * 9, (min, combination) {
-      var minimum = combination.fold<int>(0, (total, value) => total + value);
-      return minimum < min ? minimum : min;
-    });
-    var totalMax = totalCombinations.fold<int>(0, (max, combination) {
-      var maximum = combination.fold<int>(0, (total, value) => total + value);
-      return maximum > max ? maximum : max;
-    });
-    // Get combinations for domino lines
+    //print('$explanation not yet implemented!');
+    //return null;
+    // Get combinations while validating the (partial) dominos in the group
     // Limited to maximum
     var dominoCells = this.cells;
-    combinationCount = Limiter(COMBINATION_LIMIT);
-    iterationCount = Limiter(ITERATION_LIMIT);
+    var combinationCount = Limiter(COMBINATION_LIMIT);
+    var iterationCount = Limiter(ITERATION_LIMIT);
     // var stopwatch = Stopwatch();
     // stopwatch.start();
     try {
@@ -153,34 +127,19 @@ class DominoRegionGroup extends RegionGroup {
         false,
         null,
         0,
-        totalMax,
+        0,
         <int>[],
         <String, List<int>>{},
-        remainingMaxTotal,
-        validMaxTotal,
+        remainingNoTotal,
+        validNoTotal,
         combinationCount,
         iterationCount,
+        validDominoGroupValues,
       );
       // stopwatch.stop();
       // print(
       //     'combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
       // Get minimum total of dominoCombinations
-      var dominoMin = dominoCombinations.fold<int>(dominoCells.length * 9,
-          (min, combination) {
-        var minimum = combination.fold<int>(0, (total, value) => total + value);
-        return minimum < min ? minimum : min;
-      });
-      // If domino minimum is greater than total minimum, then update domino totals
-      if (dominoMin > totalMin) {
-        var newTotalCombinations = totalCombinations.where((combination) =>
-            combination.fold<int>(0, (total, value) => total + value) >=
-            dominoMin);
-        if (newTotalCombinations.length < totalCombinations.length) {
-          // Update possible - cannot handle result
-          puzzle.sudoku.updateCellCombinations(
-              totalCells, newTotalCombinations.toList(), explanation);
-        }
-      }
       return dominoCombinations;
     } catch (e) {
       // stopwatch.stop();
@@ -188,5 +147,30 @@ class DominoRegionGroup extends RegionGroup {
       //     'exception combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
       return null;
     }
+  }
+
+  int validDominoGroupValues(List<int> values) {
+    var cells = this.cells;
+
+    // Check dominos for each cell that has a value
+    // Recheck earlier cells in case a later cell is in earlier domino
+    for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
+      var cell = cells[valueIndex];
+      var value = values[valueIndex];
+      // Check domino sequence
+      for (var domino in domino.getDominos(cell)) {
+        var index = domino.cells.indexOf(cell);
+        assert(index != -1);
+        var otherCell = domino.cells[(index + 1) % 2];
+        var otherValueIndex = this.cells.indexOf(otherCell);
+        if (otherValueIndex < values.length) {
+          // Check for domino other cell
+          var otherValue = values[otherValueIndex];
+          var result = validNeighbours(domino.type, value, otherValue);
+          if (result != 0) return result;
+        }
+      }
+    }
+    return 0;
   }
 }
