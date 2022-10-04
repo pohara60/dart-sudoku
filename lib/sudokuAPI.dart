@@ -104,12 +104,12 @@ class SudokuAPI {
     return puzzle?.messageString ?? '';
   }
 
-  String addDomino(List<List<String>> dominoLines, [bool full = false]) {
+  String addDomino(List<List<String>> dominoLines, [bool negative = false]) {
     if (puzzle == null) {
       return 'No puzzle!';
     }
     currentPuzzle = currentPuzzle! + dominoLines.join('\n');
-    puzzle = Domino.puzzle(puzzle!, dominoLines, full);
+    puzzle = Domino.puzzle(puzzle!, dominoLines, negative);
     return puzzle?.messageString ?? '';
   }
 

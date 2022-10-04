@@ -206,8 +206,43 @@ void main() {
     [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd],
     [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DC, XX],
   ];
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addDomino(dominoPuzzle1, true));
+  // print(puzzle.solve(true, false));
+
+  var dominoPuzzle2 = [
+    [XX, dd, XX, DO, XX, dd, XX, dd, XX, dd, XX, dd, XX, DE, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, DO, dd, dd, dd, DE, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, DO, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, DO, XX, DO, XX, dd, XX, dd, XX, dd, XX, dd, XX, DO, XX, DO, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, DE, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, DE, dd, dd, dd, DO, dd, dd, dd, DO, dd, dd, dd, DE, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, DE, dd, dd, dd, DO, dd, dd, dd, dd],
+    [XX, DE, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DE, XX],
+    [dd, dd, dd, dd, dd, dd, DE, dd, dd, dd, DO, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [DE, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DO],
+    [XX, dd, XX, DE, XX, dd, XX, dd, XX, dd, XX, dd, XX, DE, XX, dd, XX],
+  ];
+  var dominoKiller2 = [
+    [XX, XX, XX, 23, LL, LL, XX, XX, XX],
+    [XX, 15, XX, XX, UU, XX, XX, 15, XX],
+    [RR, UU, 09, 07, LL, LL, 11, UU, LL],
+    [XX, 12, UU, 28, XX, DD, UU, 16, XX],
+    [RR, UU, XX, UU, LL, LL, XX, UU, LL],
+    [XX, XX, 25, XX, UU, XX, 25, XX, XX],
+    [14, LL, UU, XX, 22, XX, UU, 16, LL],
+    [XX, UU, UU, RR, UU, LL, UU, UU, XX],
+    [XX, RR, UU, XX, XX, XX, UU, LL, XX],
+  ];
   var puzzle = SudokuAPI.sudoku(emptySudoku);
-  print(puzzle.addDomino(dominoPuzzle1, true));
+  print(puzzle.addKiller(dominoKiller2, true));
+  print(puzzle.addDomino(dominoPuzzle2, false));
   print(puzzle.solve(true, false));
 
   // Difficult "Handshake" puzzle
