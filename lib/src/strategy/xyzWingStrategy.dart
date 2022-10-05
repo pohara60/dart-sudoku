@@ -44,7 +44,7 @@ class XYZWingStrategy extends Strategy {
   }
 
   Iterable<List<int>> getTripleAndDoubleIndexes(
-      List<Cell> cells, List<int> indexes, int value) sync* {
+      Cells cells, List<int> indexes, int value) sync* {
     for (var index3 = 0; index3 < cells.length; index3++) {
       var cell3 = cells[index3];
       // Get cells with three possible values including requested value

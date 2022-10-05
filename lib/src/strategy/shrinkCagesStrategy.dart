@@ -19,7 +19,7 @@ class ShrinkCagesStrategy extends Strategy {
     var updated = false;
     for (var cage in killer.cages) {
       // Look at overlapping cages to see if the cage can be split
-      var newCells = List<Cell>.from(cage.cells);
+      var newCells = Cells.from(cage.cells);
       var newTotal = cage.total;
       for (var cageCell in cage.cells) {
         for (var otherCage

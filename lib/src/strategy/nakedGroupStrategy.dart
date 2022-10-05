@@ -28,7 +28,7 @@ class NakedGroupStrategy extends Strategy {
     return updated;
   }
 
-  bool nonetNakedGroup(List<Cell> cells) {
+  bool nonetNakedGroup(Cells cells) {
     var anyUpdate = false;
     // Check cells for groups
     // Ignore known cells
@@ -72,8 +72,8 @@ class NakedGroupStrategy extends Strategy {
   /// f - next index in check cells to try
   /// Returns list of groups, each of which is a list of cells
 ////
-  List<List<Cell>> findGroups(List<Cell> pC, int g, List<Cell> sC, int f) {
-    var groups = <List<Cell>>[];
+  List<Cells> findGroups(Cells pC, int g, Cells sC, int f) {
+    var groups = <Cells>[];
     for (var index = f; index < pC.length; index++) {
       var c = pC[index];
       if (!sC.contains(c) && c.possibleCount <= g) {

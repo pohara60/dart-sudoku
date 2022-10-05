@@ -57,7 +57,7 @@ class Arrow extends PuzzleDecorator {
     //     .where((region) => region.value.runtimeType == ArrowRegion)
     //     .fold<String>(
     //         text, (text, region) => '$text\n${region.value.toString()}');
-    String arrowChars(List<Cell> cells, Cell cell) {
+    String arrowChars(Cells cells, Cell cell) {
       var index = cells.indexOf(cell);
       if (index == 0) return '○';
       var prior = cells[index - 1];
@@ -165,7 +165,7 @@ class Arrow extends PuzzleDecorator {
 
   var _arrowGroupSeq = 1;
 
-  void addRegionGroup(List<Cell> cells, source) {
+  void addRegionGroup(Cells cells, source) {
     var arrows = <ArrowRegion>[];
     var outieCells = <Cell>{};
     var groupCells = <Cell>{};

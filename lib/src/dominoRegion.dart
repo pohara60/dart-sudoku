@@ -15,8 +15,7 @@ enum DominoType {
 
 class DominoRegion extends Region<Domino> {
   final DominoType type;
-  DominoRegion(
-      Domino domino, String name, DominoType this.type, List<Cell> cells,
+  DominoRegion(Domino domino, String name, DominoType this.type, Cells cells,
       {nodups = true})
       : super(
           domino,
@@ -38,7 +37,7 @@ class DominoRegion extends Region<Domino> {
 
   toString() {
     var sortedCells = cells;
-    var text = '$name:${cellsString(sortedCells)}';
+    var text = '$name:${sortedCells.cellsString()}';
     return text;
   }
 
@@ -105,7 +104,7 @@ class DominoRegion extends Region<Domino> {
 
 class DominoRegionGroup extends RegionGroup {
   DominoRegionGroup(Domino puzzle, String name, String nonet, bool nodups,
-      List<Region> regions, List<Cell> cells)
+      List<Region> regions, Cells cells)
       : super(puzzle, name, nonet, nodups, regions, cells);
 
   Domino get domino => puzzle;

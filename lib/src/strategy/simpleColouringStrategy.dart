@@ -35,11 +35,11 @@ class SimpleColouringStrategy extends Strategy {
     // Try each value separately
     for (var value = 1; value < 10; value++) {
       // for axis
-      var chains = <List<Cell>>[];
+      var chains = <Cells>[];
       var cellColour = <Cell, Colour>{};
 
       // Local function to add a cell to a chain
-      void addCellToChain(Cell cell, List<Cell> chain, Colour colour) {
+      void addCellToChain(Cell cell, Cells chain, Colour colour) {
         chain.add(cell);
         cellColour[cell] = colour;
 
@@ -110,7 +110,7 @@ class SimpleColouringStrategy extends Strategy {
 
       // Rule 2
       // Local function to fix chain cells to a colour
-      void fixChain(String location, List<Cell> chain, Colour colour) {
+      void fixChain(String location, Cells chain, Colour colour) {
         for (var cell in chain) {
           if (cellColour[cell] == colour) {
             if (cell.clearPossible(value)) {

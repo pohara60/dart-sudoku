@@ -267,7 +267,7 @@ class Killer extends PuzzleDecorator {
   var _virtualSeq = 1; // Numbering for virtual cages
   var _cageSeq = 1; // Numbering for specified cages
 
-  addVirtualCage(List<Cell> cells, source) {
+  addVirtualCage(Cells cells, source) {
     // If cells include whole cages, make a virtual cage for the other cells
     var newLocations = <List<int>>[];
     var cellsTotal = 45 * (cells.length ~/ 9);

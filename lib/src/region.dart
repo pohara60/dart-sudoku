@@ -2,68 +2,15 @@ import 'package:sudoku/src/cell.dart';
 
 abstract class Region<Puzzle> {
   Puzzle puzzle;
-  List<Cell> cells;
+  Cells cells;
   String name;
   int total;
   bool nodups;
   Map<int, Set<Cell>> mandatory;
   Region(Puzzle this.puzzle, String this.name, int this.total, bool this.nodups,
-      List<Cell> this.cells)
+      Cells this.cells)
       : mandatory = Map<int, Set<Cell>>();
   String toString();
-
-  String cellsString(List<Cell> cells) {
-    var cellText2 = '';
-    var currentRow = -1, currentCol = -1;
-    var lastRow = -1, lastCol = -1;
-    var firstRow = -1, firstCol = -1;
-    String currentText() {
-      var text = '';
-      if (currentRow != -1) {
-        text +=
-            'R${currentRow}C${firstCol == lastCol ? firstCol : firstCol.toString() + '-' + lastCol.toString()}';
-      } else if (currentCol != -1) {
-        text +=
-            'R${firstRow == lastRow ? firstRow : firstRow.toString() + '-' + lastRow.toString()}C$currentCol';
-      }
-      return text;
-    }
-
-    for (final cell in cells) {
-      if (cell.row == currentRow) {
-        if (cell.col == lastCol + 1 || cell.col == lastCol - 1) {
-          lastCol = cell.col;
-          currentCol = -1;
-        } else {
-          cellText2 += (cellText2 != '' ? ',' : '') + currentText();
-          currentCol = cell.col;
-          firstRow = lastRow = cell.row;
-          firstCol = lastCol = cell.col;
-        }
-      } else if (cell.col == currentCol) {
-        if (cell.row == lastRow + 1) {
-          lastRow = cell.row;
-          currentRow = -1;
-        } else if (cell.row == lastRow - 1) {
-          lastRow = cell.row;
-          currentRow = -1;
-        } else {
-          cellText2 += (cellText2 != '' ? ',' : '') + currentText();
-          currentRow = cell.row;
-          firstRow = lastRow = cell.row;
-          firstCol = lastCol = cell.col;
-        }
-      } else {
-        cellText2 += (cellText2 != '' ? ',' : '') + currentText();
-        currentRow = cell.row;
-        currentCol = cell.col;
-        firstCol = lastCol = cell.col;
-        firstRow = lastRow = cell.row;
-      }
-    }
-    cellText2 += (cellText2 != '' ? ',' : '') + currentText();
-    return cellText2;
-  }
 
   bool equals(Region other) {
     // Equal if cells are same
@@ -141,13 +88,13 @@ abstract class RegionGroup<Puzzle> extends Region<Puzzle> {
   String nonet;
   List<Region> regions;
   RegionGroup(Puzzle puzzle, String name, String this.nonet, nodups,
-      List<Region> this.regions, List<Cell> cells)
+      List<Region> this.regions, Cells cells)
       : super(puzzle, name, 0, nodups, cells);
 
   String toString() {
     var regions = this.regions.map<String>((r) => r.name);
     var text =
-        '$name ${nonet != '' ? '$nonet,' : ''}$regions:${cellsString(cells)}';
+        '$name ${nonet != '' ? '$nonet,' : ''}$regions:${cells.cellsString()}';
     return text;
   }
 
@@ -196,7 +143,7 @@ var ITERATION_LIMIT = 100000;
 /// remainingTotal - function to update total for each value
 /// returns the set of values in the combinations
 List<List<int>> cellCombinations(
-  List<Cell> cells,
+  Cells cells,
   bool nodups,
   Map<int, Set<Cell>>? mandatory,
   int index,

@@ -44,7 +44,7 @@ class YWingStrategy extends Strategy {
   }
 
   Iterable<List<int>> getDoubleIndexes(
-      List<Cell> cells, List<int> indexes, int value) sync* {
+      Cells cells, List<int> indexes, int value) sync* {
     for (var index1 = 0; index1 < cells.length; index1++) {
       var cell1 = cells[index1];
       // Get cells with two possible values including requested value

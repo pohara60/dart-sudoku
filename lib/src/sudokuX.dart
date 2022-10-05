@@ -6,7 +6,7 @@ import 'package:sudoku/src/strategy/regionCombinations.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 class SudokuXRegion extends Region<Sudoku> {
-  SudokuXRegion(Sudoku puzzle, String name, List<Cell> cells)
+  SudokuXRegion(Sudoku puzzle, String name, Cells cells)
       : super(puzzle, name, 45, true, cells);
   String toString() => '$name';
 }

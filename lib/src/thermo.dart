@@ -57,7 +57,7 @@ class Thermo extends PuzzleDecorator {
     //     .where((region) => region.value.runtimeType == ThermoRegion)
     //     .fold<String>(
     //         text, (text, region) => '$text\n${region.value.toString()}');
-    String thermoChars(List<Cell> cells, Cell cell) {
+    String thermoChars(Cells cells, Cell cell) {
       var index = cells.indexOf(cell);
       if (index == 0) return '○';
       var prior = cells[index - 1];
@@ -150,7 +150,7 @@ class Thermo extends PuzzleDecorator {
 
   var _thermoGroupSeq = 1;
 
-  void addRegionGroup(List<Cell> cells, source) {
+  void addRegionGroup(Cells cells, source) {
     var thermos = <ThermoRegion>[];
     var outieCells = <Cell>{};
     var groupCells = <Cell>{};

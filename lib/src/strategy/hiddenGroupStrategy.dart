@@ -32,7 +32,7 @@ class HiddenGroupStrategy extends Strategy {
   }
 
   /// Find groups of values that appear in a subset of the cells
-  bool nonetHiddenGroup(List<Cell> cells) {
+  bool nonetHiddenGroup(Cells cells) {
     var possibleCells = cells.where((cell) => !cell.isSet).toList();
     var valuesPossible = getValuesPossible(possibleCells);
     // Ignore known values
@@ -124,8 +124,8 @@ class HiddenGroupStrategy extends Strategy {
   }
 }
 
-List<Cell> unionValuesCells(
-    List<Possible> valuesPossible, List<int> group, List<Cell> cells) {
+Cells unionValuesCells(
+    List<Possible> valuesPossible, List<int> group, Cells cells) {
   var possibles = <Possible>[];
   for (var value in group) {
     possibles.add(valuesPossible[value - 1]);
@@ -145,7 +145,7 @@ Possible unionValuesPossible(List<int> group) {
 
 /// Compute possible cells for values
 /// (Inverts normal meaning of Possible)
-List<Possible> getValuesPossible(List<Cell> cells) {
+List<Possible> getValuesPossible(Cells cells) {
   var result = List<Possible>.generate(9, (index) => Possible(false, 0));
   cells.where((cell) => !cell.isSet).forEachIndexed((index, cell) {
     for (var value = 1; value < 10; value++) {

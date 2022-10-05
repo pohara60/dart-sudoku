@@ -51,6 +51,8 @@ class Cell {
   List<Region> get allRegions => [rowRegion, colRegion, boxRegion, ...regions];
 
   _initRegions(regions) {
+    var gridRegion = regions['G']!;
+    gridRegion.cells.add(this);
     rowRegion = regions['R$row']!;
     rowRegion.cells.add(this);
     colRegion = regions['C$col']!;
@@ -201,34 +203,43 @@ int floor3(i) {
   throw Exception;
 }
 
-bool cellsInNonet(List<Cell> cells) {
+bool cellsInNonet(Cells cells) {
   if (Set.from(cells.map((x) => x.row)).length == 1) return true;
   if (Set.from(cells.map((x) => x.col)).length == 1) return true;
   if (Set.from(cells.map((x) => x.box)).length == 1) return true;
   return false;
 }
 
-Possible unionCellsPossible(List<Cell> cells) {
+bool cellsInMajorAxis(Cells cells, String axis, int major) {
+  var majors = Set.from(cells.map((x) => x.getAxis(axis)));
+  return majors.length == 1 && majors.contains(major);
+}
+
+bool cellsInCells(Cells innerCells, Cells outerCells) {
+  return innerCells.every((cell) => outerCells.contains(cell));
+}
+
+Possible unionCellsPossible(Cells cells) {
   var possibles = cells.map((cell) => cell.possible).toList();
   return unionPossible(possibles);
 }
 
-List<int> countCellsPossible(List<Cell> cells) {
+List<int> countCellsPossible(Cells cells) {
   var possibles = cells.map((cell) => cell.possible).toList();
   return countPossible(possibles);
 }
 
-List<Cell> intersectionCells(List<Cell> l1, List<Cell> l2) {
+Cells intersectionCells(Cells l1, Cells l2) {
   var result = l1.where((cell) => l2.contains(cell)).toList();
   return result;
 }
 
-List<Cell> remainderCells(List<Cell> l1, List<Cell> l2) {
+Cells remainderCells(Cells l1, Cells l2) {
   var result = l1.where((cell) => !l2.contains(cell)).toList();
   return result;
 }
 
-int fixedTotalCells(List<Cell> cells) {
+int fixedTotalCells(Cells cells) {
   if (cells.length == 0) return 0;
   if (cells.length == 1) {
     var cell = cells[0];
@@ -253,7 +264,7 @@ int fixedTotalCells(List<Cell> cells) {
 }
 
 List<Possible> unionCellCombinations(
-    List<Cell> cells, List<List<int>> combinations) {
+    Cells cells, List<List<int>> combinations) {
   var unionCombinations =
       List.generate(cells.length, (index) => Possible(false));
   for (var combination in combinations) {
@@ -263,4 +274,61 @@ List<Possible> unionCellCombinations(
     }
   }
   return unionCombinations;
+}
+
+typedef Cells = List<Cell>;
+
+extension ListCell on Cells {
+  String cellsString() {
+    var cellText2 = '';
+    var currentRow = -1, currentCol = -1;
+    var lastRow = -1, lastCol = -1;
+    var firstRow = -1, firstCol = -1;
+    String currentText() {
+      var text = '';
+      if (currentRow != -1) {
+        text +=
+            'R${currentRow}C${firstCol == lastCol ? firstCol : firstCol.toString() + '-' + lastCol.toString()}';
+      } else if (currentCol != -1) {
+        text +=
+            'R${firstRow == lastRow ? firstRow : firstRow.toString() + '-' + lastRow.toString()}C$currentCol';
+      }
+      return text;
+    }
+
+    for (final cell in this) {
+      if (cell.row == currentRow) {
+        if (cell.col == lastCol + 1 || cell.col == lastCol - 1) {
+          lastCol = cell.col;
+          currentCol = -1;
+        } else {
+          cellText2 += (cellText2 != '' ? ',' : '') + currentText();
+          currentCol = cell.col;
+          firstRow = lastRow = cell.row;
+          firstCol = lastCol = cell.col;
+        }
+      } else if (cell.col == currentCol) {
+        if (cell.row == lastRow + 1) {
+          lastRow = cell.row;
+          currentRow = -1;
+        } else if (cell.row == lastRow - 1) {
+          lastRow = cell.row;
+          currentRow = -1;
+        } else {
+          cellText2 += (cellText2 != '' ? ',' : '') + currentText();
+          currentRow = cell.row;
+          firstRow = lastRow = cell.row;
+          firstCol = lastCol = cell.col;
+        }
+      } else {
+        cellText2 += (cellText2 != '' ? ',' : '') + currentText();
+        currentRow = cell.row;
+        currentCol = cell.col;
+        firstCol = lastCol = cell.col;
+        firstRow = lastRow = cell.row;
+      }
+    }
+    cellText2 += (cellText2 != '' ? ',' : '') + currentText();
+    return cellText2;
+  }
 }

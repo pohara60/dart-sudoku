@@ -37,7 +37,7 @@ class UpdatePossibleStrategy extends Strategy {
   }
 
   /// Update [cell] possible values for values in box [cells], with label [explanation]
-  bool nonetUpdateCell(Cell cell, List<Cell> cells, String explanation) {
+  bool nonetUpdateCell(Cell cell, Cells cells, String explanation) {
     var updated = false;
     var set = unionCellsPossible(cells);
     if (cell.removePossible(set)) {

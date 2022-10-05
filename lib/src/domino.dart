@@ -2,6 +2,7 @@ import 'package:chalkdart/chalk.dart';
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/dominoRegion.dart';
+import 'package:sudoku/src/parityRegion.dart';
 import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/region.dart';
 import 'package:sudoku/src/strategy/regionGroupCombinations.dart';
@@ -65,7 +66,7 @@ class Domino extends PuzzleDecorator {
     //     .fold<String>(
     //         text, (text, region) => '$text\n${region.value.toString()}');
 
-    String dominoRow(int rowIndex, List<Cell> cells) {
+    String dominoRow(int rowIndex, Cells cells) {
       String rowStr = '';
       String nextStr = rowIndex < 8 ? '\n' : '';
       cells.forEachIndexed((colIndex, cell) {
@@ -138,6 +139,9 @@ class Domino extends PuzzleDecorator {
     setDomino(dominoLines);
     if (sudoku.error) return;
     addRegionGroups();
+    if (sudoku.error) return;
+    var parityRegions = ParityRegion.getParityRegions(puzzle);
+    print(parityRegions.toString().replaceAll(', ', '\n'));
   }
 
   var _dominoSeq = 1;

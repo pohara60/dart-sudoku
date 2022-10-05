@@ -3,7 +3,7 @@ import 'package:sudoku/src/thermo.dart';
 import 'package:sudoku/src/region.dart';
 
 class ThermoRegion extends Region<Thermo> {
-  ThermoRegion(Thermo thermo, String name, List<Cell> cells)
+  ThermoRegion(Thermo thermo, String name, Cells cells)
       : super(thermo, name, 0, true, cells) {
     for (var cell in cells) {
       cell.regions.add(this);
@@ -14,7 +14,7 @@ class ThermoRegion extends Region<Thermo> {
 
   toString() {
     var sortedCells = cells;
-    var text = '$name:${cellsString(sortedCells)}';
+    var text = '$name:${sortedCells.cellsString()}';
     return text;
   }
 
@@ -49,7 +49,7 @@ class ThermoRegion extends Region<Thermo> {
 
 class ThermoRegionGroup extends RegionGroup {
   ThermoRegionGroup(Thermo puzzle, String name, String nonet, bool nodups,
-      List<Region> regions, List<Cell> cells)
+      List<Region> regions, Cells cells)
       : super(puzzle, name, nonet, nodups, regions, cells);
 
   Thermo get thermo => puzzle;

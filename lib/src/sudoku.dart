@@ -21,19 +21,19 @@ typedef Solve = bool Function(Puzzle grid);
 
 class SudokuRegion extends Region<Sudoku> {
   // late Killer killer;
-  SudokuRegion(Sudoku puzzle, String name, List<Cell> cells)
+  SudokuRegion(Sudoku puzzle, String name, Cells cells)
       : super(puzzle, name, 45, true, cells);
-  String toString() => 'Sudoku $name';
+  String toString() => '$name';
 }
 
 class Sudoku implements Puzzle {
   Sudoku get sudoku => this;
 
   late bool singleStep;
-  bool debug = true;
+  bool debug = false;
 
-  late List<List<Cell>> _grid;
-  List<List<Cell>> get grid => _grid;
+  late List<Cells> _grid;
+  List<Cells> get grid => _grid;
   Cell getCell(int row, int col) => _grid[row - 1][col - 1];
 
   late Map<String, Region> _regions;
@@ -77,6 +77,7 @@ class Sudoku implements Puzzle {
 
   void _initRegions() {
     this._regions = <String, Region>{};
+    _regions['G'] = SudokuRegion(this, 'G', <Cell>[]);
     for (var r = 1; r < 10; r++) {
       _regions['R$r'] = SudokuRegion(this, 'R$r', <Cell>[]);
       _regions['C$r'] = SudokuRegion(this, 'C$r', <Cell>[]);
@@ -333,14 +334,14 @@ class Sudoku implements Puzzle {
     return updated;
   }
 
-  List<Cell> getBox(int box) => List.from(allRegions['B$box']!.cells);
-  List<Cell> getRow(int row) => List.from(allRegions['R$row']!.cells);
-  List<Cell> getColumn(int col) => List.from(allRegions['C$col']!.cells);
+  Cells getBox(int box) => List.from(allRegions['B$box']!.cells);
+  Cells getRow(int row) => List.from(allRegions['R$row']!.cells);
+  Cells getColumn(int col) => List.from(allRegions['C$col']!.cells);
 
   /// Update possible values in nonet [cells] for [cell] value, with label [explanation]
   ///
   /// For use by UI
-  void cellUpdateNonet(Cell cell, List<Cell> cells, String explanation) {
+  void cellUpdateNonet(Cell cell, Cells cells, String explanation) {
     var values = List.filled(9, false);
     assert(cell.value != null);
     values[cell.value! - 1] = true;
@@ -376,7 +377,7 @@ class Sudoku implements Puzzle {
     }
   }
 
-  List<Cell> getCells3(String axis, int boxMajor, List<Cell> cells) {
+  Cells getCells3(String axis, int boxMajor, Cells cells) {
     var cells3 = <Cell>[];
     for (var boxMinor = 0; boxMinor < 3; boxMinor++) {
       late Cell cell;
@@ -400,7 +401,7 @@ class Sudoku implements Puzzle {
     return solved;
   }
 
-  List<Cell> getCellAxis(String axis, Cell cell) {
+  Cells getCellAxis(String axis, Cell cell) {
     if (axis == 'R') {
       return getRow(cell.row);
     } else if (axis == 'B') {
@@ -410,7 +411,7 @@ class Sudoku implements Puzzle {
     }
   }
 
-  List<Cell> getMajorAxis(String axis, int major) {
+  Cells getMajorAxis(String axis, int major) {
     if (axis == 'R') {
       return getRow(major);
     } else if (axis == 'C') {
@@ -420,7 +421,7 @@ class Sudoku implements Puzzle {
     }
   }
 
-  List<Cell> getMinorAxis(String axis, int minor) {
+  Cells getMinorAxis(String axis, int minor) {
     if (axis == 'R') {
       return getColumn(minor);
     } else if (axis == 'C') {
@@ -467,7 +468,7 @@ class Sudoku implements Puzzle {
     addMessage(addExplanation(explanation, error), true);
   }
 
-  List<Cell> adjacentCells(Cell cell) {
+  Cells adjacentCells(Cell cell) {
     var row = cell.row;
     var col = cell.col;
     var cells = <Cell>[];
@@ -509,7 +510,7 @@ class Sudoku implements Puzzle {
     return valuePossibleMajors;
   }
 
-  List<Cell>? getLineCells(List<String> line) {
+  Cells? getLineCells(List<String> line) {
     var cells = <Cell>[];
     Cell? priorCell;
     String badCells = '';
@@ -543,7 +544,7 @@ class Sudoku implements Puzzle {
   }
 
   bool updateCellCombinations(
-      List<Cell> cells, List<List<int>> combinations, String explanation) {
+      Cells cells, List<List<int>> combinations, String explanation) {
     var updated = false;
     if (combinations.length == 0)
       throw SolveException('No combinations for $explanation');
@@ -586,7 +587,7 @@ class Sudoku implements Puzzle {
       }
     }
     // Order cells
-    var sortedCells = List<Cell>.from(cells);
+    var sortedCells = Cells.from(cells);
     sortedCells.sort((a, b) => cellIterateCompare(a, b));
     for (var cell in sortedCells) {
       // Check cell has not been set since cells were computed

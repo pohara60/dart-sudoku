@@ -8,7 +8,7 @@ class KillerRegion extends Region<Killer> {
   late String source;
   int? colour;
 
-  KillerRegion(Killer killer, String name, int total, List<Cell> cells,
+  KillerRegion(Killer killer, String name, int total, Cells cells,
       [bool this.virtual = false, bool nodups = true, String this.source = ''])
       : super(killer, name, total, nodups, cells) {
     for (var cell in cells) {
@@ -34,7 +34,7 @@ class KillerRegion extends Region<Killer> {
   toString() {
     var sortedCells = cells;
     var text =
-        '$name $total$source${nodups ? '' : 'd'}:${cellsString(sortedCells)}';
+        '$name $total$source${nodups ? '' : 'd'}:${sortedCells.cellsString()}';
     return text;
   }
 }

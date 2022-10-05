@@ -3,7 +3,7 @@ import 'package:sudoku/src/arrow.dart';
 import 'package:sudoku/src/region.dart';
 
 class ArrowRegion extends Region<Arrow> {
-  ArrowRegion(Arrow arrow, String name, List<Cell> cells, {nodups = true})
+  ArrowRegion(Arrow arrow, String name, Cells cells, {nodups = true})
       : super(arrow, name, 0, nodups, cells) {
     for (var cell in cells) {
       cell.regions.add(this);
@@ -14,7 +14,7 @@ class ArrowRegion extends Region<Arrow> {
 
   toString() {
     var sortedCells = cells;
-    var text = '$name:${cellsString(sortedCells)}';
+    var text = '$name:${sortedCells.cellsString()}';
     return text;
   }
 
@@ -34,7 +34,7 @@ class ArrowRegion extends Region<Arrow> {
 
 class ArrowRegionGroup extends RegionGroup {
   ArrowRegionGroup(Arrow puzzle, String name, String nonet, bool nodups,
-      List<Region> regions, List<Cell> cells)
+      List<Region> regions, Cells cells)
       : super(puzzle, name, nonet, nodups, regions, cells);
 
   Arrow get arrow => puzzle;

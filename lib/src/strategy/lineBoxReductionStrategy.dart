@@ -64,8 +64,8 @@ class LineBoxReductionStrategy extends Strategy {
         var locationAxis = addExplanation(
             explanation, '${cells3[0].boxName},${cells3[0].getAxisName(axis)}');
         // Get cells to check and cells to update according to scope
-        late List<Cell> cells6;
-        late List<Cell> updateCells;
+        late Cells cells6;
+        late Cells updateCells;
         if (scope == 'B') {
           cells6 = boxCells6;
           updateCells = axisCells6;

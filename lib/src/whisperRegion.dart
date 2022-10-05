@@ -6,7 +6,7 @@ class WhisperRegion extends Region<Whisper> {
   late Whisper whisper;
   int difference;
 
-  WhisperRegion(Whisper whisper, String name, List<Cell> cells,
+  WhisperRegion(Whisper whisper, String name, Cells cells,
       {nodups = true, this.difference = 5})
       : super(whisper, name, 0, nodups, cells) {
     for (var cell in cells) {
