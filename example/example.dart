@@ -222,7 +222,7 @@ void main() {
     [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
     [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
     [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
-    [dd, dd, dd, dd, dd, dd, dd, dd, DE, dd, dd, dd, DO, dd, dd, dd, dd],
+    [dd, dd, dd, dd, DO, dd, dd, dd, DE, dd, dd, dd, DO, dd, dd, dd, dd],
     [XX, DE, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DE, XX],
     [dd, dd, dd, dd, dd, dd, DE, dd, dd, dd, DO, dd, dd, dd, dd, dd, dd],
     [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],

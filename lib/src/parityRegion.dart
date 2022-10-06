@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/dominoRegion.dart';
 import 'package:sudoku/src/puzzle.dart';
@@ -20,13 +18,13 @@ enum Parity {
 
 class ParityRegion {
   Parity parity;
-  final Region? region;
+  final Region region;
   Cells? cells;
   late final List<ParityRegion> children;
   late final List<ParityRegion> parents;
   ParityRegion({
     this.parity = Parity.UNKNOWN,
-    this.region = null,
+    required this.region,
     this.cells = null,
     List<ParityRegion>? children,
     ParityRegion? parent,
@@ -35,8 +33,7 @@ class ParityRegion {
     this.parents = parent != null ? [parent] : [];
   }
 
-  String get name =>
-      this.region?.name ?? this.cells?.cellsString() ?? 'unknown';
+  String get name => this.region.name;
 
   String toString() {
     return '${this.name}' +
@@ -60,6 +57,12 @@ class ParityRegion {
     var parityRegions = <Region, ParityRegion>{};
     var sudoku = puzzle.sudoku;
     addParityRegion(sudoku, parityRegions, sudoku.allRegions['G']!, null);
+    // Process regions that do not fit in B/R/C
+    for (var region in sudoku.regions) {
+      if (!parityRegions.containsKey(region)) {
+        addParityRegion(sudoku, parityRegions, region, null);
+      }
+    }
     return parityRegions;
   }
 
@@ -68,10 +71,9 @@ class ParityRegion {
       Map<Region, ParityRegion> parityRegions,
       Region<dynamic> region,
       ParityRegion? parent) {
-    var parityRegion = parityRegions.values
-        .firstWhereOrNull((parityRegion) => parityRegion.region == region);
-    if (parityRegion != null && parent != null) {
-      parityRegion.parents.add(parent);
+    var parityRegion = parityRegions[region];
+    if (parityRegion != null) {
+      if (parent != null) parityRegion.parents.add(parent);
       return parityRegion;
     }
 

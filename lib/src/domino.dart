@@ -7,6 +7,7 @@ import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/region.dart';
 import 'package:sudoku/src/strategy/regionGroupCombinations.dart';
 import 'package:sudoku/src/strategy/updateDominoPossibleStrategy.dart';
+import 'package:sudoku/src/strategy/updateParityStrategyy.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/strategy/regionCombinations.dart';
@@ -15,6 +16,7 @@ import 'package:sudoku/src/strategy/strategy.dart';
 class Domino extends PuzzleDecorator {
   late final bool negative; // Apply negative constraints
   final dominoTypes = <DominoType>{}; // Domino types for negative constraints
+  Map<Region, ParityRegion>? parityRegions;
 
   Map<String, Region> get allRegions => sudoku.allRegions;
   List<Region> get regions => sudoku.regions;
@@ -42,6 +44,7 @@ class Domino extends PuzzleDecorator {
       .where((region) => region.runtimeType == DominoRegionGroup));
 
   late UpdateDominoPossibleStrategy updateDominoPossibleStrategy;
+  late UpdateParityStrategy updateParityStrategy;
   late RegionCombinationsStrategy regionCombinationsStrategy;
   late RegionGroupCombinationsStrategy regionGroupCombinationsStrategy;
 
@@ -51,6 +54,7 @@ class Domino extends PuzzleDecorator {
     initDomino(dominoLines);
     // Strategies
     updateDominoPossibleStrategy = UpdateDominoPossibleStrategy(this);
+    updateParityStrategy = UpdateParityStrategy(this);
     regionCombinationsStrategy = RegionCombinationsStrategy(this);
     regionGroupCombinationsStrategy = RegionGroupCombinationsStrategy(this);
   }
@@ -110,7 +114,8 @@ class Domino extends PuzzleDecorator {
     var strategies1 = List<Strategy>.from(easyStrategies ?? []);
     for (var strategy in [
       regionCombinationsStrategy,
-      regionGroupCombinationsStrategy
+      regionGroupCombinationsStrategy,
+      updateParityStrategy,
     ]) {
       if (!strategies1.any((s) => s.runtimeType == strategy.runtimeType)) {
         strategies1.add(strategy);
@@ -140,7 +145,7 @@ class Domino extends PuzzleDecorator {
     if (sudoku.error) return;
     addRegionGroups();
     if (sudoku.error) return;
-    var parityRegions = ParityRegion.getParityRegions(puzzle);
+    this.parityRegions = ParityRegion.getParityRegions(puzzle);
     print(parityRegions.toString().replaceAll(', ', '\n'));
   }
 

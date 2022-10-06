@@ -132,6 +132,36 @@ class Possible {
     }
     return updated;
   }
+
+  bool setEven() {
+    var updated = false;
+    for (var value = _base; value < _base + 9; value += 2) {
+      if (clear(value)) updated = true;
+    }
+    return updated;
+  }
+
+  bool setOdd() {
+    var updated = false;
+    for (var value = _base + 1; value < _base + 9; value += 2) {
+      if (clear(value)) updated = true;
+    }
+    return updated;
+  }
+
+  bool isEven() {
+    for (var value = 0; value < 9; value += 2) {
+      if (_possible[value]) return false;
+    }
+    return true;
+  }
+
+  bool isOdd() {
+    for (var value = 1; value < 9; value += 2) {
+      if (_possible[value]) return false;
+    }
+    return true;
+  }
 }
 
 Possible unionPossible(List<Possible> possibles, [base = 1]) {

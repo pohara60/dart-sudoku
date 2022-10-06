@@ -187,6 +187,22 @@ class Cell {
       throw SolveException('No values for ${this.name}');
     }
   }
+
+  bool setEven() {
+    return _possible.setEven();
+  }
+
+  bool setOdd() {
+    return _possible.setOdd();
+  }
+
+  bool isEven() {
+    return _possible.isEven();
+  }
+
+  bool isOdd() {
+    return _possible.isOdd();
+  }
 }
 
 /// Return [i] div 3 for 1-based index
