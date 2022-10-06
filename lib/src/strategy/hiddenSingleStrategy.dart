@@ -19,6 +19,7 @@ class HiddenSingleStrategy extends Strategy {
     var updated = false;
     if (cell.checkUnique()) {
       updated = true;
+      sudoku.cellUpdated(cell, 'Naked Single', '$cell');
     } else {
       // Check for a possible value not in box, row or column
       for (var axis in ['R', 'C', 'B']) {
@@ -30,11 +31,9 @@ class HiddenSingleStrategy extends Strategy {
         if (value > 0) {
           cell.value = value;
           updated = true;
+          sudoku.cellUpdated(cell, explanation, '$cell');
         }
       }
-    }
-    if (updated) {
-      sudoku.cellUpdated(cell, explanation, '$cell');
     }
     return updated;
   }
