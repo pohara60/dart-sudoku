@@ -240,9 +240,46 @@ void main() {
     [XX, UU, UU, RR, UU, LL, UU, UU, XX],
     [XX, RR, UU, XX, XX, XX, UU, LL, XX],
   ];
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addKiller(dominoKiller2, true));
+  // print(puzzle.addDomino(dominoPuzzle2, false));
+  // print(puzzle.solve(true, false));
+
+  var dominoPuzzle3 = [
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, DV, XX, dd, XX, dd, XX, dd, XX, dd, XX, DV, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DV, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, DX, XX, dd, XX, dd, XX, dd, XX, dd, XX, DX, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, DX, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, DV, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, DX, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DX, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+  ];
+  var sandwichPuzzle3 = [
+    ['C2', 3],
+    ['C5', 6],
+    ['C7', 25],
+    ['C8', 9],
+    ['R1', 30],
+    ['R2', 5],
+    ['R3', 4],
+    ['R5', 10],
+    ['R7', 30],
+    ['R8', 15],
+    ['R9', 4],
+  ];
   var puzzle = SudokuAPI.sudoku(emptySudoku);
-  print(puzzle.addKiller(dominoKiller2, true));
-  print(puzzle.addDomino(dominoPuzzle2, false));
+  print(puzzle.addDomino(dominoPuzzle3, false));
+  print(puzzle.addSandwich(sandwichPuzzle3));
   print(puzzle.solve(true, false));
 
   // Difficult "Handshake" puzzle

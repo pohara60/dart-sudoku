@@ -5,6 +5,7 @@ library sudoku;
 import 'package:sudoku/src/arrow.dart';
 import 'package:sudoku/src/domino.dart';
 import 'package:sudoku/src/generator.dart';
+import 'package:sudoku/src/sandwich.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/killer.dart';
 import 'package:sudoku/src/puzzle.dart';
@@ -91,7 +92,7 @@ class SudokuAPI {
       return 'No puzzle!';
     }
     currentPuzzle = currentPuzzle! + arrowLines.join('\n');
-    puzzle = Arrow.puzzle(puzzle!, arrowLines);
+    puzzle = Sandwich.puzzle(puzzle!, arrowLines);
     return puzzle?.messageString ?? '';
   }
 
@@ -110,6 +111,15 @@ class SudokuAPI {
     }
     currentPuzzle = currentPuzzle! + dominoLines.join('\n');
     puzzle = Domino.puzzle(puzzle!, dominoLines, negative);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addSandwich(List<List<dynamic>> sandwichLines) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + sandwichLines.join('\n');
+    puzzle = Sandwich.puzzle(puzzle!, sandwichLines);
     return puzzle?.messageString ?? '';
   }
 

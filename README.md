@@ -19,6 +19,10 @@ Dart Sudoku solver package, with Command Line Interface.
 13. Add Diabolical Strategies
 14. Add Extreme Strategies
 
+## Sandwich Outstanding
+
+Need Mixed Region Group to check valid values with intersecting (Domino) regions
+
 ## Parity Outstanding
 
 Run of Odd parity dominos (DominoRegionGroup), in row, e.g. r3c2/8 E

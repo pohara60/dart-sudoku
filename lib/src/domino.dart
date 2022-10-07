@@ -146,7 +146,9 @@ class Domino extends PuzzleDecorator {
     addRegionGroups();
     if (sudoku.error) return;
     this.parityRegions = ParityRegion.getParityRegions(puzzle);
-    if (sudoku.debug)
+    if (sudoku.debug &&
+        [DominoType.DOMINO_O, DominoType.DOMINO_E]
+            .any((type) => this.dominoTypes.contains(type)))
       print(parityRegions.toString().replaceAll(', ', '\n'));
   }
 

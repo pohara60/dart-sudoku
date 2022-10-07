@@ -45,7 +45,7 @@ class DominoRegion extends Region<Domino> {
   List<List<int>>? regionCombinations() {
     var combinations = nextRegionCombinations(
       0,
-      0,
+      this.total,
       <int>[],
       <String, List<int>>{},
       remainingOptionalTotal,
