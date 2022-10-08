@@ -22,6 +22,10 @@ Dart Sudoku solver package, with Command Line Interface.
 ## Sandwich Outstanding
 
 Need Mixed Region Group to check valid values with intersecting (Domino) regions
+C7 1 in r2c7 because 23 in V prevents outie c1/2/3
+R5 X not 1/9, 1/9 not between X => r5c1/4 or c6/9 (not r5c5)
+C5 1 in r4c5
+R8 X not 1/9, 15 => 2-5 cells, but r8c6=2/3 ... so 1/9 in r8c3/7
 
 ## Parity Outstanding
 

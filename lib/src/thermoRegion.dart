@@ -1,4 +1,5 @@
 import 'package:sudoku/src/cell.dart';
+import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/thermo.dart';
 import 'package:sudoku/src/region.dart';
 
@@ -79,7 +80,7 @@ class ThermoRegionGroup extends RegionGroup {
         validNoTotal,
         combinationCount,
         iterationCount,
-        validThermoGroupValues,
+        validThermoRegionGroupValues,
       );
       // stopwatch.stop();
       // print(
@@ -94,9 +95,15 @@ class ThermoRegionGroup extends RegionGroup {
     }
   }
 
-  int validThermoGroupValues(List<int> values) {
+  int validThermoRegionGroupValues(List<int> values) {
     var cells = this.cells;
+    return validThermoGroupValues(values, cells, puzzle);
+  }
+
+  static int validThermoGroupValues(
+      List<int> values, Cells cells, Puzzle puzzle) {
     // Check thermo maximums first as they shortcut processing
+    var thermo = puzzle as Thermo;
     var cell = cells[values.length - 1];
     var value = values[values.length - 1];
     for (var thermo in thermo.getThermos(cell)) {
@@ -117,7 +124,7 @@ class ThermoRegionGroup extends RegionGroup {
         assert(index != -1);
         if (index > 0) {
           var priorCell = thermo.cells[index - 1];
-          var priorValueIndex = this.cells.indexOf(priorCell);
+          var priorValueIndex = cells.indexOf(priorCell);
           if (priorValueIndex < values.length) {
             // Check for thermo from prior cell
             var priorValue = values[priorValueIndex];

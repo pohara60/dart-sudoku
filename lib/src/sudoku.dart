@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
+import 'package:sudoku/src/dominoRegion.dart';
 import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/region.dart';
@@ -16,6 +17,8 @@ import 'package:sudoku/src/strategy/updatePossibleStrategy.dart';
 import 'package:sudoku/src/strategy/xyzWingStrategy.dart';
 import 'package:sudoku/src/strategy/yWingStrategy.dart';
 import 'package:sudoku/src/strategy/xWingStrategy.dart';
+
+import 'mixedRegionGroup.dart';
 
 typedef Solve = bool Function(Puzzle grid);
 
@@ -211,6 +214,8 @@ class Sudoku implements Puzzle {
     if (_error) return "Error";
 
     String stringFunc() => toStr == null ? toString() : toStr();
+
+    addMixedRegionGroups();
 
     var result = StringBuffer();
     if (first) {
@@ -612,6 +617,85 @@ class Sudoku implements Puzzle {
     });
     // Clear previous error
     _error = false;
+  }
+
+  var addedMixedRegionGroups = false;
+
+  void addMixedRegionGroups() {
+    if (addedMixedRegionGroups) return;
+    addedMixedRegionGroups = true;
+
+    // Creat RegionGroup for each group of intersecting regions
+    var doneRegions = <Region>[];
+    var doneCells = <Cell>[];
+    for (var region in sudoku.regions) {
+      if (!doneRegions.contains(region)) {
+        addMixedRegionGroup(region, doneRegions, doneCells, true);
+      }
+    }
+    if (debug) {
+      print(allRegions.entries
+          .where((element) =>
+              element.key.length > 2 && element.key.substring(0, 2) == 'MG')
+          .map((e) => e.value)
+          .join('\n'));
+    }
+  }
+
+  var _mixedGroupSeq = 1;
+
+  void addMixedRegionGroup(
+    Region region,
+    List<Region> doneRegions,
+    Cells doneCells,
+    bool root, [
+    List<Region>? newRegions,
+    Cells? newCells,
+  ]) {
+    if (root) {
+      newRegions = <Region>[];
+      newCells = <Cell>[];
+    } else {
+      assert(newRegions != null && newCells != null);
+    }
+    doneRegions.add(region);
+    newRegions!.add(region);
+    for (var cell in region.cells) {
+      if (!doneCells.contains(cell)) {
+        doneCells.add(cell);
+        newCells!.add(cell);
+        for (var otherRegion in getRegions(cell)) {
+          if (!doneRegions.contains(otherRegion)) {
+            // Intersection of same regions handled by specific RegionGroups
+            // Allow multiple Dominos with other types!
+            if (otherRegion.runtimeType == DominoRegion ||
+                !newRegions.any((region) =>
+                    region.runtimeType == otherRegion.runtimeType)) {
+              addMixedRegionGroup(otherRegion, doneRegions, doneCells, false,
+                  newRegions, newCells);
+            }
+          }
+        }
+      }
+    }
+    // If multiple regions then create group
+    // Exclude just Dominos which have specific RegionGroup
+    if (root &&
+        newRegions.length > 1 &&
+        !newRegions.every((region) => region.runtimeType == DominoRegion)) {
+      var name = 'MG${_mixedGroupSeq++}';
+      var nonet = '';
+      var nodups = cellsInNonet(newCells!);
+      var mixedRegionGroup = MixedRegionGroup(
+        sudoku,
+        name,
+        nonet,
+        nodups,
+        newRegions,
+        newCells,
+      );
+      allRegions[name] = mixedRegionGroup;
+    }
   }
 }
 

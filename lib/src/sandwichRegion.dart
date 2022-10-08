@@ -1,4 +1,5 @@
 import 'package:sudoku/src/cell.dart';
+import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/sandwich.dart';
 import 'package:sudoku/src/region.dart';
 
@@ -28,12 +29,16 @@ class SandwichRegion extends Region<Sandwich> {
       remainingNoTotal,
       validNoTotal,
       true, // limited
-      validSandwichValues,
+      validSandwichRegionValues,
     );
     return combinations;
   }
 
-  int validSandwichValues(List<int> values) {
+  int validSandwichRegionValues(List<int> values) {
+    return validSandwichValues(values, this.total);
+  }
+
+  static int validSandwichValues(List<int> values, int total) {
     var inSandwich = false;
     var innieTotal = 0;
     var priorInnie = 0;
@@ -50,13 +55,60 @@ class SandwichRegion extends Region<Sandwich> {
           outieTotal += value;
       }
     }
-    if (innieTotal > this.total && priorInnie == this.total)
+    if (innieTotal > total && priorInnie == total)
       return 1; // continue processing higher values to get 9
-    if (innieTotal > this.total) return -1; // break processing higher values
-    if (outieTotal > 45 - 10 - this.total)
+    if (innieTotal > total) return -1; // break processing higher values
+    if (outieTotal > 45 - 10 - total)
       return 1; // continue processing higher values to get 9
-    if (innieTotal > 0 && !inSandwich && innieTotal < this.total)
+    if (innieTotal > 0 && !inSandwich && innieTotal < total)
       return 1; // continue processing higher values
+    return 0;
+  }
+
+  static int validSandwichGroupValues(
+      List<int> values, Cells cells, Puzzle puzzle,
+      [List<Region>? regions]) {
+    var sandwich = puzzle as Sandwich;
+
+    // Check sandwich for cells in order
+    var doneRegions = <SandwichRegion>[];
+    for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
+      var cell = cells[valueIndex];
+      var value = values[valueIndex];
+      // Check sandwich sequence
+      for (var sandwichRegion in sandwich.getSandwichs(cell).where(
+          (sandwichRegion) =>
+              !doneRegions.contains(sandwichRegion) &&
+              (regions == null || regions.contains(sandwichRegion)))) {
+        var index = sandwichRegion.cells.indexOf(cell);
+        assert(index != -1);
+        var sandwichValues = List<int>.filled(sandwichRegion.cells.length, 0);
+        sandwichValues[index] = value;
+        if (index > 0) {
+          // Check if prior cells in sandwich have values
+          for (var priorValueIndex = valueIndex - 1;
+              priorValueIndex >= 0;
+              priorValueIndex--) {
+            var priorCell = cells[priorValueIndex];
+            var priorValue = values[priorValueIndex];
+            var priorIndex = sandwichRegion.cells.indexOf(priorCell);
+            if (priorIndex != -1) {
+              // In sandwich
+              sandwichValues[priorIndex] = priorValue;
+            }
+          }
+        }
+        // Do we have a run of cells?
+        var runValues =
+            sandwichValues.takeWhile((value) => value != 0).toList();
+        if (runValues.length > 0) {
+          var result = SandwichRegion.validSandwichValues(
+              runValues, sandwichRegion.total);
+          if (result != 0) return result;
+        }
+        doneRegions.add(sandwichRegion);
+      }
+    }
     return 0;
   }
 }

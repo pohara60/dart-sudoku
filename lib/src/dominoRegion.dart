@@ -1,5 +1,6 @@
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/domino.dart';
+import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/region.dart';
 
 enum DominoType {
@@ -133,7 +134,7 @@ class DominoRegionGroup extends RegionGroup {
         validNoTotal,
         combinationCount,
         iterationCount,
-        validDominoGroupValues,
+        validDominoRegionGroupValues,
       );
       // stopwatch.stop();
       // print(
@@ -148,9 +149,14 @@ class DominoRegionGroup extends RegionGroup {
     }
   }
 
-  int validDominoGroupValues(List<int> values) {
+  int validDominoRegionGroupValues(List<int> values) {
     var cells = this.cells;
+    return validDominoGroupValues(values, cells, puzzle);
+  }
 
+  static int validDominoGroupValues(
+      List<int> values, Cells cells, Puzzle puzzle) {
+    var domino = puzzle as Domino;
     // Check dominos for each cell that has a value
     // Recheck earlier cells in case a later cell is in earlier domino
     for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
@@ -159,7 +165,7 @@ class DominoRegionGroup extends RegionGroup {
       // Check adjacent cells in the group that have a value
       var otherCells = domino.sudoku.adjacentCells(cell);
       for (var otherCell in otherCells) {
-        var otherValueIndex = this.cells.indexOf(otherCell);
+        var otherValueIndex = cells.indexOf(otherCell);
         if (otherValueIndex != -1 && otherValueIndex < values.length) {
           var otherValue = values[otherValueIndex];
           var dom = domino.sharedDomino(cell, otherCell);
