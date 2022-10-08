@@ -361,6 +361,18 @@ class Domino extends PuzzleDecorator {
       if (sum % 2 != 0) return 1; // continue processing higher values
       return 0;
     }
+    if (type == DominoType.DOMINO_V) {
+      var sum = value + otherValue;
+      if (sum < 5) return 1; // continue processing higher values
+      if (sum > 5) return -1; // break processing higher values
+      return 0;
+    }
+    if (type == DominoType.DOMINO_X) {
+      var sum = value + otherValue;
+      if (sum < 10) return 1; // continue processing higher values
+      if (sum > 10) return -1; // break processing higher values
+      return 0;
+    }
     return 0;
   }
 }
