@@ -92,7 +92,7 @@ class SudokuAPI {
       return 'No puzzle!';
     }
     currentPuzzle = currentPuzzle! + arrowLines.join('\n');
-    puzzle = Sandwich.puzzle(puzzle!, arrowLines);
+    puzzle = Arrow.puzzle(puzzle!, arrowLines);
     return puzzle?.messageString ?? '';
   }
 

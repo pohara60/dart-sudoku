@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'killerRegion.dart';
 import 'sandwichRegion.dart';
 import 'sudoku.dart';
 import 'thermoRegion.dart';
@@ -82,6 +83,13 @@ class MixedRegionGroup extends RegionGroup {
     if (sandwichRegion != null) {
       result = SandwichRegion.validSandwichGroupValues(
           values, cells, sandwichRegion.puzzle, regions);
+      if (result != 0) return result;
+    }
+    var killerRegion =
+        regions.firstWhereOrNull((region) => region is KillerRegion);
+    if (killerRegion != null) {
+      result = KillerRegion.validKillerGroupValues(
+          values, cells, killerRegion.puzzle, regions);
       if (result != 0) return result;
     }
     return 0;

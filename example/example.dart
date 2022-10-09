@@ -240,10 +240,10 @@ void main() {
     [XX, UU, UU, RR, UU, LL, UU, UU, XX],
     [XX, RR, UU, XX, XX, XX, UU, LL, XX],
   ];
-  // var puzzle = SudokuAPI.sudoku(emptySudoku);
-  // print(puzzle.addKiller(dominoKiller2, true));
-  // print(puzzle.addDomino(dominoPuzzle2, false));
-  // print(puzzle.solve(true, false));
+  var puzzle = SudokuAPI.sudoku(emptySudoku);
+  print(puzzle.addKiller(dominoKiller2, true));
+  print(puzzle.addDomino(dominoPuzzle2, false));
+  print(puzzle.solve(true, false));
 
   var dominoPuzzle3 = [
     [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
@@ -277,10 +277,10 @@ void main() {
     ['R8', 15],
     ['R9', 4],
   ];
-  var puzzle = SudokuAPI.sudoku(emptySudoku);
-  print(puzzle.addDomino(dominoPuzzle3, false));
-  print(puzzle.addSandwich(sandwichPuzzle3));
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addDomino(dominoPuzzle3, false));
+  // print(puzzle.addSandwich(sandwichPuzzle3));
+  // print(puzzle.solve(true, false));
 
   // Difficult "Handshake" puzzle
   // Needs deduction about matching cells
