@@ -1,5 +1,6 @@
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/arrow.dart';
+import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/region.dart';
 
 class ArrowRegion extends Region<Arrow> {
@@ -29,6 +30,72 @@ class ArrowRegion extends Region<Arrow> {
       validArrowTotal,
     );
     return combinations;
+  }
+
+  static int validArrowGroupValues(List<int> values, Cells cells, Puzzle puzzle,
+      [List<Region>? regions]) {
+    var arrow = puzzle as Arrow;
+
+    // Check arrow for cells in order
+    var doneRegions = <ArrowRegion>[];
+    var latestCell = cells[values.length - 1];
+    for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
+      var cell = cells[valueIndex];
+      var value = values[valueIndex];
+      // Check arrow sequence
+      for (var arrowRegion in arrow.getArrows(cell).where((arrowRegion) =>
+          !doneRegions.contains(arrowRegion) &&
+          (regions == null || regions.contains(arrowRegion)))) {
+        var index = arrowRegion.cells.indexOf(cell);
+        assert(index != -1);
+        var arrowValues = List<int>.filled(arrowRegion.cells.length, 0);
+        arrowValues[index] = value;
+        // Check if other cells in arrow have values
+        for (var priorValueIndex = valueIndex - 1;
+            priorValueIndex >= 0;
+            priorValueIndex--) {
+          var priorCell = cells[priorValueIndex];
+          var priorValue = values[priorValueIndex];
+          var priorIndex = arrowRegion.cells.indexOf(priorCell);
+          if (priorIndex != -1) {
+            // In arrow
+            arrowValues[priorIndex] = priorValue;
+          }
+        }
+        // Do we have all arrow cells?
+        var totalValue = arrowValues[0];
+        var otherValues = arrowValues.sublist(1);
+        var allValues = otherValues.every((element) => element != 0);
+        var sumValues = otherValues.fold<int>(
+            0, (previousValue, value) => previousValue + value);
+        if (totalValue != 0) {
+          if (allValues) {
+            if (sumValues < totalValue) {
+              // Need higher sum
+              if (arrowRegion.cells.contains(latestCell)) return 1;
+              return -1;
+            } else if (sumValues > totalValue) {
+              // Need higher total
+              if (latestCell == arrowRegion.cells[0]) return 1;
+              return -1;
+            }
+          } else {
+            if (sumValues > totalValue) {
+              // Need higher total
+              if (latestCell == arrowRegion.cells[0]) return 1;
+              return -1;
+            }
+          }
+        } else {
+          if (sumValues > 9) {
+            return -1;
+          }
+        }
+
+        doneRegions.add(arrowRegion);
+      }
+    }
+    return 0;
   }
 }
 

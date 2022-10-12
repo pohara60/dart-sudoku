@@ -25,7 +25,7 @@ typedef Solve = bool Function(Puzzle grid);
 class SudokuRegion extends Region<Sudoku> {
   // late Killer killer;
   SudokuRegion(Sudoku puzzle, String name, Cells cells)
-      : super(puzzle, name, 45, true, cells);
+      : super(puzzle, name, name == 'G' ? 9 * 45 : 45, true, cells);
   String toString() => '$name';
 }
 
@@ -33,7 +33,7 @@ class Sudoku implements Puzzle {
   Sudoku get sudoku => this;
 
   late bool singleStep;
-  bool debug = false;
+  bool debug = true;
 
   late List<Cells> _grid;
   List<Cells> get grid => _grid;
@@ -46,6 +46,10 @@ class Sudoku implements Puzzle {
   List<Region> get regions =>
       List<Region>.from(this.allRegions.values.where((region) =>
           region.runtimeType != SudokuRegion && !(region is RegionGroup)));
+
+  /// Regions that are simple SudokuRegion
+  List<Region> get nonets => List<Region>.from(this.allRegions.values.where(
+      (region) => region.runtimeType == SudokuRegion && region.total == 45));
 
   /// Regions that are not simple SudokuRegion
   List<RegionGroup> get regionGroups => List<RegionGroup>.from(
@@ -226,43 +230,44 @@ class Sudoku implements Puzzle {
     if (!isSolved() && !_error) {
       // Find cell to try
       try {
-        Cell tryCell = findCellToIterate().first;
-        var tryValues = List.from(tryCell.possible.values);
-        var state = saveState();
-        // Iterate over values while fails until succeeds
-        for (var value in tryValues) {
-          var msg = debugPrint('Iterate $tryCell, value $value');
-          if (explain) {
-            result.writeln(msg);
-          }
-          tryCell.value = value;
-          try {
-            // Solve with new value
-            var nextResult = solve(
-              explain: explain,
-              showPossible: showPossible,
-              easyStrategies: easyStrategies,
-              toughStrategies: toughStrategies,
-              toStr: toStr,
-              first: false,
-            );
-            if (isSolved()) {
-              result.write(nextResult.toString());
-              break;
-            }
-            // Failed to find solution
-            var msg = debugPrint('Iterate failed to find solution!');
+        for (Cell tryCell in findCellToIterate()) {
+          var tryValues = List.from(tryCell.possible.values);
+          var state = saveState();
+          // Iterate over values while fails until succeeds
+          for (var value in tryValues) {
+            var msg = debugPrint('Iterate $tryCell, value $value');
             if (explain) {
               result.writeln(msg);
             }
-          } on SolveException catch (e) {
-            // Invalid state
-            var msg = debugPrint('Iterate exception ${e.message}!');
-            if (explain) {
-              result.writeln(msg);
+            tryCell.value = value;
+            try {
+              // Solve with new value
+              var nextResult = solve(
+                explain: explain,
+                showPossible: showPossible,
+                easyStrategies: easyStrategies,
+                toughStrategies: toughStrategies,
+                toStr: toStr,
+                first: false,
+              );
+              if (isSolved()) {
+                result.write(nextResult.toString());
+                break;
+              }
+              // Failed to find solution
+              var msg = debugPrint('Iterate failed to find solution!');
+              if (explain) {
+                result.writeln(msg);
+              }
+            } on SolveException catch (e) {
+              // Invalid state
+              var msg = debugPrint('Iterate exception ${e.message}!');
+              if (explain) {
+                result.writeln(msg);
+              }
             }
+            restoreState(state);
           }
-          restoreState(state);
         }
         // ignore: unused_catch_clause
       } on StateError catch (e) {
@@ -633,6 +638,17 @@ class Sudoku implements Puzzle {
         addMixedRegionGroup(region, doneRegions, doneCells, true);
       }
     }
+    // This creates lots of RegionGroups...
+    // Create RegionGroup for nonets that do not have a corresponding Sandwich
+    // for (var region in sudoku.nonets.where(
+    //     (region) => !sudoku.regions.any((other) => other.equals(region)))) {
+    //   if (!doneRegions.contains(region)) {
+    //     doneRegions = <Region>[];
+    //     doneCells = <Cell>[];
+    //     addMixedRegionGroup(region, doneRegions, doneCells, true);
+    //   }
+    // }
+
     if (debug) {
       print(allRegions.entries
           .where((element) =>
@@ -668,9 +684,12 @@ class Sudoku implements Puzzle {
           if (!doneRegions.contains(otherRegion)) {
             // Intersection of same regions handled by specific RegionGroups
             // Allow multiple Dominos with other types!
-            if (otherRegion.runtimeType == DominoRegion ||
-                !newRegions.any((region) =>
-                    region.runtimeType == otherRegion.runtimeType)) {
+            if ((otherRegion.runtimeType == DominoRegion ||
+                    !newRegions.any((region) =>
+                        region.runtimeType == otherRegion.runtimeType)) &&
+                true) {
+              //  !(otherRegion.runtimeType == KillerRegion &&
+              //     (otherRegion as KillerRegion).virtual)) {
               addMixedRegionGroup(otherRegion, doneRegions, doneCells, false,
                   newRegions, newCells);
             }
@@ -683,19 +702,31 @@ class Sudoku implements Puzzle {
     if (root &&
         newRegions.length > 1 &&
         !newRegions.every((region) => region.runtimeType == DominoRegion)) {
-      var name = 'MG${_mixedGroupSeq++}';
-      var nonet = '';
-      var nodups = cellsInNonet(newCells!);
-      var mixedRegionGroup = MixedRegionGroup(
-        sudoku,
-        name,
-        nonet,
-        nodups,
-        newRegions,
-        newCells,
-      );
-      allRegions[name] = mixedRegionGroup;
+      createMixedRegionGroup(newRegions, newCells!);
     }
+  }
+
+  bool addMixedRegionGroupByName(List<String> regionNames) {
+    if (regionNames.any((name) => !allRegions.containsKey(name))) return false;
+    var regions = regionNames.map((name) => allRegions[name]!).toList();
+    var cells = regions.expand<Cell>((region) => region.cells).toSet().toList();
+    createMixedRegionGroup(regions, cells);
+    return true;
+  }
+
+  void createMixedRegionGroup(List<Region<dynamic>> regions, Cells cells) {
+    var name = 'MG${_mixedGroupSeq++}';
+    var nonet = '';
+    var nodups = cellsInNonet(cells);
+    var mixedRegionGroup = MixedRegionGroup(
+      sudoku,
+      name,
+      nonet,
+      nodups,
+      regions,
+      cells,
+    );
+    allRegions[name] = mixedRegionGroup;
   }
 }
 

@@ -81,10 +81,10 @@ class Arrow extends PuzzleDecorator {
         }
       } else {
         if (cell.col > prior.col) {
-          if (index != cells.length - 1) return r'⟍';
+          if (index != cells.length - 1) return r'⟋';
           return '↗';
         } else {
-          if (index != cells.length - 1) return r'⟋';
+          if (index != cells.length - 1) return r'⟍';
           return '↖';
         }
       }
@@ -160,6 +160,13 @@ class Arrow extends PuzzleDecorator {
         var source = '$axis$major1';
         this.addRegionGroup(cells, source);
       }
+    }
+    if (sudoku.debug) {
+      print(allRegions.entries
+          .where((element) =>
+              element.key.length > 2 && element.key.substring(0, 2) == 'AG')
+          .map((e) => e.value)
+          .join('\n'));
     }
   }
 

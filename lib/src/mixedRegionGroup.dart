@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'arrowRegion.dart';
 import 'killerRegion.dart';
 import 'sandwichRegion.dart';
 import 'sudoku.dart';
@@ -23,8 +24,8 @@ class MixedRegionGroup extends RegionGroup {
     // Get combinations for mixed lines
     // Limited to maximum
     var mixedCells = this.cells;
-    var combinationCount = Limiter(COMBINATION_LIMIT);
-    var iterationCount = Limiter(ITERATION_LIMIT);
+    var combinationCount = Limiter(COMBINATION_LIMIT * 10);
+    var iterationCount = Limiter(ITERATION_LIMIT * 10);
     // var stopwatch = Stopwatch();
     // stopwatch.start();
     try {
@@ -90,6 +91,13 @@ class MixedRegionGroup extends RegionGroup {
     if (killerRegion != null) {
       result = KillerRegion.validKillerGroupValues(
           values, cells, killerRegion.puzzle, regions);
+      if (result != 0) return result;
+    }
+    var arrowRegion =
+        regions.firstWhereOrNull((region) => region is ArrowRegion);
+    if (arrowRegion != null) {
+      result = ArrowRegion.validArrowGroupValues(
+          values, cells, arrowRegion.puzzle, regions);
       if (result != 0) return result;
     }
     return 0;

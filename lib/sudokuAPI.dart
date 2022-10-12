@@ -132,6 +132,16 @@ class SudokuAPI {
     return puzzle?.messageString ?? '';
   }
 
+  String addMixedRegionGroupByName(List<String> regionNames) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    if (!puzzle!.sudoku.addMixedRegionGroupByName(regionNames)) {
+      return 'Unknown region(s)';
+    }
+    return '';
+  }
+
   String solve([bool explain = false, bool showPossible = false]) {
     if (puzzle == null) {
       throw Exception();

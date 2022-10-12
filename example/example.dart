@@ -91,6 +91,20 @@ void main() {
     [XX, XX, RR, UU, UU, UU, LL, XX, XX],
     [XX, XX, 08, LL, XX, 08, LL, XX, XX],
   ];
+  var killerPuzzle6 = [
+    [08, LL, XX, XX, 22, XX, XX, 10, LL],
+    [UU, XX, XX, RR, UU, XX, XX, XX, UU],
+    [XX, 15, LL, XX, XX, 18, LL, XX, XX],
+    [XX, UU, XX, 06, LL, XX, UU, XX, XX],
+    [XX, XX, XX, UU, XX, XX, XX, XX, XX],
+    [XX, 20, LL, XX, XX, XX, 20, LL, XX],
+    [XX, UU, 20, XX, XX, XX, 20, UU, XX],
+    [XX, RR, UU, XX, XX, XX, UU, LL, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+  ];
+  var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle6, true);
+  print(puzzle.solve(true, false));
+
   var killerPuzzle = [
     [11, LL, XX, 11, 11, 11, XX, XX, XX],
     [XX, XX, 45, UU, UU, UU, 45, XX, XX],
@@ -240,10 +254,10 @@ void main() {
     [XX, UU, UU, RR, UU, LL, UU, UU, XX],
     [XX, RR, UU, XX, XX, XX, UU, LL, XX],
   ];
-  var puzzle = SudokuAPI.sudoku(emptySudoku);
-  print(puzzle.addKiller(dominoKiller2, true));
-  print(puzzle.addDomino(dominoPuzzle2, false));
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addKiller(dominoKiller2, true));
+  // print(puzzle.addDomino(dominoPuzzle2, false));
+  // print(puzzle.solve(true, false));
 
   var dominoPuzzle3 = [
     [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
@@ -306,6 +320,41 @@ void main() {
   ];
   // var puzzle = SudokuAPI.sudoku(emptySudoku);
   // print(puzzle.addArrow(arrowPuzzle2));
+  // print(puzzle.solve(true, false));
+
+  var arrowKiller3 = [
+    [XX, XX, XX, XX, 10, XX, XX, 07, LL],
+    [XX, XX, XX, XX, UU, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, 16, LL, LL],
+    [10, LL, XX, XX, 15, LL, LL, XX, XX],
+    [XX, XX, XX, XX, UU, XX, XX, XX, XX],
+    [XX, XX, XX, 08, UU, XX, XX, XX, XX],
+    [14, XX, XX, UU, XX, XX, XX, 18, LL],
+    [UU, XX, XX, UU, XX, XX, XX, UU, UU],
+  ];
+  var arrowPuzzle3 = [
+    ['R3C3', 'R2C4', 'R1C4'],
+    ['R3C3', 'R4C2', 'R4C1'],
+    ['R3C3', 'R4C4'],
+    ['R3C7', 'R2C6', 'R1C6'],
+    ['R3C7', 'R4C6'],
+    ['R7C3', 'R6C2', 'R6C1'],
+    ['R7C3', 'R6C4'],
+    ['R7C8', 'R6C9', 'R5C8'],
+    ['R8C7', 'R9C6', 'R8C5'],
+  ];
+  // Difficult puzzle requires intersection of Row and Box with
+  // Arrow and Killer regions
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addKiller(arrowKiller3, true));
+  // print(puzzle.addArrow(arrowPuzzle3));
+  // // Attempt complex Mixed Regions
+  // puzzle.addMixedRegionGroupByName(
+  //     ['B2', 'A1', 'A4', 'K1', 'R3', 'A3', 'A5', 'C4']);
+  // puzzle.addMixedRegionGroupByName(['B4', 'A2', 'A6', 'K4', 'C3', 'A3', 'A7']);
+  // puzzle.addMixedRegionGroupByName(['C3', 'C5', 'R3', 'R5', 'K5']);
+  // // Still no solutiom
   // print(puzzle.solve(true, false));
 
   var puzzle1 = [
