@@ -3,8 +3,10 @@
 library sudoku;
 
 import 'package:sudoku/src/arrow.dart';
+import 'package:sudoku/src/chess.dart';
 import 'package:sudoku/src/domino.dart';
 import 'package:sudoku/src/generator.dart';
+import 'package:sudoku/src/renban.dart';
 import 'package:sudoku/src/sandwich.dart';
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/killer.dart';
@@ -123,12 +125,31 @@ class SudokuAPI {
     return puzzle?.messageString ?? '';
   }
 
+  String addRenban(List<List<String>> renbanLines) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + renbanLines.join('\n');
+    puzzle = Renban.puzzle(puzzle!, renbanLines);
+    return puzzle?.messageString ?? '';
+  }
+
   String addSudokuX() {
     if (puzzle == null) {
       return 'No puzzle!';
     }
     currentPuzzle = currentPuzzle! + 'SudokuX\n';
     puzzle = SudokuX.puzzle(puzzle!);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addChess({kingsMove = false, knightsMove = false}) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + 'Chess\n';
+    puzzle =
+        Chess.puzzle(puzzle!, kingsMove: kingsMove, knightsMove: knightsMove);
     return puzzle?.messageString ?? '';
   }
 

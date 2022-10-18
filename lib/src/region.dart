@@ -98,8 +98,14 @@ abstract class RegionGroup<Puzzle> extends Region<Puzzle> {
     return text;
   }
 
-  int get minimum {
-    return 0;
+  bool equalsGroup(RegionGroup other) {
+    // Equal if cells are same
+    if (this.regions.length == other.regions.length &&
+        this.regions.every((region) =>
+            other.regions.any((otherRegion) => otherRegion == region))) {
+      return true;
+    }
+    return false;
   }
 
   List<List<int>>? regionGroupCombinations(String explanation) {

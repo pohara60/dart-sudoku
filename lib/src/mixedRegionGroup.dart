@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:sudoku/src/renbanRegion.dart';
 import 'arrowRegion.dart';
 import 'killerRegion.dart';
 import 'sandwichRegion.dart';
@@ -98,6 +99,13 @@ class MixedRegionGroup extends RegionGroup {
     if (arrowRegion != null) {
       result = ArrowRegion.validArrowGroupValues(
           values, cells, arrowRegion.puzzle, regions);
+      if (result != 0) return result;
+    }
+    var renbanRegion =
+        regions.firstWhereOrNull((region) => region is RenbanRegion);
+    if (renbanRegion != null) {
+      result = RenbanRegion.validRenbanGroupValues(
+          values, cells, renbanRegion.puzzle, regions);
       if (result != 0) return result;
     }
     return 0;

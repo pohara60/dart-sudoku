@@ -172,7 +172,7 @@ class Arrow extends PuzzleDecorator {
 
   var _arrowGroupSeq = 1;
 
-  void addRegionGroup(Cells cells, source) {
+  void addRegionGroup(Cells cells, String source) {
     var arrows = <ArrowRegion>[];
     var outieCells = <Cell>{};
     var groupCells = <Cell>{};

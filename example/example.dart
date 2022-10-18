@@ -102,8 +102,9 @@ void main() {
     [XX, RR, UU, XX, XX, XX, UU, LL, XX],
     [XX, XX, XX, XX, XX, XX, XX, XX, XX],
   ];
-  var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle6, true);
-  print(puzzle.solve(true, false));
+  // Not solved!
+  // var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle6, true);
+  // print(puzzle.solve(true, false));
 
   var killerPuzzle = [
     [11, LL, XX, 11, 11, 11, XX, XX, XX],
@@ -356,6 +357,94 @@ void main() {
   // puzzle.addMixedRegionGroupByName(['C3', 'C5', 'R3', 'R5', 'K5']);
   // // Still no solutiom
   // print(puzzle.solve(true, false));
+  var arrowKiller4 = [
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, 10, LL],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    [XX, XX, XX, 06, LL, XX, XX, XX, XX],
+  ];
+  var arrowPuzzle4 = [
+    ['R1C6', 'R2C7', 'R3C7'],
+    ['R1C9', 'R2C8', 'R3C8'],
+    ['R2C1', 'R1C2', 'R1C3'],
+    ['R3C3', 'R3C4', 'R3C5', 'R2C5'],
+    ['R4C1', 'R5C1', 'R6C1'],
+    ['R4C6', 'R5C5', 'R5C4'],
+    ['R4C9', 'R5C9', 'R6C9'],
+    ['R6C3', 'R7C4', 'R6C5'],
+    ['R8C1', 'R8C2', 'R8C3'],
+    ['R8C9', 'R8C8', 'R8C7'],
+  ];
+  var sandwichPuzzle4 = [
+    ['C1', 17],
+    ['C3', 10],
+    ['R1', 15],
+    ['R4', 22],
+    ['R8', 12],
+  ];
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addKiller(arrowKiller4, true));
+  // print(puzzle.addArrow(arrowPuzzle4));
+  // print(puzzle.addSandwich(sandwichPuzzle4));
+  // puzzle.addMixedRegionGroupByName(['SC1', 'A3', 'A5', 'A9']);
+  // puzzle.addMixedRegionGroupByName(['SC3', 'A3', 'A4', 'A8', 'A9']);
+  // puzzle.addMixedRegionGroupByName(['SR1', 'A1', 'A2', 'A3']);
+  // puzzle.addMixedRegionGroupByName(['SR4', 'A5', 'A6', 'A7']);
+  // puzzle.addMixedRegionGroupByName(['SR8', 'A9', 'A10']);
+  // print(puzzle.solve(true, false));
+
+  var renbanSudokuPuzzle = [
+    ".........",
+    ".........",
+    "......1..",
+    ".........",
+    ".........",
+    ".........",
+    ".........",
+    ".........",
+    ".........",
+  ].join('\n');
+  var renbanDomino = [
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DM, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DM],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, DM, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DM, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+  ];
+  var renbanPuzzle = [
+    ['R2C1', 'R1C1', 'R1C2', 'R1C3'],
+    ['R1C4', 'R1C5', 'R1C6', 'R2C6'],
+    ['R2C3', 'R2C4', 'R3C4', 'R4C4'],
+    ['R3C1', 'R4C1', 'R5C1', 'R5C2'],
+    ['R4C8', 'R4C9', 'R5C9', 'R6C9'],
+    ['R5C4', 'R5C3', 'R6C3', 'R7C3'],
+    ['R5C5', 'R5C6', 'R6C6', 'R7C6'],
+    ['R6C7', 'R7C7', 'R8C7', 'R8C6'],
+    ['R7C1', 'R8C1', 'R9C1', 'R9C2'],
+    ['R7C4', 'R8C4', 'R9C4', 'R9C3'],
+    ['R7C9', 'R8C9', 'R9C9', 'R9C8'],
+  ];
+  var puzzle = SudokuAPI.sudoku(renbanSudokuPuzzle);
+  print(puzzle.addDomino(renbanDomino));
+  print(puzzle.addRenban(renbanPuzzle));
+  print(puzzle.solve(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",

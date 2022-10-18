@@ -4,6 +4,7 @@ import 'package:sudoku/src/dominoRegion.dart';
 import 'package:sudoku/src/possible.dart';
 import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/region.dart';
+import 'package:sudoku/src/sandwichRegion.dart';
 import 'package:sudoku/src/solveException.dart';
 import 'package:sudoku/src/strategy/bugStrategy.dart';
 import 'package:sudoku/src/strategy/hiddenGroupStrategy.dart';
@@ -51,7 +52,7 @@ class Sudoku implements Puzzle {
   List<Region> get nonets => List<Region>.from(this.allRegions.values.where(
       (region) => region.runtimeType == SudokuRegion && region.total == 45));
 
-  /// Regions that are not simple SudokuRegion
+  /// RegionGroups
   List<RegionGroup> get regionGroups => List<RegionGroup>.from(
       this.allRegions.values.where((region) => region is RegionGroup));
 
@@ -497,6 +498,29 @@ class Sudoku implements Puzzle {
     return cells;
   }
 
+  Cells knightsMoveCells(Cell cell) {
+    var row = cell.row;
+    var col = cell.col;
+    var cells = <Cell>[];
+    if (row > 1) {
+      if (col > 2) cells.add(sudoku.getCell(row - 1, col - 2));
+      if (col < 8) cells.add(sudoku.getCell(row - 1, col + 2));
+    }
+    if (row > 2) {
+      if (col > 1) cells.add(sudoku.getCell(row - 2, col - 1));
+      if (col < 9) cells.add(sudoku.getCell(row - 2, col + 1));
+    }
+    if (row < 8) {
+      if (col > 1) cells.add(sudoku.getCell(row + 2, col - 1));
+      if (col < 9) cells.add(sudoku.getCell(row + 2, col + 1));
+    }
+    if (row < 9) {
+      if (col > 2) cells.add(sudoku.getCell(row + 1, col - 2));
+      if (col < 8) cells.add(sudoku.getCell(row + 1, col + 2));
+    }
+    return cells;
+  }
+
   /// Find Rows/Columns/Boxes where values may appear up to occurrences times
   Map<int, Map<int, List<int>>> getValuePossibleIndexes(
       String axis, int occurrences) {
@@ -649,6 +673,14 @@ class Sudoku implements Puzzle {
     //   }
     // }
 
+    for (var axis in ['R', 'C', 'B']) {
+      for (var major1 = 1; major1 < 10; major1++) {
+        var cells = sudoku.getMajorAxis(axis, major1);
+        var source = '$axis$major1';
+        this.addMixedRegionGroupForCells(cells, source);
+      }
+    }
+
     if (debug) {
       print(allRegions.entries
           .where((element) =>
@@ -702,7 +734,7 @@ class Sudoku implements Puzzle {
     if (root &&
         newRegions.length > 1 &&
         !newRegions.every((region) => region.runtimeType == DominoRegion)) {
-      createMixedRegionGroup(newRegions, newCells!);
+      createMixedRegionGroup(newRegions, newCells!, '');
     }
   }
 
@@ -710,13 +742,44 @@ class Sudoku implements Puzzle {
     if (regionNames.any((name) => !allRegions.containsKey(name))) return false;
     var regions = regionNames.map((name) => allRegions[name]!).toList();
     var cells = regions.expand<Cell>((region) => region.cells).toSet().toList();
-    createMixedRegionGroup(regions, cells);
+    createMixedRegionGroup(regions, cells, '');
     return true;
   }
 
-  void createMixedRegionGroup(List<Region<dynamic>> regions, Cells cells) {
+  void addMixedRegionGroupForCells(Cells cells, String source) {
+    var regions = <Region>[];
+    var outieCells = <Cell>{};
+    var groupCells = <Cell>{};
+    for (var cell in cells) {
+      for (var region
+          in getRegions(cell).where((region) => !(region is SandwichRegion))) {
+        if (!regions.contains(region)) {
+          var regionCells = region.cells;
+          var union =
+              regionCells.where((regionCell) => cells.contains(regionCell));
+          groupCells.addAll(union);
+          var difference =
+              regionCells.where((regionCell) => !cells.contains(regionCell));
+          outieCells.addAll(difference);
+          regions.add(region);
+        }
+      }
+    }
+    if (regions.isNotEmpty && regions.length > 1) {
+      // Now create all region groups, combination processing limits inefficiency
+      // Do not bother when outies dominate
+      // ignore: dead_code
+      if (true || outieCells.length < groupCells.length) {
+        var cells = [...groupCells, ...outieCells];
+        cells.sort((c1, c2) => c1.compareTo(c2));
+        createMixedRegionGroup(regions, cells, source);
+      }
+    }
+  }
+
+  void createMixedRegionGroup(
+      List<Region<dynamic>> regions, Cells cells, String nonet) {
     var name = 'MG${_mixedGroupSeq++}';
-    var nonet = '';
     var nodups = cellsInNonet(cells);
     var mixedRegionGroup = MixedRegionGroup(
       sudoku,
@@ -726,7 +789,13 @@ class Sudoku implements Puzzle {
       regions,
       cells,
     );
-    allRegions[name] = mixedRegionGroup;
+    // Discard duplicates
+    if (this.regionGroups.firstWhereOrNull(
+            (regionGroup) => regionGroup.equalsGroup(mixedRegionGroup)) ==
+        null) {
+      allRegions[name] = mixedRegionGroup;
+    } else
+      _mixedGroupSeq--;
   }
 }
 

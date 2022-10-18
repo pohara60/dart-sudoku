@@ -42,8 +42,6 @@ class SudokuX extends PuzzleDecorator {
     regionCombinationsStrategy = RegionCombinationsStrategy(this);
   }
 
-  late RegionCombinationsStrategy killerCombinationsStrategy;
-
   String toString() {
     var text = 'SudokuX';
     text = '$text\n' + puzzle.toString();
