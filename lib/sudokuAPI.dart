@@ -26,6 +26,13 @@ class SudokuAPI {
     generator = SudokuGenerator();
   }
 
+  set debug(bool debug) {
+    if (currentPuzzle == null) {
+      throw Exception();
+    }
+    puzzle!.sudoku.debug = debug;
+  }
+
   factory SudokuAPI.sudoku(String puzzleString, [singleStep = false]) {
     var sudoku = SudokuAPI(singleStep);
     sudoku.setSudoku(puzzleString);

@@ -255,10 +255,10 @@ void main() {
     [XX, UU, UU, RR, UU, LL, UU, UU, XX],
     [XX, RR, UU, XX, XX, XX, UU, LL, XX],
   ];
-  var puzzle = SudokuAPI.sudoku(emptySudoku);
-  print(puzzle.addKiller(dominoKiller2, true));
-  print(puzzle.addDomino(dominoPuzzle2, false));
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addKiller(dominoKiller2, true));
+  // print(puzzle.addDomino(dominoPuzzle2, false));
+  // print(puzzle.solve(true, false));
 
   var dominoPuzzle3 = [
     [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
@@ -445,6 +445,22 @@ void main() {
   // print(puzzle.addDomino(renbanDomino));
   // print(puzzle.addRenban(renbanPuzzle));
   // print(puzzle.solve(true, false));
+
+  var chessSudoku1 = [
+    ".........",
+    "7.......8",
+    "..12345..",
+    "3.......6",
+    "....8....",
+    "1.......4",
+    "..45678..",
+    "9.......2",
+    ".........",
+  ].join('\n');
+  var puzzle = SudokuAPI.sudoku(chessSudoku1);
+  puzzle.debug = true;
+  print(puzzle.addChess(knightsMove: true));
+  print(puzzle.solve(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",
