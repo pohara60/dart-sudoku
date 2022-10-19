@@ -34,7 +34,7 @@ class Sudoku implements Puzzle {
   Sudoku get sudoku => this;
 
   late bool singleStep;
-  bool debug = true;
+  bool debug = false;
 
   late List<Cells> _grid;
   List<Cells> get grid => _grid;

@@ -49,6 +49,7 @@ class RenbanRegion extends Region<Renban> {
         if (value > maxValue) maxValue = value;
       }
       if (maxValue - minValue >= cells.length) return 1; // continue
+      if (Set.from(values).length != values.length) return 1; // continue
     }
     return 0;
   }

@@ -1,5 +1,4 @@
 import 'package:sudoku/src/cell.dart';
-import 'package:sudoku/src/domino.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 import '../chess.dart';

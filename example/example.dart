@@ -255,10 +255,10 @@ void main() {
     [XX, UU, UU, RR, UU, LL, UU, UU, XX],
     [XX, RR, UU, XX, XX, XX, UU, LL, XX],
   ];
-  // var puzzle = SudokuAPI.sudoku(emptySudoku);
-  // print(puzzle.addKiller(dominoKiller2, true));
-  // print(puzzle.addDomino(dominoPuzzle2, false));
-  // print(puzzle.solve(true, false));
+  var puzzle = SudokuAPI.sudoku(emptySudoku);
+  print(puzzle.addKiller(dominoKiller2, true));
+  print(puzzle.addDomino(dominoPuzzle2, false));
+  print(puzzle.solve(true, false));
 
   var dominoPuzzle3 = [
     [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
@@ -441,10 +441,10 @@ void main() {
     ['R7C4', 'R8C4', 'R9C4', 'R9C3'],
     ['R7C9', 'R8C9', 'R9C9', 'R9C8'],
   ];
-  var puzzle = SudokuAPI.sudoku(renbanSudokuPuzzle);
-  print(puzzle.addDomino(renbanDomino));
-  print(puzzle.addRenban(renbanPuzzle));
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.sudoku(renbanSudokuPuzzle);
+  // print(puzzle.addDomino(renbanDomino));
+  // print(puzzle.addRenban(renbanPuzzle));
+  // print(puzzle.solve(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",

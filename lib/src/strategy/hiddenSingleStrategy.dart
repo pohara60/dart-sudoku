@@ -32,6 +32,7 @@ class HiddenSingleStrategy extends Strategy {
           cell.value = value;
           updated = true;
           sudoku.cellUpdated(cell, explanation, '$cell');
+          break;
         }
       }
     }

@@ -19,16 +19,13 @@ class MixedRegionGroup extends RegionGroup {
 
   @override
   List<List<int>>? regionGroupCombinations(String explanation) {
-    //print('$explanation not yet implemented!');
-    //return null;
-    // Get combinations while validating the (partial) mixeds in the group
-    // Get combinations for mixed lines
+    // Get combinations while validating the (partial) regions in the group
     // Limited to maximum
     var mixedCells = this.cells;
-    var combinationCount = Limiter(COMBINATION_LIMIT * 10);
-    var iterationCount = Limiter(ITERATION_LIMIT * 10);
-    // var stopwatch = Stopwatch();
-    // stopwatch.start();
+    var combinationCount = Limiter(COMBINATION_LIMIT);
+    var iterationCount = Limiter(ITERATION_LIMIT);
+    var stopwatch = Stopwatch();
+    stopwatch.start();
     try {
       var mixedCombinations = cellCombinations(
         mixedCells,
@@ -44,15 +41,13 @@ class MixedRegionGroup extends RegionGroup {
         iterationCount,
         validMixedGroupValues,
       );
-      // stopwatch.stop();
-      // print(
-      //     'combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
-      // Get minimum total of mixedCombinations
+      stopwatch.stop();
+      sudoku.debugPrint(
+          'combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
       return mixedCombinations;
     } catch (e) {
-      // stopwatch.stop();
-      // print(
-      //     'exception combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
+      sudoku.debugPrint(
+          'exception combinations=$combinationCount, iterations=$iterationCount, $this, elapsed=${stopwatch.elapsed}');
       return null;
     }
   }
