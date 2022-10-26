@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:sudoku/src/renbanRegion.dart';
 import 'arrowRegion.dart';
+import 'entropyRegion.dart';
 import 'killerRegion.dart';
 import 'sandwichRegion.dart';
 import 'sudoku.dart';
@@ -101,6 +102,13 @@ class MixedRegionGroup extends RegionGroup {
     if (renbanRegion != null) {
       result = RenbanRegion.validRenbanGroupValues(
           values, cells, renbanRegion.puzzle, regions);
+      if (result != 0) return result;
+    }
+    var entropyRegion =
+        regions.firstWhereOrNull((region) => region is EntropyRegion);
+    if (entropyRegion != null) {
+      result = EntropyRegion.validEntropyGroupValues(
+          values, cells, entropyRegion.puzzle, regions);
       if (result != 0) return result;
     }
     return 0;

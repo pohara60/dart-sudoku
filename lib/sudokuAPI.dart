@@ -2,18 +2,19 @@
 ///
 library sudoku;
 
-import 'package:sudoku/src/arrow.dart';
-import 'package:sudoku/src/chess.dart';
-import 'package:sudoku/src/domino.dart';
-import 'package:sudoku/src/generator.dart';
-import 'package:sudoku/src/renban.dart';
-import 'package:sudoku/src/sandwich.dart';
-import 'package:sudoku/src/sudoku.dart';
-import 'package:sudoku/src/killer.dart';
-import 'package:sudoku/src/puzzle.dart';
-import 'package:sudoku/src/sudokuX.dart';
-import 'package:sudoku/src/thermo.dart';
-import 'package:sudoku/src/whisper.dart';
+import 'src/arrow.dart';
+import 'src/chess.dart';
+import 'src/domino.dart';
+import 'src/entropy.dart';
+import 'src/generator.dart';
+import 'src/renban.dart';
+import 'src/sandwich.dart';
+import 'src/sudoku.dart';
+import 'src/killer.dart';
+import 'src/puzzle.dart';
+import 'src/sudokuX.dart';
+import 'src/thermo.dart';
+import 'src/whisper.dart';
 
 /// Provide access to the Sudoku API.
 class SudokuAPI {
@@ -138,6 +139,15 @@ class SudokuAPI {
     }
     currentPuzzle = currentPuzzle! + renbanLines.join('\n');
     puzzle = Renban.puzzle(puzzle!, renbanLines);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addEntropy(List<List<String>> entropyLines) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + entropyLines.join('\n');
+    puzzle = Entropy.puzzle(puzzle!, entropyLines);
     return puzzle?.messageString ?? '';
   }
 
