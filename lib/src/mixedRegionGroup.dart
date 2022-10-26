@@ -10,6 +10,7 @@ import 'cell.dart';
 import 'dominoRegion.dart';
 import 'puzzle.dart';
 import 'region.dart';
+import 'whisperRegion.dart';
 
 class MixedRegionGroup extends RegionGroup {
   MixedRegionGroup(Puzzle puzzle, String name, String nonet, bool nodups,
@@ -109,6 +110,13 @@ class MixedRegionGroup extends RegionGroup {
     if (entropyRegion != null) {
       result = EntropyRegion.validEntropyGroupValues(
           values, cells, entropyRegion.puzzle, regions);
+      if (result != 0) return result;
+    }
+    var whisperRegion =
+        regions.firstWhereOrNull((region) => region is WhisperRegion);
+    if (whisperRegion != null) {
+      result = WhisperRegion.validWhisperGroupValues(
+          values, cells, whisperRegion.puzzle, regions);
       if (result != 0) return result;
     }
     return 0;
