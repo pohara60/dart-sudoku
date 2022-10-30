@@ -1,15 +1,16 @@
 import 'package:collection/collection.dart';
-import 'package:sudoku/src/renbanRegion.dart';
+
 import 'arrowRegion.dart';
+import 'cell.dart';
+import 'dominoRegion.dart';
 import 'entropyRegion.dart';
 import 'killerRegion.dart';
+import 'puzzle.dart';
+import 'region.dart';
+import 'renbanRegion.dart';
 import 'sandwichRegion.dart';
 import 'sudoku.dart';
 import 'thermoRegion.dart';
-import 'cell.dart';
-import 'dominoRegion.dart';
-import 'puzzle.dart';
-import 'region.dart';
 import 'whisperRegion.dart';
 
 class MixedRegionGroup extends RegionGroup {
@@ -98,24 +99,26 @@ class MixedRegionGroup extends RegionGroup {
           values, cells, arrowRegion.puzzle, regions);
       if (result != 0) return result;
     }
-    var renbanRegion =
-        regions.firstWhereOrNull((region) => region is RenbanRegion);
+    var renbanRegion = regions
+        .firstWhereOrNull((region) => region is RenbanRegion) as RenbanRegion?;
     if (renbanRegion != null) {
-      result = RenbanRegion.validRenbanGroupValues(
+      result = renbanRegion.validLineGroupValues(
           values, cells, renbanRegion.puzzle, regions);
       if (result != 0) return result;
     }
     var entropyRegion =
-        regions.firstWhereOrNull((region) => region is EntropyRegion);
+        regions.firstWhereOrNull((region) => region is EntropyRegion)
+            as EntropyRegion?;
     if (entropyRegion != null) {
-      result = EntropyRegion.validEntropyGroupValues(
+      result = entropyRegion.validLineGroupValues(
           values, cells, entropyRegion.puzzle, regions);
       if (result != 0) return result;
     }
     var whisperRegion =
-        regions.firstWhereOrNull((region) => region is WhisperRegion);
+        regions.firstWhereOrNull((region) => region is WhisperRegion)
+            as WhisperRegion?;
     if (whisperRegion != null) {
-      result = WhisperRegion.validWhisperGroupValues(
+      result = whisperRegion.validLineGroupValues(
           values, cells, whisperRegion.puzzle, regions);
       if (result != 0) return result;
     }

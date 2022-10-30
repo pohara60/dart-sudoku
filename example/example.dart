@@ -172,9 +172,9 @@ void main() {
     ['R8C9', 'R7C9', 'R6C9'],
     ['R8C9', 'R9C9', 'R9C8', 'R9C7', 'R9C6', 'R9C5'],
   ];
-  // var puzzle = SudokuAPI.sudoku(emptySudoku);
-  // print(puzzle.addThermo(thermoPuzzle2));
-  // print(puzzle.solve(true, false));
+  var puzzle = SudokuAPI.sudoku(emptySudoku);
+  print(puzzle.addThermo(thermoPuzzle2));
+  print(puzzle.solve(true, false));
 
   const dd = ' ';
   const DX = 'X';
@@ -444,6 +444,7 @@ void main() {
   // var puzzle = SudokuAPI.sudoku(renbanSudokuPuzzle);
   // print(puzzle.addDomino(renbanDomino));
   // print(puzzle.addRenban(renbanPuzzle));
+  // puzzle.debug = true;
   // print(puzzle.solve(true, false));
 
   var chessSudoku1 = [
@@ -533,10 +534,10 @@ void main() {
       'R3C5'
     ]
   ];
-  var puzzle = SudokuAPI.sudoku(entropySudokuPuzzle);
-  print(puzzle.addEntropy(entropyPuzzle));
-  puzzle.debug = true;
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.sudoku(entropySudokuPuzzle);
+  // print(puzzle.addEntropy(entropyPuzzle));
+  // puzzle.debug = true;
+  // print(puzzle.solve(true, false));
 
   var puzzle1 = [
     "72.4.8.3.",
