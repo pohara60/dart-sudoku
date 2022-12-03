@@ -30,7 +30,7 @@ class UpdateChessPossibleStrategy extends Strategy {
     // Look at neighbours of cell that are chess move away
     var chess = puzzle as Chess;
     if (chess.kingsMove) {
-      var kingCells = sudoku.adjacentCells(cell);
+      var kingCells = sudoku.kingsMoveCells(cell);
       for (var otherCell in kingCells) {
         if (otherCell.isSet) {
           if (cell.remove(otherCell.value!)) updated = true;

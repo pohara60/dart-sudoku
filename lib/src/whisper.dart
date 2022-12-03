@@ -1,12 +1,7 @@
 import 'package:chalkdart/chalk.dart';
-import 'package:collection/collection.dart';
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/whisperRegion.dart';
-import 'package:sudoku/src/region.dart';
-import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/puzzle.dart';
-import 'package:sudoku/src/strategy/regionCombinations.dart';
-import 'package:sudoku/src/strategy/strategy.dart';
 
 import 'line.dart';
 

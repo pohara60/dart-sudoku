@@ -498,6 +498,37 @@ class Sudoku implements Puzzle {
     return cells;
   }
 
+  Cells kingsMoveCells(Cell cell) {
+    var row = cell.row;
+    var col = cell.col;
+    var cells = <Cell>[];
+    if (row > 1) {
+      cells.add(_grid[row - 2][col - 1]);
+    }
+    if (row < 9) {
+      cells.add(_grid[row][col - 1]);
+    }
+    if (col > 1) {
+      cells.add(_grid[row - 1][col - 2]);
+    }
+    if (col < 9) {
+      cells.add(_grid[row - 1][col]);
+    }
+    if (row > 1 && col > 1) {
+      cells.add(_grid[row - 2][col - 2]);
+    }
+    if (row > 1 && col < 9) {
+      cells.add(_grid[row - 2][col]);
+    }
+    if (row < 9 && col > 1) {
+      cells.add(_grid[row][col - 2]);
+    }
+    if (row < 9 && col < 9) {
+      cells.add(_grid[row][col]);
+    }
+    return cells;
+  }
+
   Cells knightsMoveCells(Cell cell) {
     var row = cell.row;
     var col = cell.col;
