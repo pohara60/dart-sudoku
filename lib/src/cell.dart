@@ -101,6 +101,11 @@ class Cell {
           : axis == 'B'
               ? 'B$box'
               : name;
+  int getMinorAxis(String axis) => axis == 'R'
+      ? _col
+      : axis == 'C'
+          ? _row
+          : box;
 
   void togglePossible(int value) {
     _possible.toggle(value);
