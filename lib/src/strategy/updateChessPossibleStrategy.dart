@@ -1,5 +1,6 @@
 import 'package:sudoku/src/cell.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
+import 'package:sudoku/src/sudoku.dart';
 
 import '../chess.dart';
 import '../puzzle.dart';
@@ -63,24 +64,12 @@ class UpdateChessPossibleStrategy extends Strategy {
     var chess = puzzle as Chess;
 
     bool updated = false;
-    for (var axis in ['R', 'C', 'B']) {
-      var valuePossibleTwiceMajors = sudoku.getValuePossibleIndexes(axis, 2);
+    for (var axis in ['B', 'R', 'C']) {
+      var valuePossibleTwiceMajors = sudoku.getValuePossibleIndexes(axis, 3);
       for (var value = 1; value < 10; value++) {
         var majors = valuePossibleTwiceMajors[value];
         if (majors != null) {
           majors.forEach((major1, minors) {
-            assert(minors.length == 2);
-            List<int> adjacentAxes(major1, offset) {
-              var major2s = <int>[];
-              if (major1 % 3 == 0) major2s.add(major1 + offset);
-              if (major1 % 3 == 1) major2s.add(major1 - offset);
-              if (major1 % 3 == 2 && offset == 2) {
-                major2s.add(major1 + offset);
-                major2s.add(major1 - offset);
-              }
-              return major2s;
-            }
-
             // Process Kings and Knights moves
             const KINGS = 'Kings';
             const KNIGHTS = 'Knights';
@@ -91,16 +80,16 @@ class UpdateChessPossibleStrategy extends Strategy {
               void updateCell(cell, value, annotation) {
                 if (cell.clearPossible(value)) {
                   updated = true;
-                  sudoku.cellUpdated(cell, explanation,
+                  var location = addExplanation(explanation, '$axis$major1');
+                  sudoku.cellUpdated(cell, location,
                       "remove $move $annotation value $value from $cell");
                 }
               }
 
-              var offset = move == KINGS ? 1 : 2;
-              if (axis == 'B') {
+              var cell1 = sudoku.getAxisCell(axis, major1, minors[0]);
+              var cell2 = sudoku.getAxisCell(axis, major1, minors[1]);
+              if (minors.length == 2 && axis == 'B') {
                 // Pair in box
-                var cell1 = sudoku.getAxisCell(axis, major1, minors[0]);
-                var cell2 = sudoku.getAxisCell(axis, major1, minors[1]);
                 for (var axis2 in ['R', 'C']) {
                   var cell1major2 = cell1.getAxis(axis2);
                   var cell2major2 = cell2.getAxis(axis2);
@@ -126,27 +115,23 @@ class UpdateChessPossibleStrategy extends Strategy {
                     if (updateAdjacentAxis(cell1, cell2)) updated = true;
                     if (updateAdjacentAxis(cell2, cell1)) updated = true;
                   }
-                  // TODO knightsMove intersection
-                  var cells = intersectionCells(sudoku.knightsMoveCells(cell1),
-                      sudoku.knightsMoveCells(cell2));
-                  for (var cell in cells) {
-                    // Clear value from intersection cell
-                    updateCell(cell, value, 'intersection');
-                  }
                 }
-              } else {
-                // Pair in row/col
-                for (var major2 in adjacentAxes(major1, offset)) {
-                  // If adjacent pair next to different box
-                  if (minors[0] + 1 == minors[1] && major2 > 0 && major2 < 10) {
-                    // Remove value from adjacent axis cells
-                    minors.forEach((minor) {
-                      var cell = sudoku.getAxisCell(axis, major2, minor);
-                      updateCell(cell, value, 'pair');
-                    });
-                  }
-                }
-                // TODO knightsMove triple
+              }
+
+              var cells = move == KNIGHTS
+                  ? intersectionCells(sudoku.knightsMoveCells(cell1),
+                      sudoku.knightsMoveCells(cell2))
+                  : intersectionCells(sudoku.kingsMoveCells(cell1),
+                      sudoku.kingsMoveCells(cell2));
+              if (minors.length == 3) {
+                var cell3 = sudoku.getAxisCell(axis, major1, minors[2]);
+                cells = move == KNIGHTS
+                    ? intersectionCells(cells, sudoku.knightsMoveCells(cell3))
+                    : intersectionCells(cells, sudoku.kingsMoveCells(cell3));
+              }
+              for (var cell in cells) {
+                // Clear value from intersection cells
+                updateCell(cell, value, 'intersection');
               }
             }
           });

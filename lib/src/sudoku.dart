@@ -552,6 +552,22 @@ class Sudoku implements Puzzle {
     return cells;
   }
 
+  Cells coveredCells(Cell cell,
+      {List<String>? excludeAxes,
+      bool kingsMove = false,
+      bool knightsMove = false}) {
+    var axes = ['B', 'R', 'C'];
+    if (excludeAxes != null)
+      axes.removeWhere((axis) => excludeAxes.contains(axis));
+    var cells = <Cell>{};
+    if (axes.contains('R')) cells.addAll(getRow(cell.row));
+    if (axes.contains('C')) cells.addAll(getColumn(cell.col));
+    if (axes.contains('B')) cells.addAll(getBox(cell.box));
+    if (kingsMove) cells.addAll(kingsMoveCells(cell));
+    if (knightsMove) cells.addAll(knightsMoveCells(cell));
+    return cells.toList();
+  }
+
   /// Find Rows/Columns/Boxes where values may appear up to occurrences times
   Map<int, Map<int, List<int>>> getValuePossibleIndexes(
       String axis, int occurrences) {
