@@ -13,7 +13,6 @@ class UpdateChessPossibleStrategy extends Strategy {
   bool solve() {
     // Should only apply to Chess puzzles
     if (!(puzzle is Chess)) return false;
-    var chess = puzzle as Chess;
 
     var updated = false;
 
@@ -23,7 +22,7 @@ class UpdateChessPossibleStrategy extends Strategy {
         }));
 
     // Find adjacent pairs and update adjacent cells
-    if (chess.kingsMove && updateKingsPairs()) updated = true;
+    if (updatePairs()) updated = true;
 
     return updated;
   }
@@ -60,8 +59,9 @@ class UpdateChessPossibleStrategy extends Strategy {
     return updated;
   }
 
-  // TODO similar logic for knightsMove
-  bool updateKingsPairs() {
+  bool updatePairs() {
+    var chess = puzzle as Chess;
+
     bool updated = false;
     for (var axis in ['R', 'C', 'B']) {
       var valuePossibleTwiceMajors = sudoku.getValuePossibleIndexes(axis, 2);
@@ -70,60 +70,83 @@ class UpdateChessPossibleStrategy extends Strategy {
         if (majors != null) {
           majors.forEach((major1, minors) {
             assert(minors.length == 2);
-            int adjacentAxis(major1) {
-              var major2 = 0;
-              if (major1 % 3 == 0) major2 = major1 + 1;
-              if (major1 % 3 == 1) major2 = major1 - 1;
-              return major2;
+            List<int> adjacentAxes(major1, offset) {
+              var major2s = <int>[];
+              if (major1 % 3 == 0) major2s.add(major1 + offset);
+              if (major1 % 3 == 1) major2s.add(major1 - offset);
+              if (major1 % 3 == 2 && offset == 2) {
+                major2s.add(major1 + offset);
+                major2s.add(major1 - offset);
+              }
+              return major2s;
             }
 
-            if (axis == 'B') {
-              // Pair in box
-              var cell1 = sudoku.getAxisCell(axis, major1, minors[0]);
-              var cell2 = sudoku.getAxisCell(axis, major1, minors[1]);
-              for (var axis2 in ['R', 'C']) {
-                var cell1major2 = cell1.getAxis(axis2);
-                var cell2major2 = cell2.getAxis(axis2);
-                // Pair in same axis handled by other branch
-                // Want adjacent axes
-                if (cell1major2 == cell2major2 + 1 ||
-                    cell1major2 + 1 == cell2major2) {
-                  bool updateAdjacentAxis(Cell cell1, Cell cell2) {
-                    var updated = false;
-                    var minor1 = cell1.getMinorAxis(axis2);
-                    var minor2 = adjacentAxis(minor1);
-                    if (minor2 > 0 && minor2 < 10) {
-                      // Clear value from adjacent minor axis in other cell major axis
-                      var major2 = cell2.getAxis(axis2);
-                      var cell = sudoku.getAxisCell(axis2, major2, minor2);
-                      if (cell.clearPossible(value)) {
-                        updated = true;
-                        sudoku.cellUpdated(cell, explanation,
-                            "remove offset value $value from $cell");
-                      }
-                    }
-                    return updated;
-                  }
-
-                  // Update adjacent axis of each cell
-                  if (updateAdjacentAxis(cell1, cell2)) updated = true;
-                  if (updateAdjacentAxis(cell2, cell1)) updated = true;
+            // Process Kings and Knights moves
+            const KINGS = 'Kings';
+            const KNIGHTS = 'Knights';
+            for (var move in [
+              if (chess.kingsMove) KINGS,
+              if (chess.knightsMove) KNIGHTS
+            ]) {
+              void updateCell(cell, value, annotation) {
+                if (cell.clearPossible(value)) {
+                  updated = true;
+                  sudoku.cellUpdated(cell, explanation,
+                      "remove $move $annotation value $value from $cell");
                 }
               }
-            } else {
-              // Pair in row/col
-              var major2 = adjacentAxis(major1);
-              // If adjacent pair next to different box
-              if (minors[0] + 1 == minors[1] && major2 > 0 && major2 < 10) {
-                // Remove value from adjacent axis cells
-                minors.forEach((minor) {
-                  var cell = sudoku.getAxisCell(axis, major2, minor);
-                  if (cell.clearPossible(value)) {
-                    updated = true;
-                    sudoku.cellUpdated(cell, explanation,
-                        "remove pair value $value from $cell");
+
+              var offset = move == KINGS ? 1 : 2;
+              if (axis == 'B') {
+                // Pair in box
+                var cell1 = sudoku.getAxisCell(axis, major1, minors[0]);
+                var cell2 = sudoku.getAxisCell(axis, major1, minors[1]);
+                for (var axis2 in ['R', 'C']) {
+                  var cell1major2 = cell1.getAxis(axis2);
+                  var cell2major2 = cell2.getAxis(axis2);
+                  // Pair in same axis handled by other branch
+                  // Want adjacent axes
+                  if (cell1major2 != cell2major2) {
+                    bool updateAdjacentAxis(Cell cell1, Cell cell2) {
+                      var updated = false;
+                      var cells = move == KINGS
+                          ? sudoku.kingsMoveCells(cell1)
+                          : sudoku.knightsMoveCells(cell1);
+                      for (var cell in cells) {
+                        // Clear value from move cell in other cell major axis
+                        if (cell != cell2 &&
+                            cell.getAxis(axis2) == cell2.getAxis(axis2)) {
+                          updateCell(cell, value, 'offset');
+                        }
+                      }
+                      return updated;
+                    }
+
+                    // Update adjacent axis of each cell
+                    if (updateAdjacentAxis(cell1, cell2)) updated = true;
+                    if (updateAdjacentAxis(cell2, cell1)) updated = true;
                   }
-                });
+                  // TODO knightsMove intersection
+                  var cells = intersectionCells(sudoku.knightsMoveCells(cell1),
+                      sudoku.knightsMoveCells(cell2));
+                  for (var cell in cells) {
+                    // Clear value from intersection cell
+                    updateCell(cell, value, 'intersection');
+                  }
+                }
+              } else {
+                // Pair in row/col
+                for (var major2 in adjacentAxes(major1, offset)) {
+                  // If adjacent pair next to different box
+                  if (minors[0] + 1 == minors[1] && major2 > 0 && major2 < 10) {
+                    // Remove value from adjacent axis cells
+                    minors.forEach((minor) {
+                      var cell = sudoku.getAxisCell(axis, major2, minor);
+                      updateCell(cell, value, 'pair');
+                    });
+                  }
+                }
+                // TODO knightsMove triple
               }
             }
           });

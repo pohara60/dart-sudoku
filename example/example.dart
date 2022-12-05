@@ -194,11 +194,11 @@ void main() {
     ['R9C2', 'R8C2', 'R7C2', 'R6C2'],
     ['R9C1', 'R8C1', 'R7C1'],
   ];
-  var puzzle = SudokuAPI.sudoku(thermoSudoku3);
-  print(puzzle.addThermo(thermoPuzzle3));
-  print(puzzle.addChess(kingsMove: true));
-  puzzle.debug = true;
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.sudoku(thermoSudoku3);
+  // print(puzzle.addThermo(thermoPuzzle3));
+  // print(puzzle.addChess(kingsMove: true));
+  // puzzle.debug = true;
+  // print(puzzle.solve(true, false));
 
   const dd = ' ';
   const DX = 'X';
@@ -486,6 +486,22 @@ void main() {
   // puzzle.debug = true;
   // print(puzzle.addChess(knightsMove: true));
   // print(puzzle.solve(true, false));
+
+  var chessSudoku2 = [
+    "123......",
+    "45.......",
+    "7.9......",
+    ".........",
+    ".........",
+    ".........",
+    "......1.3",
+    "......456",
+    ".......89",
+  ].join('\n');
+  var puzzle = SudokuAPI.sudoku(chessSudoku2);
+  puzzle.debug = true;
+  print(puzzle.addChess(knightsMove: true));
+  print(puzzle.solve(true, false));
 
   var entropySudokuPuzzle = [
     ".........",
