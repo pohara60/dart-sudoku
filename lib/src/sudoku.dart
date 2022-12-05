@@ -348,6 +348,9 @@ class Sudoku implements Puzzle {
   Cells getBox(int box) => List.from(allRegions['B$box']!.cells);
   Cells getRow(int row) => List.from(allRegions['R$row']!.cells);
   Cells getColumn(int col) => List.from(allRegions['C$col']!.cells);
+  Set<Cell> getBoxSet(int box) => Set.from(allRegions['B$box']!.cells);
+  Set<Cell> getRowSet(int row) => Set.from(allRegions['R$row']!.cells);
+  Set<Cell> getColumnSet(int col) => Set.from(allRegions['C$col']!.cells);
 
   /// Update possible values in nonet [cells] for [cell] value, with label [explanation]
   ///
@@ -565,6 +568,12 @@ class Sudoku implements Puzzle {
     if (axes.contains('B')) cells.addAll(getBox(cell.box));
     if (kingsMove) cells.addAll(kingsMoveCells(cell));
     if (knightsMove) cells.addAll(knightsMoveCells(cell));
+    if (excludeAxes != null && excludeAxes.contains('R'))
+      cells = cells.difference(getRowSet(cell.row));
+    if (excludeAxes != null && excludeAxes.contains('C'))
+      cells = cells.difference(getColumnSet(cell.col));
+    if (excludeAxes != null && excludeAxes.contains('B'))
+      cells = cells.difference(getBoxSet(cell.box));
     return cells.toList();
   }
 
