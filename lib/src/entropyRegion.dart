@@ -10,7 +10,7 @@ class EntropyRegion extends LineRegion {
       {nodups = true, this.difference = 5})
       : super(entropy, name, cells, nodups: nodups);
 
-  int validLineValues(List<int> values, Cells cells) {
+  int validLineValues(List<int> values, Cells valueCells, Cells cells) {
     // Check for entropy from prior cells
     var entropy = List.filled(3, -1);
     for (var i = 0; i < values.length; i++) {

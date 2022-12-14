@@ -7,6 +7,7 @@ import 'src/chess.dart';
 import 'src/domino.dart';
 import 'src/entropy.dart';
 import 'src/generator.dart';
+import 'src/regionSum.dart';
 import 'src/renban.dart';
 import 'src/sandwich.dart';
 import 'src/sudoku.dart';
@@ -148,6 +149,15 @@ class SudokuAPI {
     }
     currentPuzzle = currentPuzzle! + entropyLines.join('\n');
     puzzle = Entropy.puzzle(puzzle!, entropyLines);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addRegionSum(List<List<String>> regionSumLines) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + regionSumLines.join('\n');
+    puzzle = RegionSum.puzzle(puzzle!, regionSumLines);
     return puzzle?.messageString ?? '';
   }
 

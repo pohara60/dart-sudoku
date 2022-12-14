@@ -111,24 +111,14 @@ class Domino extends PuzzleDecorator {
       List<Strategy>? easyStrategies,
       List<Strategy>? toughStrategies,
       Function? toStr}) {
-    var strategies1 = List<Strategy>.from(easyStrategies ?? []);
-    for (var strategy in [
+    var strategies1 = Strategy.addStrategies(easyStrategies, [
       regionCombinationsStrategy,
       regionGroupCombinationsStrategy,
       updateParityStrategy,
-    ]) {
-      if (!strategies1.any((s) => s.runtimeType == strategy.runtimeType)) {
-        strategies1.add(strategy);
-      }
-    }
-    var strategies2 = List<Strategy>.from(easyStrategies ?? []);
-    for (var strategy in [
+    ]);
+    var strategies2 = Strategy.addStrategies(toughStrategies ?? [], [
       updateDominoPossibleStrategy,
-    ]) {
-      if (!strategies2.any((s) => s.runtimeType == strategy.runtimeType)) {
-        strategies2.add(strategy);
-      }
-    }
+    ]);
 
     String stringFunc() => toStr == null ? toString() : toStr();
 

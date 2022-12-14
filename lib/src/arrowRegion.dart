@@ -32,15 +32,16 @@ class ArrowRegion extends Region<Arrow> {
     return combinations;
   }
 
-  static int validArrowGroupValues(List<int> values, Cells cells, Puzzle puzzle,
+  static int validArrowGroupValues(
+      List<int> values, Cells valueCells, Cells cells, Puzzle puzzle,
       [List<Region>? regions]) {
     var arrow = puzzle as Arrow;
 
     // Check arrow for cells in order
     var doneRegions = <ArrowRegion>[];
-    var latestCell = cells[values.length - 1];
+    var latestCell = valueCells[values.length - 1];
     for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
-      var cell = cells[valueIndex];
+      var cell = valueCells[valueIndex];
       var value = values[valueIndex];
       // Check arrow sequence
       for (var arrowRegion in arrow.getArrows(cell).where((arrowRegion) =>
@@ -54,7 +55,7 @@ class ArrowRegion extends Region<Arrow> {
         for (var priorValueIndex = valueIndex - 1;
             priorValueIndex >= 0;
             priorValueIndex--) {
-          var priorCell = cells[priorValueIndex];
+          var priorCell = valueCells[priorValueIndex];
           var priorValue = values[priorValueIndex];
           var priorIndex = arrowRegion.cells.indexOf(priorCell);
           if (priorIndex != -1) {

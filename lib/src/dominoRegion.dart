@@ -57,7 +57,7 @@ class DominoRegion extends Region<Domino> {
     return combinations;
   }
 
-  int validDominoValues(List<int> values) {
+  int validDominoValues(List<int> values, Cells valueCells) {
     // Check Consecutive and Multiple, X/V checked by total logic
     if (type == DominoType.DOMINO_X && type == DominoType.DOMINO_V) return 0;
 
@@ -149,23 +149,23 @@ class DominoRegionGroup extends RegionGroup {
     }
   }
 
-  int validDominoRegionGroupValues(List<int> values) {
+  int validDominoRegionGroupValues(List<int> values, Cells valueCells) {
     var cells = this.cells;
-    return validDominoGroupValues(values, cells, puzzle);
+    return validDominoGroupValues(values, valueCells, cells, puzzle);
   }
 
   static int validDominoGroupValues(
-      List<int> values, Cells cells, Puzzle puzzle) {
+      List<int> values, Cells valueCells, Cells cells, Puzzle puzzle) {
     var domino = puzzle as Domino;
     // Check dominos for each cell that has a value
     // Recheck earlier cells in case a later cell is in earlier domino
     for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
-      var cell = cells[valueIndex];
+      var cell = valueCells[valueIndex];
       var value = values[valueIndex];
       // Check adjacent cells in the group that have a value
       var otherCells = domino.sudoku.adjacentCells(cell);
       for (var otherCell in otherCells) {
-        var otherValueIndex = cells.indexOf(otherCell);
+        var otherValueIndex = valueCells.indexOf(otherCell);
         if (otherValueIndex != -1 && otherValueIndex < values.length) {
           var otherValue = values[otherValueIndex];
           var dom = domino.sharedDomino(cell, otherCell);

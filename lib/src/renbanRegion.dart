@@ -6,7 +6,7 @@ class RenbanRegion extends LineRegion {
   RenbanRegion(Line renban, String name, Cells cells, {nodups = true})
       : super(renban, name, cells, nodups: nodups);
 
-  int validLineValues(List<int> values, Cells cells) {
+  int validLineValues(List<int> values, Cells valueCells, Cells cells) {
     // Check for renban from prior cells
     if (values.length > 1) {
       var minValue = 10;

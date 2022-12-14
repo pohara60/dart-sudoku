@@ -8,6 +8,7 @@ import 'package:sudoku/src/strategy/regionCombinations.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
 import 'lineRegion.dart';
+import 'strategy/regionGroupCombinations.dart';
 
 abstract class Line<RegionType extends LineRegion> extends PuzzleDecorator {
   late final bool partial;
@@ -31,6 +32,7 @@ abstract class Line<RegionType extends LineRegion> extends PuzzleDecorator {
       cell.regions.where((region) => region is RegionType));
 
   late RegionCombinationsStrategy regionCombinationsStrategy;
+  late RegionGroupCombinationsStrategy regionGroupCombinationsStrategy;
 
   Line.puzzle(Puzzle puzzle, List<List<String>> lineLines, [partial = false]) {
     this.puzzle = puzzle;
@@ -38,6 +40,7 @@ abstract class Line<RegionType extends LineRegion> extends PuzzleDecorator {
     initLine(lineLines);
     // Strategies
     regionCombinationsStrategy = RegionCombinationsStrategy(this);
+    regionGroupCombinationsStrategy = RegionGroupCombinationsStrategy(this);
   }
 
   get defaultColour => chalk.black.onGrey;
@@ -67,11 +70,10 @@ abstract class Line<RegionType extends LineRegion> extends PuzzleDecorator {
       List<Strategy>? easyStrategies,
       List<Strategy>? toughStrategies,
       Function? toStr}) {
-    var strategies = List<Strategy>.from(easyStrategies ?? []);
-    if (!strategies.any(
-        (strategy) => strategy.runtimeType == RegionCombinationsStrategy)) {
-      strategies.add(regionCombinationsStrategy);
-    }
+    List<Strategy> strategies = Strategy.addStrategies(
+      easyStrategies,
+      [regionCombinationsStrategy, regionGroupCombinationsStrategy],
+    );
 
     String stringFunc() => toStr == null ? toString() : toStr();
 

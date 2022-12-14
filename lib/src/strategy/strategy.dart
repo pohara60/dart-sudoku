@@ -10,4 +10,15 @@ abstract class Strategy {
   }
 
   bool solve();
+
+  static List<Strategy> addStrategies(
+      List<Strategy>? oldStrategies, List<Strategy> addStrategies) {
+    var strategies = List<Strategy>.from(oldStrategies ?? []);
+    for (var strategy in addStrategies) {
+      if (!strategies.any((s) => s.runtimeType == strategy.runtimeType)) {
+        strategies.add(strategy);
+      }
+    }
+    return strategies;
+  }
 }

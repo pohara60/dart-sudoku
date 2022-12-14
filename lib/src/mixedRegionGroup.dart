@@ -7,6 +7,7 @@ import 'entropyRegion.dart';
 import 'killerRegion.dart';
 import 'puzzle.dart';
 import 'region.dart';
+import 'regionSumRegion.dart';
 import 'renbanRegion.dart';
 import 'sandwichRegion.dart';
 import 'sudoku.dart';
@@ -26,7 +27,7 @@ class MixedRegionGroup extends RegionGroup {
     // Limited to maximum
     var mixedCells = this.cells;
     var combinationCount = Limiter(COMBINATION_LIMIT);
-    var iterationCount = Limiter(ITERATION_LIMIT);
+    var iterationCount = Limiter(ITERATION_LIMIT * 4);
     var stopwatch = Stopwatch();
     stopwatch.start();
     try {
@@ -55,9 +56,9 @@ class MixedRegionGroup extends RegionGroup {
     }
   }
 
-  int validMixedGroupValues(List<int> values) {
+  int validMixedGroupValues(List<int> values, Cells valueCells) {
     var cells = this.cells;
-    var cell = cells[values.length - 1];
+    var cell = valueCells[values.length - 1];
     var regions = sudoku
         .getRegions(cell)
         .where((region) => this.regions.contains(region))
@@ -68,42 +69,42 @@ class MixedRegionGroup extends RegionGroup {
         regions.firstWhereOrNull((region) => region is ThermoRegion);
     if (thermoRegion != null) {
       result = ThermoRegionGroup.validThermoGroupValues(
-          values, cells, thermoRegion.puzzle);
+          values, valueCells, cells, thermoRegion.puzzle);
       if (result != 0) return result;
     }
     var dominoRegion =
         regions.firstWhereOrNull((region) => region is DominoRegion);
     if (dominoRegion != null) {
       result = DominoRegionGroup.validDominoGroupValues(
-          values, cells, dominoRegion.puzzle);
+          values, valueCells, cells, dominoRegion.puzzle);
       if (result != 0) return result;
     }
     var sandwichRegion =
         regions.firstWhereOrNull((region) => region is SandwichRegion);
     if (sandwichRegion != null) {
       result = SandwichRegion.validSandwichGroupValues(
-          values, cells, sandwichRegion.puzzle, regions);
+          values, valueCells, cells, sandwichRegion.puzzle, regions);
       if (result != 0) return result;
     }
     var killerRegion =
         regions.firstWhereOrNull((region) => region is KillerRegion);
     if (killerRegion != null) {
       result = KillerRegion.validKillerGroupValues(
-          values, cells, killerRegion.puzzle, regions);
+          values, valueCells, cells, killerRegion.puzzle, regions);
       if (result != 0) return result;
     }
     var arrowRegion =
         regions.firstWhereOrNull((region) => region is ArrowRegion);
     if (arrowRegion != null) {
       result = ArrowRegion.validArrowGroupValues(
-          values, cells, arrowRegion.puzzle, regions);
+          values, valueCells, cells, arrowRegion.puzzle, regions);
       if (result != 0) return result;
     }
     var renbanRegion = regions
         .firstWhereOrNull((region) => region is RenbanRegion) as RenbanRegion?;
     if (renbanRegion != null) {
       result = renbanRegion.validLineGroupValues(
-          values, cells, renbanRegion.puzzle, regions);
+          values, valueCells, cells, renbanRegion.puzzle, regions);
       if (result != 0) return result;
     }
     var entropyRegion =
@@ -111,7 +112,7 @@ class MixedRegionGroup extends RegionGroup {
             as EntropyRegion?;
     if (entropyRegion != null) {
       result = entropyRegion.validLineGroupValues(
-          values, cells, entropyRegion.puzzle, regions);
+          values, valueCells, cells, entropyRegion.puzzle, regions);
       if (result != 0) return result;
     }
     var whisperRegion =
@@ -119,7 +120,15 @@ class MixedRegionGroup extends RegionGroup {
             as WhisperRegion?;
     if (whisperRegion != null) {
       result = whisperRegion.validLineGroupValues(
-          values, cells, whisperRegion.puzzle, regions);
+          values, valueCells, cells, whisperRegion.puzzle, regions);
+      if (result != 0) return result;
+    }
+    var regionSumRegion =
+        regions.firstWhereOrNull((region) => region is RegionSumRegion)
+            as RegionSumRegion?;
+    if (regionSumRegion != null) {
+      result = regionSumRegion.validLineGroupValues(
+          values, valueCells, cells, regionSumRegion.puzzle, regions);
       if (result != 0) return result;
     }
     return 0;

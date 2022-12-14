@@ -9,7 +9,7 @@ class WhisperRegion extends LineRegion {
       {nodups = true, this.difference = 5})
       : super(whisper, name, cells, nodups: nodups);
 
-  int validLineValues(List<int> values, Cells cells) {
+  int validLineValues(List<int> values, Cells valueCells, Cells cells) {
     // Check for whisper from prior cell
     if (values.length > 1) {
       var value = values[values.length - 1];

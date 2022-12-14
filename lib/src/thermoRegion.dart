@@ -34,7 +34,7 @@ class ThermoRegion extends Region<Thermo> {
     return combinations;
   }
 
-  int validThermoValues(List<int> values) {
+  int validThermoValues(List<int> values, Cells valueCells) {
     // Check for thermo from prior cell
     var value = values[values.length - 1];
     if (values.length > 1) {
@@ -95,16 +95,16 @@ class ThermoRegionGroup extends RegionGroup {
     }
   }
 
-  int validThermoRegionGroupValues(List<int> values) {
+  int validThermoRegionGroupValues(List<int> values, Cells valueCells) {
     var cells = this.cells;
-    return validThermoGroupValues(values, cells, puzzle);
+    return validThermoGroupValues(values, valueCells, cells, puzzle);
   }
 
   static int validThermoGroupValues(
-      List<int> values, Cells cells, Puzzle puzzle) {
+      List<int> values, Cells valueCells, Cells cells, Puzzle puzzle) {
     // Check thermo maximums first as they shortcut processing
     var thermo = puzzle as Thermo;
-    var cell = cells[values.length - 1];
+    var cell = valueCells[values.length - 1];
     var value = values[values.length - 1];
     for (var thermo in thermo.getThermos(cell)) {
       var index = thermo.cells.indexOf(cell);
@@ -116,7 +116,7 @@ class ThermoRegionGroup extends RegionGroup {
     // Recheck earlier cells in case a later cell is the prior cell
     bool latest = true;
     for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
-      cell = cells[valueIndex];
+      cell = valueCells[valueIndex];
       value = values[valueIndex];
       // Check thermo sequence
       for (var thermo in thermo.getThermos(cell)) {

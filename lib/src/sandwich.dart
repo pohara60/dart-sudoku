@@ -76,15 +76,10 @@ class Sandwich extends PuzzleDecorator {
       List<Strategy>? easyStrategies,
       List<Strategy>? toughStrategies,
       Function? toStr}) {
-    var strategies = List<Strategy>.from(easyStrategies ?? []);
-    for (var strategy in [
+    var strategies = Strategy.addStrategies(easyStrategies, [
       regionCombinationsStrategy,
-      regionGroupCombinationsStrategy
-    ]) {
-      if (!strategies.any((s) => s.runtimeType == strategy.runtimeType)) {
-        strategies.add(strategy);
-      }
-    }
+      regionGroupCombinationsStrategy,
+    ]);
 
     String stringFunc() => toStr == null ? toString() : toStr();
 
@@ -92,6 +87,7 @@ class Sandwich extends PuzzleDecorator {
         explain: explain,
         showPossible: showPossible,
         easyStrategies: strategies,
+        toughStrategies: toughStrategies,
         toStr: stringFunc);
   }
 

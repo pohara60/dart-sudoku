@@ -40,14 +40,14 @@ class KillerRegion extends Region<Killer> {
   }
 
   static int validKillerGroupValues(
-      List<int> values, Cells cells, Puzzle puzzle,
+      List<int> values, Cells valueCells, Cells cells, Puzzle puzzle,
       [List<Region>? regions]) {
     var killer = puzzle as Killer;
 
     // Check killer for cells
     var doneRegions = <KillerRegion>[];
     for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
-      var cell = cells[valueIndex];
+      var cell = valueCells[valueIndex];
       var value = values[valueIndex];
       // Check killer
       var killerRegion = killer.getCage(cell);
@@ -58,7 +58,7 @@ class KillerRegion extends Region<Killer> {
         for (var priorValueIndex = valueIndex - 1;
             priorValueIndex >= 0;
             priorValueIndex--) {
-          var priorCell = cells[priorValueIndex];
+          var priorCell = valueCells[priorValueIndex];
           var priorValue = values[priorValueIndex];
           var priorIndex = killerRegion.cells.indexOf(priorCell);
           if (priorIndex != -1) {

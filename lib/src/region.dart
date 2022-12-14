@@ -51,7 +51,7 @@ abstract class Region<Puzzle> {
       int remainingTotal(int total, int value, int index),
       bool validTotal(int total, int value),
       [bool limited = true,
-      int validValues(List<int> values)?]) {
+      int validValues(List<int> values, Cells valueCells)?]) {
     var combinationCount = Limiter(limited ? COMBINATION_LIMIT : null);
     var iterationCount = Limiter(limited ? ITERATION_LIMIT : null);
     // var stopwatch = Stopwatch();
@@ -160,7 +160,7 @@ List<List<int>> cellCombinations(
   bool validTotal(int total, int value), [
   Limiter? combinationLimiter,
   Limiter? iterationLimiter,
-  int validValues(List<int> values)?,
+  int validValues(List<int> values, Cells valueCells)?,
 ]) {
   var regionCells = cells;
   assert(nodups || axisValues != null);
@@ -184,7 +184,7 @@ List<List<int>> cellCombinations(
       // Value validation
       var combination = [...setValues, value];
       if (validValues != null) {
-        var valid = validValues(combination);
+        var valid = validValues(combination, cells);
         if (valid > 0) continue valueLoop;
         if (valid < 0) break;
       }

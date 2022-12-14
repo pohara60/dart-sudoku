@@ -114,15 +114,10 @@ class Arrow extends PuzzleDecorator {
       List<Strategy>? easyStrategies,
       List<Strategy>? toughStrategies,
       Function? toStr}) {
-    var strategies = List<Strategy>.from(easyStrategies ?? []);
-    for (var strategy in [
-      regionCombinationsStrategy,
-      regionGroupCombinationsStrategy
-    ]) {
-      if (!strategies.any((s) => s.runtimeType == strategy.runtimeType)) {
-        strategies.add(strategy);
-      }
-    }
+    List<Strategy> strategies = Strategy.addStrategies(
+      easyStrategies,
+      [regionCombinationsStrategy, regionGroupCombinationsStrategy],
+    );
 
     String stringFunc() => toStr == null ? toString() : toStr();
 

@@ -34,11 +34,12 @@ class SandwichRegion extends Region<Sandwich> {
     return combinations;
   }
 
-  int validSandwichRegionValues(List<int> values) {
-    return validSandwichValues(values, this.total);
+  int validSandwichRegionValues(List<int> values, Cells valueCells) {
+    return validSandwichValues(values, valueCells, this.total);
   }
 
-  static int validSandwichValues(List<int> values, int total) {
+  static int validSandwichValues(
+      List<int> values, Cells valueCells, int total) {
     var inSandwich = false;
     var innieTotal = 0;
     var priorInnie = 0;
@@ -66,14 +67,14 @@ class SandwichRegion extends Region<Sandwich> {
   }
 
   static int validSandwichGroupValues(
-      List<int> values, Cells cells, Puzzle puzzle,
+      List<int> values, Cells valueCells, Cells cells, Puzzle puzzle,
       [List<Region>? regions]) {
     var sandwich = puzzle as Sandwich;
 
     // Check sandwich for cells in order
     var doneRegions = <SandwichRegion>[];
     for (var valueIndex = values.length - 1; valueIndex >= 0; valueIndex--) {
-      var cell = cells[valueIndex];
+      var cell = valueCells[valueIndex];
       var value = values[valueIndex];
       // Check sandwich sequence
       for (var sandwichRegion in sandwich.getSandwichs(cell).where(
@@ -89,7 +90,7 @@ class SandwichRegion extends Region<Sandwich> {
           for (var priorValueIndex = valueIndex - 1;
               priorValueIndex >= 0;
               priorValueIndex--) {
-            var priorCell = cells[priorValueIndex];
+            var priorCell = valueCells[priorValueIndex];
             var priorValue = values[priorValueIndex];
             var priorIndex = sandwichRegion.cells.indexOf(priorCell);
             if (priorIndex != -1) {
@@ -102,8 +103,8 @@ class SandwichRegion extends Region<Sandwich> {
         var runValues =
             sandwichValues.takeWhile((value) => value != 0).toList();
         if (runValues.length > 0) {
-          var result = SandwichRegion.validSandwichValues(
-              runValues, sandwichRegion.total);
+          var result = SandwichRegion.validSandwichValues(runValues,
+              cells.take(runValues.length).toList(), sandwichRegion.total);
           if (result != 0) return result;
         }
         doneRegions.add(sandwichRegion);
