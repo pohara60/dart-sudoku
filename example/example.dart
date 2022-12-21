@@ -122,8 +122,52 @@ void main() {
     ['R2C7', 'R3C7', 'R4C7', 'R5C7', 'R6C7', 'R7C7'],
     ['R6C9', 'R7C9'],
   ];
-  // var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
-  // print(puzzle.addWhisper(whisperPuzzle));
+  var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
+  print(puzzle.addWhisper(whisperPuzzle));
+  puzzle.debug = true;
+  print(puzzle.solve(true, false));
+
+  var whisperPuzzle2 = [
+    [
+      'R4C4',
+      'R4C5',
+      'R5C6',
+      'R6C7',
+      'R6C8',
+      'R6C9',
+      'R5C9',
+      'R4C9',
+      'R4C8',
+      'R3C9',
+      'R2C8',
+      'R3C7',
+      'R3C6',
+      'R3C5',
+      'R2C4',
+      'R2C3',
+      'R2C2',
+      'R3C2',
+      'R4C1',
+      'R5C2',
+      'R6C1',
+      'R6C2',
+      'R6C3',
+      'R6C4',
+      'R7C3',
+      'R8C3',
+      'R8C2',
+      'R8C1',
+      'R9C1',
+    ],
+  ];
+  var thermoPuzzle4 = [
+    ['R9C7', 'R9C8'],
+  ];
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addSudokuX());
+  // print(puzzle.addThermo(thermoPuzzle4));
+  // print(puzzle.addWhisper(whisperPuzzle2));
+  // puzzle.debug = true;
   // print(puzzle.solve(true, false));
 
   var sudokuPuzzle = [
@@ -279,11 +323,11 @@ void main() {
     [XX, UU, UU, RR, UU, LL, UU, UU, XX],
     [XX, RR, UU, XX, XX, XX, UU, LL, XX],
   ];
-  var puzzle = SudokuAPI.sudoku(emptySudoku);
-  print(puzzle.addKiller(dominoKiller2, true));
-  print(puzzle.addDomino(dominoPuzzle2, false));
-  puzzle.debug = true;
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addKiller(dominoKiller2, true));
+  // print(puzzle.addDomino(dominoPuzzle2, false));
+  // puzzle.debug = true;
+  // print(puzzle.solve(true, false));
 
   var dominoPuzzle3 = [
     [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],

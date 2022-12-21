@@ -16,8 +16,11 @@ class Chess extends PuzzleDecorator {
 
   late UpdateChessPossibleStrategy updateChessPossibleStrategy;
 
+  void Function()? clearStateCallback = null;
+
   Chess.puzzle(Puzzle puzzle,
       {this.kingsMove = false, this.knightsMove = false}) {
+    puzzle.clearStateCallback = clearState;
     this.puzzle = puzzle;
     // Strategies
     updateChessPossibleStrategy = UpdateChessPossibleStrategy(this);

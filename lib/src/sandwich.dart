@@ -32,9 +32,11 @@ class Sandwich extends PuzzleDecorator {
 
   late RegionCombinationsStrategy regionCombinationsStrategy;
   late RegionGroupCombinationsStrategy regionGroupCombinationsStrategy;
+  void Function()? clearStateCallback = null;
 
   Sandwich.puzzle(Puzzle puzzle, List<List<dynamic>> sandwichLines,
       [partial = false]) {
+    puzzle.clearStateCallback = clearState;
     this.puzzle = puzzle;
     initSandwich(sandwichLines);
     // Strategies

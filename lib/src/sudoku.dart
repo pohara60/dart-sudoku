@@ -119,6 +119,8 @@ class Sudoku implements Puzzle {
     _initProcessing();
   }
 
+  void Function()? clearStateCallback = null;
+
   Sudoku.puzzle(List<String> newSudokuPuzzle, [this.singleStep = false]) {
     _initRegions();
     _grid = newSudokuPuzzle.asMap().entries.map((entry) {
@@ -430,8 +432,12 @@ class Sudoku implements Puzzle {
       return getRow(major);
     } else if (axis == 'C') {
       return getColumn(major);
-    } else {
+    } else if (axis == 'B') {
       return getBox(major);
+    } else {
+      if (axis[0] == 'X' && major != 0 && allRegions.containsKey('X$major'))
+        return allRegions['X$major']!.cells;
+      return List.from([]);
     }
   }
 
@@ -473,6 +479,10 @@ class Sudoku implements Puzzle {
 
   void cellUpdated(Cell cell, String explanation, String? message) {
     _updates.add(cell);
+    cellMessage(cell, explanation, message);
+  }
+
+  void cellMessage(Cell cell, String explanation, String? message) {
     if (message != null) {
       addMessage(addExplanation(explanation, message));
     }
@@ -694,6 +704,11 @@ class Sudoku implements Puzzle {
     return state;
   }
 
+  // Hook for subclasses to clear any state
+  void clearState() {
+    if (clearStateCallback != null) clearStateCallback!();
+  }
+
   void restoreState(List<List<Possible>> state) {
     state.forEachIndexed((rowIndex, row) {
       row.forEachIndexed((colIndex, possible) {
@@ -702,6 +717,8 @@ class Sudoku implements Puzzle {
     });
     // Clear previous error
     _error = false;
+    // Clear any saved state
+    clearState();
   }
 
   var addedMixedRegionGroups = false;

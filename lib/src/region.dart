@@ -82,6 +82,11 @@ abstract class Region<Puzzle> {
       return null;
     }
   }
+
+  // Most regions do not support colouring
+  bool regionColouring(String location) {
+    return false;
+  }
 }
 
 abstract class RegionGroup<Puzzle> extends Region<Puzzle> {

@@ -5,8 +5,12 @@ import 'line.dart';
 import 'puzzle.dart';
 
 class Entropy extends Line<EntropyRegion> {
+  void Function()? clearStateCallback = null;
+
   Entropy.puzzle(Puzzle puzzle, List<List<String>> entropyLines)
-      : super.puzzle(puzzle, entropyLines);
+      : super.puzzle(puzzle, entropyLines) {
+    puzzle.clearStateCallback = clearState;
+  }
 
   get lineColour => chalk.black.onYellow;
 

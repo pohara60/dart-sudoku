@@ -8,7 +8,7 @@ class EntropyRegion extends LineRegion {
 
   EntropyRegion(Entropy entropy, String name, Cells cells,
       {nodups = true, this.difference = 5})
-      : super(entropy, name, cells, nodups: nodups);
+      : super(entropy, name, cells, nodups: nodups, colours: 3);
 
   int validLineValues(List<int> values, Cells valueCells, Cells cells) {
     // Check for entropy from prior cells

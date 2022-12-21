@@ -31,8 +31,11 @@ class Killer extends PuzzleDecorator {
 
   late RegionCombinationsStrategy regionCombinationsStrategy;
 
+  void Function()? clearStateCallback = null;
+
   Killer.puzzle(Puzzle puzzle, List<List<dynamic>> killerGrid,
       [partial = false]) {
+    puzzle.clearStateCallback = clearState;
     this.puzzle = puzzle;
     this.partial = partial;
     initKiller(killerGrid);

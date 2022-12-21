@@ -48,8 +48,11 @@ class Domino extends PuzzleDecorator {
   late RegionCombinationsStrategy regionCombinationsStrategy;
   late RegionGroupCombinationsStrategy regionGroupCombinationsStrategy;
 
+  void Function()? clearStateCallback = null;
+
   Domino.puzzle(Puzzle puzzle, List<List<String>> dominoLines,
       [this.negative = false]) {
+    puzzle.clearStateCallback = clearState;
     this.puzzle = puzzle;
     initDomino(dominoLines);
     // Strategies

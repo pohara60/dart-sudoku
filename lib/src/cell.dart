@@ -32,6 +32,14 @@ class Cell {
     return index;
   }
 
+  List<int> get x => _row - _col == 0
+      ? (_row + _col == 10 ? [1, 2] : [1])
+      : _row + _col == 10
+          ? [2]
+          : [];
+
+  List<String> get xName => x.map<String>((e) => 'X$e').toList();
+
   late Possible _possible;
   Possible get possible => _possible;
   int get possibleCount => _possible.count;
@@ -93,7 +101,11 @@ class Cell {
       ? _row
       : axis == 'C'
           ? _col
-          : box;
+          : axis == 'B'
+              ? box
+              : xName.contains(axis)
+                  ? int.parse(axis[1])
+                  : 0;
   String getAxisName(String axis) => axis == 'R'
       ? 'R$row'
       : axis == 'C'
@@ -169,7 +181,7 @@ class Cell {
     return updated;
   }
 
-  getOtherPossible(int value) {
+  int getOtherPossible(int value) {
     return _possible.getOther(value);
   }
 

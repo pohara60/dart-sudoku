@@ -28,7 +28,10 @@ class SudokuX extends PuzzleDecorator {
 
   late RegionCombinationsStrategy regionCombinationsStrategy;
 
+  void Function()? clearStateCallback = null;
+
   SudokuX.puzzle(Puzzle puzzle, {rising = true, falling = true}) {
+    puzzle.clearStateCallback = clearState;
     this.puzzle = puzzle;
     var cells1 = <Cell>[];
     var cells2 = <Cell>[];

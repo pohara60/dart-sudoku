@@ -5,8 +5,11 @@ import 'puzzle.dart';
 import 'regionSumRegion.dart';
 
 class RegionSum extends Line<RegionSumRegion> {
+  void Function()? clearStateCallback = null;
   RegionSum.puzzle(Puzzle puzzle, List<List<String>> regionSumLines)
-      : super.puzzle(puzzle, regionSumLines);
+      : super.puzzle(puzzle, regionSumLines) {
+    puzzle.clearStateCallback = clearState;
+  }
 
   get lineColour => chalk.black.onCyan;
 

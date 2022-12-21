@@ -5,8 +5,11 @@ import 'puzzle.dart';
 import 'renbanRegion.dart';
 
 class Renban extends Line<RenbanRegion> {
+  void Function()? clearStateCallback = null;
   Renban.puzzle(Puzzle puzzle, List<List<String>> renbanLines)
-      : super.puzzle(puzzle, renbanLines);
+      : super.puzzle(puzzle, renbanLines) {
+    puzzle.clearStateCallback = clearState;
+  }
 
   get lineColour => chalk.black.onMagenta;
 

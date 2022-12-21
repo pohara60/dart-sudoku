@@ -35,6 +35,7 @@ abstract class Line<RegionType extends LineRegion> extends PuzzleDecorator {
   late RegionGroupCombinationsStrategy regionGroupCombinationsStrategy;
 
   Line.puzzle(Puzzle puzzle, List<List<String>> lineLines, [partial = false]) {
+    puzzle.clearStateCallback = clearState;
     this.puzzle = puzzle;
     this.partial = partial;
     initLine(lineLines);
@@ -81,7 +82,14 @@ abstract class Line<RegionType extends LineRegion> extends PuzzleDecorator {
         explain: explain,
         showPossible: showPossible,
         easyStrategies: strategies,
+        toughStrategies: toughStrategies,
         toStr: stringFunc);
+  }
+
+  void clearState() {
+    for (var line in lines) {
+      line.clearState();
+    }
   }
 
   void initLine(List<List<String>> lineLines) {

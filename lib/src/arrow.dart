@@ -38,8 +38,11 @@ class Arrow extends PuzzleDecorator {
   late RegionCombinationsStrategy regionCombinationsStrategy;
   late RegionGroupCombinationsStrategy regionGroupCombinationsStrategy;
 
+  void Function()? clearStateCallback = null;
+
   Arrow.puzzle(Puzzle puzzle, List<List<String>> arrowLines,
       [partial = false]) {
+    puzzle.clearStateCallback = clearState;
     this.puzzle = puzzle;
     initArrow(arrowLines);
     // Strategies

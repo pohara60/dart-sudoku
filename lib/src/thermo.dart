@@ -38,8 +38,11 @@ class Thermo extends PuzzleDecorator {
   late RegionCombinationsStrategy regionCombinationsStrategy;
   late RegionGroupCombinationsStrategy regionGroupCombinationsStrategy;
 
+  void Function()? clearStateCallback = null;
+
   Thermo.puzzle(Puzzle puzzle, List<List<String>> thermoLines,
       [partial = false]) {
+    puzzle.clearStateCallback = clearState;
     this.puzzle = puzzle;
     initThermo(thermoLines);
     // Strategies

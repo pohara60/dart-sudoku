@@ -19,6 +19,11 @@ class Possible {
     _base = other._base;
   }
 
+  Possible.list(List<int> values, [int this._base = 1]) {
+    _possible =
+        List<bool>.generate(9, (index) => values.contains(_base + index));
+  }
+
   int get count => _possible.where((element) => element == true).length;
   //_possible.fold(0, (previous, element) => element ? previous + 1 : previous);
 
@@ -107,7 +112,7 @@ class Possible {
     return result;
   }
 
-  getOther(int value) {
+  int getOther(int value) {
     for (var other = _base; other < _base + 9; other++) {
       if (value != other && _possible[other - _base]) {
         return other;

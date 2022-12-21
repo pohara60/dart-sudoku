@@ -19,6 +19,10 @@ Dart Sudoku solver package, with Command Line Interface.
 
 Run of Odd parity dominos (DominoRegionGroup), in row, e.g. r3c2/8 E
 
+## Region Colouring Outstanding
+
+Three Colour enhancement.
+
 ## Strategies
 
 [Strategies](https.//www.sudokuwiki.org/Strategy_Families)
