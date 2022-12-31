@@ -122,10 +122,10 @@ void main() {
     ['R2C7', 'R3C7', 'R4C7', 'R5C7', 'R6C7', 'R7C7'],
     ['R6C9', 'R7C9'],
   ];
-  var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
-  print(puzzle.addWhisper(whisperPuzzle));
-  puzzle.debug = true;
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle, true);
+  // print(puzzle.addWhisper(whisperPuzzle));
+  // puzzle.debug = true;
+  // print(puzzle.solve(true, false));
 
   var whisperPuzzle2 = [
     [
@@ -364,6 +364,47 @@ void main() {
   // var puzzle = SudokuAPI.sudoku(emptySudoku);
   // print(puzzle.addDomino(dominoPuzzle3, false));
   // print(puzzle.addSandwich(sandwichPuzzle3));
+  // print(puzzle.solve(true, false));
+
+  var dominoPuzzle4 = [
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd, dd, dd],
+    [XX, DM, XX, DC, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [DM, dd, dd, dd, DC, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, DC, XX, DC, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, DM, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, DM, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, DC, XX, dd, XX, dd, XX, DC, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DM],
+    [XX, dd, XX, DM, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+  ];
+  var whisperPuzzle4 = [
+    ['R3C9', 'R4C8', 'R4C7', 'R3C7', 'R3C8', 'R4C9'],
+    ['R5C3', 'R6C2', 'R6C1', 'R5C1', 'R5C2', 'R6C3'],
+  ];
+  var renbanPuzzle4 = [
+    ['R1C8', 'R1C7', 'R2C6', 'R1C6', 'R2C7'],
+    ['R2C4', 'R2C3', 'R3C2', 'R2C2', 'R3C3'],
+    ['R5C7', 'R5C6', 'R6C5', 'R5C5', 'R6C6'],
+    ['R7C3', 'R7C2', 'R8C1', 'R7C1', 'R8C2'],
+  ];
+  var thermoPuzzle5 = [
+    ['R8C5', 'R7C6', 'R8C7', 'R9C8', 'R8C8', 'R9C7', 'R9C6', 'R9C5'],
+  ];
+  // Seven Fish Pie https://www.youtube.com/watch?v=C1jOI3gBnV4&t=2272s
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addDomino(dominoPuzzle4, false));
+  // print(puzzle.addWhisper(whisperPuzzle4));
+  // print(puzzle.addRenban(renbanPuzzle4));
+  // print(puzzle.addThermo(thermoPuzzle5));
+  // puzzle.debug = true;
   // print(puzzle.solve(true, false));
 
   // Difficult "Handshake" puzzle
@@ -619,10 +660,11 @@ void main() {
       'R3C5'
     ]
   ];
-  // var puzzle = SudokuAPI.sudoku(entropySudokuPuzzle);
-  // print(puzzle.addEntropy(entropyPuzzle));
-  // puzzle.debug = true;
-  // print(puzzle.solve(true, false));
+  // Entropic Lines 101 https://logic-masters.de/Raetselportal/Raetsel/zeigen.php?id=0008W3
+  var puzzle = SudokuAPI.sudoku(entropySudokuPuzzle);
+  print(puzzle.addEntropy(entropyPuzzle));
+  puzzle.debug = true;
+  print(puzzle.solve(true, false));
 
   var regionSumSudokuPuzzle1 = [
     "1........",

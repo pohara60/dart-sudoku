@@ -39,11 +39,13 @@ class Whisper extends Line<WhisperRegion> {
       regionColouringStrategy,
     ]);
 
+    String stringFunc() => toStr == null ? toString() : toStr();
+
     return super.solve(
-      explain: explain,
-      showPossible: showPossible,
-      easyStrategies: strategies,
-      toughStrategies: toughStrategies,
-    );
+        explain: explain,
+        showPossible: showPossible,
+        easyStrategies: strategies,
+        toughStrategies: toughStrategies,
+        toStr: stringFunc);
   }
 }
