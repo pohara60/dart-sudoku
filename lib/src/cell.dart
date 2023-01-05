@@ -112,7 +112,9 @@ class Cell {
           ? 'C$col'
           : axis == 'B'
               ? 'B$box'
-              : name;
+              : axis[0] == 'X'
+                  ? axis
+                  : name;
   int getMinorAxis(String axis) => axis == 'R'
       ? _col
       : axis == 'C'

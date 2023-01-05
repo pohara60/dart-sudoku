@@ -19,10 +19,14 @@ class NakedGroupStrategy extends Strategy {
 
   bool solve() {
     var updated = false;
-    for (var axis in ['B', 'R', 'C']) {
+    for (var axis in ['B', 'R', 'C', 'X1', 'X2']) {
       for (var major = 1; major < 10; major++) {
         var cells = sudoku.getMajorAxis(axis, major);
-        if (nonetNakedGroup(cells)) updated = true;
+        if (cells.isNotEmpty) {
+          if (nonetNakedGroup(cells)) {
+            updated = true;
+          }
+        }
       }
     }
     return updated;

@@ -91,6 +91,11 @@ void main() {
     [XX, XX, RR, UU, UU, UU, LL, XX, XX],
     [XX, XX, 08, LL, XX, 08, LL, XX, XX],
   ];
+  var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle5, true);
+  puzzle.addSudokuX();
+  puzzle.debug = true;
+  print(puzzle.solve(true, false));
+
   var killerPuzzle6 = [
     [08, LL, XX, XX, 22, XX, XX, 10, LL],
     [UU, XX, XX, RR, UU, XX, XX, XX, UU],
@@ -291,6 +296,7 @@ void main() {
   ];
   // var puzzle = SudokuAPI.sudoku(emptySudoku);
   // print(puzzle.addDomino(dominoPuzzle1, true));
+  // puzzle.debug = true;
   // print(puzzle.solve(true, false));
 
   var dominoPuzzle2 = [
@@ -661,10 +667,10 @@ void main() {
     ]
   ];
   // Entropic Lines 101 https://logic-masters.de/Raetselportal/Raetsel/zeigen.php?id=0008W3
-  var puzzle = SudokuAPI.sudoku(entropySudokuPuzzle);
-  print(puzzle.addEntropy(entropyPuzzle));
-  puzzle.debug = true;
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.sudoku(entropySudokuPuzzle);
+  // print(puzzle.addEntropy(entropyPuzzle));
+  // puzzle.debug = true;
+  // print(puzzle.solve(true, false));
 
   var regionSumSudokuPuzzle1 = [
     "1........",
@@ -783,4 +789,31 @@ void main() {
   var sudoku4 = SudokuAPI.sudoku(puzzle4);
   // sudoku4.addKiller('KillerString');
   // print(sudoku4.solve(true, false));
+
+  // "XV Kropki X" by Florian Wortmann
+  // (Diagonal +/-, kropki no negative, XV with negative)
+  var dominoPuzzle5 = [
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, DC, XX, DC, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, DC, dd, dd, dd, DV, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, DM, XX, dd, XX, dd, XX, DX, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DM, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DM, dd, DC, dd, dd],
+    [XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, DC, XX, dd, XX],
+    [dd, dd, dd, dd, dd, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, DM, XX, dd, XX, dd, XX, DM, XX, DC, XX, dd, XX, dd, XX],
+    [dd, dd, DC, dd, DC, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd, dd, dd],
+    [XX, dd, XX, DC, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
+  ];
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addDomino(dominoPuzzle5, true, ['xv']));
+  // print(puzzle.addSudokuX());
+  // puzzle.debug = true;
+  // print(puzzle.solve(true, false));
 }

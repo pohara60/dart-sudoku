@@ -45,15 +45,17 @@ class LineBoxReductionStrategy extends Strategy {
   /// Box and remove from rest of Row/Column
   /// Line Box Reduction - If scope is not "B" then find unique value in Rows/Columns
   /// contained in Box and remove from rest of Box
+  /// SudokuX addition - Add Diagonals to Rows/Columns. Also Pair on Diagonal
+  /// eliminates orthogaonal intersection cells
   bool lineBoxReduction(String scope, int box) {
     var updated = false;
     var cells = sudoku.getBox(box);
     // Check each Row then each Column of Box
-    for (var axis in ['R', 'C']) {
+    for (var axis in sudoku.getAxesWithDiagonals(['R', 'C'])) {
       for (var boxMajor = 0; boxMajor < 3; boxMajor++) {
         // Three cells in Row/Column
         var cells3 = sudoku.getCells3(axis, boxMajor, cells);
-        if (cells3.isEmpty) continue; // All set
+        if (cells3.isEmpty) continue; // All set or box not on diagonal
         // Other six cells in Box
         var boxCells6 = cells
             .where((cell) => !cell.isSet && !cells3.contains(cell))

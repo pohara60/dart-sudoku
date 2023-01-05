@@ -116,12 +116,13 @@ class SudokuAPI {
     return puzzle?.messageString ?? '';
   }
 
-  String addDomino(List<List<String>> dominoLines, [bool negative = false]) {
+  String addDomino(List<List<String>> dominoLines,
+      [bool negative = false, List<String>? negativeTypes = null]) {
     if (puzzle == null) {
       return 'No puzzle!';
     }
     currentPuzzle = currentPuzzle! + dominoLines.join('\n');
-    puzzle = Domino.puzzle(puzzle!, dominoLines, negative);
+    puzzle = Domino.puzzle(puzzle!, dominoLines, negative, negativeTypes);
     return puzzle?.messageString ?? '';
   }
 

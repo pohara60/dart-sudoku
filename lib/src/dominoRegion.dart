@@ -4,12 +4,15 @@ import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/region.dart';
 
 enum DominoType {
-  DOMINO_X, // Add to 10
-  DOMINO_V, // Add to 5
-  DOMINO_C, // Consecutive
-  DOMINO_M, // MUltiple 2
-  DOMINO_O, // Odd parity
-  DOMINO_E; // Even parity
+  DOMINO_X('xv'), // Add to 10
+  DOMINO_V('xv'), // Add to 5
+  DOMINO_C('kropki'), // Consecutive
+  DOMINO_M('kropki'), // MUltiple 2
+  DOMINO_O('parity'), // Odd parity
+  DOMINO_E('parity'); // Even parity
+
+  final String category;
+  const DominoType(this.category);
 
   String toString() => this.name.substring(this.name.length - 1);
 }
@@ -173,6 +176,13 @@ class DominoRegionGroup extends RegionGroup {
             // Adjacent cell in domino, check valid
             var result = domino.validNeighbours(dom.type, value, otherValue);
             if (result != 0) return result;
+            // Check negative constraints of other types
+            if (domino.negative) {
+              if (domino.negativeNeighbours(value, otherValue,
+                  exclude: dom.type)) {
+                return 1; // continue processing higher values
+              }
+            }
           } else {
             // Adjacent cell not in domino, check negative constraint
             if (domino.negative) {

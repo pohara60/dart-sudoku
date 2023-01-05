@@ -21,18 +21,20 @@ class HiddenSingleStrategy extends Strategy {
       updated = true;
       sudoku.cellUpdated(cell, 'Naked Single', '$cell');
     } else {
-      // Check for a possible value not in box, row or column
-      for (var axis in ['R', 'C', 'B']) {
+      // Check for a possible value not in row, column, box or diagonal if present
+      for (var axis in ['R', 'C', 'B', 'X1', 'X2']) {
         var cells = sudoku.getMajorAxis(axis, cell.getAxis(axis));
-        cells.remove(cell);
-        var otherPossible = unionCellsPossible(cells);
-        var difference = cell.possible.subtract(otherPossible);
-        var value = difference.unique();
-        if (value > 0) {
-          cell.value = value;
-          updated = true;
-          sudoku.cellUpdated(cell, explanation, '$cell');
-          break;
+        if (cells.isNotEmpty) {
+          cells.remove(cell);
+          var otherPossible = unionCellsPossible(cells);
+          var difference = cell.possible.subtract(otherPossible);
+          var value = difference.unique();
+          if (value > 0) {
+            cell.value = value;
+            updated = true;
+            sudoku.cellUpdated(cell, explanation, '$cell');
+            break;
+          }
         }
       }
     }

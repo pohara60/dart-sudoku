@@ -399,8 +399,19 @@ class Sudoku implements Puzzle {
       late Cell cell;
       if (axis == 'R') {
         cell = cells[boxMajor * 3 + boxMinor];
-      } else {
+      } else if (axis == 'C') {
         cell = cells[boxMinor * 3 + boxMajor];
+      } else {
+        // Diagonal X1 or X2
+        if (boxMajor != 0) return [];
+        var box = cells[0].box;
+        if (axis[1] == '1') {
+          if (box != 1 && box != 5 && box != 9) return [];
+          cell = cells[boxMinor * 3 + boxMinor];
+        } else {
+          if (box != 3 && box != 5 && box != 7) return [];
+          cell = cells[boxMinor * 2 + 2];
+        }
       }
       if (!cell.isSet) cells3.add(cell);
     }
@@ -420,10 +431,16 @@ class Sudoku implements Puzzle {
   Cells getCellAxis(String axis, Cell cell) {
     if (axis == 'R') {
       return getRow(cell.row);
+    } else if (axis == 'C') {
+      return getColumn(cell.col);
     } else if (axis == 'B') {
       return getBox(cell.box);
     } else {
-      return getColumn(cell.col);
+      if (axis[0] == 'X' &&
+          cell.getAxis(axis) != 0 &&
+          allRegions.containsKey(axis))
+        return List.from(allRegions[axis]!.cells);
+      return List.from([]);
     }
   }
 
@@ -435,8 +452,10 @@ class Sudoku implements Puzzle {
     } else if (axis == 'B') {
       return getBox(major);
     } else {
-      if (axis[0] == 'X' && major != 0 && allRegions.containsKey('X$major'))
-        return allRegions['X$major']!.cells;
+      if (axis[0] == 'X' &&
+          (major == 1 || major == 2) &&
+          allRegions.containsKey('X$major'))
+        return List.from(allRegions['X$major']!.cells);
       return List.from([]);
     }
   }
@@ -593,6 +612,7 @@ class Sudoku implements Puzzle {
     var valuePossibleMajors = <int, Map<int, List<int>>>{};
     for (var major = 1; major < 10; major++) {
       var cells = getMajorAxis(axis, major);
+      if (cells.isEmpty) continue; // All set or not diagonal
       var countPossibles = countCellsPossible(cells);
       for (var value = 1; value < 10; value++) {
         if (countPossibles[value - 1] > 1 &&
@@ -869,6 +889,15 @@ class Sudoku implements Puzzle {
       allRegions[name] = mixedRegionGroup;
     } else
       _mixedGroupSeq--;
+  }
+
+  List<String> getAxesWithDiagonals(List<String> axes) {
+    // Add any Diagonal regions to axes
+    var result = List<String>.from(axes);
+    for (var diagonal in ['X1', 'X2']) {
+      if (allRegions.containsKey(diagonal)) result.add(diagonal);
+    }
+    return result;
   }
 }
 

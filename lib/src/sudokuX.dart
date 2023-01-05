@@ -5,6 +5,8 @@ import 'package:sudoku/src/puzzle.dart';
 import 'package:sudoku/src/strategy/regionCombinations.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 
+import 'strategy/pointingDiagonalStrategy.dart';
+
 class SudokuXRegion extends Region<Sudoku> {
   SudokuXRegion(Sudoku puzzle, String name, Cells cells)
       : super(puzzle, name, 45, true, cells);
@@ -27,6 +29,7 @@ class SudokuX extends PuzzleDecorator {
       cell.regions.where((region) => region.runtimeType == SudokuXRegion));
 
   late RegionCombinationsStrategy regionCombinationsStrategy;
+  late PointingDiagonalStrategy pointingDiagonalStrategy;
 
   void Function()? clearStateCallback = null;
 
@@ -43,6 +46,7 @@ class SudokuX extends PuzzleDecorator {
     if (rising) allRegions['X2'] = SudokuXRegion(sudoku, 'X2', cells2);
     // Strategies
     regionCombinationsStrategy = RegionCombinationsStrategy(this);
+    pointingDiagonalStrategy = PointingDiagonalStrategy(this);
   }
 
   String toString() {
@@ -58,11 +62,10 @@ class SudokuX extends PuzzleDecorator {
       List<Strategy>? easyStrategies,
       List<Strategy>? toughStrategies,
       Function? toStr}) {
-    var strategies = List<Strategy>.from(easyStrategies ?? []);
-    if (!strategies.any(
-        (strategy) => strategy.runtimeType == RegionCombinationsStrategy)) {
-      strategies.add(regionCombinationsStrategy);
-    }
+    List<Strategy> strategies = Strategy.addStrategies(
+      easyStrategies,
+      [pointingDiagonalStrategy, regionCombinationsStrategy],
+    );
 
     String stringFunc() => toStr == null ? toString() : toStr();
 

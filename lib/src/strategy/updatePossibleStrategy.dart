@@ -22,7 +22,7 @@ class UpdatePossibleStrategy extends Strategy {
     if (cell.value != null) return false;
 
     // Remove known values from box, row, col
-    for (var axis in ['B', 'R', 'C']) {
+    for (var axis in ['B', 'R', 'C', 'X1', 'X2']) {
       var cells = sudoku
           .getCellAxis(axis, cell)
           .where((c) => c != cell && c.isSet)

@@ -22,10 +22,14 @@ class HiddenGroupStrategy extends Strategy {
 
   bool solve() {
     var updated = false;
-    for (var axis in ['R', 'C', 'B']) {
+    for (var axis in ['R', 'C', 'B', 'X1', 'X2']) {
       for (var major = 1; major < 10; major++) {
         var cells = sudoku.getMajorAxis(axis, major);
-        if (nonetHiddenGroup(cells)) updated = true;
+        if (cells.isNotEmpty) {
+          if (nonetHiddenGroup(cells)) {
+            updated = true;
+          }
+        }
       }
     }
     return updated;

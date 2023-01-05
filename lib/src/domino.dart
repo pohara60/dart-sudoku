@@ -51,10 +51,36 @@ class Domino extends PuzzleDecorator {
   void Function()? clearStateCallback = null;
 
   Domino.puzzle(Puzzle puzzle, List<List<String>> dominoLines,
-      [this.negative = false]) {
+      [this.negative = false, List<String>? negativeTypes = null]) {
     puzzle.clearStateCallback = clearState;
     this.puzzle = puzzle;
     initDomino(dominoLines);
+
+    // Negative constraint types
+    if (!negative) {
+      if (negativeTypes != null) {
+        sudoku.addMessage(
+            'NegativeTypes provided for non-negative puzzle', true);
+      }
+    } else {
+      if (negativeTypes == null) {
+        // All types found during initDomino
+      } else {
+        dominoTypes.clear();
+        for (var type in negativeTypes) {
+          if (type.toLowerCase() == 'kropki') {
+            dominoTypes.addAll([DominoType.DOMINO_C, DominoType.DOMINO_M]);
+          } else if (type.toLowerCase() == 'xv') {
+            dominoTypes.addAll([DominoType.DOMINO_X, DominoType.DOMINO_V]);
+          } else {
+            sudoku.addMessage(
+                'NegativeTypes must be "kropki" and/or "xv", $type not recognised',
+                true);
+          }
+        }
+      }
+    }
+
     // Strategies
     updateDominoPossibleStrategy = UpdateDominoPossibleStrategy(this);
     updateParityStrategy = UpdateParityStrategy(this);
@@ -313,9 +339,12 @@ class Domino extends PuzzleDecorator {
     return neighbour;
   }
 
-  bool negativeNeighbours(int value, int otherValue) {
+  bool negativeNeighbours(int value, int otherValue,
+      {DominoType? exclude = null}) {
     for (var type in this.dominoTypes) {
-      if (validNeighbours(type, value, otherValue) == 0) return true;
+      if (exclude == null || type.category != exclude.category) {
+        if (validNeighbours(type, value, otherValue) == 0) return true;
+      }
     }
     return false;
   }
