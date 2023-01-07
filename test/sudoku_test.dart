@@ -123,7 +123,7 @@ void main() {
     'Simple Colouring, Rule 4 R6C3,R3C9, remove value 9 from R3C3 = 47',
     'Pointing Group, B1,R1, remove group 9 from R1C7 = 125',
     'XYZ-Wing, R hinge R5C8 B6, remove value 6 from R5C9 = 19',
-    'Iterate R1C2 = 79, value 7',
+    'Guess R1C2 = 79, value 7',
     'Hidden Single, R1C3 = 9',
     'Naked Single, R1C4 = 5',
     'Naked Single, R3C3 = 4',

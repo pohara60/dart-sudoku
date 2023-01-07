@@ -238,7 +238,7 @@ class Sudoku implements Puzzle {
           var state = saveState();
           // Iterate over values while fails until succeeds
           for (var value in tryValues) {
-            var msg = debugPrint('Iterate $tryCell, value $value');
+            var msg = debugPrint('Guess $tryCell, value $value');
             if (explain) {
               result.writeln(msg);
             }
@@ -258,13 +258,13 @@ class Sudoku implements Puzzle {
                 break;
               }
               // Failed to find solution
-              var msg = debugPrint('Iterate failed to find solution!');
+              var msg = debugPrint('Guess failed to find solution!');
               if (explain) {
                 result.writeln(msg);
               }
             } on SolveException catch (e) {
               // Invalid state
-              var msg = debugPrint('Iterate exception ${e.message}!');
+              var msg = debugPrint('Guess exception ${e.message}!');
               if (explain) {
                 result.writeln(msg);
               }

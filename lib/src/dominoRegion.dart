@@ -7,7 +7,7 @@ enum DominoType {
   DOMINO_X('xv'), // Add to 10
   DOMINO_V('xv'), // Add to 5
   DOMINO_C('kropki'), // Consecutive
-  DOMINO_M('kropki'), // MUltiple 2
+  DOMINO_M('kropki'), // Multiple 2
   DOMINO_O('parity'), // Odd parity
   DOMINO_E('parity'); // Even parity
 

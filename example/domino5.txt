@@ -1,5 +1,3 @@
-Connecting to VM Service at http://127.0.0.1:59140/B6Fyh4iT4lI=/
-
 MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5
 MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6
 MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8
@@ -153,22 +151,22 @@ Region Combinations, D3C:R2-3C3, R3C3 = 12346
 ║456│45 │45 ║456│456│45 ║456│456│456║
 ║789│   │   ║789│789│7 9║789│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.001218
-combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000100
-combinations=12/10000!, iterations=38/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000708
-combinations=53/10000!, iterations=175/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.004770
-combinations=12/10000!, iterations=116/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.001899
-combinations=6/10000!, iterations=22/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000370
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.001288
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000106
+combinations=12/10000!, iterations=38/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.001037
+combinations=53/10000!, iterations=175/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.003621
+combinations=12/10000!, iterations=116/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.002683
+combinations=6/10000!, iterations=22/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000364
 combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000110
-combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000130
-combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000044
-combinations=1/10000!, iterations=7/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000118
-combinations=1/10000!, iterations=11/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000223
-combinations=9/10000!, iterations=59/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.001552
-combinations=9/10000!, iterations=35/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000898
-combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000081
-combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000066
-combinations=9/10000!, iterations=53/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000870
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000182
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000036
+combinations=1/10000!, iterations=7/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000121
+combinations=1/10000!, iterations=11/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000225
+combinations=9/10000!, iterations=59/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000900
+combinations=9/10000!, iterations=35/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000591
+combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000061
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000094
+combinations=9/10000!, iterations=53/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.001072
 Region Group Combinations, DG1 (D1C, D3C, D5M, D2C, D4V, D6X):R2C3-5,R3C2-3,R3C5-6, R2C3 = 5
 Region Group Combinations, DG1 (D1C, D3C, D5M, D2C, D4V, D6X):R2C3-5,R3C2-3,R3C5-6, R2C4 = 4
 Region Group Combinations, DG1 (D1C, D3C, D5M, D2C, D4V, D6X):R2C3-5,R3C2-3,R3C5-6, R2C5 = 3
@@ -449,14 +447,10 @@ Line Box Reduction, B5,X1, remove group 5 from R6C5 = 14679
 ║   │ 5 │4  ║  6│  6│   ║  6│  6│   ║
 ║789│   │   ║7 9│7 9│   ║789│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [4, 7]
-PointingDiagonalStrategy major=2, minors= [1, 6]
-PointingDiagonalStrategy major=1, minors= [4, 5]
-PointingDiagonalStrategy major=2, minors= [1, 5]
-Pointing Diagonal, R4C4,R7C7], remove value 3 from R4C7 = 1246789
-Pointing Diagonal, R1C9,R6C4], remove value 3 from R6C9 = 12456789
-Pointing Diagonal, R1C9,R5C5], remove value 5 from R1C5 = 1679
-Pointing Diagonal, R1C9,R5C5], remove value 5 from R5C9 = 12346789
+Pointing Diagonal, R4C4,R7C7, remove value 3 from R4C7 = 1246789
+Pointing Diagonal, R1C9,R6C4, remove value 3 from R6C9 = 12456789
+Pointing Diagonal, R1C9,R5C5, remove value 5 from R1C5 = 1679
+Pointing Diagonal, R1C9,R5C5, remove value 5 from R5C9 = 12346789
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║12 │12 │12 ║1  │1  │1  ║123│123│123║
 ║4  │   │   ║ 56│  6│  6║4 6│456│45 ║
@@ -610,10 +604,6 @@ Line Box Reduction, B3,X2, remove group 4 from R3C9 = 1579
 ║   │ 5 │4  ║  6│  6│   ║  6│  6│   ║
 ║789│   │   ║7 9│7 9│   ║789│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [4, 7]
-PointingDiagonalStrategy major=2, minors= [1, 6]
-PointingDiagonalStrategy major=1, minors= [1, 7]
-PointingDiagonalStrategy major=2, minors= [1, 3]
 Region Combinations, D8M:R6-7C7, R6C7 = 12468
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║12 │12 │12 ║1  │1  │1  ║123│123│123║
@@ -652,10 +642,6 @@ Region Combinations, D8M:R6-7C7, R6C7 = 12468
 ║   │ 5 │4  ║  6│  6│   ║  6│  6│   ║
 ║789│   │   ║7 9│7 9│   ║789│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [4, 7]
-PointingDiagonalStrategy major=2, minors= [1, 6]
-PointingDiagonalStrategy major=1, minors= [1, 7]
-PointingDiagonalStrategy major=2, minors= [1, 3]
 Region Combinations, D7M:R6C7-8, R6C8 = 12348
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║12 │12 │12 ║1  │1  │1  ║123│123│123║
@@ -694,26 +680,22 @@ Region Combinations, D7M:R6C7-8, R6C8 = 12348
 ║   │ 5 │4  ║  6│  6│   ║  6│  6│   ║
 ║789│   │   ║7 9│7 9│   ║789│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [4, 7]
-PointingDiagonalStrategy major=2, minors= [1, 6]
-PointingDiagonalStrategy major=1, minors= [1, 7]
-PointingDiagonalStrategy major=2, minors= [1, 3]
-combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000056
-combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000087
-combinations=8/10000!, iterations=31/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000338
-combinations=8/10000!, iterations=46/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000585
-combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000116
-combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000066
-combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000062
-combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000088
-combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000026
-combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000060
-combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000066
-combinations=8/10000!, iterations=47/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000464
-combinations=8/10000!, iterations=31/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000327
-combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000047
-combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000051
-combinations=8/10000!, iterations=47/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000523
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000052
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000041
+combinations=8/10000!, iterations=31/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000305
+combinations=8/10000!, iterations=46/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000584
+combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000101
+combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000059
+combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000065
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000096
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000035
+combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000064
+combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000072
+combinations=8/10000!, iterations=47/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000437
+combinations=8/10000!, iterations=31/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000364
+combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000022
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000043
+combinations=8/10000!, iterations=47/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000437
 Update Domino Possible, update cell R1C4 = 579
 Update Domino Possible, update cell R1C5 = 169
 Update Domino Possible, update cell R2C2 = 189
@@ -727,10 +709,17 @@ Update Domino Possible, update cell R8C4 = 19
 Update Domino Possible, update cell R9C4 = 27
 Update Domino Possible, update cell R9C5 = 169
 Update Domino Possible, update cell R9C7 = 1689
+Update Domino Possible, R1:7,8,9, remove 27 from R1C8 = 135689
+Update Domino Possible, R7:7,8,9, remove 27 from R7C8 = 1349
+Update Domino Possible, R7:7,8,9, remove 16 from R7C8 = 349
+Update Domino Possible, C4:4,5,6, remove 27 from R5C4 = 13689
+Update Domino Possible, C2:4,5,6, remove 16 from R5C2 = 24789
+Update Domino Possible, B2:2,3,6, remove 49 from R1C6 = 167
+Update Domino Possible, B2:2,3,6, remove 1 from centre R1C6 = 67
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
 ║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
-║789│789│789║7 9│  9│7 9║789│789│789║
+║789│789│789║7 9│  9│7  ║789│ 89│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │1  │   ║   │  3│1  ║12 │12 │12 ║
 ║   │   │ 5 ║4  │   │  6║  6│   │  6║
@@ -744,17 +733,17 @@ Update Domino Possible, update cell R9C7 = 1689
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║789│7 9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
 ║  6│4  │   ║  6│ 5 │  6║4 6│4 6│4 6║
-║   │789│789║789│   │7 9║789│789│789║
+║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║789│7 9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║12 │1  │   ║123│123│123║
+║12 │12 │1  ║12 │1  │   ║123│  3│123║
 ║   │   │   ║  6│  6│ 5 ║4  │4  │4 6║
-║789│789│ 89║7 9│7 9│   ║ 8 │7 9│789║
+║789│789│ 89║7 9│7 9│   ║ 8 │  9│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -764,32 +753,123 @@ Update Domino Possible, update cell R9C7 = 1689
 ║   │ 5 │4  ║   │  6│   ║  6│  6│   ║
 ║789│   │   ║7  │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [4, 7]
-PointingDiagonalStrategy major=2, minors= [1, 6]
-PointingDiagonalStrategy major=1, minors= [1, 7]
-PointingDiagonalStrategy major=2, minors= [1, 3]
-combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000041
-combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000039
-combinations=8/10000!, iterations=31/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000432
-combinations=8/10000!, iterations=46/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000667
-combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000137
-combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000079
-combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000097
-combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000117
-combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000027
-combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000086
-combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000117
-combinations=8/10000!, iterations=47/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000983
-combinations=8/10000!, iterations=31/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000388
-combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000026
-combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000078
-combinations=8/10000!, iterations=47/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.001829
+Region Combinations, D9C:R6-7C8, R6C8 = 2348
+Region Combinations, D10C:R7C7-8, R7C7 = 2348
+╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
+║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
+║789│789│789║7 9│  9│7  ║789│ 89│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║12 │1  │   ║   │  3│1  ║12 │12 │12 ║
+║   │   │ 5 ║4  │   │  6║  6│   │  6║
+║789│ 89│   ║   │   │  9║789│789│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║1  │  3│   ║   │ 2 │   ║1  │1  │1  ║
+║4  │   │  6║ 5 │   │   ║4  │ 5 │ 5 ║
+║  9│   │   ║7 9│   │ 8 ║7 9│7 9│7 9║
+╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
+║  3│1  │12 ║1 3│1  │1  ║12 │123│123║
+║ 56│4  │   ║   │4 6│   ║4 6│456│456║
+║   │ 89│789║789│7 9│7 9║789│789│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
+║  6│4  │   ║  6│ 5 │  6║4 6│4 6│4 6║
+║   │789│789║ 89│   │7 9║789│789│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║  3│12 │12 ║1 3│1  │12 ║12 │ 23│12 ║
+║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
+║   │789│789║789│7 9│7 9║ 8 │ 8 │789║
+╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
+║12 │12 │1  ║12 │1  │   ║ 23│  3│123║
+║   │   │   ║  6│  6│ 5 ║4  │4  │4 6║
+║789│789│ 89║7 9│7 9│   ║ 8 │  9│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║12 │   │  3║1  │   │   ║   │12 │12 ║
+║   │  6│   ║   │   │4  ║ 5 │   │   ║
+║7 9│   │   ║  9│ 8 │   ║   │7 9│7 9║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║12 │   │   ║ 2 │1  │  3║1  │12 │12 ║
+║   │ 5 │4  ║   │  6│   ║  6│  6│   ║
+║789│   │   ║7  │  9│   ║ 89│789│789║
+╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000065
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000073
+combinations=4/10000!, iterations=16/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000184
+combinations=4/10000!, iterations=24/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000502
+combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000091
+combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000078
+combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000069
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000130
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000034
+combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000067
+combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000091
+combinations=4/10000!, iterations=24/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000347
+combinations=4/10000!, iterations=16/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000220
+combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000059
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000066
+combinations=4/10000!, iterations=24/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000333
+Region Group Combinations, DG2 (D7M, D8M, D10C, D9C):R6C7-8,R7C7-8, R6C7 = 2468
+Region Group Combinations, DG2 (D7M, D8M, D10C, D9C):R6C7-8,R7C7-8, R6C8 = 348
+Region Group Combinations, DG2 (D7M, D8M, D10C, D9C):R6C7-8,R7C7-8, R7C7 = 348
+╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
+║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
+║789│789│789║7 9│  9│7  ║789│ 89│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║12 │1  │   ║   │  3│1  ║12 │12 │12 ║
+║   │   │ 5 ║4  │   │  6║  6│   │  6║
+║789│ 89│   ║   │   │  9║789│789│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║1  │  3│   ║   │ 2 │   ║1  │1  │1  ║
+║4  │   │  6║ 5 │   │   ║4  │ 5 │ 5 ║
+║  9│   │   ║7 9│   │ 8 ║7 9│7 9│7 9║
+╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
+║  3│1  │12 ║1 3│1  │1  ║12 │123│123║
+║ 56│4  │   ║   │4 6│   ║4 6│456│456║
+║   │ 89│789║789│7 9│7 9║789│789│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
+║  6│4  │   ║  6│ 5 │  6║4 6│4 6│4 6║
+║   │789│789║ 89│   │7 9║789│789│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
+║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
+║   │789│789║789│7 9│7 9║ 8 │ 8 │789║
+╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
+║12 │12 │1  ║12 │1  │   ║  3│  3│123║
+║   │   │   ║  6│  6│ 5 ║4  │4  │4 6║
+║789│789│ 89║7 9│7 9│   ║ 8 │  9│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║12 │   │  3║1  │   │   ║   │12 │12 ║
+║   │  6│   ║   │   │4  ║ 5 │   │   ║
+║7 9│   │   ║  9│ 8 │   ║   │7 9│7 9║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║12 │   │   ║ 2 │1  │  3║1  │12 │12 ║
+║   │ 5 │4  ║   │  6│   ║  6│  6│   ║
+║789│   │   ║7  │  9│   ║ 89│789│789║
+╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000033
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000031
+combinations=4/10000!, iterations=16/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000112
+combinations=4/10000!, iterations=24/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000244
+combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000202
+combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000034
+combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000049
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000068
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000023
+combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000055
+combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000061
+combinations=4/10000!, iterations=24/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000222
+combinations=4/10000!, iterations=16/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000114
+combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000034
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000042
+combinations=4/10000!, iterations=24/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000233
 Update Domino Possible, update cell R2C1 = 2789
 Update Domino Possible, update cell R7C4 = 267
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
 ║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
-║789│789│789║7 9│  9│7 9║789│789│789║
+║789│789│789║7 9│  9│7  ║789│ 89│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
 ║   │   │ 5 ║4  │   │  6║  6│   │  6║
@@ -803,17 +883,17 @@ Update Domino Possible, update cell R7C4 = 267
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║789│7 9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
 ║  6│4  │   ║  6│ 5 │  6║4 6│4 6│4 6║
-║   │789│789║789│   │7 9║789│789│789║
+║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║789│7 9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║ 2 │1  │   ║123│123│123║
+║12 │12 │1  ║ 2 │1  │   ║  3│  3│123║
 ║   │   │   ║  6│  6│ 5 ║4  │4  │4 6║
-║789│789│ 89║7  │7 9│   ║ 8 │7 9│789║
+║789│789│ 89║7  │7 9│   ║ 8 │  9│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -823,31 +903,27 @@ Update Domino Possible, update cell R7C4 = 267
 ║   │ 5 │4  ║   │  6│   ║  6│  6│   ║
 ║789│   │   ║7  │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [4, 7]
-PointingDiagonalStrategy major=2, minors= [1, 6]
-PointingDiagonalStrategy major=1, minors= [1, 7]
-PointingDiagonalStrategy major=2, minors= [1, 3]
-combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000034
-combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000222
-combinations=8/10000!, iterations=31/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000361
-combinations=8/10000!, iterations=46/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000635
-combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000070
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000030
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000039
+combinations=4/10000!, iterations=16/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000082
+combinations=4/10000!, iterations=24/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000204
+combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000082
 combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000052
-combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000051
-combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000087
-combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000022
-combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000055
+combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000038
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000062
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000086
+combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000064
 combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000064
-combinations=8/10000!, iterations=47/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000389
-combinations=8/10000!, iterations=31/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000273
-combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000026
-combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000043
-combinations=8/10000!, iterations=47/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000380
-Iterate R9C4 = 27, value 2
+combinations=4/10000!, iterations=24/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000361
+combinations=4/10000!, iterations=16/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000110
+combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000029
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000044
+combinations=4/10000!, iterations=24/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000219
+Guess R9C4 = 27, value 2
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
 ║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
-║789│789│789║7 9│  9│7 9║789│789│789║
+║789│789│789║7 9│  9│7  ║789│ 89│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
 ║   │   │ 5 ║4  │   │  6║  6│   │  6║
@@ -861,17 +937,17 @@ Iterate R9C4 = 27, value 2
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║789│7 9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
 ║  6│4  │   ║  6│ 5 │  6║4 6│4 6│4 6║
-║   │789│789║789│   │7 9║789│789│789║
+║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║789│7 9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │1  │   ║123│123│123║
+║12 │12 │1  ║   │1  │   ║  3│  3│123║
 ║   │   │   ║  6│  6│ 5 ║4  │4  │4 6║
-║789│789│ 89║7  │7 9│   ║ 8 │7 9│789║
+║789│789│ 89║7  │7 9│   ║ 8 │  9│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -883,12 +959,11 @@ Iterate R9C4 = 27, value 2
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 Pointing Group, B8,R7, remove group 7 from R7C1 = 1289
 Pointing Group, B8,R7, remove group 7 from R7C2 = 1289
-Pointing Group, B8,R7, remove group 7 from R7C8 = 12349
 Pointing Group, B8,R7, remove group 7 from R7C9 = 1234689
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
 ║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
-║789│789│789║7 9│  9│7 9║789│789│789║
+║789│789│789║7 9│  9│7  ║789│ 89│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
 ║   │   │ 5 ║4  │   │  6║  6│   │  6║
@@ -902,15 +977,15 @@ Pointing Group, B8,R7, remove group 7 from R7C9 = 1234689
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║789│7 9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
 ║  6│4  │   ║  6│ 5 │  6║4 6│4 6│4 6║
-║   │789│789║789│   │7 9║789│789│789║
+║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║789│7 9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │1  │   ║123│123│123║
+║12 │12 │1  ║   │1  │   ║  3│  3│123║
 ║   │   │   ║  6│  6│ 5 ║4  │4  │4 6║
 ║ 89│ 89│ 89║7  │7 9│   ║ 8 │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -925,9 +1000,9 @@ Pointing Group, B8,R7, remove group 7 from R7C9 = 1234689
 Pointing Group, B7,C1, remove group 7 from R1C1 = 12489
 Pointing Group, B7,C1, remove group 7 from R2C1 = 289
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
 ║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
-║ 89│789│789║7 9│  9│7 9║789│789│789║
+║ 89│789│789║7 9│  9│7  ║789│ 89│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
 ║   │   │ 5 ║4  │   │  6║  6│   │  6║
@@ -941,15 +1016,15 @@ Pointing Group, B7,C1, remove group 7 from R2C1 = 289
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║789│7 9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
 ║  6│4  │   ║  6│ 5 │  6║4 6│4 6│4 6║
-║   │789│789║789│   │7 9║789│789│789║
+║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║789│7 9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │1  │   ║123│123│123║
+║12 │12 │1  ║   │1  │   ║  3│  3│123║
 ║   │   │   ║  6│  6│ 5 ║4  │4  │4 6║
 ║ 89│ 89│ 89║7  │7 9│   ║ 8 │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -962,23 +1037,21 @@ Pointing Group, B7,C1, remove group 7 from R2C1 = 289
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 Pointing Group, B1,R1, remove group 7 from R1C4 = 59
-Pointing Group, B1,R1, remove group 7 from R1C6 = 169
+Pointing Group, B1,R1, remove group 7 from R1C6 = 6
 Pointing Group, B1,R1, remove group 7 from R1C7 = 123689
-Pointing Group, B1,R1, remove group 7 from R1C8 = 1235689
 Pointing Group, B1,R1, remove group 7 from R1C9 = 123489
 Pointing Group, B2,R3, remove group 7 from R3C7 = 149
 Pointing Group, B2,R3, remove group 7 from R3C8 = 159
 Pointing Group, B2,R3, remove group 7 from R3C9 = 159
 Pointing Group, B2,C4, remove group 57 from R4C4 = 1389
-Pointing Group, B2,C4, remove group 57 from R5C4 = 13689
 Pointing Group, B2,C4, remove group 57 from R6C4 = 1389
 Pointing Group, B2,C4, remove group 57 from R7C4 = 6
 Pointing Group, B8,C5, remove group 7 from R4C5 = 1469
 Pointing Group, B8,C5, remove group 7 from R6C5 = 1469
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
 ║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
-║ 89│789│789║  9│  9│  9║ 89│ 89│ 89║
+║ 89│789│789║  9│  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
 ║   │   │ 5 ║4  │   │  6║  6│   │  6║
@@ -992,15 +1065,15 @@ Pointing Group, B8,C5, remove group 7 from R6C5 = 1469
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║ 89│  9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
 ║  6│4  │   ║  6│ 5 │  6║4 6│4 6│4 6║
 ║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │1  │   ║123│123│123║
+║12 │12 │1  ║   │1  │   ║  3│  3│123║
 ║   │   │   ║  6│  6│ 5 ║4  │4  │4 6║
 ║ 89│ 89│ 89║   │7 9│   ║ 8 │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -1012,13 +1085,14 @@ Pointing Group, B8,C5, remove group 7 from R6C5 = 1469
 ║   │ 5 │4  ║   │  6│   ║  6│  6│   ║
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
+Naked Single, R1C6 = 6
 Hidden Single, R3C4 = 7
 Naked Single, R7C4 = 6
 Hidden Single, R7C5 = 7
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
 ║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
-║ 89│789│789║  9│  9│  9║ 89│ 89│ 89║
+║ 89│789│789║  9│  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
 ║   │   │ 5 ║4  │   │  6║  6│   │  6║
@@ -1032,15 +1106,15 @@ Hidden Single, R7C5 = 7
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║ 89│  9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
 ║  6│4  │   ║  6│ 5 │  6║4 6│4 6│4 6║
 ║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║123│123│123║
+║12 │12 │1  ║   │   │   ║  3│  3│123║
 ║   │   │   ║  6│   │ 5 ║4  │4  │4 6║
 ║ 89│ 89│ 89║   │7  │   ║ 8 │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -1053,12 +1127,12 @@ Hidden Single, R7C5 = 7
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
-║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
-║ 89│789│789║  9│  9│  9║ 89│ 89│ 89║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
+║4  │   │   ║ 5 │   │  6║   │ 5 │4  ║
+║ 89│789│789║  9│  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
 ║ 89│ 89│   ║   │   │  9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║1  │1  │1  ║
@@ -1069,15 +1143,15 @@ Hidden Single, R7C5 = 7
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║ 89│  9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
 ║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║123│123│123║
+║12 │12 │1  ║   │   │   ║  3│  3│123║
 ║   │   │   ║  6│   │ 5 ║4  │4  │4  ║
 ║ 89│ 89│ 89║   │7  │   ║ 8 │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -1091,12 +1165,12 @@ Hidden Single, R7C5 = 7
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 Hidden Single, R1C4 = 5
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
-║4  │   │   ║ 5 │  6│  6║  6│ 56│4  ║
-║ 89│789│789║   │  9│  9║ 89│ 89│ 89║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
+║4  │   │   ║ 5 │   │  6║   │ 5 │4  ║
+║ 89│789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
 ║ 89│ 89│   ║   │   │  9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║1  │1  │1  ║
@@ -1107,15 +1181,15 @@ Hidden Single, R1C4 = 5
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║ 89│  9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
 ║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║123│123│123║
+║12 │12 │1  ║   │   │   ║  3│  3│123║
 ║   │   │   ║  6│   │ 5 ║4  │4  │4  ║
 ║ 89│ 89│ 89║   │7  │   ║ 8 │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -1128,12 +1202,12 @@ Hidden Single, R1C4 = 5
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║123│123│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│4  ║
-║ 89│789│789║   │  9│  9║ 89│ 89│ 89║
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │4  ║
+║ 89│789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
 ║ 89│ 89│   ║   │   │  9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║1  │1  │1  ║
@@ -1144,15 +1218,15 @@ Hidden Single, R1C4 = 5
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
 ║   │ 89│789║ 89│  9│7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
 ║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│1  │12 ║ 2 │  3│12 ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
 ║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║123│123│123║
+║12 │12 │1  ║   │   │   ║  3│  3│123║
 ║   │   │   ║  6│   │ 5 ║4  │4  │4  ║
 ║ 89│ 89│ 89║   │7  │   ║ 8 │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -1164,36 +1238,79 @@ Hidden Single, R1C4 = 5
 ║   │ 5 │4  ║   │   │   ║  6│  6│   ║
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-Line Box Reduction, B3,X2, remove group 24 from R1C7 = 13689
-Line Box Reduction, B3,X2, remove group 24 from R1C8 = 13689
+Naked Group, remove group 19 from R4C5 = 46
+Naked Group, remove group 19 from R6C5 = 46
+╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
+║12 │12 │12 ║   │1  │   ║123│1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │4  ║
+║ 89│789│789║   │  9│   ║ 89│ 89│ 89║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║ 2 │1  │   ║   │  3│1  ║12 │12 │12 ║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║789│789│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║1  │  3│   ║   │ 2 │   ║1  │1  │1  ║
+║4  │   │  6║   │   │   ║4  │ 5 │ 5 ║
+║  9│   │   ║7  │   │ 8 ║  9│  9│  9║
+╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
+║  3│1  │12 ║1 3│   │1  ║12 │123│123║
+║ 56│4  │   ║   │4 6│   ║4 6│456│456║
+║   │ 89│789║ 89│   │7 9║789│789│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║  3│ 2 │12 ║1 3│   │12 ║123│123│123║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
+║   │789│789║ 89│   │7 9║789│789│789║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║  3│12 │12 ║1 3│   │12 ║ 2 │  3│12 ║
+║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
+║   │789│789║ 89│   │7 9║ 8 │ 8 │789║
+╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
+║12 │12 │1  ║   │   │   ║  3│  3│123║
+║   │   │   ║  6│   │ 5 ║4  │4  │4  ║
+║ 89│ 89│ 89║   │7  │   ║ 8 │  9│ 89║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║12 │   │  3║1  │   │   ║   │12 │12 ║
+║   │  6│   ║   │   │4  ║ 5 │   │   ║
+║7 9│   │   ║  9│ 8 │   ║   │7 9│7 9║
+╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
+║1  │   │   ║ 2 │1  │  3║1  │1  │1  ║
+║   │ 5 │4  ║   │   │   ║  6│  6│   ║
+║789│   │   ║   │  9│   ║ 89│789│789║
+╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
+Line Box Reduction, B3,X2, remove group 24 from R1C7 = 1389
 Line Box Reduction, B3,X2, remove group 24 from R2C7 = 16789
 Line Box Reduction, B3,X2, remove group 24 from R2C9 = 16789
+Line Box Reduction, B6,C7, remove group 2 from R4C8 = 13456789
+Line Box Reduction, B6,C7, remove group 2 from R4C9 = 13456789
+Line Box Reduction, B6,C7, remove group 2 from R5C8 = 1346789
+Line Box Reduction, B6,C7, remove group 2 from R5C9 = 1346789
+Line Box Reduction, B6,C7, remove group 2 from R6C9 = 1456789
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║1 3│1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│4  ║
-║ 89│789│789║   │  9│  9║ 89│ 89│ 89║
+║12 │12 │12 ║   │1  │   ║1 3│1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │4  ║
+║ 89│789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║1  │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
 ║ 89│ 89│   ║   │   │  9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║1  │1  │1  ║
 ║4  │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║  9│  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1 3│1  │1  ║12 │123│123║
+║  3│1  │12 ║1 3│   │1  ║12 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
+║  3│ 2 │12 ║1 3│   │12 ║123│1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
 ║   │789│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│   │12 ║ 2 │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
-║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
+║   │789│789║ 89│   │7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║123│123│123║
+║12 │12 │1  ║   │   │   ║  3│  3│123║
 ║   │   │   ║  6│   │ 5 ║4  │4  │4  ║
 ║ 89│ 89│ 89║   │7  │   ║ 8 │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -1205,59 +1322,56 @@ Line Box Reduction, B3,X2, remove group 24 from R2C9 = 16789
 ║   │ 5 │4  ║   │   │   ║  6│  6│   ║
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=2, minors= [1, 2]
-PointingDiagonalStrategy major=1, minors= [4, 7]
-PointingDiagonalStrategy major=2, minors= [1, 6]
-PointingDiagonalStrategy major=1, minors= [1, 7]
-PointingDiagonalStrategy major=2, minors= [1, 3]
-combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000091
-combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000042
-combinations=7/10000!, iterations=30/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000348
-combinations=7/10000!, iterations=44/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000402
-combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000080
-combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000058
-combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000320
-combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000076
-combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000026
-combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000053
-combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000103
-combinations=7/10000!, iterations=44/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000440
-combinations=7/10000!, iterations=30/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000250
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000029
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000023
+combinations=4/10000!, iterations=16/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000064
+combinations=4/10000!, iterations=24/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000173
+combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000081
+combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000051
+combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000041
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000065
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000015
+combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000396
+combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000057
+combinations=4/10000!, iterations=24/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000375
+combinations=4/10000!, iterations=16/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000118
 combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000025
-combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000030
-combinations=7/10000!, iterations=44/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000341
-Update Domino Possible, update cell R2C7 = 6789
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000081
+combinations=4/10000!, iterations=24/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000125
+Update Domino Possible, update cell R2C7 = 678
 Update Domino Possible, update cell R3C8 = 59
 Update Domino Possible, update cell R4C4 = 189
 Update Domino Possible, update cell R4C7 = 246789
+Update Domino Possible, C7:4,5,6, remove 38 from R5C7 = 124679
+Update Domino Possible, B7:1,2,4, remove 38 from R7C1 = 129
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║1 3│1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│4  ║
-║ 89│789│789║   │  9│  9║ 89│ 89│ 89║
+║12 │12 │12 ║   │1  │   ║1 3│1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │4  ║
+║ 89│789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║1  │   │1  ║
 ║4  │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║  9│  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │123│123║
+║  3│1  │12 ║1  │   │1  ║ 2 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│   │12 ║ 2 │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
-║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
+║   │789│789║ 89│   │7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║123│123│123║
+║12 │12 │1  ║   │   │   ║  3│  3│123║
 ║   │   │   ║  6│   │ 5 ║4  │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║ 8 │  9│ 89║
+║  9│ 89│ 89║   │7  │   ║ 8 │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1269,33 +1383,33 @@ Update Domino Possible, update cell R4C7 = 246789
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 Hidden Single, R7C7 = 3
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║1 3│1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│4  ║
-║ 89│789│789║   │  9│  9║ 89│ 89│ 89║
+║12 │12 │12 ║   │1  │   ║1 3│1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │4  ║
+║ 89│789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║1  │   │1  ║
 ║4  │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║  9│  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │123│123║
+║  3│1  │12 ║1  │   │1  ║ 2 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║123│123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│   │12 ║ 2 │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
-║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
+║   │789│789║ 89│   │7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│123│123║
+║12 │12 │1  ║   │   │   ║  3│  3│123║
 ║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │  9│ 89║
+║  9│ 89│ 89║   │7  │   ║   │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1306,33 +1420,33 @@ Hidden Single, R7C7 = 3
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║12 │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│4  ║
-║ 89│789│789║   │  9│  9║ 89│ 89│ 89║
+║12 │12 │12 ║   │1  │   ║1  │1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │4  ║
+║ 89│789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║1  │   │1  ║
 ║4  │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║  9│  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │123│123║
+║  3│1  │12 ║1  │   │1  ║ 2 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│   │12 ║ 2 │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
-║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
+║   │789│789║ 89│   │7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│12 │12 ║
+║12 │12 │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │  9│ 89║
+║  9│ 89│ 89║   │7  │   ║   │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1344,33 +1458,33 @@ Hidden Single, R7C7 = 3
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 Hidden Single, R1C1 = 4
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│4  ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
+║   │12 │12 ║   │1  │   ║1  │1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │4  ║
+║   │789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║1  │   │1  ║
 ║4  │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║  9│  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │123│123║
+║  3│1  │12 ║1  │   │1  ║ 2 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│   │12 ║ 2 │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
-║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
+║   │789│789║ 89│   │7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│12 │12 ║
+║12 │12 │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │  9│ 89║
+║  9│ 89│ 89║   │7  │   ║   │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1381,33 +1495,33 @@ Hidden Single, R1C1 = 4
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
+║   │12 │12 ║   │1  │   ║1  │1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │   ║
+║   │789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║1  │   │1  ║
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║  9│  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │123│123║
+║  3│1  │12 ║1  │   │1  ║ 2 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│   │12 ║ 2 │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
-║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
+║   │789│789║ 89│   │7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│12 │12 ║
+║12 │12 │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │  9│ 89║
+║  9│ 89│ 89║   │7  │   ║   │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1419,33 +1533,33 @@ Hidden Single, R1C1 = 4
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 Hidden Single, R3C7 = 4
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
+║   │12 │12 ║   │1  │   ║1  │1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │   ║
+║   │789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║   │   │1  ║
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │123│123║
+║  3│1  │12 ║1  │   │1  ║ 2 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║4 6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │123│123║
-║  6│4  │   ║   │ 5 │  6║4 6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║4 6│4 6│4 6║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│   │12 ║ 2 │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║4 6│4  │456║
-║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
+║   │789│789║ 89│   │7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│12 │12 ║
+║12 │12 │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │  9│ 89║
+║  9│ 89│ 89║   │7  │   ║   │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1456,33 +1570,33 @@ Hidden Single, R3C7 = 4
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
+║   │12 │12 ║   │1  │   ║1  │1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │   ║
+║   │789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║   │   │1  ║
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │123│123║
+║  3│1  │12 ║1  │   │1  ║ 2 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║  6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │123│123║
-║  6│4  │   ║   │ 5 │  6║  6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║  6│4 6│4 6║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │123│12 ║
+║  3│12 │12 ║1 3│   │12 ║ 2 │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║  6│4  │456║
-║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
+║   │789│789║ 89│   │7 9║ 8 │ 8 │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│12 │12 ║
+║12 │12 │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │  9│ 89║
+║  9│ 89│ 89║   │7  │   ║   │  9│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1492,85 +1606,38 @@ Hidden Single, R3C7 = 4
 ║   │ 5 │4  ║   │   │   ║  6│  6│   ║
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-Line Box Reduction, B6,C7, remove group 2 from R4C8 = 13456789
-Line Box Reduction, B6,C7, remove group 2 from R4C9 = 13456789
-Line Box Reduction, B6,C7, remove group 2 from R5C8 = 1346789
-Line Box Reduction, B6,C7, remove group 2 from R5C9 = 1346789
-Line Box Reduction, B6,C7, remove group 2 from R6C8 = 1348
-Line Box Reduction, B6,C7, remove group 2 from R6C9 = 1456789
-╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │  3│   ║   │ 2 │   ║   │   │1  ║
-║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
-║  9│   │   ║7  │   │ 8 ║   │  9│  9║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │1 3│1 3║
-║ 56│4  │   ║   │4 6│   ║  6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │1 3│1 3║
-║  6│4  │   ║   │ 5 │  6║  6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║12 │1 3│1  ║
-║ 56│4  │   ║   │4 6│   ║  6│4  │456║
-║   │789│789║ 89│  9│7 9║ 8 │ 8 │789║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│12 │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │  9│ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║12 │   │  3║1  │   │   ║   │12 │12 ║
-║   │  6│   ║   │   │4  ║ 5 │   │   ║
-║7 9│   │   ║  9│ 8 │   ║   │7 9│7 9║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │   │   ║ 2 │1  │  3║1  │1  │1  ║
-║   │ 5 │4  ║   │   │   ║  6│  6│   ║
-║789│   │   ║   │  9│   ║ 89│789│789║
-╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [6, 8]
-PointingDiagonalStrategy major=2, minors= [1, 2]
-PointingDiagonalStrategy major=2, minors= [1, 6]
-Region Combinations, D7M:R6C7-8, R6C7 = 268
-Region Combinations, D7M:R6C7-8, R6C8 = 134
+Region Combinations, D7M:R6C7-8, R6C8 = 34
 Region Combinations, D8M:R6-7C7, R6C7 = 6
-Region Combinations, D9C:R6-7C8, R6C8 = 13
-Region Combinations, D9C:R6-7C8, R7C8 = 24
+Region Combinations, D9C:R6-7C8, R6C8 = 3
+Region Combinations, D9C:R6-7C8, R7C8 = 4
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
+║   │12 │12 ║   │1  │   ║1  │1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │   ║
+║   │789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║   │   │1  ║
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │1 3│1 3║
+║  3│1  │12 ║1  │   │1  ║ 2 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║  6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │1 3│1 3║
-║  6│4  │   ║   │ 5 │  6║  6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║  6│4 6│4 6║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║   │1 3│1  ║
+║  3│12 │12 ║1 3│   │12 ║   │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║  6│   │456║
-║   │789│789║ 89│  9│7 9║   │   │789║
+║   │789│789║ 89│   │7 9║   │   │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│ 2 │12 ║
+║12 │12 │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1581,34 +1648,36 @@ Region Combinations, D9C:R6-7C8, R7C8 = 24
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 Naked Single, R6C7 = 6
+Naked Single, R6C8 = 3
+Naked Single, R7C8 = 4
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║  6│  6│   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
+║   │12 │12 ║   │1  │   ║1  │1 3│123║
+║4  │   │   ║ 5 │   │  6║   │   │   ║
+║   │789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║  6│   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║  6│   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║   │   │1  ║
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │1 3│1 3║
+║  3│1  │12 ║1  │   │1  ║ 2 │1 3│1 3║
 ║ 56│4  │   ║   │4 6│   ║  6│456│456║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │1 3│1 3║
-║  6│4  │   ║   │ 5 │  6║  6│4 6│4 6║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1 3│1 3║
+║  6│4  │   ║   │ 5 │   ║  6│4 6│4 6║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║   │1 3│1  ║
+║  3│12 │12 ║1 3│   │12 ║   │  3│1  ║
 ║ 56│4  │   ║   │4 6│   ║  6│   │456║
-║   │789│789║ 89│  9│7 9║   │   │789║
+║   │789│789║ 89│   │7 9║   │   │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│ 2 │12 ║
+║12 │12 │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1619,33 +1688,33 @@ Naked Single, R6C7 = 6
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║   │  6│   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
+║   │12 │12 ║   │1  │   ║1  │1  │123║
+║4  │   │   ║ 5 │   │  6║   │   │   ║
+║   │789│789║   │  9│   ║ 89│ 89│ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │12 │1  ║
-║   │   │ 5 ║4  │   │  6║   │   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│789║
+║   │   │ 5 ║4  │   │   ║   │   │  6║
+║ 89│ 89│   ║   │   │  9║78 │789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║   │   │1  ║
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │1 3│1 3║
-║ 56│4  │   ║   │4 6│   ║   │45 │45 ║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
+║  3│1  │12 ║1  │   │1  ║ 2 │1  │1  ║
+║ 56│4  │   ║   │4 6│   ║   │ 5 │45 ║
+║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │1 3│1 3║
-║  6│4  │   ║   │ 5 │  6║   │4  │4  ║
-║   │789│789║ 89│   │7 9║789│789│789║
+║  3│ 2 │12 ║1 3│   │12 ║12 │1  │1  ║
+║  6│4  │   ║   │ 5 │   ║   │   │4  ║
+║   │789│789║ 89│   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║   │1 3│1  ║
+║   │12 │12 ║1  │   │12 ║   │  3│1  ║
 ║ 5 │4  │   ║   │4  │   ║  6│   │45 ║
-║   │789│789║ 89│  9│7 9║   │   │789║
+║   │789│789║ 89│   │7 9║   │   │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│ 2 │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║12 │12 │1  ║   │   │   ║  3│   │12 ║
+║   │   │   ║  6│   │ 5 ║   │4  │   ║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1655,234 +1724,44 @@ Naked Single, R6C7 = 6
 ║   │ 5 │4  ║   │   │   ║   │  6│   ║
 ║789│   │   ║   │  9│   ║ 89│789│789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-Hidden Single, R2C9 = 6
-Hidden Single, R9C8 = 6
-╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║   │  6│   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║ 2 │1  │   ║   │  3│1  ║   │12 │   ║
-║   │   │ 5 ║4  │   │  6║   │   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│   ║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │  3│   ║   │ 2 │   ║   │   │1  ║
-║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
-║  9│   │   ║7  │   │ 8 ║   │  9│  9║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │1 3│1 3║
-║ 56│4  │   ║   │4 6│   ║   │45 │45 ║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │1 3│1 3║
-║  6│4  │   ║   │ 5 │  6║   │4  │4  ║
-║   │789│789║ 89│   │7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║   │1 3│1  ║
-║ 5 │4  │   ║   │4  │   ║  6│   │45 ║
-║   │789│789║ 89│  9│7 9║   │   │789║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│ 2 │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║12 │   │  3║1  │   │   ║   │12 │12 ║
-║   │  6│   ║   │   │4  ║ 5 │   │   ║
-║7 9│   │   ║  9│ 8 │   ║   │7 9│7 9║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │   │   ║ 2 │1  │  3║1  │   │1  ║
-║   │ 5 │4  ║   │   │   ║   │  6│   ║
-║789│   │   ║   │  9│   ║ 89│   │789║
-╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║   │   │   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║ 2 │1  │   ║   │  3│1  ║   │12 │   ║
-║   │   │ 5 ║4  │   │   ║   │   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│   ║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │  3│   ║   │ 2 │   ║   │   │1  ║
-║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
-║  9│   │   ║7  │   │ 8 ║   │  9│  9║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │1 3│1 3║
-║ 56│4  │   ║   │4 6│   ║   │45 │45 ║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │1 3│1 3║
-║  6│4  │   ║   │ 5 │  6║   │4  │4  ║
-║   │789│789║ 89│   │7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║   │1 3│1  ║
-║ 5 │4  │   ║   │4  │   ║  6│   │45 ║
-║   │789│789║ 89│  9│7 9║   │   │789║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│ 2 │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║12 │   │  3║1  │   │   ║   │12 │12 ║
-║   │  6│   ║   │   │4  ║ 5 │   │   ║
-║7 9│   │   ║  9│ 8 │   ║   │7 9│7 9║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │   │   ║ 2 │1  │  3║1  │   │1  ║
-║   │ 5 │4  ║   │   │   ║   │  6│   ║
-║789│   │   ║   │  9│   ║ 89│   │789║
-╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [6, 8]
-PointingDiagonalStrategy major=2, minors= [1, 2]
-PointingDiagonalStrategy major=2, minors= [1, 6]
-Region Combinations, D7M:R6C7-8, R6C8 = 3
-╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║   │   │   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║ 2 │1  │   ║   │  3│1  ║   │12 │   ║
-║   │   │ 5 ║4  │   │   ║   │   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│   ║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │  3│   ║   │ 2 │   ║   │   │1  ║
-║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
-║  9│   │   ║7  │   │ 8 ║   │  9│  9║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │1 3│1 3║
-║ 56│4  │   ║   │4 6│   ║   │45 │45 ║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │1 3│1 3║
-║  6│4  │   ║   │ 5 │  6║   │4  │4  ║
-║   │789│789║ 89│   │7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║   │  3│1  ║
-║ 5 │4  │   ║   │4  │   ║  6│   │45 ║
-║   │789│789║ 89│  9│7 9║   │   │789║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│ 2 │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║12 │   │  3║1  │   │   ║   │12 │12 ║
-║   │  6│   ║   │   │4  ║ 5 │   │   ║
-║7 9│   │   ║  9│ 8 │   ║   │7 9│7 9║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │   │   ║ 2 │1  │  3║1  │   │1  ║
-║   │ 5 │4  ║   │   │   ║   │  6│   ║
-║789│   │   ║   │  9│   ║ 89│   │789║
-╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-Naked Single, R6C8 = 3
-╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1 3│123║
-║4  │   │   ║ 5 │  6│  6║   │   │   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║ 2 │1  │   ║   │  3│1  ║   │12 │   ║
-║   │   │ 5 ║4  │   │   ║   │   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│   ║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │  3│   ║   │ 2 │   ║   │   │1  ║
-║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
-║  9│   │   ║7  │   │ 8 ║   │  9│  9║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │1 3│1 3║
-║ 56│4  │   ║   │4 6│   ║   │45 │45 ║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │1 3│1 3║
-║  6│4  │   ║   │ 5 │  6║   │4  │4  ║
-║   │789│789║ 89│   │7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│1  │12 ║   │  3│1  ║
-║ 5 │4  │   ║   │4  │   ║  6│   │45 ║
-║   │789│789║ 89│  9│7 9║   │   │789║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│ 2 │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║12 │   │  3║1  │   │   ║   │12 │12 ║
-║   │  6│   ║   │   │4  ║ 5 │   │   ║
-║7 9│   │   ║  9│ 8 │   ║   │7 9│7 9║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │   │   ║ 2 │1  │  3║1  │   │1  ║
-║   │ 5 │4  ║   │   │   ║   │  6│   ║
-║789│   │   ║   │  9│   ║ 89│   │789║
-╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1  │123║
-║4  │   │   ║ 5 │  6│  6║   │   │   ║
-║   │789│789║   │  9│  9║ 89│ 89│ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║ 2 │1  │   ║   │  3│1  ║   │12 │   ║
-║   │   │ 5 ║4  │   │   ║   │   │  6║
-║ 89│ 89│   ║   │   │  9║789│789│   ║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │  3│   ║   │ 2 │   ║   │   │1  ║
-║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
-║  9│   │   ║7  │   │ 8 ║   │  9│  9║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │1  │1  ║ 2 │1  │1  ║
-║ 56│4  │   ║   │4 6│   ║   │45 │45 ║
-║   │ 89│789║ 89│  9│7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║  3│12 │12 ║1 3│   │12 ║12 │1  │1  ║
-║  6│4  │   ║   │ 5 │  6║   │4  │4  ║
-║   │789│789║ 89│   │7 9║789│789│789║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║1  │1  │12 ║   │  3│1  ║
-║ 5 │4  │   ║   │4  │   ║  6│   │45 ║
-║   │789│789║ 89│  9│7 9║   │   │789║
-╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│ 2 │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║12 │   │  3║1  │   │   ║   │12 │12 ║
-║   │  6│   ║   │   │4  ║ 5 │   │   ║
-║7 9│   │   ║  9│ 8 │   ║   │7 9│7 9║
-╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║1  │   │   ║ 2 │1  │  3║1  │   │1  ║
-║   │ 5 │4  ║   │   │   ║   │  6│   ║
-║789│   │   ║   │  9│   ║ 89│   │789║
-╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 Hidden Single, R1C9 = 3
 Hidden Single, R2C8 = 2
+Hidden Single, R2C9 = 6
 Hidden Single, R4C1 = 3
 Hidden Single, R4C5 = 6
 Hidden Single, R5C1 = 6
 Hidden Single, R5C4 = 3
 Naked Single, R6C1 = 5
-Hidden Single, R6C5 = 4
+Naked Single, R6C5 = 4
+Hidden Single, R9C8 = 6
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1  │  3║
-║4  │   │   ║ 5 │  6│  6║   │   │   ║
-║   │789│789║   │  9│  9║ 89│ 89│   ║
+║   │12 │12 ║   │1  │   ║1  │1  │  3║
+║4  │   │   ║ 5 │   │  6║   │   │   ║
+║   │789│789║   │  9│   ║ 89│ 89│   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │1  │   ║   │  3│1  ║   │ 2 │   ║
 ║   │   │ 5 ║4  │   │   ║   │   │  6║
-║ 89│ 89│   ║   │   │  9║789│   │   ║
+║ 89│ 89│   ║   │   │  9║78 │   │   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║   │   │1  ║
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║  3│1  │12 ║1  │   │1  ║ 2 │1  │1  ║
-║   │4  │   ║   │  6│   ║   │45 │45 ║
+║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │12 ║12 │1  │1  ║
-║  6│4  │   ║   │ 5 │  6║   │4  │4  ║
-║   │789│789║   │   │7 9║789│789│789║
+║   │ 2 │12 ║  3│   │12 ║12 │1  │1  ║
+║  6│4  │   ║   │ 5 │   ║   │   │4  ║
+║   │789│789║   │   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │12 │12 ║1  │   │12 ║   │  3│1  ║
 ║ 5 │4  │   ║   │4  │   ║  6│   │45 ║
 ║   │789│789║ 89│   │7 9║   │   │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║12 │12 │1  ║   │   │   ║  3│ 2 │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║12 │12 │1  ║   │   │   ║  3│   │12 ║
+║   │   │   ║  6│   │ 5 ║   │4  │   ║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │12 │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1893,33 +1772,33 @@ Hidden Single, R6C5 = 4
 ║789│   │   ║   │  9│   ║ 89│   │789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
-║   │12 │12 ║   │1  │1  ║1  │1  │  3║
+║   │12 │12 ║   │1  │   ║1  │1  │  3║
 ║4  │   │   ║ 5 │   │  6║   │   │   ║
-║   │789│789║   │  9│  9║ 89│ 89│   ║
+║   │789│789║   │  9│   ║ 89│ 89│   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │   ║   │  3│1  ║   │ 2 │   ║
 ║   │   │ 5 ║4  │   │   ║   │   │  6║
-║ 89│ 89│   ║   │   │  9║789│   │   ║
+║ 89│ 89│   ║   │   │  9║78 │   │   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║1  │  3│   ║   │ 2 │   ║   │   │1  ║
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║  3│1  │12 ║1  │   │1  ║ 2 │1  │1  ║
-║   │4  │   ║   │  6│   ║   │45 │45 ║
+║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │12 ║12 │1  │1  ║
-║  6│4  │   ║   │ 5 │   ║   │4  │4  ║
-║   │789│789║   │   │7 9║789│789│789║
+║   │ 2 │12 ║  3│   │12 ║12 │1  │1  ║
+║  6│4  │   ║   │ 5 │   ║   │   │4  ║
+║   │789│789║   │   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │12 │12 ║1  │   │12 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
 ║   │789│789║ 89│   │7 9║   │   │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │12 │1  ║   │   │   ║  3│   │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║   │   │   ║  6│   │ 5 ║   │4  │   ║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │1  │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1929,10 +1808,8 @@ Hidden Single, R6C5 = 4
 ║   │ 5 │4  ║   │   │   ║   │  6│   ║
 ║789│   │   ║   │  9│   ║ 89│   │789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-Hidden Single, R1C6 = 6
 Hidden Single, R2C7 = 7
 Hidden Single, R6C6 = 2
-Naked Single, R7C8 = 4
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║   │12 │12 ║   │1  │   ║1  │1  │  3║
 ║4  │   │   ║ 5 │   │  6║   │   │   ║
@@ -1947,20 +1824,20 @@ Naked Single, R7C8 = 4
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║  3│1  │12 ║1  │   │1  ║ 2 │1  │1  ║
-║   │4  │   ║   │  6│   ║   │45 │45 ║
+║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║789│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │12 ║12 │1  │1  ║
-║  6│4  │   ║   │ 5 │   ║   │4  │4  ║
-║   │789│789║   │   │7 9║789│789│789║
+║   │ 2 │12 ║  3│   │12 ║12 │1  │1  ║
+║  6│4  │   ║   │ 5 │   ║   │   │4  ║
+║   │789│789║   │   │7 9║7 9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │12 │12 ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
 ║   │789│789║ 89│   │   ║   │   │789║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │12 │1  ║   │   │   ║  3│   │12 ║
-║   │   │   ║  6│   │ 5 ║   │4  │4  ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║   │   │   ║  6│   │ 5 ║   │4  │   ║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │1  │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -1987,9 +1864,9 @@ Naked Single, R7C8 = 4
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -1997,7 +1874,7 @@ Naked Single, R7C8 = 4
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │12 │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │1  │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2026,9 +1903,9 @@ Naked Group, remove group 189 from R1C3 = 27
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2036,7 +1913,7 @@ Naked Group, remove group 189 from R1C3 = 27
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │12 │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │1  │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2065,9 +1942,9 @@ Line Box Reduction, B9,X1, remove group 7 from R8C9 = 129
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2075,7 +1952,7 @@ Line Box Reduction, B9,X1, remove group 7 from R8C9 = 129
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║12 │   │  3║1  │   │   ║   │1  │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2085,24 +1962,22 @@ Line Box Reduction, B9,X1, remove group 7 from R8C9 = 129
 ║   │ 5 │4  ║   │   │   ║   │  6│   ║
 ║789│   │   ║   │  9│   ║ 89│   │789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [8, 9]
-PointingDiagonalStrategy major=2, minors= [4, 9]
-combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000266
-combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000019
-combinations=1/10000!, iterations=4/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000019
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000024
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000021
+combinations=1/10000!, iterations=4/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000011
 combinations=1/10000!, iterations=6/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000034
 combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000059
 combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000036
-combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000031
-combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000055
-combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000016
-combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000038
-combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000041
-combinations=1/10000!, iterations=6/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000039
-combinations=1/10000!, iterations=4/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000022
-combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000021
-combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000033
-combinations=1/10000!, iterations=6/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000038
+combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000075
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000054
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000035
+combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000043
+combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000049
+combinations=1/10000!, iterations=6/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000046
+combinations=1/10000!, iterations=4/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000020
+combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000018
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000027
+combinations=1/10000!, iterations=6/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000035
 Simple Colouring, Rule 4 R9C5,R3C9, remove value 1 from R9C9 = 789
 Simple Colouring, Rule 4 R8C4,R3C1, remove value 1 from R8C1 = 279
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
@@ -2122,9 +1997,9 @@ Simple Colouring, Rule 4 R8C4,R3C1, remove value 1 from R8C1 = 279
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2132,7 +2007,7 @@ Simple Colouring, Rule 4 R8C4,R3C1, remove value 1 from R8C1 = 279
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │1  │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2142,23 +2017,21 @@ Simple Colouring, Rule 4 R8C4,R3C1, remove value 1 from R8C1 = 279
 ║   │ 5 │4  ║   │   │   ║   │  6│   ║
 ║789│   │   ║   │  9│   ║ 89│   │789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [8, 9]
-PointingDiagonalStrategy major=2, minors= [4, 9]
-combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000033
-combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000037
-combinations=1/10000!, iterations=4/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000129
-combinations=1/10000!, iterations=6/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000070
-combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000135
-combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000044
-combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000042
-combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000100
-combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000013
-combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000061
-combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000051
-combinations=1/10000!, iterations=6/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000056
-combinations=1/10000!, iterations=4/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000039
-combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000022
-combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000037
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000023
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000023
+combinations=1/10000!, iterations=4/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000011
+combinations=1/10000!, iterations=6/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000020
+combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000059
+combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000038
+combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000034
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000056
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000015
+combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000037
+combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000042
+combinations=1/10000!, iterations=6/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000039
+combinations=1/10000!, iterations=4/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000021
+combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000021
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000028
 combinations=1/10000!, iterations=6/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000037
 XYZ-Wing, R hinge R2C2 B1, remove value 9 from R2C1 = 8
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
@@ -2178,9 +2051,9 @@ XYZ-Wing, R hinge R2C2 B1, remove value 9 from R2C1 = 8
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2188,7 +2061,7 @@ XYZ-Wing, R hinge R2C2 B1, remove value 9 from R2C1 = 8
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │1  │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2216,9 +2089,9 @@ Naked Single, R2C1 = 8
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2226,7 +2099,7 @@ Naked Single, R2C1 = 8
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │12 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║ 89│ 89│ 89║   │7  │   ║   │   │ 89║
+║  9│ 89│ 89║   │7  │   ║   │   │ 89║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │1  │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2253,9 +2126,9 @@ Naked Single, R2C1 = 8
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2291,9 +2164,9 @@ Pointing Group, B7,R7, remove group 8 from R7C9 = 129
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2311,12 +2184,8 @@ Pointing Group, B7,R7, remove group 8 from R7C9 = 129
 ║   │ 5 │4  ║   │   │   ║   │  6│   ║
 ║7 9│   │   ║   │  9│   ║ 89│   │789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [8, 9]
-PointingDiagonalStrategy major=2, minors= [4, 9]
-PointingDiagonalStrategy major=1, minors= [4, 9]
-PointingDiagonalStrategy major=2, minors= [6, 7]
-Pointing Diagonal, R4C4,R9C9], remove value 8 from R4C9 = 14579
-Pointing Diagonal, R6C4,R7C3], remove value 8 from R6C3 = 179
+Pointing Diagonal, R4C4,R9C9, remove value 8 from R4C9 = 14579
+Pointing Diagonal, R6C4,R7C3, remove value 8 from R6C3 = 179
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║   │ 2 │ 2 ║   │1  │   ║1  │1  │  3║
 ║4  │   │   ║ 5 │   │  6║   │   │   ║
@@ -2334,9 +2203,9 @@ Pointing Diagonal, R6C4,R7C3], remove value 8 from R6C3 = 179
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│7 9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2354,26 +2223,22 @@ Pointing Diagonal, R6C4,R7C3], remove value 8 from R6C3 = 179
 ║   │ 5 │4  ║   │   │   ║   │  6│   ║
 ║7 9│   │   ║   │  9│   ║ 89│   │789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [8, 9]
-PointingDiagonalStrategy major=2, minors= [4, 9]
-PointingDiagonalStrategy major=1, minors= [4, 9]
-PointingDiagonalStrategy major=2, minors= [6, 7]
-combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000032
-combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000032
-combinations=1/10000!, iterations=4/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000018
-combinations=1/10000!, iterations=6/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000034
-combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000064
-combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000032
-combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000031
-combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000050
-combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000019
-combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000033
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000024
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000020
+combinations=1/10000!, iterations=4/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000011
+combinations=1/10000!, iterations=6/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000031
+combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000062
+combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000036
+combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000036
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000057
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000016
+combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000036
 combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000044
-combinations=1/10000!, iterations=6/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000043
-combinations=1/10000!, iterations=4/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000021
-combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000020
-combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000028
-combinations=1/10000!, iterations=6/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000042
+combinations=1/10000!, iterations=6/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000048
+combinations=1/10000!, iterations=4/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000024
+combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000022
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000035
+combinations=1/10000!, iterations=6/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000038
 Simple Colouring, Rule 4 R8C4,R3C1, remove value 9 from R8C1 = 27
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║   │ 2 │ 2 ║   │1  │   ║1  │1  │  3║
@@ -2392,9 +2257,9 @@ Simple Colouring, Rule 4 R8C4,R3C1, remove value 9 from R8C1 = 27
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
 ║   │ 89│789║ 89│   │7 9║ 89│789│7 9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │12 ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │12 ║  3│   │1  ║12 │1  │1  ║
 ║  6│4  │   ║   │ 5 │   ║   │   │4  ║
-║   │789│789║   │   │7 9║ 89│789│789║
+║   │789│789║   │   │7 9║  9│789│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║1  │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2412,34 +2277,34 @@ Simple Colouring, Rule 4 R8C4,R3C1, remove value 9 from R8C1 = 27
 ║   │ 5 │4  ║   │   │   ║   │  6│   ║
 ║7 9│   │   ║   │  9│   ║ 89│   │789║
 ╚═══╧═══╧═══╩═══╧═══╧═══╩═══╧═══╧═══╝
-PointingDiagonalStrategy major=1, minors= [8, 9]
-PointingDiagonalStrategy major=2, minors= [4, 9]
-PointingDiagonalStrategy major=1, minors= [4, 9]
-PointingDiagonalStrategy major=2, minors= [6, 7]
-combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000029
-combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000048
-combinations=1/10000!, iterations=4/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000024
-combinations=1/10000!, iterations=6/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000039
-combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000069
-combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000038
-combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000031
-combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000063
-combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000013
-combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000033
-combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000039
-combinations=1/10000!, iterations=6/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000041
-combinations=1/10000!, iterations=4/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000019
-combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000017
-combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000024
-combinations=1/10000!, iterations=6/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000032
+combinations=1/10000!, iterations=5/400000!, MG1 R2,(D1C, D3C, D2C, D4V):R2C3-5,R3C3,R3C5, elapsed=0:00:00.000022
+combinations=1/10000!, iterations=6/400000!, MG2 R3,(D5M, D3C, D4V, D6X):R2C3,R2C5,R3C2-3,R3C5-6, elapsed=0:00:00.000020
+combinations=1/10000!, iterations=4/400000!, MG3 R6,(D7M, D8M, D9C):R6C7-8,R7C7-8, elapsed=0:00:00.000011
+combinations=1/10000!, iterations=6/400000!, MG4 R7,(D11C, D8M, D10C, D9C):R6C7-8,R7C6-8,R8C6, elapsed=0:00:00.000020
+combinations=1/10000!, iterations=9/400000!, MG5 R8,(D12M, D15C, D16C, D13M, D11C, D14C, D17C):R7C6,R8C2-3,R8C5-7,R9C2-3,R9C6, elapsed=0:00:00.000037
+combinations=1/10000!, iterations=6/400000!, MG6 R9,(D15C, D18C, D16C, D17C):R8C2-3,R8C6,R9C2-3,R9C6, elapsed=0:00:00.000024
+combinations=1/10000!, iterations=6/400000!, MG7 C2,(D5M, D12M, D15C, D18C):R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000024
+combinations=1/10000!, iterations=8/400000!, MG8 C3,(D1C, D3C, D5M, D12M, D16C, D18C):R2C3-4,R3C2-3,R8C2-3,R9C2-3, elapsed=0:00:00.000033
+combinations=1/10000!, iterations=3/400000!, MG9 C4,(D1C, D2C):R2C3-5, elapsed=0:00:00.000015
+combinations=1/10000!, iterations=6/400000!, MG10 C5,(D2C, D4V, D6X, D13M):R2C4-5,R3C5-6,R8C5-6, elapsed=0:00:00.000036
+combinations=1/10000!, iterations=7/400000!, MG11 C6,(D6X, D11C, D13M, D14C, D17C):R3C5-6,R7C6,R8C5-7,R9C6, elapsed=0:00:00.000046
+combinations=1/10000!, iterations=6/400000!, MG12 C7,(D7M, D8M, D10C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000040
+combinations=1/10000!, iterations=4/400000!, MG13 C8,(D7M, D9C, D10C):R6C7-8,R7C7-8, elapsed=0:00:00.000023
+combinations=1/10000!, iterations=4/400000!, MG14 B1,(D1C, D3C, D5M):R2C3-4,R3C2-3, elapsed=0:00:00.000020
+combinations=1/10000!, iterations=5/400000!, MG15 B2,(D1C, D2C, D4V, D6X):R2C3-5,R3C5-6, elapsed=0:00:00.000029
+combinations=1/10000!, iterations=6/400000!, MG16 B9,(D8M, D10C, D9C, D14C):R6C7-8,R7C7-8,R8C6-7, elapsed=0:00:00.000040
 Update Domino Possible, update cell R1C8 = 19
-Update Domino Possible, update cell R5C2 = 12789
+Update Domino Possible, update cell R5C2 = 2789
 Update Domino Possible, update cell R5C3 = 189
 Update Domino Possible, update cell R5C8 = 189
 Update Domino Possible, update cell R6C4 = 89
 Update Domino Possible, update cell R6C9 = 189
 Update Domino Possible, update cell R7C9 = 29
 Update Domino Possible, update cell R8C8 = 79
+Update Domino Possible, R7:1,2,3, remove 49 from R7C2 = 18
+Update Domino Possible, C7:4,5, remove 38 from R4C7 = 29
+Update Domino Possible, C9:4,5, remove 16 from R4C9 = 4579
+Update Domino Possible, C9:4,5, remove 16 from R5C9 = 4789
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║   │ 2 │ 2 ║   │1  │   ║1  │1  │  3║
 ║4  │   │   ║ 5 │   │  6║   │   │   ║
@@ -2453,13 +2318,13 @@ Update Domino Possible, update cell R8C8 = 79
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│1  │12 ║1  │   │1  ║ 2 │1  │1  ║
+║  3│1  │12 ║1  │   │1  ║ 2 │1  │   ║
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
-║   │ 89│789║ 89│   │7 9║ 89│789│7 9║
+║   │ 89│789║ 89│   │7 9║  9│789│7 9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │1  ║  3│   │1  ║12 │1  │1  ║
+║   │ 2 │1  ║  3│   │1  ║12 │1  │   ║
 ║  6│   │   ║   │ 5 │   ║   │   │4  ║
-║   │789│ 89║   │   │7 9║ 89│ 89│789║
+║   │789│ 89║   │   │7 9║  9│ 89│789║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║   │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2467,7 +2332,7 @@ Update Domino Possible, update cell R8C8 = 79
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │ 2 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║  9│ 89│ 89║   │7  │   ║   │   │  9║
+║  9│ 8 │ 89║   │7  │   ║   │   │  9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │   │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2493,13 +2358,13 @@ Hidden Single, R5C9 = 4
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│   │12 ║1  │   │1  ║ 2 │1  │1  ║
+║  3│   │12 ║1  │   │1  ║ 2 │1  │   ║
 ║   │4  │   ║   │  6│   ║   │ 5 │45 ║
-║   │   │789║ 89│   │7 9║ 89│789│7 9║
+║   │   │789║ 89│   │7 9║  9│789│7 9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │1  ║  3│   │1  ║12 │1  │   ║
+║   │ 2 │1  ║  3│   │1  ║12 │1  │   ║
 ║  6│   │   ║   │ 5 │   ║   │   │4  ║
-║   │789│ 89║   │   │7 9║ 89│ 89│   ║
+║   │789│ 89║   │   │7 9║  9│ 89│   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║   │1  │1  ║   │   │ 2 ║   │  3│1  ║
 ║ 5 │   │   ║   │4  │   ║  6│   │   ║
@@ -2507,7 +2372,7 @@ Hidden Single, R5C9 = 4
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │ 2 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║  9│ 89│ 89║   │7  │   ║   │   │  9║
+║  9│ 8 │ 89║   │7  │   ║   │   │  9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │   │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2530,11 +2395,11 @@ Hidden Single, R5C9 = 4
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│   │12 ║1  │   │1  ║ 2 │1  │1  ║
+║  3│   │12 ║1  │   │1  ║ 2 │1  │   ║
 ║   │4  │   ║   │  6│   ║   │ 5 │ 5 ║
 ║   │   │789║ 89│   │7 9║  9│789│7 9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │1  ║  3│   │1  ║12 │1  │   ║
+║   │ 2 │1  ║  3│   │1  ║12 │1  │   ║
 ║  6│   │   ║   │ 5 │   ║   │   │4  ║
 ║   │789│ 89║   │   │7 9║  9│ 89│   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -2544,7 +2409,7 @@ Hidden Single, R5C9 = 4
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │ 2 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║  9│ 89│ 89║   │7  │   ║   │   │  9║
+║  9│ 8 │ 89║   │7  │   ║   │   │  9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │   │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2568,11 +2433,11 @@ Hidden Single, R9C9 = 8
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│   │12 ║1  │   │1  ║ 2 │1  │1  ║
+║  3│   │12 ║1  │   │1  ║ 2 │1  │   ║
 ║   │4  │   ║   │  6│   ║   │ 5 │ 5 ║
 ║   │   │789║ 89│   │7 9║  9│789│7 9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │1  ║  3│   │1  ║12 │1  │   ║
+║   │ 2 │1  ║  3│   │1  ║12 │1  │   ║
 ║  6│   │   ║   │ 5 │   ║   │   │4  ║
 ║   │789│ 89║   │   │7 9║  9│ 89│   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -2582,7 +2447,7 @@ Hidden Single, R9C9 = 8
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │ 2 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║  9│ 89│ 89║   │7  │   ║   │   │  9║
+║  9│ 8 │ 89║   │7  │   ║   │   │  9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │   │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2605,11 +2470,11 @@ Hidden Single, R9C9 = 8
 ║   │   │  6║   │   │   ║4  │ 5 │ 5 ║
 ║  9│   │   ║7  │   │ 8 ║   │  9│  9║
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
-║  3│   │12 ║1  │   │1  ║ 2 │1  │1  ║
+║  3│   │12 ║1  │   │1  ║ 2 │1  │   ║
 ║   │4  │   ║   │  6│   ║   │ 5 │ 5 ║
 ║   │   │789║  9│   │7 9║  9│789│7 9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │1  ║  3│   │1  ║12 │1  │   ║
+║   │ 2 │1  ║  3│   │1  ║12 │1  │   ║
 ║  6│   │   ║   │ 5 │   ║   │   │4  ║
 ║   │789│ 89║   │   │7 9║  9│ 89│   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -2619,7 +2484,7 @@ Hidden Single, R9C9 = 8
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │ 2 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║  9│ 89│ 89║   │7  │   ║   │   │  9║
+║  9│ 8 │ 89║   │7  │   ║   │   │  9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │   │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2650,7 +2515,7 @@ Hidden Single, R9C1 = 7
 ║   │4  │   ║   │  6│   ║   │ 5 │   ║
 ║   │   │789║  9│   │7 9║  9│789│7  ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │1  ║  3│   │1  ║12 │1  │   ║
+║   │ 2 │1  ║  3│   │1  ║12 │1  │   ║
 ║  6│   │   ║   │ 5 │   ║   │   │4  ║
 ║   │789│ 89║   │   │7 9║  9│ 89│   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -2660,7 +2525,7 @@ Hidden Single, R9C1 = 7
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │ 2 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║  9│ 89│ 89║   │7  │   ║   │   │  9║
+║  9│ 8 │ 89║   │7  │   ║   │   │  9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │   │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2687,7 +2552,7 @@ Hidden Single, R9C1 = 7
 ║   │4  │   ║   │  6│   ║   │ 5 │   ║
 ║   │   │ 89║  9│   │  9║  9│ 89│7  ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │1  ║  3│   │1  ║12 │1  │   ║
+║   │ 2 │1  ║  3│   │1  ║12 │1  │   ║
 ║  6│   │   ║   │ 5 │   ║   │   │4  ║
 ║   │789│ 89║   │   │7 9║  9│ 89│   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -2697,7 +2562,7 @@ Hidden Single, R9C1 = 7
 ╠═══╪═══╪═══╬═══╪═══╪═══╬═══╪═══╪═══╣
 ║12 │1  │1  ║   │   │   ║  3│   │ 2 ║
 ║   │   │   ║  6│   │ 5 ║   │4  │   ║
-║  9│ 89│  9║   │7  │   ║   │   │  9║
+║  9│ 8 │  9║   │7  │   ║   │   │  9║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
 ║ 2 │   │  3║1  │   │   ║   │   │12 ║
 ║   │  6│   ║   │   │4  ║ 5 │   │   ║
@@ -2730,7 +2595,7 @@ Naked Single, R8C1 = 2
 ║   │4  │   ║   │  6│   ║   │ 5 │   ║
 ║   │   │ 89║  9│   │  9║  9│   │7  ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │1  ║  3│   │   ║12 │   │   ║
+║   │ 2 │1  ║  3│   │   ║12 │   │   ║
 ║  6│   │   ║   │ 5 │   ║   │   │4  ║
 ║   │789│ 89║   │   │7  ║  9│ 8 │   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -2767,7 +2632,7 @@ Naked Single, R8C1 = 2
 ║   │4  │   ║   │  6│   ║   │ 5 │   ║
 ║   │   │ 89║  9│   │  9║  9│   │7  ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
-║   │12 │1  ║  3│   │   ║12 │   │   ║
+║   │ 2 │1  ║  3│   │   ║12 │   │   ║
 ║  6│   │   ║   │ 5 │   ║   │   │4  ║
 ║   │  9│  9║   │   │7  ║  9│ 8 │   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -3034,10 +2899,10 @@ Line Box Reduction, B5,X1, remove group 5 from R4C5 = 14679
 Line Box Reduction, B5,X1, remove group 5 from R5C4 = 136789
 Line Box Reduction, B5,X1, remove group 5 from R6C4 = 13789
 Line Box Reduction, B5,X1, remove group 5 from R6C5 = 14679
-Pointing Diagonal, R4C4,R7C7], remove value 3 from R4C7 = 1246789
-Pointing Diagonal, R1C9,R6C4], remove value 3 from R6C9 = 12456789
-Pointing Diagonal, R1C9,R5C5], remove value 5 from R1C5 = 1679
-Pointing Diagonal, R1C9,R5C5], remove value 5 from R5C9 = 12346789
+Pointing Diagonal, R4C4,R7C7, remove value 3 from R4C7 = 1246789
+Pointing Diagonal, R1C9,R6C4, remove value 3 from R6C9 = 12456789
+Pointing Diagonal, R1C9,R5C5, remove value 5 from R1C5 = 1679
+Pointing Diagonal, R1C9,R5C5, remove value 5 from R5C9 = 12346789
 Hidden Single, R5C5 = 5
 Line Box Reduction, B3,X2, remove group 4 from R1C7 = 1236789
 Line Box Reduction, B3,X2, remove group 4 from R1C8 = 12356789
@@ -3058,72 +2923,81 @@ Update Domino Possible, update cell R8C4 = 19
 Update Domino Possible, update cell R9C4 = 27
 Update Domino Possible, update cell R9C5 = 169
 Update Domino Possible, update cell R9C7 = 1689
+Update Domino Possible, R1:7,8,9, remove 27 from R1C8 = 135689
+Update Domino Possible, R7:7,8,9, remove 27 from R7C8 = 1349
+Update Domino Possible, R7:7,8,9, remove 16 from R7C8 = 349
+Update Domino Possible, C4:4,5,6, remove 27 from R5C4 = 13689
+Update Domino Possible, C2:4,5,6, remove 16 from R5C2 = 24789
+Update Domino Possible, B2:2,3,6, remove 49 from R1C6 = 167
+Update Domino Possible, B2:2,3,6, remove 1 from centre R1C6 = 67
+Region Combinations, D9C:R6-7C8, R6C8 = 2348
+Region Combinations, D10C:R7C7-8, R7C7 = 2348
+Region Group Combinations, DG2 (D7M, D8M, D10C, D9C):R6C7-8,R7C7-8, R6C7 = 2468
+Region Group Combinations, DG2 (D7M, D8M, D10C, D9C):R6C7-8,R7C7-8, R6C8 = 348
+Region Group Combinations, DG2 (D7M, D8M, D10C, D9C):R6C7-8,R7C7-8, R7C7 = 348
 Update Domino Possible, update cell R2C1 = 2789
 Update Domino Possible, update cell R7C4 = 267
-Iterate R9C4 = 27, value 2
+Guess R9C4 = 27, value 2
 Pointing Group, B8,R7, remove group 7 from R7C1 = 1289
 Pointing Group, B8,R7, remove group 7 from R7C2 = 1289
-Pointing Group, B8,R7, remove group 7 from R7C8 = 12349
 Pointing Group, B8,R7, remove group 7 from R7C9 = 1234689
 Pointing Group, B7,C1, remove group 7 from R1C1 = 12489
 Pointing Group, B7,C1, remove group 7 from R2C1 = 289
 Pointing Group, B1,R1, remove group 7 from R1C4 = 59
-Pointing Group, B1,R1, remove group 7 from R1C6 = 169
+Pointing Group, B1,R1, remove group 7 from R1C6 = 6
 Pointing Group, B1,R1, remove group 7 from R1C7 = 123689
-Pointing Group, B1,R1, remove group 7 from R1C8 = 1235689
 Pointing Group, B1,R1, remove group 7 from R1C9 = 123489
 Pointing Group, B2,R3, remove group 7 from R3C7 = 149
 Pointing Group, B2,R3, remove group 7 from R3C8 = 159
 Pointing Group, B2,R3, remove group 7 from R3C9 = 159
 Pointing Group, B2,C4, remove group 57 from R4C4 = 1389
-Pointing Group, B2,C4, remove group 57 from R5C4 = 13689
 Pointing Group, B2,C4, remove group 57 from R6C4 = 1389
 Pointing Group, B2,C4, remove group 57 from R7C4 = 6
 Pointing Group, B8,C5, remove group 7 from R4C5 = 1469
 Pointing Group, B8,C5, remove group 7 from R6C5 = 1469
+Naked Single, R1C6 = 6
 Hidden Single, R3C4 = 7
 Naked Single, R7C4 = 6
 Hidden Single, R7C5 = 7
 Hidden Single, R1C4 = 5
-Line Box Reduction, B3,X2, remove group 24 from R1C7 = 13689
-Line Box Reduction, B3,X2, remove group 24 from R1C8 = 13689
+Naked Group, remove group 19 from R4C5 = 46
+Naked Group, remove group 19 from R6C5 = 46
+Line Box Reduction, B3,X2, remove group 24 from R1C7 = 1389
 Line Box Reduction, B3,X2, remove group 24 from R2C7 = 16789
 Line Box Reduction, B3,X2, remove group 24 from R2C9 = 16789
-Update Domino Possible, update cell R2C7 = 6789
-Update Domino Possible, update cell R3C8 = 59
-Update Domino Possible, update cell R4C4 = 189
-Update Domino Possible, update cell R4C7 = 246789
-Hidden Single, R7C7 = 3
-Hidden Single, R1C1 = 4
-Hidden Single, R3C7 = 4
 Line Box Reduction, B6,C7, remove group 2 from R4C8 = 13456789
 Line Box Reduction, B6,C7, remove group 2 from R4C9 = 13456789
 Line Box Reduction, B6,C7, remove group 2 from R5C8 = 1346789
 Line Box Reduction, B6,C7, remove group 2 from R5C9 = 1346789
-Line Box Reduction, B6,C7, remove group 2 from R6C8 = 1348
 Line Box Reduction, B6,C7, remove group 2 from R6C9 = 1456789
-Region Combinations, D7M:R6C7-8, R6C7 = 268
-Region Combinations, D7M:R6C7-8, R6C8 = 134
+Update Domino Possible, update cell R2C7 = 678
+Update Domino Possible, update cell R3C8 = 59
+Update Domino Possible, update cell R4C4 = 189
+Update Domino Possible, update cell R4C7 = 246789
+Update Domino Possible, C7:4,5,6, remove 38 from R5C7 = 124679
+Update Domino Possible, B7:1,2,4, remove 38 from R7C1 = 129
+Hidden Single, R7C7 = 3
+Hidden Single, R1C1 = 4
+Hidden Single, R3C7 = 4
+Region Combinations, D7M:R6C7-8, R6C8 = 34
 Region Combinations, D8M:R6-7C7, R6C7 = 6
-Region Combinations, D9C:R6-7C8, R6C8 = 13
-Region Combinations, D9C:R6-7C8, R7C8 = 24
+Region Combinations, D9C:R6-7C8, R6C8 = 3
+Region Combinations, D9C:R6-7C8, R7C8 = 4
 Naked Single, R6C7 = 6
-Hidden Single, R2C9 = 6
-Hidden Single, R9C8 = 6
-Region Combinations, D7M:R6C7-8, R6C8 = 3
 Naked Single, R6C8 = 3
+Naked Single, R7C8 = 4
 Hidden Single, R1C9 = 3
 Hidden Single, R2C8 = 2
+Hidden Single, R2C9 = 6
 Hidden Single, R4C1 = 3
 Hidden Single, R4C5 = 6
 Hidden Single, R5C1 = 6
 Hidden Single, R5C4 = 3
 Naked Single, R6C1 = 5
-Hidden Single, R6C5 = 4
-Hidden Single, R1C6 = 6
+Naked Single, R6C5 = 4
+Hidden Single, R9C8 = 6
 Hidden Single, R2C7 = 7
 Hidden Single, R6C6 = 2
-Naked Single, R7C8 = 4
 Naked Group, remove group 189 from R1C2 = 27
 Naked Group, remove group 189 from R1C3 = 27
 Line Box Reduction, B7,C1, remove group 27 from R7C2 = 189
@@ -3133,17 +3007,21 @@ Simple Colouring, Rule 4 R8C4,R3C1, remove value 1 from R8C1 = 279
 XYZ-Wing, R hinge R2C2 B1, remove value 9 from R2C1 = 8
 Naked Single, R2C1 = 8
 Pointing Group, B7,R7, remove group 8 from R7C9 = 129
-Pointing Diagonal, R4C4,R9C9], remove value 8 from R4C9 = 14579
-Pointing Diagonal, R6C4,R7C3], remove value 8 from R6C3 = 179
+Pointing Diagonal, R4C4,R9C9, remove value 8 from R4C9 = 14579
+Pointing Diagonal, R6C4,R7C3, remove value 8 from R6C3 = 179
 Simple Colouring, Rule 4 R8C4,R3C1, remove value 9 from R8C1 = 27
 Update Domino Possible, update cell R1C8 = 19
-Update Domino Possible, update cell R5C2 = 12789
+Update Domino Possible, update cell R5C2 = 2789
 Update Domino Possible, update cell R5C3 = 189
 Update Domino Possible, update cell R5C8 = 189
 Update Domino Possible, update cell R6C4 = 89
 Update Domino Possible, update cell R6C9 = 189
 Update Domino Possible, update cell R7C9 = 29
 Update Domino Possible, update cell R8C8 = 79
+Update Domino Possible, R7:1,2,3, remove 49 from R7C2 = 18
+Update Domino Possible, C7:4,5, remove 38 from R4C7 = 29
+Update Domino Possible, C9:4,5, remove 16 from R4C9 = 4579
+Update Domino Possible, C9:4,5, remove 16 from R5C9 = 4789
 Hidden Single, R1C7 = 8
 Hidden Single, R4C2 = 4
 Hidden Single, R5C9 = 4
@@ -3184,7 +3062,7 @@ Hidden Single, R8C9 = 1
 Hidden Single, R9C5 = 1
 Hidden Single, R9C7 = 9
 Solved!
-Solution iterations=68
+Solution iterations=65
 SudokuX
 . . . . . . . . .
                  
@@ -3212,4 +3090,3 @@ SudokuX
 981675342
 263984571
 754213968
-Exited

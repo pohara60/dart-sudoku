@@ -91,10 +91,10 @@ void main() {
     [XX, XX, RR, UU, UU, UU, LL, XX, XX],
     [XX, XX, 08, LL, XX, 08, LL, XX, XX],
   ];
-  var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle5, true);
-  puzzle.addSudokuX();
-  puzzle.debug = true;
-  print(puzzle.solve(true, false));
+  // var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle5, true);
+  // puzzle.addSudokuX();
+  // puzzle.debug = true;
+  // print(puzzle.solve(true, false));
 
   var killerPuzzle6 = [
     [08, LL, XX, XX, 22, XX, XX, 10, LL],
@@ -811,9 +811,9 @@ void main() {
     [dd, dd, DC, dd, DC, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd, dd, dd],
     [XX, dd, XX, DC, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
   ];
-  // var puzzle = SudokuAPI.sudoku(emptySudoku);
-  // print(puzzle.addDomino(dominoPuzzle5, true, ['xv']));
-  // print(puzzle.addSudokuX());
-  // puzzle.debug = true;
-  // print(puzzle.solve(true, false));
+  var puzzle = SudokuAPI.sudoku(emptySudoku);
+  print(puzzle.addDomino(dominoPuzzle5, true, ['xv']));
+  print(puzzle.addSudokuX());
+  puzzle.debug = true;
+  print(puzzle.solve(true, false));
 }
