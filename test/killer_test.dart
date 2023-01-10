@@ -374,6 +374,202 @@ void main() {
     '176295384',
   ];
 
+  // Little Killer
+  var littleKillerSudoku1 = [
+    "....3....",
+    ".2.....4.",
+    "..8......",
+    "...2.....",
+    "9.......5",
+    ".....6...",
+    "......4..",
+    ".8.....6.",
+    "....7....",
+  ].join('\n');
+  var littleKillerPuzzle1 = [
+    ['41', 'DR', 'R1C1'],
+    ['09', 'DR', 'R1C7'],
+    ['10', 'DR', 'R1C8'],
+    ['09', 'UR', 'R2C1'],
+    ['08', 'UR', 'R3C1'],
+    ['10', 'DL', 'R7C9'],
+    ['11', 'DL', 'R8C9'],
+    ['12', 'UL', 'R9C2'],
+    ['11', 'UL', 'R9C3'],
+  ];
+  var littleKillerSolution1 = [
+    '○⟋⟋   ○○ ',
+    '○⟍     ⟍⟍',
+    '○ ⟍     ⟍',
+    '   ⟍     ',
+    '    ⟍    ',
+    '     ⟍   ',
+    '⟍     ⟍ ○',
+    '⟍⟍     ⟍○',
+    ' ○○   ⟋⟋⟍',
+    '....3....',
+    '.2.....4.',
+    '..8......',
+    '...2.....',
+    '9.......5',
+    '.....6...',
+    '......4..',
+    '.8.....6.',
+    '....7....',
+    'Region Combinations, LK1:R1C1,R2C2,R3C3,R4C4,R5C5,R6C6,R7C7,R8C8,R9C9, R1C1 = 1467',
+    'Region Combinations, LK1:R1C1,R2C2,R3C3,R4C4,R5C5,R6C6,R7C7,R8C8,R9C9, R9C9 = 1238',
+    'Region Combinations, LK2:R1C7,R2C8,R3C9, R1C7 = 2',
+    'Region Combinations, LK2:R1C7,R2C8,R3C9, R3C9 = 3',
+    'Region Combinations, LK3:R1C8,R2C9, R1C8 = 1279',
+    'Region Combinations, LK3:R1C8,R2C9, R2C9 = 1389',
+    'Region Combinations, LK4:R2C1,R1C2, R2C1 = 35',
+    'Region Combinations, LK4:R2C1,R1C2, R1C2 = 46',
+    'Region Combinations, LK5:R3C1,R2C2,R1C3, R3C1 = 15',
+    'Region Combinations, LK5:R3C1,R2C2,R1C3, R1C3 = 15',
+    'Region Combinations, LK6:R7C9,R8C8,R9C7, R7C9 = 13',
+    'Region Combinations, LK6:R7C9,R8C8,R9C7, R9C7 = 13',
+    'Region Combinations, LK7:R8C9,R9C8, R8C9 = 239',
+    'Region Combinations, LK7:R8C9,R9C8, R9C8 = 289',
+    'Region Combinations, LK8:R9C2,R8C1, R9C2 = 59',
+    'Region Combinations, LK8:R9C2,R8C1, R8C1 = 37',
+    'Region Combinations, LK9:R9C3,R8C2,R7C1, R9C3 = 12',
+    'Region Combinations, LK9:R9C3,R8C2,R7C1, R7C1 = 12',
+    'Naked Single, R1C7 = 2',
+    'Naked Single, R3C9 = 3',
+    'Naked Single, R7C9 = 1',
+    'Naked Single, R7C1 = 2',
+    'Naked Single, R9C7 = 3',
+    'Naked Single, R9C3 = 1',
+    'Naked Single, R1C3 = 5',
+    'Naked Single, R2C1 = 3',
+    'Naked Single, R3C1 = 1',
+    'Naked Single, R8C1 = 7',
+    'Hidden Single, R7C8 = 7',
+    'Hidden Single, R8C7 = 5',
+    'Hidden Single, R3C8 = 5',
+    'Naked Group, remove group 46 from R2C3 = 79',
+    'Naked Group, remove group 46 from R3C2 = 79',
+    'Naked Group, remove group 46 from R1C4 = 1789',
+    'Naked Group, remove group 46 from R1C6 = 1789',
+    'Naked Group, remove group 46 from R1C9 = 789',
+    'Naked Group, remove group 289 from R1C9 = 7',
+    'Naked Group, remove group 289 from R4C9 = 467',
+    'Naked Group, remove group 289 from R6C9 = 47',
+    'Naked Group, remove group 47 from R4C9 = 6',
+    'Naked Group, remove group 67 from R6C9 = 4',
+    'Naked Single, R1C9 = 7',
+    'Naked Single, R4C9 = 6',
+    'Naked Single, R6C9 = 4',
+    'Pointing Group, B3,R2, remove group 8 from R2C4 = 15679',
+    'Pointing Group, B3,R2, remove group 8 from R2C5 = 1569',
+    'Pointing Group, B3,R2, remove group 8 from R2C6 = 1579',
+    'Pointing Group, B6,C8, remove group 23 from R9C8 = 89',
+    'Pointing Group, B9,R9, remove group 8 from R9C4 = 4569',
+    'Pointing Group, B9,R9, remove group 8 from R9C6 = 2459',
+    'Region Combinations, LK1:R1C1,R2C2,R3C3,R4C4,R5C5,R6C6,R7C7,R8C8,R9C9, R1C1 = 4',
+    'Region Combinations, LK1:R1C1,R2C2,R3C3,R4C4,R5C5,R6C6,R7C7,R8C8,R9C9, R5C5 = 1',
+    'Region Combinations, LK1:R1C1,R2C2,R3C3,R4C4,R5C5,R6C6,R7C7,R8C8,R9C9, R9C9 = 8',
+    'Region Combinations, LK3:R1C8,R2C9, R1C8 = 1',
+    'Region Combinations, LK3:R1C8,R2C9, R2C9 = 9',
+    'Region Combinations, LK4:R2C1,R1C2, R1C2 = 6',
+    'Region Combinations, LK7:R8C9,R9C8, R8C9 = 2',
+    'Region Combinations, LK7:R8C9,R9C8, R9C8 = 9',
+    'Region Combinations, LK8:R9C2,R8C1, R9C2 = 5',
+    'Naked Single, R1C1 = 4',
+    'Naked Single, R1C2 = 6',
+    'Naked Single, R1C8 = 1',
+    'Hidden Single, R2C7 = 8',
+    'Naked Single, R2C9 = 9',
+    'Hidden Single, R3C7 = 6',
+    'Naked Single, R5C5 = 1',
+    'Naked Single, R8C9 = 2',
+    'Hidden Single, R9C1 = 6',
+    'Naked Single, R9C2 = 5',
+    'Hidden Single, R9C6 = 2',
+    'Naked Single, R9C8 = 9',
+    'Naked Single, R9C9 = 8',
+    'Naked Single, R2C3 = 7',
+    'Hidden Single, R3C2 = 9',
+    'Hidden Single, R3C5 = 2',
+    'Hidden Single, R5C3 = 6',
+    'Naked Single, R5C7 = 7',
+    'Hidden Single, R5C8 = 2',
+    'Hidden Single, R6C3 = 2',
+    'Hidden Single, R8C3 = 4',
+    'Naked Single, R9C4 = 4',
+    'Naked Single, R3C4 = 7',
+    'Hidden Single, R3C6 = 4',
+    'Naked Single, R4C3 = 3',
+    'Hidden Single, R4C5 = 4',
+    'Hidden Single, R4C6 = 7',
+    'Hidden Single, R4C7 = 9',
+    'Hidden Single, R6C7 = 1',
+    'Naked Single, R7C2 = 3',
+    'Hidden Single, R7C3 = 9',
+    'Naked Single, R8C5 = 9',
+    'Hidden Single, R1C6 = 9',
+    'Hidden Single, R4C1 = 5',
+    'Naked Single, R4C2 = 1',
+    'Naked Single, R4C8 = 8',
+    'Naked Single, R5C2 = 4',
+    'Hidden Single, R6C1 = 8',
+    'Naked Single, R6C2 = 7',
+    'Hidden Single, R6C4 = 9',
+    'Hidden Single, R6C5 = 5',
+    'Hidden Single, R6C8 = 3',
+    'Hidden Single, R7C5 = 8',
+    'Naked Single, R1C4 = 8',
+    'Naked Single, R2C5 = 6',
+    'Hidden Single, R5C6 = 8',
+    'Hidden Single, R7C4 = 6',
+    'Naked Single, R7C6 = 5',
+    'Hidden Single, R8C6 = 3',
+    'Hidden Single, R2C4 = 5',
+    'Naked Single, R2C6 = 1',
+    'Naked Single, R5C4 = 3',
+    'Naked Single, R8C4 = 1',
+    'Solved!',
+    'Solution iterations=36',
+    '○⟋⟋   ○○ ',
+    '○⟍     ⟍⟍',
+    '○ ⟍     ⟍',
+    '   ⟍     ',
+    '    ⟍    ',
+    '     ⟍   ',
+    '⟍     ⟍ ○',
+    '⟍⟍     ⟍○',
+    ' ○○   ⟋⟋⟍',
+    '465839217',
+    '327561849',
+    '198724653',
+    '513247986',
+    '946318725',
+    '872956134',
+    '239685471',
+    '784193562',
+    '651472398',
+  ];
+
+  String removeAnsi(String input) {
+    var buffer = StringBuffer();
+    int lastEnd = 0;
+    final regexp = RegExp(r'\x1b\[[0-9;]*m');
+    Iterable<Match> matches = regexp.allMatches(input);
+    for (final Match match in matches) {
+      final matchedText = match.group(0);
+      if (matchedText != null) {
+        var index = input.indexOf(matchedText, lastEnd);
+        if (index != -1) {
+          buffer.write(input.substring(lastEnd, index));
+          lastEnd = index + matchedText.length;
+        }
+      }
+    }
+    // Remainder
+    buffer.write(input.substring(lastEnd, input.length));
+    return buffer.toString();
+  }
+
   group('API', () {
     test('killer1', () {
       var puzzle = SudokuAPI.killer(emptySudoku, killerPuzzle1, true);
@@ -381,6 +577,14 @@ void main() {
       expect(
         puzzle.solve(true, false),
         killerSolution1.join('\n'),
+      );
+    });
+    test('littleKiller1', () {
+      var puzzle = SudokuAPI.sudoku(littleKillerSudoku1);
+      puzzle.addLittleKiller(littleKillerPuzzle1);
+      expect(
+        removeAnsi(puzzle.solve(true, false)),
+        littleKillerSolution1.join('\n'),
       );
     });
   });

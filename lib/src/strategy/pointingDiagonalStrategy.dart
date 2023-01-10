@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-
 import 'package:sudoku/src/sudoku.dart';
 import 'package:sudoku/src/strategy/strategy.dart';
 

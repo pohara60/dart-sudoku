@@ -811,9 +811,55 @@ void main() {
     [dd, dd, DC, dd, DC, dd, dd, dd, dd, dd, DC, dd, dd, dd, dd, dd, dd],
     [XX, dd, XX, DC, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX, dd, XX],
   ];
-  var puzzle = SudokuAPI.sudoku(emptySudoku);
-  print(puzzle.addDomino(dominoPuzzle5, true, ['xv']));
-  print(puzzle.addSudokuX());
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addDomino(dominoPuzzle5, true, ['xv']));
+  // print(puzzle.addSudokuX());
+  // puzzle.debug = true;
+  // print(puzzle.solve(true, false));
+
+  // Little Killer
+  var littleKillerSudoku1 = [
+    "....3....",
+    ".2.....4.",
+    "..8......",
+    "...2.....",
+    "9.......5",
+    ".....6...",
+    "......4..",
+    ".8.....6.",
+    "....7....",
+  ].join('\n');
+  var littleKillerPuzzle1 = [
+    ['41', 'DR', 'R1C1'],
+    ['09', 'DR', 'R1C7'],
+    ['10', 'DR', 'R1C8'],
+    ['09', 'UR', 'R2C1'],
+    ['08', 'UR', 'R3C1'],
+    ['10', 'DL', 'R7C9'],
+    ['11', 'DL', 'R8C9'],
+    ['12', 'UL', 'R9C2'],
+    ['11', 'UL', 'R9C3'],
+  ];
+  var puzzle = SudokuAPI.sudoku(littleKillerSudoku1);
+  print(puzzle.addLittleKiller(littleKillerPuzzle1));
   puzzle.debug = true;
   print(puzzle.solve(true, false));
+
+  // Little Killer - not solvable
+  var littleKillerPuzzle2 = [
+    ['31', 'DR', 'R1C4'],
+    ['31', 'DR', 'R1C5'],
+    ['31', 'UR', 'R4C1'],
+    ['31', 'UR', 'R5C1'],
+    ['31', 'UR', 'R6C1'],
+    ['31', 'UR', 'R7C1'],
+    ['31', 'UR', 'R8C1'],
+    ['31', 'UR', 'R9C1'],
+    ['31', 'UR', 'R9C2'],
+    ['31', 'DL', 'R6C9'],
+  ];
+  // var puzzle = SudokuAPI.sudoku(emptySudoku);
+  // print(puzzle.addLittleKiller(littleKillerPuzzle2));
+  // puzzle.debug = true;
+  // print(puzzle.solve(true, false));
 }

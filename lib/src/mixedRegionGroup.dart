@@ -5,6 +5,7 @@ import 'cell.dart';
 import 'dominoRegion.dart';
 import 'entropyRegion.dart';
 import 'killerRegion.dart';
+import 'littleKillerRegion.dart';
 import 'puzzle.dart';
 import 'region.dart';
 import 'regionSumRegion.dart';
@@ -129,6 +130,14 @@ class MixedRegionGroup extends RegionGroup {
     if (regionSumRegion != null) {
       result = regionSumRegion.validLineGroupValues(
           values, valueCells, cells, regionSumRegion.puzzle, regions);
+      if (result != 0) return result;
+    }
+    var littleKillerRegion =
+        regions.firstWhereOrNull((region) => region is LittleKillerRegion)
+            as LittleKillerRegion?;
+    if (littleKillerRegion != null) {
+      result = LittleKillerRegionGroup.validLittleKillerGroupValues(
+          values, valueCells, cells, littleKillerRegion.puzzle, regions);
       if (result != 0) return result;
     }
     return 0;

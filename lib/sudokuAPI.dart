@@ -2,6 +2,7 @@
 ///
 library sudoku;
 
+import 'src/littleKiller.dart';
 import 'src/arrow.dart';
 import 'src/chess.dart';
 import 'src/domino.dart';
@@ -178,6 +179,15 @@ class SudokuAPI {
     currentPuzzle = currentPuzzle! + 'Chess\n';
     puzzle =
         Chess.puzzle(puzzle!, kingsMove: kingsMove, knightsMove: knightsMove);
+    return puzzle?.messageString ?? '';
+  }
+
+  String addLittleKiller(List<List<String>> littleKillerLines) {
+    if (puzzle == null) {
+      return 'No puzzle!';
+    }
+    currentPuzzle = currentPuzzle! + littleKillerLines.join('\n');
+    puzzle = LittleKiller.puzzle(puzzle!, littleKillerLines);
     return puzzle?.messageString ?? '';
   }
 
